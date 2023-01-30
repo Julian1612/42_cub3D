@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/01/30 14:55:49 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/01/30 16:21:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 #define WIDTH 256
 #define HEIGHT 256
 
-int32_t	main(void)
+int	main(int argc, char **argv)
 {
-	printf("correctly\n");
+	(void)	argc;
+	printf("%s", argv[1]);
 	return (0);
 }
