@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/01/30 20:23:16 by jschneid         ###   ########.fr       */
+/*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
+/*   Updated: 2023/01/31 14:55:06 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
-#include <stdlib.h>
+#include "parser.h"
 #include <stdio.h>
-#include <unistd.h>
-#include <memory.h>
-#define WIDTH 256
-#define HEIGHT 256
 
-int	main(int argc, char **argv)
+int parser(int *argc, char **argv)
 {
-	parser(&argc, argv);
+	(void)argv;
+	(void)argc;
+	if (*argc > 2 || *argc < 2)
+	{
+		printf("error");
+		return (0);
+	}
+	else
+		printf("correct");
 	return (0);
 }
