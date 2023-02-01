@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/01 15:07:03 by jschneid         ###   ########.fr       */
+/*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
+/*   Updated: 2023/02/01 15:34:11 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include "./../../includes/cub3D.h"
+#include "parser.h"
+#include <stdio.h>
 
-typedef struct s_map
+void	error_message(int error_code)
 {
-	char			*we;
-	char			*ea;
-	char			*so;
-	char			*no;
-	char			*s;
-	char			*f;
-	char			**map;
-}				t_map;
-
-// parser.c
-int		parser(int *argc, char **argv, t_map *map_data);
-
-// error_message.c
-void	error_message(int error_code);
-
-#endif
+	if (error_code == 1)
+		printf("Error!\nWrong amount of arument\n");
+	else if (error_code == 2)
+		printf("Error!\nFile not found\n");
+	else if (error_code == 3)
+		printf("Error!\nFile has wrong datatype\n");
+}
