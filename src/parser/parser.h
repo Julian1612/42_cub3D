@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/01 17:20:55 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:03:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		parser(int *argc, char **argv, t_map *map_data);
 void	error_message(int error_code);
 
 // map_to_arr.c
-int		map_to_arr(char **raw_map, char *path);
+int		map_to_arr(char ***raw_map, char *path);
 
 // check_file.c
 int		check_file(char **argv);

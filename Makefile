@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/02/01 18:17:05 by jschneid         ###   ########.fr        #
+#    Updated: 2023/02/01 18:27:14 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,11 @@ CFLAGS		= -Wall -Wextra -Werror -g
 LIBMLX		= ./lib/MLX
 LIBFT		= ./lib/libft
 CC			= cc
+VPATH		= src: src/parser:
+SRC			= main.c parser.c check_file.c error_messages.c map_to_arr.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
-VPATH		= src: src/parser:
-SRC			= 	main.c parser.c check_file.c error_messages.c map_to_arr.c
 OBJS		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
 OBJ_DIR		= ./obj/
 
@@ -33,8 +33,6 @@ MAGENTA		= \033[35;1m
 CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
-
-# //= Recipes =//
 
 all: libft libmlx $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/01 17:23:33 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/01 19:05:00 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	test(char **raw_map)
 	int i = 0;
 	while (raw_map[i])
 	{
-		printf("%s\n", raw_map[i]);
+		printf("%s", raw_map[i]);
 		i++;
 	}
 }
@@ -38,7 +38,7 @@ int	parser(int *argc, char **argv, t_map *map_data)
 		return (1);
 	if (check_file(argv))
 		return (1);
-	map_to_arr(raw_map, argv[1]);
+	map_to_arr(&raw_map, argv[1]);
 	test(raw_map);
 	// remove this exit(0) later !!!
 	exit(0);
