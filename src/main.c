@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/01 15:24:45 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:08:24 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 {
 	t_map	*map_data;
 
+	printf("Hello World");
 	map_data = NULL;
 	if (parser(&argc, argv, map_data))
 	{

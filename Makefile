@@ -6,11 +6,10 @@
 #    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/01/23 22:02:59 by jschneid         ###   ########.fr        #
+#    Updated: 2023/02/01 18:17:05 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# gcc main.c libmlx42.a -lglfw -L /Users/julianschneider/goinfre/.brew/opt/glfw/lib
 NAME		= cub3D
 CFLAGS		= -Wall -Wextra -Werror -g
 LIBMLX		= ./lib/MLX
@@ -19,8 +18,10 @@ CC			= cc
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
-SRCS		= $(shell find ./src -iname "*.c")
-OBJS		= ${SRCS:.c=.o}
+VPATH		= src: src/parser:
+SRC			= 	main.c parser.c check_file.c error_messages.c map_to_arr.c
+OBJS		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
+OBJ_DIR		= ./obj/
 
 BOLD		= \033[1m
 BLACK		= \033[30;1m
@@ -37,20 +38,23 @@ RESET		= \033[0m
 
 all: libft libmlx $(NAME)
 
+obj:
+	@mkdir -p $(OBJ_DIR)
+
 libft:
 	@$(MAKE) -C $(LIBFT)
 
 libmlx:
 	@$(MAKE) -C $(LIBMLX)
 
-%.o: %.c
+obj/%.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
-$(NAME): $(OBJS)
+$(NAME): obj $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
-	@rm -f $(OBJS)
+	@rm -rf obj
 	@$(MAKE) -C $(LIBFT) clean
 	@$(MAKE) -C $(LIBMLX) clean
 
