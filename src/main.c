@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/01 18:24:18 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:33:03 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@
 
 int	main(int argc, char **argv)
 {
-	t_map	*map_data;
+	t_map	map_data;
 
-	map_data = NULL;
-	if (parser(&argc, argv, map_data))
+	if (parser(&argc, argv, &map_data))
 	{
 		// free_data(map_data);
 		return (1);
@@ -31,5 +30,6 @@ int	main(int argc, char **argv)
 	#ifdef RUN_TEST
 		printf("correct");
 	#endif
+	// system("leaks cub3D");
 	return (0);
 }

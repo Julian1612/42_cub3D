@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:07:05 by jschneid          #+#    #+#             */
-/*   Updated: 2022/08/17 15:22:44 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:44:35 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-
+// MY FUNCTIONS
+int				ft_free_arr(char **arr);
+int				ft_arrlen(char **array);
+// LIBFT FUNCTIONS
 int				ft_atoi(const char *nptr);
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t count, size_t size);

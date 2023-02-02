@@ -1,7 +1,7 @@
 C 36,42,107
 F 33,35,38
 
-NO ./textures/north.xpm
+NO ./img/north.xpm
 EA ./textures/east.xpm
 SO ./textures/south.xpm
 WE ./textures/west.xpm

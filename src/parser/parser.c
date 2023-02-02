@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/01 19:05:00 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/02 12:05:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,6 @@
 #include <fcntl.h>
 
 static int	check_args(int *argc, char **argv);
-
-void	test(char **raw_map)
-{
-	int i = 0;
-	while (raw_map[i])
-	{
-		printf("%s", raw_map[i]);
-		i++;
-	}
-}
 
 int	parser(int *argc, char **argv, t_map *map_data)
 {
@@ -39,7 +29,8 @@ int	parser(int *argc, char **argv, t_map *map_data)
 	if (check_file(argv))
 		return (1);
 	map_to_arr(&raw_map, argv[1]);
-	test(raw_map);
+	if (get_textures(map_data, raw_map))
+		return (1);
 	// remove this exit(0) later !!!
 	exit(0);
 	return (0);
