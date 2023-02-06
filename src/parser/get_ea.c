@@ -6,55 +6,55 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:07 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/02 14:10:01 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:16:17 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <stdio.h>
 
-static int	finde_line(char *direction, char **raw_map, int *i)
+static int	get_path_ea(t_map *map_data, char **line_content)
 {
-	int	count;
-	int	i_save;
-	int	line_len;
-
-	count = 0;
-	i_save = *i;
-	line_len = ft_strlen(raw_map[*i]);
-	while (raw_map[*i])
+	map_data->ea = malloc(sizeof(char) * ft_strlen(line_content[1]));
+	if (map_data->ea == NULL)
 	{
-		if (line_len >= 2
-			&& ft_strnstr(raw_map[*i], direction, line_len) != NULL)
-		{
-			i_save = *i;
-			count++;
-		}
-		(*i)++;
-	}
-	if (count > 1)
-	{
-		error_message(5);
 		return (1);
 	}
-	*i = i_save;
+	if (cpy_line(map_data->ea, line_content[1],
+			ft_strlen(line_content[1]) - 1) == NULL)
+	{
+		error_message(4);
+		return (1);
+	}
+	if (map_data->ea == NULL)
+	{
+		error_message(4);
+		return (1);
+	}
 	return (0);
 }
 
-// check for correct data type
-// check if file exists
-
-static int	get_path_ea(t_map *map_data, char *raw_line)
+static int	get_data_ea(t_map *map_data, char *raw_line)
 {
 	char	**line_content;
 
-	line_content = ft_split(raw_line, ' ');
-	if (ft_arrlen(line_content) < 2)
+	line_content = get_line_content(raw_line);
+	if (line_content == NULL)
 	{
-		error_message(5);
+		error_message(4);
 		return (1);
 	}
-	map_data->ea = ft_strdup(line_content[1]);
+	if (get_path_ea(map_data, line_content))
+	{
+		ft_free_arr(line_content);
+		return (1);
+	}
+	if (check_file(map_data->ea, "xpm"))
+	{
+		ft_free_arr(line_content);
+		return (1);
+	}
+	ft_free_arr(line_content);
 	return (0);
 }
 
@@ -65,7 +65,7 @@ int	get_ea(t_map *map_data, char **raw_map)
 	i = 0;
 	if (finde_line("EA", raw_map, &i))
 		return (1);
-	if (get_path_ea(map_data, raw_map[i]))
+	if (get_data_ea(map_data, raw_map[i]))
 		return (1);
 	return (0);
 }

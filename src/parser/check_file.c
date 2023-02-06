@@ -6,26 +6,30 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:13:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/01 21:01:13 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:08:42 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include <stdio.h>
 
-static int	check_data_type(char *path);
+static int	check_data_type(char *path, char *data_type);
 
-int	check_file(char **argv)
+// the problem is that the last character of the path is not a newline
+// remove the newline from the path
+
+int	check_file(char *str, char *data_type)
 {
 	int	fd;
 
-	fd = open(argv[1], O_RDONLY);
+	fd = open(str, O_RDONLY);
 	close(fd);
 	if (fd < 0)
 	{
 		error_message(2);
 		return (1);
 	}
-	if (check_data_type(argv[1]))
+	if (check_data_type(str, data_type))
 	{
 		error_message(3);
 		return (1);
@@ -33,13 +37,14 @@ int	check_file(char **argv)
 	return (0);
 }
 
-static int	check_data_type(char *path)
+static int	check_data_type(char *path, char *data_type)
 {
 	int	path_len;
+	int	dt_len;
 
 	path_len = ft_strlen(path);
-	if (path[path_len - 3] != 'c' || path[path_len - 2] != 'u'
-		|| path[path_len - 1] != 'b')
+	dt_len = ft_strlen(data_type);
+	if (path_len >= dt_len && ft_strncmp(path + (path_len - dt_len), data_type, dt_len))
 		return (1);
 	return (0);
 }

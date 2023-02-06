@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/03 12:12:14 by jschneid         ###   ########.fr       */
+/*   Created: 2023/02/06 13:20:02 by jschneid          #+#    #+#             */
+/*   Updated: 2023/02/06 13:20:16 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <memory.h>
-#define WIDTH 256
-#define HEIGHT 256
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strcpy(char *dest, char *src, int len)
 {
-	t_map	map_data;
+	int	i;
 
-	if (parser(&argc, argv, &map_data))
+	i = 0;
+	while (i < len)
 	{
-		return (1);
+		dest[i] = src[i];
+		i++;
 	}
-	return (0);
+	dest[i] = '\0';
+	return (dest);
 }
