@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"libft.h": "c",
-		"mlx42.h": "c"
+		"mlx42.h": "c",
+		"system_error": "c",
+		"stdio.h": "c"
 	}
 }
