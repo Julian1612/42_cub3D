@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:16:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/01 19:29:48 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:06:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	get_file_len(char *path);
 
-int	map_to_arr(char ***raw_map, char *path)
+int	file_to_arr(char ***raw_map, char *path)
 {
 	int		i;
 	int		len;

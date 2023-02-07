@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:13:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/06 13:08:42 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:18:09 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #include <stdio.h>
 
 static int	check_data_type(char *path, char *data_type);
-
-// the problem is that the last character of the path is not a newline
-// remove the newline from the path
 
 int	check_file(char *str, char *data_type)
 {
@@ -44,7 +41,8 @@ static int	check_data_type(char *path, char *data_type)
 
 	path_len = ft_strlen(path);
 	dt_len = ft_strlen(data_type);
-	if (path_len >= dt_len && ft_strncmp(path + (path_len - dt_len), data_type, dt_len))
+	if (path_len >= dt_len
+		&& ft_strncmp(path + (path_len - dt_len), data_type, dt_len))
 		return (1);
 	return (0);
 }

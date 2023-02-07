@@ -3,7 +3,7 @@ EA ./textures/east.xpm
 
 F  141,        1,      126
 
-C     0        ,183      ,183
+C 0,183,183
 
 SO                   textures/south.xpm
 NO textures/north.xpm

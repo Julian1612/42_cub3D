@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/02/02 13:50:27 by jschneid         ###   ########.fr        #
+#    Updated: 2023/02/06 18:10:55 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ LIBMLX		=	./lib/MLX
 LIBFT		=	./lib/libft
 CC			=	cc
 VPATH		=	src: src/parser:
-SRC			=	main.c parser.c check_file.c error_messages.c map_to_arr.c get_textures.c\
-				get_ea.c get_no.c get_so.c get_we.c
+SRC			=	main.c parser.c check_file.c error_messages.c file_to_arr.c get_textures.c\
+				get_ea.c get_no.c get_so.c get_we.c get_ceiling.c get_floor.c\
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
