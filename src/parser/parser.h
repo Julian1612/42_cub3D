@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/06 18:17:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:09:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,8 @@ int		get_ceiling(t_map *map_data, char **raw_map);
 
 // get_floor.c
 int		get_floor(t_map *map_data, char **raw_map);
+
+// get_map.c
+int		get_map(t_map *map_data, char **raw_map);
 
 #endif

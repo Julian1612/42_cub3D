@@ -1,7 +1,7 @@
-NO ./pics/redbrick.xpm
-SO ./pics/redbrick.xpm
-WE ./pics/redbrick.xpm
-EA ./pics/redbrick.xpm
+NO ./textures/north.xpm
+SO ./textures/west.xpm
+WE ./textures/south.xpm
+EA ./textures/east.xpm
 
 F 220,100,0
 C 225,30,0

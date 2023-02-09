@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/07 11:24:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:07:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ int	parser(int *argc, char **argv, t_map *map_data)
 	file_to_arr(&raw_map, argv[1]);
 	if (get_textures(map_data, raw_map))
 		return (1);
+	if (get_map(map_data, raw_map))
+		return (1);
 	// remove this exit(0) later !!!
-	printf("textures ok\n");
+	exit(0);
 	return (0);
 }
 

@@ -17,7 +17,7 @@ LIBFT		=	./lib/libft
 CC			=	cc
 VPATH		=	src: src/parser:
 SRC			=	main.c parser.c check_file.c error_messages.c file_to_arr.c get_textures.c\
-				get_ea.c get_no.c get_so.c get_we.c get_ceiling.c get_floor.c\
+				get_ea.c get_no.c get_so.c get_we.c get_ceiling.c get_floor.c get_map.c \
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
