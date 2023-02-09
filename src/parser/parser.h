@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/07 14:09:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/09 12:11:45 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_map
 	int				floor_r;
 	int				floor_g;
 	int				floor_b;
-	int				**map;
+	char			**map;
 }				t_map;
 
 // parser.c
