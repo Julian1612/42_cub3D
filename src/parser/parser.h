@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/09 12:11:45 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:39:03 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,14 @@ int		get_floor(t_map *map_data, char **raw_map);
 
 // get_map.c
 int		get_map(t_map *map_data, char **raw_map);
+
+// check_wall_horizontal.c
+int		check_wall_horizontal(char **raw_map, int i);
+
+// check_wall_vertical.c
+int		check_wall_vertical(char **raw_map, int i);
+
+// map_to_arr.c
+int		map_to_arr(char **raw_map, t_map *map_data, int start_map);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:22:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/07 13:02:34 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:18:19 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../parser.h"
 #include <stdio.h>
 
 static int	get_data_ceiling(t_map *map_data, char *raw_line)
