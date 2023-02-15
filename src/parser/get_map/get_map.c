@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:08:23 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/14 16:49:25 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:01:57 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 static int	finde_map_in_file(char **raw_map, int *i);
 static int	remove_newline_from_arr(char **raw_map, int i);
-// static int	check_map(char **raw_map, int i);
 
 int	get_map(t_map *map_data, char **raw_map)
 {
@@ -28,7 +27,7 @@ int	get_map(t_map *map_data, char **raw_map)
 		return (1);
 	if (map_to_arr(raw_map, map_data, start_map))
 		return (1);
-	if (check_map(map_data, i))
+	if (check_map(map_data->map))
 		return (1);
 	return (0);
 }

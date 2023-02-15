@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 19:58:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/14 15:18:37 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:30:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 int	get_textures(t_map *map_data, char **raw_map)
 {
-	if (get_we(map_data, raw_map))
+	if (get_we(map_data, raw_map)) // checked
 		return (1);
-	if (get_ea(map_data, raw_map))
+	if (get_ea(map_data, raw_map)) // checked
 		return (1);
-	if (get_so(map_data, raw_map))
+	if (get_so(map_data, raw_map)) // checked
 		return (1);
-	if (get_no(map_data, raw_map))
+	if (get_no(map_data, raw_map)) // checked
 		return (1);
 	if (get_ceiling(map_data, raw_map))
 		return (1);
@@ -56,7 +56,8 @@ char	**get_line_content(char *raw_line)
 	}
 	if (ft_arrlen(line_content) < 2)
 	{
-		error_message(4);
+		ft_free_arr(line_content);
+		error_message(4); // is die nachricht richtig?
 		return (NULL);
 	}
 	return (line_content);
@@ -83,9 +84,23 @@ int	finde_line(char *direction, char **raw_map, int *i)
 	}
 	if (count > 1)
 	{
+		ft_free_arr(raw_map);
 		error_message(5);
 		return (1);
 	}
 	*i = i_save;
 	return (0);
+}
+
+void	remove_letter(char **line_content, char letter)
+{
+	int	i;
+
+	i = 0;
+	while (line_content[0][i] != '\0')
+	{
+		if (line_content[0][i] == letter)
+			line_content[0][i] = ' ';
+		i++;
+	}
 }

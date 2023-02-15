@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:13:37 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/14 15:18:51 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:53:18 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,23 @@ static int	check_top_to_bottom(char **raw_map, int i, int j);
 static int	check_bottom_to_top(char **raw_map, int i, int j);
 static int	get_map_len(char **raw_map, int i);
 
-int	check_wall_vertical(char **raw_map, int i)
+int	check_wall_vertical(char **raw_map)
 {
-	int		j;
+	int	i;
+	int	j;
 
 	j = 0;
+	i = 0;
 	while (raw_map[i][j] != '\0')
 	{
 		if (check_top_to_bottom(raw_map, i, j))
 		{
-			printf("check_top_to_bottom failed\n");
+			error_message(6);
 			return (1);
 		}
 		if (check_bottom_to_top(raw_map, i, j))
 		{
-			printf("check_bottom_to_top failed\n");
+			error_message(6);
 			return (1);
 		}
 		j++;
@@ -63,19 +65,12 @@ static int	check_bottom_to_top(char **raw_map, int i, int j)
 	map_len = get_map_len(raw_map, i);
 	map_start = i - 1;
 	i += (map_len - 1);
-	printf("map_start = %d\n", map_start);
-	printf("i = %d\n", i);
-	printf("---------------------------\n");
 	while (i > map_start)
 	{
-		printf("raw_map[%d][%d] = %c\n", i, j, raw_map[i][j]);
 		if (raw_map[i][j] == '1')
 		{
 			while (i > map_start && raw_map[i][j] != ' ')
-			{
-				printf("raw_map[%d][%d] = %c\n", i, j, raw_map[i][j]);
 				i--;
-			}
 			if (raw_map[i + 1][j] != '1')
 				return (1);
 		}

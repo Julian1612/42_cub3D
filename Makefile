@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/02/14 15:36:42 by jschneid         ###   ########.fr        #
+#    Updated: 2023/02/15 14:58:15 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,13 @@ CFLAGS		=	-Wall -Wextra -Werror -g
 LIBMLX		=	./lib/MLX
 LIBFT		=	./lib/libft
 CC			=	cc
-VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures:
+VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
+				src/parser/check_map:
+
 SRC			=	main.c parser.c check_file.c error_messages.c file_to_arr.c get_textures.c\
 				get_ea.c get_no.c get_so.c get_we.c get_ceiling.c get_floor.c get_map.c \
-				check_wall_horizontal.c check_wall_vertical.c map_to_arr.c
+				check_wall_horizontal.c check_wall_vertical.c map_to_arr.c check_map.c \
+				malloc_map.c free_textures.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a

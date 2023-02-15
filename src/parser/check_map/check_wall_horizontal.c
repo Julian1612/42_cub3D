@@ -6,11 +6,36 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:12:56 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/14 15:18:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:53:11 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
+
+static int	check_from_left_to_right(char **raw_map, int *i);
+static int	check_from_right_to_left(char **raw_map, int *i);
+
+int	check_wall_horizontal(char **raw_map)
+{
+	int		i;
+
+	i = 0;
+	while (raw_map[i] != NULL)
+	{
+		if (check_from_left_to_right(raw_map, &i))
+		{
+			error_message(6);
+			return (1);
+		}
+		if (check_from_right_to_left(raw_map, &i))
+		{
+			error_message(6);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 static int	check_from_right_to_left(char **raw_map, int *i)
 {
@@ -46,19 +71,6 @@ static int	check_from_left_to_right(char **raw_map, int *i)
 				return (1);
 		}
 		j++;
-	}
-	return (0);
-}
-
-int	check_wall_horizontal(char **raw_map, int i)
-{
-	while (raw_map[i] != NULL)
-	{
-		if (check_from_left_to_right(raw_map, &i))
-			return (1);
-		if (check_from_right_to_left(raw_map, &i))
-			return (1);
-		i++;
 	}
 	return (0);
 }

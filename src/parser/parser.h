@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/14 15:39:03 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:54:59 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,29 @@ int		get_ceiling(t_map *map_data, char **raw_map);
 // get_floor.c
 int		get_floor(t_map *map_data, char **raw_map);
 
+// remove_letter.c
+void	remove_letter(char **line_content, char letter);
+
 // get_map.c
 int		get_map(t_map *map_data, char **raw_map);
 
 // check_wall_horizontal.c
-int		check_wall_horizontal(char **raw_map, int i);
+int		check_wall_horizontal(char **raw_map);
 
 // check_wall_vertical.c
-int		check_wall_vertical(char **raw_map, int i);
+int		check_wall_vertical(char **raw_map);
 
 // map_to_arr.c
 int		map_to_arr(char **raw_map, t_map *map_data, int start_map);
+
+// check_map.c
+int		check_map(char **raw_map);
+
+// malloc_map.c
+int		malloc_map(char ***map, int map_height, int map_width);
+
+// get_textures_utils.c
+void	free_textures(t_map *map_data);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:16:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/14 15:28:25 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/15 13:09:40 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@ int	file_to_arr(char ***raw_map, char *path)
 
 	i = 0;
 	fd = open(path, O_RDONLY);
+	if (fd == -1)
+	{
+		error_message(4);
+		return (1);
+	}
 	len = get_file_len(path);
 	*raw_map = (char **) malloc(sizeof(char *) * (len + 1));
 	if (raw_map == NULL)
 	{
+		// hier free ?
 		error_message(4);
 		return (1);
 	}
@@ -35,6 +41,11 @@ int	file_to_arr(char ***raw_map, char *path)
 	while (i < len)
 	{
 		line = get_next_line(fd);
+		if (line == NULL && i != len - 1)
+		{
+			error_message(4);
+			return (1);
+		}
 		if (line != NULL)
 			(*raw_map)[i] = ft_strdup(line);
 		free(line);

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:13:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/06 18:18:09 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:57:45 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_file(char *str, char *data_type)
 static int	check_data_type(char *path, char *data_type)
 {
 	int	path_len;
-	int	dt_len;
+	int	dt_len; // anderen namen wählen
 
 	path_len = ft_strlen(path);
 	dt_len = ft_strlen(data_type);

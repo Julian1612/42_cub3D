@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:29:46 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/14 16:39:11 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:45:22 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 static int	get_map_width(char **raw_map, int i, int *map_width);
 static int	get_map_height(char **raw_map, int i, int *map_height);
-static int	malloc_map(char ***map, int map_height, int map_width);
 static int	fill_map(char **map, char **raw_map, int start_map);
 static int	fill_line(char *map, char *raw_map);
 
@@ -58,39 +57,6 @@ static int	get_map_height(char **raw_map, int i, int *map_height)
 	return (0);
 }
 
-static void init_line(char *line, int map_width)
-{
-	int i;
-
-	i = 0;
-	while (i < map_width)
-	{
-		line[i] = ' ';
-		i++;
-	}
-	line[i] = '\0';
-}
-
-static int	malloc_map(char ***map, int map_height, int map_width)
-{
-	int	i;
-
-	i = 0;
-	*map = (char **)malloc(sizeof(char *) * (map_height + 1));
-	if (*map == NULL)
-		return (1);
-	(*map)[map_height] = NULL;
-	while (i < map_height)
-	{
-		(*map)[i] = (char *)malloc(sizeof(char) * (map_width + 1));
-		if ((*map)[i] == NULL)
-			return (1);
-		init_line((*map)[i], map_width);
-		i++;
-	}
-	return (0);
-}
-
 static int	fill_map(char **map, char **raw_map, int start_map)
 {
 	int		i_map;
@@ -103,12 +69,6 @@ static int	fill_map(char **map, char **raw_map, int start_map)
 		fill_line(map[i_map], raw_map[i_raw_map]);
 		i_map++;
 		i_raw_map++;
-	}
-	int u = 0;
-	while (map[u] != NULL)
-	{
-		printf("{%s}\n", map[u]);
-		u++;
 	}
 	ft_free_arr(raw_map);
 	return (0);
