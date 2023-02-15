@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:08:23 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/14 18:01:57 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:56:10 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int	finde_map_in_file(char **raw_map, int *i)
 		j = 0;
 		(*i)++;
 	}
+	error_message(9);
 	return (1);
 }
 

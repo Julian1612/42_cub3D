@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:16:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 13:09:40 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:11:21 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	file_to_arr(char ***raw_map, char *path)
 	*raw_map = (char **) malloc(sizeof(char *) * (len + 1));
 	if (raw_map == NULL)
 	{
-		// hier free ?
 		error_message(4);
 		return (1);
 	}

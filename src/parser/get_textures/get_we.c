@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 14:00:06 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:30:08 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ static int	get_data_we(t_map *map_data, char *raw_line)
 
 	line_content = get_line_content(raw_line);
 	if (line_content == NULL) // hier free ?
-	{
-		error_message(4);
 		return (1);
-	}
 	if (get_path_we(map_data, line_content)) // checked
 	{
 		ft_free_arr(line_content);
