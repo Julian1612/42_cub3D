@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:22:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 14:55:29 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 09:46:46 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ static int	get_data_ceiling(t_map *map_data, char *raw_line)
 	if (line_content == NULL)
 	{
 		error_message(4);
+		free_textures(map_data);
+		return (1);
+	}
+	if (ft_arrlen(line_content) != 3)
+	{
+		error_message(14);
 		free_textures(map_data);
 		return (1);
 	}

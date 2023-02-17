@@ -6,11 +6,12 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:12:56 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 10:53:11 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:42:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
+#include <stdio.h>
 
 static int	check_from_left_to_right(char **raw_map, int *i);
 static int	check_from_right_to_left(char **raw_map, int *i);

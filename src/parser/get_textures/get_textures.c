@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 19:58:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 18:19:26 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 09:46:05 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,11 @@ char	*cpy_line(char *dest, char *src, int len)
 char	**get_line_content(char *raw_line)
 {
 	char	**line_content;
-	///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	line_content = ft_split(raw_line, ' ');
 	if (line_content == NULL)
 	{
 		error_message(8);
-		return (NULL);
-	}
-	if (ft_arrlen(line_content) < 2)
-	{
-		ft_free_arr(line_content);
-		error_message(10); // is die nachricht richtig?
 		return (NULL);
 	}
 	return (line_content);
@@ -83,7 +77,25 @@ int	finde_line(char *direction, char **raw_map, int *i)
 		}
 		(*i)++;
 	}
-	if (count > 1)
+	if (count == 0 && ft_arrlen(raw_map) > 1 && direction[0] == 'F')
+	{
+		ft_free_arr(raw_map);
+		error_message(11);
+		return (1);
+	}
+	else if (count == 0 && ft_arrlen(raw_map) > 1 && direction[0] == 'C')
+	{
+		ft_free_arr(raw_map);
+		error_message(12);
+		return (1);
+	}
+	else if (count == 0 && ft_arrlen(raw_map) > 1)
+	{
+		ft_free_arr(raw_map);
+		error_message(10);
+		return (1);
+	}
+	else if (count > 1)
 	{
 		ft_free_arr(raw_map);
 		error_message(5);

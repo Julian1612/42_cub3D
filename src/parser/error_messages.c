@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 18:19:24 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 09:45:55 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,13 @@ void	error_message(int error_code)
 	else if (error_code == 9)
 		printf("Error!\nFile contains no map\n");
 	else if (error_code == 10)
-		printf("Error!\nNo file path for we\n");
+		printf("Error!\nFilepath to .xpm file is missing\n");
+	else if (error_code == 11)
+		printf("Error!\nRGB's for floor is missing\n");
+	else if (error_code == 12)
+		printf("Error!\nRGB's for ceiling is missing\n");
+	else if (error_code == 13)
+		printf("Error!\nMap is in incorrect position. Please place the map over the texture declarations.\n");
+	else if (error_code == 14)
+		printf("Error!\nThere are colors values for the RGBs missing\n");
 }

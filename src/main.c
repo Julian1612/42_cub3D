@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 18:26:34 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/16 09:45:45 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	main(int argc, char **argv)
 	map_data.map = NULL;
 	if (parser(&argc, argv, &map_data))
 		return (1);
-	system("leaks cub3D");
+	// system("leaks cub3D");
 	return (0);
 }

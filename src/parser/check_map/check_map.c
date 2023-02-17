@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:13:29 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 10:50:41 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:05:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,4 @@ static int	check_wall(char **map)
 		return (1);
 	return (0);
 }
-// static int	check_for_invalid_chars(char **map)
-// {
-// 	int		i;
-// 	int		j;
 
-// 	i = 0;
-// 	while (map[i] != NULL)
-// 	{
-// 		j = 0;
-// 		while (map[i][j] != '\0')
-// 		{
-// 			if (map[i][j] != '0' )
-// 				return (1);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }

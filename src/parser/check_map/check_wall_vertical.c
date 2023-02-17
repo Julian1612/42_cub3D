@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:13:37 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 10:53:18 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:42:59 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static int	check_bottom_to_top(char **raw_map, int i, int j)
 	return (0);
 }
 
+// die funktion wo anders speichern
 static int	get_map_len(char **raw_map, int i)
 {
 	int		map_len;

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:22:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 14:56:34 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 09:46:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ static int	get_data_floor(t_map *map_data, char *raw_line)
 		free_textures(map_data);
 		return (1);
 	}
+	if (ft_arrlen(line_content) != 3)
+	{
+		error_message(14);
+		free_textures(map_data);
+		return (1);
+	}
 	remove_letter(line_content, 'F');
 	if (ft_atoi(line_content[0]) > 255 || ft_atoi(line_content[1]) > 255
 		|| ft_atoi(line_content[2]) > 255)
@@ -48,6 +54,7 @@ static int	get_data_floor(t_map *map_data, char *raw_line)
 	map_data->floor_r = ft_atoi(line_content[0]);
 	map_data->floor_g = ft_atoi(line_content[1]);
 	map_data->floor_b = ft_atoi(line_content[2]);
+	// printf("floor: %d, %d, %d\n", map_data->floor_r, map_data->floor_g, map_data->floor_b);
 	ft_free_arr(line_content);
 	return (0);
 }
