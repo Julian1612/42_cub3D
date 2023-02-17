@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 19:58:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 17:02:49 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:35:59 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,22 @@
 
 int	get_textures(t_map *map_data, char **raw_map)
 {
-	if (get_we(map_data, raw_map))
+	// map_data->west = "test\n";
+	if (get_path(raw_map, "WE", &map_data->west))
 		return (1);
-	if (get_ea(map_data, raw_map))
-		return (1);
-	if (get_so(map_data, raw_map))
-		return (1);
-	if (get_no(map_data, raw_map))
-		return (1);
+	printf("map_data.west: %s\n", map_data->west);
+	// if (get_path(raw_map, "EA", map_data->west))
+	// 	return (1);
+	// if (get_path(raw_map, "SO", map_data->west))
+	// 	return (1);
+	// if (get_path(raw_map, "NO", map_data->west))
+	// 	return (1);
+	// if (get_ea(map_data, raw_map))
+	// 	return (1);
+	// if (get_so(map_data, raw_map))
+	// 	return (1);
+	// if (get_no(map_data, raw_map))
+	// 	return (1);
 	if (get_ceiling(map_data, raw_map))
 		return (1);
 	if (get_floor(map_data, raw_map))
@@ -58,7 +66,7 @@ char	**get_line_content(char *raw_line)
 	return (line_content);
 }
 
-int	finde_line(char *direction, char **raw_map, int *i)
+int	finde_line(char **raw_map, char *direction, int *i)
 {
 	int	count;
 	int	i_save;

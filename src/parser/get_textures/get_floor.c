@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:22:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 17:02:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 18:03:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	get_floor(t_map *map_data, char **raw_map)
 	int	i;
 
 	i = 0;
-	if (finde_line("F", raw_map, &i))
+	if (finde_line(raw_map, "F", &i))
 		return (1);
 	if (get_data_floor(map_data, raw_map[i]))
 		return (1);
@@ -45,11 +45,7 @@ static int	get_data_floor(t_map *map_data, char *raw_line)
 		return (1);
 	}
 	remove_letter(line_content, 'F');
-	if (ft_atoi(line_content[0]) > 255 || ft_atoi(line_content[1]) > 255
-		|| ft_atoi(line_content[2]) > 255)
-		return (1);
-	if (ft_atoi(line_content[0]) < 0 || ft_atoi(line_content[1]) < 0
-		|| ft_atoi(line_content[2]) < 0)
+	if (check_rgb_values(line_content))
 		return (1);
 	map_data->floor_r = ft_atoi(line_content[0]);
 	map_data->floor_g = ft_atoi(line_content[1]);
