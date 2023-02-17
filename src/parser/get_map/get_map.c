@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:08:23 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/16 17:45:45 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:12:28 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,12 @@ int static	remove_newline_from_arr(char **raw_map, int i)
 	while (raw_map[i] != NULL)
 	{
 		j = 0;
+		if (raw_map[i][0] == '\n')
+		{
+			error_message(15);
+			ft_free_arr(raw_map);
+			return (1);
+		}
 		while (raw_map[i][j] != '\0')
 		{
 			if (raw_map[i][j] == '\n')

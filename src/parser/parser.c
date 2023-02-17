@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 09:41:38 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 13:55:24 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	parser(int *argc, char **argv, t_map *map_data)
 		return (1);
 	if (get_map(map_data, raw_map))
 		return (1);
+	printf("correct map\n");
 	return (0);
 }
 

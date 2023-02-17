@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:18 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 17:32:02 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 14:07:10 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	get_data_so(t_map *map_data, char *raw_line)
 		ft_free_arr(line_content);
 		return (1);
 	}
-	if (check_file(map_data->so, "xpm"))
+	if (check_file(map_data->south, "xpm"))
 	{
 		ft_free_arr(line_content);
 		return (1);
@@ -55,13 +55,13 @@ static int	get_data_so(t_map *map_data, char *raw_line)
 
 static int	get_path_so(t_map *map_data, char **line_content)
 {
-	map_data->so = malloc(sizeof(char) * ft_strlen(line_content[1]));
-	if (map_data->so == NULL)
+	map_data->south = malloc(sizeof(char) * ft_strlen(line_content[1]));
+	if (map_data->south == NULL)
 	{
 		error_message(4);
 		return (1);
 	}
-	if (cpy_line(map_data->so, line_content[1],
+	if (cpy_line(map_data->south, line_content[1],
 			ft_strlen(line_content[1]) - 1) == NULL)
 	{
 		free_struct_so(map_data);
@@ -74,7 +74,7 @@ static int	get_path_so(t_map *map_data, char **line_content)
 
 static void	free_struct_so(t_map *map_data)
 {
-	free(map_data->we);
-	free(map_data->ea);
-	free(map_data->so);
+	free(map_data->west);
+	free(map_data->east);
+	free(map_data->south);
 }

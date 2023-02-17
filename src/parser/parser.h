@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/15 14:54:59 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 14:04:21 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@
 
 typedef struct s_map
 {
-	char			*we;
-	char			*ea;
-	char			*so;
-	char			*no;
+	char			*west;
+	char			*east;
+	char			*south;
+	char			*north;
 	int				ceiling_r;
 	int				ceiling_g;
 	int				ceiling_b;
 	int				floor_r;
 	int				floor_g;
 	int				floor_b;
+	int				player_x;
+	int				player_y;
 	char			**map;
 }				t_map;
 
