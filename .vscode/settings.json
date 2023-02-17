@@ -4,6 +4,9 @@
 		"mlx42.h": "c",
 		"system_error": "c",
 		"stdio.h": "c",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"memory.h": "c",
+		"parser.h": "c",
+		"types.h": "c"
 	}
 }
