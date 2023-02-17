@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:07 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 14:05:49 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:02:26 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static int	get_data_ea(t_map *map_data, char *raw_line)
 	line_content = get_line_content(raw_line);
 	if (line_content == NULL)
 		return (1);
-	if (get_path_ea(map_data, line_content)) // checked
+	if (get_path_ea(map_data, line_content))
 	{
 		ft_free_arr(line_content);
 		return (1);
 	}
-	if (check_file(map_data->east, "xpm")) // checked
+	if (check_file(map_data->east, "xpm"))
 	{
 		ft_free_arr(line_content);
 		return (1);

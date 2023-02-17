@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:22:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 09:46:50 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:02:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	get_data_floor(t_map *map_data, char *raw_line)
 	map_data->floor_r = ft_atoi(line_content[0]);
 	map_data->floor_g = ft_atoi(line_content[1]);
 	map_data->floor_b = ft_atoi(line_content[2]);
-	// printf("floor: %d, %d, %d\n", map_data->floor_r, map_data->floor_g, map_data->floor_b);
 	ft_free_arr(line_content);
 	return (0);
 }

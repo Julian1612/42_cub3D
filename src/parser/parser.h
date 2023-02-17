@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 14:04:21 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:03:52 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,5 @@ int		malloc_map(char ***map, int map_height, int map_width);
 
 // get_textures_utils.c
 void	free_textures(t_map *map_data);
-
 
 #endif

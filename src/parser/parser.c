@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 15:16:44 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:03:45 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ int	parser(int *argc, char **argv, t_map *map_data)
 	char	**raw_map;
 
 	raw_map = NULL;
-	if (check_args(argc, argv)) //checked
+	if (check_args(argc, argv))
 		return (1);
-	if (check_file(argv[1], "cub")) //checked
+	if (check_file(argv[1], "cub"))
 		return (1);
-	// filecontent_to_arr
-	if (file_to_arr(&raw_map, argv[1])) //checked
+	if (file_to_arr(&raw_map, argv[1]))
 		return (1);
 	if (get_textures(map_data, raw_map))
 		return (1);

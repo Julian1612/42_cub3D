@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 19:58:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 09:46:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:02:49 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 int	get_textures(t_map *map_data, char **raw_map)
 {
-	if (get_we(map_data, raw_map)) // checked
+	if (get_we(map_data, raw_map))
 		return (1);
-	if (get_ea(map_data, raw_map)) // checked
+	if (get_ea(map_data, raw_map))
 		return (1);
-	if (get_so(map_data, raw_map)) // checked
+	if (get_so(map_data, raw_map))
 		return (1);
-	if (get_no(map_data, raw_map)) // checked
+	if (get_no(map_data, raw_map))
 		return (1);
 	if (get_ceiling(map_data, raw_map))
 		return (1);
