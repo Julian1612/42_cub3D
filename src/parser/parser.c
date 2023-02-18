@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 18:30:18 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/18 09:24:15 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	parser(int *argc, char **argv, t_map *map_data)
 		return (1);
 	if (get_textures(map_data, raw_map))
 		return (1);
-	printf("map_data.west: %s\n", map_data->west);
 	if (get_map(map_data, raw_map))
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 18:37:08 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/18 09:26:33 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	get_path(char **raw_map, char *direction, char **path)
 		ft_free_arr(raw_map);
 		return (1);
 	}
-	printf("map_data.west: %s\n", *path);
 	return (0);
 }
 
@@ -49,7 +48,6 @@ static int	get_data_texture(char *raw_line, char **path)
 		ft_free_arr(line_content);
 		return (1);
 	}
-	printf("map_data.west: %s\n", *path);
 	ft_free_arr(line_content);
 	return (0);
 }

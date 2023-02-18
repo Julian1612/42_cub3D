@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 18:35:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/18 10:18:07 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,8 @@ typedef struct s_map
 	char			*east;
 	char			*south;
 	char			*north;
-	int				ceiling_r;
-	int				ceiling_g;
-	int				ceiling_b;
-	int				floor_r;
-	int				floor_g;
-	int				floor_b;
-	int				player_x;
-	int				player_y;
+	int				ceiling_rgb_arr[3];
+	int				floor_rgb_arr[3];
 	char			**map;
 }				t_map;
 
@@ -63,11 +57,11 @@ int		get_data(t_map *map_data, char *raw_line);
 int		get_path(char **raw_map, char *direction, char **path);
 
 // get_ceiling.c
-int		get_ceiling(t_map *map_data, char **raw_map);
+int		get_map_color(int *rgb_values, char **raw_map, char *surface);
 int		check_rgb_values(char **line_content); // in ein anderes file auslagern
 
 // get_floor.c
-int		get_floor(t_map *map_data, char **raw_map);
+// int		get_floor(t_map *map_data, char **raw_map);
 
 // remove_letter.c
 void	remove_letter(char **line_content, char letter);
