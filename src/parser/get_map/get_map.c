@@ -6,11 +6,11 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:08:23 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 17:12:43 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:21:59 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parser.h"
+#include "private_get_map.h"
 #include <stdio.h>
 
 static int	finde_map_in_file(char **raw_map, int *i);
@@ -58,7 +58,7 @@ static int	finde_map_in_file(char **raw_map, int *i)
 		j = 0;
 		(*i)++;
 	}
-	error_message(9);
+	error_get_map(9);
 	return (1);
 }
 
@@ -79,7 +79,7 @@ static int	validate_map_position(char **raw_map, int i, int j, int flage)
 	if (flage < 6 && raw_map[i][j] == '1')
 	{
 		ft_free_arr(raw_map);
-		error_message(13);
+		error_get_map(13);
 		return (1);
 	}
 	return (0);
@@ -94,7 +94,7 @@ int static	remove_newline_from_arr(char **raw_map, int i)
 		j = 0;
 		if (raw_map[i][0] == '\n')
 		{
-			error_message(15);
+			error_get_map(15);
 			ft_free_arr(raw_map);
 			return (1);
 		}

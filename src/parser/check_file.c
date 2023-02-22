@@ -6,11 +6,11 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:13:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 17:03:22 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:05:31 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "private_parser.h"
 #include <stdio.h>
 
 static int	check_data_type(char *path, char *data_type);
@@ -37,12 +37,12 @@ int	check_file(char *str, char *data_type)
 static int	check_data_type(char *path, char *data_type)
 {
 	int	path_len;
-	int	dt_len; // anderen namen wählen
+	int	len_type;
 
 	path_len = ft_strlen(path);
-	dt_len = ft_strlen(data_type);
-	if (path_len >= dt_len
-		&& ft_strncmp(path + (path_len - dt_len), data_type, dt_len))
+	len_type = ft_strlen(data_type);
+	if (path_len >= len_type
+		&& ft_strncmp(path + (path_len - len_type), data_type, len_type))
 		return (1);
 	return (0);
 }

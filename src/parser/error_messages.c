@@ -6,11 +6,11 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/17 13:29:09 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:32:09 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "private_parser.h"
 #include <stdio.h>
 
 void	error_message(int error_code)
@@ -35,16 +35,14 @@ void	error_message(int error_code)
 		printf("Error!\nfile contains no map\n");
 	else if (error_code == 10)
 		printf("Error!\nFilepath to .xpm file is missing\n");
-	else if (error_code == 11)
-		printf("Error!\nRGB values for floor are missing\n");
-	else if (error_code == 12)
-		printf("Error!\nRGB values for ceiling are missing\n");
 	else if (error_code == 13)
 		printf("Error!\nMap is in incorrect position. Please place the map under the texture declarations\n");
 	else if (error_code == 14)
-		printf("Error!\nThere are colors values for the RGBs missing\n");
+		printf("Error!\nThe values for the RGBs are missing\n");
 	else if (error_code == 15)
 		printf("Error!\nEmty line in map\n");
 	else if (error_code == 16)
 		printf("Error!\nInvalid character in map\n");
+	else if (error_code == 17)
+		printf("Error!\nRGB value out of range\n");
 }

@@ -6,11 +6,11 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/18 09:26:33 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:23:24 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parser.h"
+#include "private_get_textures.h"
 #include <stdio.h>
 
 static int	get_data_texture(char *raw_line, char **path);
@@ -57,14 +57,14 @@ static int	get_path_texture(char **path, char **line_content)
 	*path = malloc(sizeof(char) * ft_strlen(line_content[1]));
 	if (*path == NULL)
 	{
-		error_message(4);
+		error_textures(4);
 		return (1);
 	}
 	if (cpy_line(*path, line_content[1],
 			ft_strlen(line_content[1]) - 1) == NULL)
 	{
 		ft_free_arr(line_content);
-		error_message(7);
+		error_textures(7);
 		return (1);
 	}
 	return (0);

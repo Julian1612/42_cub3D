@@ -6,11 +6,11 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:29:46 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/16 13:54:11 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:20:34 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parser.h"
+#include "private_get_map.h"
 #include <stdio.h>
 
 static int	get_map_width(char **raw_map, int i, int *map_width);
@@ -66,8 +66,6 @@ static int	fill_map(char **map, char **raw_map, int start_map)
 	i_raw_map = start_map;
 	while (raw_map[i_raw_map] != NULL)
 	{
-		if (raw_map[i_raw_map][0] == '\n')
-			printf("test\n");
 		fill_line(map[i_map], raw_map[i_raw_map]);
 		i_map++;
 		i_raw_map++;

@@ -6,22 +6,23 @@
 #    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/02/18 10:17:11 by jschneid         ###   ########.fr        #
+#    Updated: 2023/02/22 14:50:54 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
 CFLAGS		=	-Wall -Wextra -Werror -g
-LIBMLX		=	./lib/MLX
-LIBFT		=	./lib/libft
+LIBMLX		=	./libraries/MLX
+LIBFT		=	./libraries/libft
 CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
-				src/parser/check_map:
 
-SRC			=	main.c parser.c check_file.c error_messages.c file_to_arr.c get_textures.c\
-				get_path.c get_rgb_values.c get_map.c \
-				check_wall_horizontal.c check_wall_vertical.c map_to_arr.c check_map.c \
-				malloc_map.c free_textures.c
+SRC			=	main.c \
+				check_args.c check_file.c error_messages.c parser.c put_file_content_in_arr.c \
+				errors_textures.c free_textures.c get_path_utils.c get_path.c get_rgb_values.c \
+				get_textures.c \
+				check_map.c check_wall_horizontal.c check_wall_vertical.c errors_map.c get_map.c \
+				malloc_map.c map_to_arr.c\
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
