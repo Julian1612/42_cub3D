@@ -7,6 +7,15 @@
 		"ft_printf.h": "c",
 		"memory.h": "c",
 		"parser.h": "c",
-		"types.h": "c"
-	}
+		"types.h": "c",
+		"cub3d.h": "c",
+		"private_textures.h": "c",
+		"get_next_line.h": "c",
+		"fcntl.h": "c",
+		"stat.h": "c",
+		"private_get_map.h": "c",
+		"private_parser.h": "c",
+		"private_get_textures.h": "c"
+	},
+	"C_Cpp.dimInactiveRegions": false
 }
