@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/22 14:04:21 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:15:23 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "../libraries/mlx/include/MLX42/MLX42.h"
 # include "../libraries/libft/src/libft/libft.h"
 # include "../libraries/libft/src/get_next_line/get_next_line.h"
-// # include "parser.h"
+# include "../libraries/mlx/include/MLX42/MLX42.h"
 
 typedef struct s_map
 {
