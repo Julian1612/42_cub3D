@@ -1,20 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   private_player_position.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 13:19:57 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/23 20:46:33 by jschneid         ###   ########.fr       */
+/*   Created: 2023/02/23 20:37:06 by jschneid          #+#    #+#             */
+/*   Updated: 2023/02/23 20:44:45 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include "cub3D.h"
-
-// parser
-int	parser(int *argc, char **argv, t_map *map_data);
+#ifndef PRIVATE_PLAYER_POSITION_H
+# define PRIVATE_PLAYER_POSITION_H
+# include "../cub3D.h"
 
 #endif

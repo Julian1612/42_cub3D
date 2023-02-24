@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/23 16:15:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/23 20:55:35 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,12 @@ typedef struct s_map
 	int				floor_rgb_arr[3];
 	char			**map;
 }				t_map;
+
+typedef struct s_player
+{
+	double			x;
+	double			y;
+	int				direction;
+}				t_player;
 
 #endif

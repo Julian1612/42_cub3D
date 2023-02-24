@@ -6,12 +6,14 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/23 16:15:01 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/23 21:09:10 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parser.h"
+#include "player_position.h"
+#include <stdio.h>
 
 #define WIDTH 512
 #define HEIGHT 512
@@ -36,23 +38,28 @@ void hook(void* param)
 
 int	main(int argc, char **argv)
 {
-	t_map	map_data;
-	mlx_t*	 mlx;
+	t_map		map_data;
+	t_player	player_pos;
+	double		fovAngle = 60;
+	// mlx_t*		mlx;
 
 	map_data.map = NULL;
 	if (parser(&argc, argv, &map_data))
 		return (1);
+	if (init_player_position(&map_data, &player_pos))
+		return (1);
+	printf("Player position: x = %f, y = %f, direction = %c\n",
+		player_pos.x, player_pos.y, player_pos.direction);
 
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-		return(EXIT_FAILURE);
+	// if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	// 	return(EXIT_FAILURE);
+	// img = mlx_new_image(mlx, 128, 128);
+	// memset(img->pixels, 255, img->width * img->height * sizeof(int));
+	// mlx_image_to_window(mlx, img, 0, 0);
 
-	img = mlx_new_image(mlx, 128, 128);
-	memset(img->pixels, 255, img->width * img->height * sizeof(int));
-	mlx_image_to_window(mlx, img, 0, 0);
+	// mlx_loop_hook(mlx, &hook, mlx);
+	// mlx_loop(mlx);
 
-	mlx_loop_hook(mlx, &hook, mlx);
-	mlx_loop(mlx);
-
-	mlx_terminate(mlx);
+	// mlx_terminate(mlx);
 	return (0);
 }
