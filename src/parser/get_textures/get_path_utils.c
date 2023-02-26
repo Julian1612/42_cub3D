@@ -6,11 +6,12 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:17:26 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/22 14:23:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:17:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_get_textures.h"
+#include <stdio.h>
 
 char	*cpy_line(char *dest, char *src, int len)
 {
@@ -79,7 +80,9 @@ int	finde_line(char **raw_map, char *direction, int *i)
 	i_save = *i;
 	while (raw_map[*i])
 	{
+		printf("1hi %d\n", *i);
 		line_len = ft_strlen(raw_map[*i]);
+		printf("%d\n", line_len);
 		if (line_len >= 2
 			&& ft_strnstr(raw_map[*i], direction, line_len) != NULL)
 		{
@@ -87,7 +90,9 @@ int	finde_line(char **raw_map, char *direction, int *i)
 			count++;
 		}
 		(*i)++;
+		printf("2hi %d\n", *i);
 	}
+	printf("heiland\n");
 	if (check_for_errors(raw_map, direction, count))
 		return (1);
 	*i = i_save;

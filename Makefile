@@ -6,12 +6,13 @@
 #    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/02/23 20:48:28 by jschneid         ###   ########.fr        #
+#    Updated: 2023/02/26 17:22:52 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=
+# -Wall -Wextra -Werror -g
 LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft
 CC			=	cc

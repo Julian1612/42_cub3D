@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:16:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/22 14:06:17 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:06:14 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int	cpy_data_to_arr(char ***raw_map, int len, int fd)
 		error_message(4);
 		return (1);
 	}
-	(*raw_map)[len] = NULL;
 	while (i < len)
 	{
 		line = get_next_line(fd);
@@ -61,10 +60,11 @@ static int	cpy_data_to_arr(char ***raw_map, int len, int fd)
 			return (1);
 		}
 		if (line != NULL)
-			(*raw_map)[i] = ft_strdup(line);
+			(*raw_map)[i] = ft_strdup(line); // if malloc failed !!!!!!!!!!!!!
 		free(line);
 		i++;
 	}
+	(*raw_map)[i] = NULL;
 	return (0);
 }
 

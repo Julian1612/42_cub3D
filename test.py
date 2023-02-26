@@ -49,10 +49,10 @@ while True:
     # Calculate the player's direction vector based on the angle
     player_dir = [math.cos(player_angle), math.sin(player_angle)]
 
-    # Draw the player
+    # Draw the player and the dot indicating the direction
     screen.fill((255, 255, 255))
     pygame.draw.circle(screen, (255, 0, 0), player_pos, 10)
-    pygame.draw.line(screen, (255, 0, 0), player_pos, (player_pos[0] + player_dir[0] * 20, player_pos[1] + player_dir[1] * 20), 2)
+    pygame.draw.circle(screen, (0, 0, 255), (int(player_pos[0] + player_dir[0] * 50), int(player_pos[1] + player_dir[1] * 50)), 5)
 
     # Update the screen
     pygame.display.flip()
