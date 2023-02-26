@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/23 21:09:10 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/26 09:40:11 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,77 @@
 #include "parser.h"
 #include "player_position.h"
 #include <stdio.h>
-
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
 #define WIDTH 512
 #define HEIGHT 512
+#define PLAYER_SIZE 50
 
-static mlx_image_t* img;
+static mlx_image_t	*img;
 
 void hook(void* param)
 {
-	mlx_t* mlx = param;
+	t_hook		*hook_data;
+	t_player	*player;
+	mlx_t		*mlx;
 
+	hook_data = param;
+	mlx = hook_data->mlx;
+	player = hook_data->player;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		img->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		img->instances[0].y += 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
+	{
+		img->instances[0].y += cos(player->player_angle) * 5;
+		img->instances[0].x += sin(player->player_angle) * 5;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
+	{
+		img->instances[0].y -= cos(player->player_angle) * 5;
+		img->instances[0].x -= sin(player->player_angle) * 5;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
+	{
+		img->instances[0].y += cos(player->player_angle - M_PI_2) * 5;
+		img->instances[0].x += sin(player->player_angle - M_PI_2) * 5;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
+	{
+		img->instances[0].y += cos(player->player_angle + M_PI_2) * 5;
+		img->instances[0].x += sin(player->player_angle + M_PI_2) * 5;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		img->instances[0].x -= 5;
+		player->player_angle += M_PI / 180 * 5;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		img->instances[0].x += 5;
+		player->player_angle -= M_PI / 180 * 5;
 }
 
 int	main(int argc, char **argv)
 {
-	t_map		map_data;
-	t_player	player_pos;
-	double		fovAngle = 60;
-	// mlx_t*		mlx;
+	mlx_t			*mlx;
+	t_player		player;
+	t_hook	 		hook_data;
 
-	map_data.map = NULL;
-	if (parser(&argc, argv, &map_data))
-		return (1);
-	if (init_player_position(&map_data, &player_pos))
-		return (1);
-	printf("Player position: x = %f, y = %f, direction = %c\n",
-		player_pos.x, player_pos.y, player_pos.direction);
-
-	// if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-	// 	return(EXIT_FAILURE);
-	// img = mlx_new_image(mlx, 128, 128);
-	// memset(img->pixels, 255, img->width * img->height * sizeof(int));
-	// mlx_image_to_window(mlx, img, 0, 0);
-
-	// mlx_loop_hook(mlx, &hook, mlx);
-	// mlx_loop(mlx);
-
-	// mlx_terminate(mlx);
+	(void)argc;
+	(void)argv;
+	if (!(mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true)))
+		return(EXIT_FAILURE);
+	player.player_angle = 0;
+	hook_data.mlx = mlx;
+	hook_data.player = &player;
+	// if (parser(&argc, argv, &map_data))
+	// 	return (1);
+	// if (init_player_position(&map_data, &player_pos))
+	// 	return (1);
+	img = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
+	memset(img->pixels, 255, img->width * img->height * sizeof(int));
+	mlx_image_to_window(mlx, img, 0, 0);
+	mlx_loop_hook(mlx, &hook, &hook_data);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
 	return (0);
+
 }

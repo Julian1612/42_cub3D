@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/23 20:55:35 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/25 16:05:18 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,15 @@ typedef struct s_player
 {
 	double			x;
 	double			y;
-	int				direction;
+	int 			head_x;
+	int				head_y;
+	float			player_angle;
 }				t_player;
+
+typedef struct s_hook
+{
+	mlx_t			*mlx;
+	t_player		*player;
+}				t_hook;
 
 #endif
