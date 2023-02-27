@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_wall_horizontal.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:12:56 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/22 14:21:39 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:30:53 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

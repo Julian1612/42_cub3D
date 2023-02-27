@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:12:52 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/26 21:16:11 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:43:29 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 size_t	ft_strlen(const char *a);
 
@@ -24,6 +23,5 @@ size_t	ft_strlen(const char *a)
 	{
 		i++;
 	}
-	printf("sfjas;dlkfjasdl;fkj%d\n", i);
 	return (i);
 }

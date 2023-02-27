@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_file_content_in_arr.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:16:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/26 21:06:14 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:00:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	cpy_data_to_arr(char ***raw_map, int len, int fd)
 	char	*line;
 
 	i = 0;
-	*raw_map = (char **) malloc(sizeof(char *) * (len + 1));
+	(*raw_map) = (char **) malloc(sizeof(char *) * (len + 1));
 	if (raw_map == NULL)
 	{
 		error_message(4);
@@ -60,11 +60,23 @@ static int	cpy_data_to_arr(char ***raw_map, int len, int fd)
 			return (1);
 		}
 		if (line != NULL)
-			(*raw_map)[i] = ft_strdup(line); // if malloc failed !!!!!!!!!!!!!
+		{
+			(*raw_map)[i] = ft_strdup(line);
+			if ((*raw_map)[i] == NULL)
+			{
+				error_message(4);
+				return(1);
+			}
+		}
 		free(line);
 		i++;
 	}
-	(*raw_map)[i] = NULL;
+	(*raw_map)[len - 1] = NULL;
+	int y = 0;
+	while ((*raw_map)[y])
+	{
+		y++;
+	}
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 19:58:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/26 17:31:53 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:40:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int	get_textures(t_map *map_data, char **raw_map)
 {
-
 	if (get_path(raw_map, "WE", &map_data->west))
 		return (1);
 	if (get_path(raw_map, "EA", &map_data->east))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:33:29 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/22 14:22:04 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:41:41 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	malloc_map(char ***map, int map_height, int map_width)
 		error_get_map(4);
 		return (1);
 	}
-	(*map)[map_height] = NULL;
 	while (i < map_height)
 	{
 		(*map)[i] = (char *)malloc(sizeof(char) * (map_width + 1));
@@ -37,6 +36,7 @@ int	malloc_map(char ***map, int map_height, int map_width)
 		init_line((*map)[i], map_width);
 		i++;
 	}
+	(*map)[map_height] = NULL;
 	return (0);
 }
 

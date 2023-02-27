@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_wall_vertical.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:13:37 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/22 14:21:45 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:58:49 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	check_top_to_bottom(char **raw_map, int i, int j)
 			if (raw_map[i - 1][j] != '1')
 				return (1);
 		}
+		if (raw_map[i] == NULL)
+			break ;
 		i++;
 	}
 	return (0);

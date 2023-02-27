@@ -3,16 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/02/26 17:22:52 by jschneid         ###   ########.fr        #
+#    Updated: 2023/02/27 14:47:30 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=
-# -Wall -Wextra -Werror -g
+CFLAGS		=   -Wall -Wextra -Werror -g
 LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft
 CC			=	cc
