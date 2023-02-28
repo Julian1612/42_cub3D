@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/27 18:06:43 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:45:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	double			x;
-	double			y;
+	float			x;
+	float			y;
 	int				head_x;
 	int				head_y;
 	float			player_angle;
@@ -43,6 +43,7 @@ typedef struct s_hook
 {
 	mlx_t			*mlx;
 	t_player		*player;
+	t_map			*map_data;
 }				t_hook;
 
 #endif

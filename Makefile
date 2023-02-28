@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/02/27 14:47:30 by jschneid         ###   ########.fr        #
+#    Updated: 2023/02/28 13:55:35 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: libft libmlx $(NAME)
+all: $(NAME)
+# libft libmlx 
 
 obj:
 	@mkdir -p $(OBJ_DIR)
