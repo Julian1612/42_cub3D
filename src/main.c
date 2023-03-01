@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/28 17:40:31 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:24:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #define WALL_BLOCK 64
 #define NBR_OF_RAYS 1
 
+
 static mlx_image_t	*img;
 static mlx_image_t	*view_direction;
 static mlx_image_t	*walls;
@@ -33,52 +34,110 @@ static mlx_image_t	*ray;
 
 int draw_ray(mlx_t *mlx, t_player *player, t_map *map_data)
 {
-	float ray_x, ray_y, offset_x, offset_y;
-	int mx, my, map_position;
-	int i = 0;
-	int this_ray = NBR_OF_RAYS;
-	int rayHitDistance;
-	float ray_angle = player->player_angle;
-	while(i < this_ray)
+	double	player_pos_x = player->x, player_pos_y = player->y;
+	double	cam_pos_horizontal;
+	double	line_of_sight_x = -1, line_of_sight_y = 0;
+	double	plane_x = 0, plane_y = 0.66;
+	double	cameraPositionX;
+	double	ray_dir_x, ray_dir_y;
+	double	len_ray_x, len_ray_y;
+	double	dist_x, dist_y;
+	double	wall_distance; 
+	int		pos_map_x, pos_map_y;
+	int		step_x;
+	int		step_y;
+	int		wall_hit = 0;
+	int		hit_side;
+	int		i;
+	int		rays = 2;
+	int		wall_height;
+	int		bottom_wall;
+	int		top_wall;
+
+	while()
 	{
-		rayHitDistance = 0;
-		float aTan = -1/tan(ray_angle);
-		if (ray_angle > M_PI)
+		while(i < rays)
 		{
-			ray_y = ((player->y / 64) * 64) - 0.0001;
-			ray_x = (player->y - ray_y) * aTan + player->x;
-			offset_y = -64;
-			offset_x = -offset_y * aTan;
-		}
-		if (ray_angle < M_PI)
-		{
-			ray_y = ((player->y / 64) * 64) + 64;
-			ray_x = (player->y - ray_y) * aTan + player->x;
-			offset_y = 64;
-			offset_x = -offset_y * aTan;
-		}
-		if (ray_angle == 0 || ray_angle == M_PI)
-		{
-			ray_x = player->x;
-			ray_y = player->y;
-			rayHitDistance = 8;
-		}
-		while(rayHitDistance<8)
-		{
-			mx = (int) (ray_x) / 64;
-			my = (int) (ray_y) / 64;
-			map_position = my * map_data->map_width + mx;
-			if (map_position < map_data->map_width && map_data->map[mx][my] == '1')
-				rayHitDistance = 8;
+			//calculate ray position and direction
+			// cam_pos_horizontal = 2 * i / (double)
+			ray_dir_x = line_of_sight_x + plane_x * cam_pos_horizontal;
+			ray_dir_y = line_of_sight_y + plane_y * cam_pos_horizontal;
+			// get positon in map
+			pos_map_x = (int)player_pos_x;
+			pos_map_y = (int)player_pos_y;
+			//length of ray from one x or y-hit_side to next x or y-hit_side
+			if (ray_dir_x == 0)
+			    dist_x = 1e30; // macro erstellen
 			else 
-			{
-				ray_x += offset_x;
-				ray_y += offset_y;
-				rayHitDistance++;
+    			dist_x = fabs(1 / ray_dir_x);
+			if (ray_dir_y == 0) 
+    			dist_y = 1e30;
+			else
+    			dist_y = fabs(1 / ray_dir_y);
+			//calculate step and initial sideDist
+			if(ray_dir_x < 0)
+      		{
+      		  step_x = -1;
+      		  len_ray_x = (player_pos_x - pos_map_x) * dist_x;
+      		}
+      		else
+      		{
+      		  step_x = 1;
+      		  len_ray_x = (pos_map_x + 1.0 - player_pos_x) * dist_x;
+      		}
+      		if(ray_dir_y < 0)
+      		{
+      		  step_y = -1;
+      		  len_ray_y = (player_pos_y - pos_map_y) * dist_y;
+      		}
+      		else
+      		{
+      		  step_y = 1;
+      		  len_ray_y = (pos_map_y + 1.0 - player_pos_y) * dist_y;
+      		}
+			//perform DDA
+      		while(wall_hit == 0)
+      		{
+        	//jump to next map square, either in x-direction, or in y-direction
+        	if(len_ray_x < len_ray_y)
+        	{
+        	  len_ray_x += dist_x;
+        	  pos_map_x += step_x;
+        	  hit_side = 0;
+        	}
+        	else
+        	{
+        	  len_ray_y += dist_y;
+        	  pos_map_y += step_y;
+        	  hit_side = 1;
+        	}
+        	//Check if ray has wall_hit a wall
+        	if(map_data->map[pos_map_x][pos_map_y] == '1') 
+				wall_hit = 1;
 			}
+			//Calculate distance projected on camera direction.
+			if(hit_side == 0)
+				wall_distance = (len_ray_x - dist_x);
+     		else
+				wall_distance = (len_ray_y - dist_y);
+			//Calculate height of line to draw on screen
+      		wall_height = (int)(h / wall_distance);
+			//calculate lowest and highest pixel to fill in current stripe
+      		bottom_wall = -wall_height / 2 + h / 2;
+      		if(bottom_wall < 0) 
+				bottom_wall = 0;
+      		top_wall = wall_height / 2 + h / 2;
+      		if(top_wall >= h)
+				top_wall = h - 1;
+
+			// make a function which gives the correct color for the wall
+
+			// if(hit_side == 1) 
+			// 	color = color / 2;
+
+			// draw vertical line
+			i++;
 		}
-		mlx_image_to_window(mlx, ray, ray_x, ray_y);
-		i++;
 	}
 	return (0);
 }
@@ -127,7 +186,6 @@ void hook(void* param)
 	view_direction->instances[0].y = img->instances[0].y + 10 * cos(player->player_angle);
 	view_direction->instances[0].x = img->instances[0].x + 10 * sin(player->player_angle);
 	printf("%f\n", player->player_angle);
-	mlx_delete_image(mlx, ray);
 	draw_ray(mlx, player, map_data);
 
 }
@@ -200,5 +258,4 @@ int	main(int argc, char **argv)
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (0);
-
 }

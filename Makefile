@@ -6,12 +6,13 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/02/28 13:55:35 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/01 14:33:12 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=   -Wall -Wextra -Werror -g
+CFLAGS		=   -g
+# -Wall -Wextra -Werror 
 LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft
 CC			=	cc
@@ -42,8 +43,7 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: $(NAME)
-# libft libmlx 
+all: libft libmlx $(NAME) 
 
 obj:
 	@mkdir -p $(OBJ_DIR)
@@ -58,6 +58,9 @@ obj/%.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 $(NAME): obj $(OBJS)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+
+n: obj $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
