@@ -1,0 +1,80 @@
+-----------------Structure--------------------
+
+
+# define EMPTY 0
+# define WALL 1
+# defien SPRITE 2......
+
+-----------data types
+- map struct t_map
+	- char **map
+	- hexrgb ceiling_color
+	- hexrgb floor_color
+	- char **cardinals
+		- north = cardinals[0] etc
+	- char **sprites
+		- sprite[SPRITE] = /path/to/sprite.xpm
+
+- player struct t_player
+	- int position_x
+	- int position_y
+	- double field of view
+
+- enemy struct t_enemy
+	- int position_x
+	- int position_y
+	- int health
+	- int speed
+	- t_item *weapon
+
+- weapon struct t_weapon
+	- int damage
+	- int range
+	- int reload_time
+
+- t_raycast
+	- [0] = NULL
+	- [1] = ft_print_cardinal
+	- [2] = ft_print_sprite[SPRITE]
+
+
+-----------modules
+>> file string
+- fn_parser
+	- reading information from file
+		- map 
+		- textures nort, south, east, west
+		- ceiling color
+		- floor color
+>> t_map, t_player, t_enemy *enemies
+
+>> t_map, t_player, t_enemy *enemies
+- fn_main_loop
+	- fn_key_hook
+	- fn_mouse_hook
+	- fn_minimap
+	- fn_collision
+	- fn_enemies
+	- fn_check_door
+	- fn_raycaster
+>> success or error
+
+- fn_check_door
+	- if player in range of door
+	- change door state 
+
+- fn_minimap
+
+- fn_collision
+
+- fn_key_hook
+
+- fn_mouse_hook
+
+- fn_enemies
+
+>> t_map, t_player
+- fn_raycaster
+	- displaying 3d version of map on screen from current player view
+	- displaying sprites
+>> success or error
