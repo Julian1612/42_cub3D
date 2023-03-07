@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/27 14:11:25 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:43:58 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		check_file(char *str, char *data_type);
 int		put_file_content_in_arr(char ***raw_map, char *path);
 
 // get_textures.c
-int		get_textures(t_map *map_data, char **raw_map);
+int     get_textures(t_map *map_data, char *path);
 
 // get_map.c
 int		get_map(t_map *map_data, char **raw_map);

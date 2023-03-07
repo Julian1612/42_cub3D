@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:08:23 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/27 16:48:56 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/06 14:20:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static int	validate_map_position(char **raw_map, int i, int j, int flage)
 	}
 	return (0);
 }
+// @todo kann ich den shit einfach null terminiueren oder muss da was anderes gemadhrt weren 
 
 int static	remove_newline_from_arr(char **raw_map, int i)
 {
@@ -101,7 +102,7 @@ int static	remove_newline_from_arr(char **raw_map, int i)
 		while (raw_map[i][j] != '\0')
 		{
 			if (raw_map[i][j] == '\n')
-				raw_map[i][j] = ' ';
+				raw_map[i][j] = '\0';
 			j++;
 		}
 		i++;

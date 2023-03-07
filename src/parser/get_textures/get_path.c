@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/26 20:39:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:46:47 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,45 @@
 #include <stdio.h>
 
 static int	get_data_texture(char *raw_line, char **path);
-static int	get_path_texture(char **path, char **line_content);
+static int	get_path_of_texture(char **path, char **line_content);
+static int	get_path_texture(char **texture_path, char *line_content);
 
-int	get_path(char **raw_map, char *direction, char **path)
+int	get_path(char *direction, char **texture_path, char *cub_file_path)
 {
 	int	i;
+	char *line_content;
 
 	i = 0;
-	if (finde_line(raw_map, direction, &i))
+	line_content = NULL;
+	if (find_line(cub_file_path, direction, &line_content))
 		return (1);
-	if (get_data_texture(raw_map[i], path))
+	if (get_path_of_texture(texture_path, &line_content))
+		return (1);
+	return (0);
+}
+
+static int	get_path_texture(char **texture_path, char *line_content)
+{
+	char **splitted_str;
+
+	splitted_str = ft_split(line_content, ' ');
+	*texture_path = malloc(sizeof(char) * ft_strlen(splitted_str[1]));
+	if (*texture_path == NULL)
 	{
-		ft_free_arr(raw_map);
+		error_textures(4);
 		return (1);
 	}
+	// checken of split 2 elemente hat
+	// error returnen
+	if (cpy_line(texture_path, splitted_str[1], ft_strlen(line_content[1]) - 1) == NULL)
+		return (1);
+	printf("texture_path: %s\n", *texture_path);
 	return (0);
 }
 
 static int	get_data_texture(char *raw_line, char **path)
 {
-	char	**line_content;
+	char	*line_content;
 
 	line_content = get_line_content(raw_line);
 	if (line_content == NULL)
@@ -52,20 +71,3 @@ static int	get_data_texture(char *raw_line, char **path)
 	return (0);
 }
 
-static int	get_path_texture(char **path, char **line_content)
-{
-	*path = malloc(sizeof(char) * ft_strlen(line_content[1]));
-	if (*path == NULL)
-	{
-		error_textures(4);
-		return (1);
-	}
-	if (cpy_line(*path, line_content[1],
-			ft_strlen(line_content[1]) - 1) == NULL)
-	{
-		ft_free_arr(line_content);
-		error_textures(7);
-		return (1);
-	}
-	return (0);
-}

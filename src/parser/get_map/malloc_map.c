@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 18:33:29 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/27 16:41:41 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:45:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	malloc_map(char ***map, int map_height, int map_width)
 	while (i < map_height)
 	{
 		(*map)[i] = (char *)malloc(sizeof(char) * (map_width + 1));
+		// (*map)[i] = ww_malloc_and_add(sizeof(char), map_width + 1);
 		if ((*map)[i] == NULL)
 		{
 			error_get_map(4);

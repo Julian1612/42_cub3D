@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:29:46 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/27 18:12:02 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/06 14:04:43 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	map_to_arr(char **raw_map, t_map *map_data, int start_map)
 	map_data->map_width = map_width;
 	if (get_map_height(raw_map, start_map, &map_height))
 		return (1);
-	map_data->map_hight = map_height;
+	map_data->map_height = map_height;
 	if (malloc_map(&map_data->map, map_height, map_width))
 		return (1);
 	if (fill_map(map_data->map, raw_map, start_map, map_height))

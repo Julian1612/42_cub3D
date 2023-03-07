@@ -6,21 +6,21 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/01 14:33:12 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/07 10:44:01 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=   -g
-# -Wall -Wextra -Werror 
+CFLAGS		=   -g -Wall -Wextra -Werror 
 LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft
+GARBAGE		=	./libraries/garbage_collector
 CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 				src/player_position:
 
 SRC			=	main.c \
-				check_args.c check_file.c error_messages.c parser.c put_file_content_in_arr.c \
+				check_args.c check_file.c error_messages.c parser.c \
 				errors_textures.c free_textures.c get_path_utils.c get_path.c get_rgb_values.c \
 				get_textures.c \
 				check_map.c check_wall_horizontal.c check_wall_vertical.c errors_map.c get_map.c \
@@ -28,7 +28,8 @@ SRC			=	main.c \
 				init_player_position.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
-LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a 
+# $(GARBAGE)/libwastewiz.a
 OBJS		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
 OBJ_DIR		= ./obj/
 
@@ -43,7 +44,7 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: libft libmlx $(NAME) 
+all: libft libmlx garbage_collector $(NAME) 
 
 obj:
 	@mkdir -p $(OBJ_DIR)
@@ -53,6 +54,9 @@ libft:
 
 libmlx:
 	@$(MAKE) -C $(LIBMLX)
+
+# garbage_collector:
+# 	@$(MAKE) -C $(GARBAGE)
 
 obj/%.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"

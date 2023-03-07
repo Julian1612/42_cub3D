@@ -6,26 +6,28 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 19:58:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/27 13:40:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:40:09 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_get_textures.h"
 #include <stdio.h>
 
-int	get_textures(t_map *map_data, char **raw_map)
+// @todo add defines for we and ea etxc 
+
+int	get_textures(t_map *map_data, char *path)
 {
-	if (get_path(raw_map, "WE", &map_data->west))
+	if (get_path("WE", &map_data->west, path))
 		return (1);
-	if (get_path(raw_map, "EA", &map_data->east))
+	if (get_path("EA", &map_data->east, path))
 		return (1);
-	if (get_path(raw_map, "SO", &map_data->south))
+	if (get_path("SO", &map_data->south, path))
 		return (1);
-	if (get_path(raw_map, "NO", &map_data->north))
+	if (get_path("NO", &map_data->north, path))
 		return (1);
-	if (get_map_color(map_data->floor_rgb_arr, raw_map, "F"))
-		return (1);
-	if (get_map_color(map_data->ceiling_rgb_arr, raw_map, "C"))
-		return (1);
+	// if (get_map_color(map_data->floor_rgb_arr, path, "F"))
+	// 	return (1);
+	// if (get_map_color(map_data->ceiling_rgb_arr, path, "C"))
+	// 	return (1);
 	return (0);
 }
