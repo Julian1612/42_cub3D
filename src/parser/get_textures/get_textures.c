@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 19:58:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/07 14:40:09 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:12:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	get_textures(t_map *map_data, char *path)
 		return (1);
 	if (get_path("NO", &map_data->north, path))
 		return (1);
-	// if (get_map_color(map_data->floor_rgb_arr, path, "F"))
-	// 	return (1);
-	// if (get_map_color(map_data->ceiling_rgb_arr, path, "C"))
-	// 	return (1);
+	if (get_map_color("F", map_data->floor_rgb_arr, path))
+		return (1);
+	if (get_map_color("C", map_data->ceiling_rgb_arr, path))
+		return (1);
 	return (0);
 }

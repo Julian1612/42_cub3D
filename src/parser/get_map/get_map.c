@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:08:23 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/06 14:20:39 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:14:54 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,28 @@ static int	check_for_texture(char **raw_map, int *i, int j, int *flage);
 static int	validate_map_position(char **raw_map, int i, int j, int flage);
 static int	remove_newline_from_arr(char **raw_map, int i);
 
-int	get_map(t_map *map_data, char **raw_map)
+int	get_map(t_map *map_data, char *cub_file_path)
 {
-	int	start_map;
+	int	fd;
+	int	file_len;
+	char *line;
 
-	start_map = 0;
-	if (finde_map_in_file(raw_map, &start_map))
+	line = NULL;
+	fd = open(cub_file_path, O_RDONLY);
+	file_len = get_file_len(cub_file_path);
+	if (finde_map_in_file(fd, line))
 		return (1);
-	if (remove_newline_from_arr(raw_map, start_map))
-		return (1);
-	if (map_to_arr(raw_map, map_data, start_map))
-		return (1);
-	if (check_map(map_data->map))
-		return (1);
+	printf("line = %s\n", line);
+	// if (remove_newline_from_arr(raw_map, start_map))
+	// 	return (1);
+	// if (put_map_in_arr(raw_map, map_data, start_map))
+	// 	return (1);
+	// if (check_map(map_data->map))
+	// 	return (1);
 	return (0);
 }
 
-static int	finde_map_in_file(char **raw_map, int *i)
+static int	finde_map_in_file(char *cub_file_path)
 {
 	int		j;
 	int		row_len;
@@ -42,6 +47,11 @@ static int	finde_map_in_file(char **raw_map, int *i)
 
 	j = 0;
 	flage = 0;
+    if (fd == -1)
+	{
+		error_message(2);
+		return (1);
+	}
 	while (raw_map[*i] != NULL)
 	{
 		row_len = ft_strlen(raw_map[*i]);
@@ -84,7 +94,7 @@ static int	validate_map_position(char **raw_map, int i, int j, int flage)
 	}
 	return (0);
 }
-// @todo kann ich den shit einfach null terminiueren oder muss da was anderes gemadhrt weren 
+// @todo kann ich den shit einfach null terminiueren oder muss da was anderes gemadhrt weren
 
 int static	remove_newline_from_arr(char **raw_map, int i)
 {

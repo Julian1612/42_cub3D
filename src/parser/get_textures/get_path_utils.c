@@ -6,14 +6,14 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:17:26 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/07 17:29:17 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:05:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_get_textures.h"
 #include <stdio.h>
 
-static int	get_file_len(char *path);
+// static int	get_file_len(char *path);
 
 char	*cpy_line(char **des, char *src, int len)
 {
@@ -78,62 +78,26 @@ char	**get_line_content(char *raw_line)
 // 	}
 // 	return (0);
 // }
-int	find_line(char *cub_file_path, char *direction, char **line_content)
-{
-	int	i;
-	int	fd;
-	int	file_len;
-	char *line;
 
-	i = 0;
-	fd = open(cub_file_path, O_RDONLY);
-	file_len = get_file_len(cub_file_path);
-	if (fd == -1)
-	{
-		error_message(2);
-		return (1);
-	}
-	while (i < file_len - 1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL && i != file_len - 1)
-		{
-			error_message(4);
-			return (1);
-		}
-		if (ft_strnstr(line, direction, ft_strlen(line)) != NULL)
-		{
-			cpy_line(line_content, line, ft_strlen(line));
-			break ;
-		}
-		free(line);
-		i++;
-	}
-	// printf("line_content: %s\n", line_content);
-	// if (check_for_errors(raw_map, direction, count))
-	// 	return (1);
-	return (0);
-}
+// static int	get_file_len(char *path)
+// {
+// 	int		len;
+// 	int		fd;
+// 	char	*line;
 
-static int	get_file_len(char *path)
-{
-	int		len;
-	int		fd;
-	char	*line;
-
-	len = 1;
-	fd = open(path, O_RDONLY);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		free(line);
-		line = get_next_line(fd);
-		len++;
-	}
-	free(line);
-	close(fd);
-	return (len);
-}
+// 	len = 1;
+// 	fd = open(path, O_RDONLY);
+// 	line = get_next_line(fd);
+// 	while (line != NULL)
+// 	{
+// 		free(line);
+// 		line = get_next_line(fd);
+// 		len++;
+// 	}
+// 	free(line);
+// 	close(fd);
+// 	return (len);
+// }
 
 void	remove_letter(char **line_content, char letter)
 {
