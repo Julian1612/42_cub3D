@@ -6,25 +6,34 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:17:26 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/27 16:36:09 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:05:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_get_textures.h"
 #include <stdio.h>
 
-char	*cpy_line(char *dest, char *src, int len)
+// static int	get_file_len(char *path);
+
+char	*cpy_line(char **des, char *src, int len)
 {
 	int	i;
 
 	i = 0;
-	while (i < len)
+	// printf("src: %s", src);
+	*des = malloc(sizeof(char) * (len + 1));
+	if (*des == NULL)
 	{
-		dest[i] = src[i];
+		error_textures(4);
+		return (NULL);
+	}
+	while (i < len - 1)
+	{
+		(*des)[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	(*des)[i] = '\0';
+	return (*des);
 }
 
 // hier muss gecheckt ob fiel wirklich empty oder malloc error !!!
@@ -41,59 +50,54 @@ char	**get_line_content(char *raw_line)
 	return (line_content);
 }
 
-int static	check_for_errors(char **raw_map, char *direction, int count)
-{
-	if (count == 0 && ft_arrlen(raw_map) > 1 && direction[0] == 'F')
-	{
-		ft_free_arr(raw_map);
-		error_textures(14);
-		return (1);
-	}
-	else if (count == 0 && ft_arrlen(raw_map) > 1 && direction[0] == 'C')
-	{
-		ft_free_arr(raw_map);
-		error_textures(14);
-		return (1);
-	}
-	else if (count == 0 && ft_arrlen(raw_map) > 1)
-	{
-		ft_free_arr(raw_map);
-		error_textures(10);
-		return (1);
-	}
-	else if (count > 1)
-	{
-		ft_free_arr(raw_map);
-		error_textures(5);
-		return (1);
-	}
-	return (0);
-}
+// int static	check_for_errors(char **raw_map, char *direction, int count)
+// {
+// 	if (count == 0 && ft_arrlen(raw_map) > 1 && direction[0] == 'F')
+// 	{
+// 		ft_free_arr(raw_map);
+// 		error_textures(14);
+// 		return (1);
+// 	}
+// 	else if (count == 0 && ft_arrlen(raw_map) > 1 && direction[0] == 'C')
+// 	{
+// 		ft_free_arr(raw_map);
+// 		error_textures(14);
+// 		return (1);
+// 	}
+// 	else if (count == 0 && ft_arrlen(raw_map) > 1)
+// 	{
+// 		ft_free_arr(raw_map);
+// 		error_textures(10);
+// 		return (1);
+// 	}
+// 	else if (count > 1)
+// 	{
+// 		ft_free_arr(raw_map);
+// 		error_textures(5);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
-int	finde_line(char **raw_map, char *direction, int *i)
-{
-	int	count;
-	int	i_save;
-	int	line_len;
+// static int	get_file_len(char *path)
+// {
+// 	int		len;
+// 	int		fd;
+// 	char	*line;
 
-	count = 0;
-	i_save = *i;
-	while (raw_map[*i])
-	{
-		line_len = ft_strlen(raw_map[*i]);
-		if (line_len >= 2
-			&& ft_strnstr(raw_map[*i], direction, line_len) != NULL)
-		{
-			i_save = *i;
-			count++;
-		}
-		(*i)++;
-	}
-	if (check_for_errors(raw_map, direction, count))
-		return (1);
-	*i = i_save;
-	return (0);
-}
+// 	len = 1;
+// 	fd = open(path, O_RDONLY);
+// 	line = get_next_line(fd);
+// 	while (line != NULL)
+// 	{
+// 		free(line);
+// 		line = get_next_line(fd);
+// 		len++;
+// 	}
+// 	free(line);
+// 	close(fd);
+// 	return (len);
+// }
 
 void	remove_letter(char **line_content, char letter)
 {
@@ -107,3 +111,5 @@ void	remove_letter(char **line_content, char letter)
 		i++;
 	}
 }
+
+

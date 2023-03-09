@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:16:13 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/27 18:00:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/06 14:42:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	put_file_content_in_arr(char ***raw_map, char *path)
 		error_message(2);
 		return (1);
 	}
-	len = get_file_len(path);
-	if (len == 0)
-	{
-		error_message(4);
-		return (1);
-	}
+	// len = get_file_len(path);
+	// if (len == 0)
+	// {
+	// 	error_message(4);
+	// 	return (1);
+	// }
 	if (cpy_data_to_arr(raw_map, len, fd))
 		return (1);
 	close(fd);
@@ -44,13 +44,13 @@ static int	cpy_data_to_arr(char ***raw_map, int len, int fd)
 	int		i;
 	char	*line;
 
-	i = 0;
-	(*raw_map) = (char **) malloc(sizeof(char *) * (len + 1));
-	if (raw_map == NULL)
-	{
-		error_message(4);
-		return (1);
-	}
+	// i = 0;
+	// (*raw_map) = (char **) malloc(sizeof(char *) * (len + 1));
+	// if (raw_map == NULL)
+	// {
+	// 	error_message(4);
+	// 	return (1);
+	// }
 	while (i < len)
 	{
 		line = get_next_line(fd);
@@ -80,22 +80,22 @@ static int	cpy_data_to_arr(char ***raw_map, int len, int fd)
 	return (0);
 }
 
-static int	get_file_len(char *path)
-{
-	int		len;
-	int		fd;
-	char	*line;
+// static int	get_file_len(char *path)
+// {
+// 	int		len;
+// 	int		fd;
+// 	char	*line;
 
-	len = 1;
-	fd = open(path, O_RDONLY);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		free(line);
-		line = get_next_line(fd);
-		len++;
-	}
-	free(line);
-	close(fd);
-	return (len);
-}
+// 	len = 1;
+// 	fd = open(path, O_RDONLY);
+// 	line = get_next_line(fd);
+// 	while (line != NULL)
+// 	{
+// 		free(line);
+// 		line = get_next_line(fd);
+// 		len++;
+// 	}
+// 	free(line);
+// 	close(fd);
+// 	return (len);
+// }

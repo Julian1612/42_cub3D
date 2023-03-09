@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:13:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/22 14:05:31 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:13:06 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,23 @@
 
 static int	check_data_type(char *path, char *data_type);
 
-int	check_file(char *str, char *data_type)
+int	check_file(t_parser *parser_data, char *cub_file_path, char *data_type)
 {
 	int	fd;
 
-	fd = open(str, O_RDONLY);
-	close(fd);
+	fd = open(cub_file_path, O_RDONLY);
 	if (fd < 0)
 	{
 		error_message(2);
 		return (1);
 	}
-	if (check_data_type(str, data_type))
+	close(fd);
+	if (check_data_type(cub_file_path, data_type))
 	{
 		error_message(3);
 		return (1);
 	}
+	parser_data->cub_file_path = cub_file_path;
 	return (0);
 }
 

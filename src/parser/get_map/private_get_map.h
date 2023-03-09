@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   private_get_map.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:23:21 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/22 14:22:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:04:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRIVATE_GET_MAP_H
 # define PRIVATE_GET_MAP_H
 # include "../private_parser.h"
+# define NBR_POSSIBLE_DEFINITIONS 6
 
 int	check_map(char **map);
 
@@ -26,6 +27,6 @@ void	error_get_map(int error_code);
 
 int	malloc_map(char ***map, int map_height, int map_width);
 
-int	map_to_arr(char **raw_map, t_map *map_data, int start_map);
+int	init_map_arr(char **line, t_map *map_data, int fd, char *cub_file_path);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 17:13:29 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/27 16:49:53 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:32:43 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static int	check_wall(char **map)
 	return (0);
 }
 
+
 static int	check_for_invalid_chars(char **map)
 {
+	// auf alle texturen prüfen auch bonus !!
 	int	i;
 	int	j;
 
