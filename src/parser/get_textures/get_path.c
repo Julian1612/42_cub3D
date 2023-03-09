@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/09 17:34:50 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:49:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	get_texture_file_path(char **texture_path, char *line_content);
 // am ende gucken ob die essentials da sind, wenn nicht dann erro
 // die get rgb funktion auch hier direkt mit machen das mach nicht nochmal durber eiern muss
 // einfach if c oder f dann rgb values rein schallern
+// wenn er auf den anfang der map stößt dann eine funktion die die map in ein array schreibt und einfach bis zum ende rein lad wenn dann
+// noche eine definition drin ist muss das spater beim map checken abgefangen werden
 int	get_path(char *direction, char **texture_path, char *cub_file_path)
 {
 	int		i;
