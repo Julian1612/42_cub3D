@@ -6,35 +6,51 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/09 19:46:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/09 21:09:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game
-#include "../libraries/mlx/include/MLX42/MLX42.h" // mlx_functions
+#include "minimap.h" // t_minimap
+#include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
 #include <stdio.h> // @note remove
+#include <math.h> // cos, sin
 
-void	draw(t_game *game)
+void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player)
 {
-	game->img_a = mlx_texture_to_image(game->mlx, game->map.west.texture);
-	mlx_image_to_window(game->mlx, game->img_a, 0, 0);
-}
-
-void	keys(t_game *game)
-{
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
-		mlx_close_window(game->mlx);
+		mlx_close_window(mlx);
 		errexit_msg("Escape pressed. Exiting program.");
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-		game->img_a->instances[0].y -= 3;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-		game->img_a->instances[0].y += 3;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		game->img_a->instances[0].x -= 3;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-		game->img_a->instances[0].x += 3;
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
+	{
+		minimap->img->instances[0].y += cos(player->player_angle) * 5;
+		minimap->img->instances[0].x += sin(player->player_angle) * 5;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
+	{
+		minimap->img->instances[0].y -= cos(player->player_angle) * 5;
+		minimap->img->instances[0].x -= sin(player->player_angle) * 5;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
+	{
+		minimap->img->instances[0].y += cos(player->player_angle - M_PI_2) * 5;
+		minimap->img->instances[0].x += sin(player->player_angle - M_PI_2) * 5;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
+	{
+		minimap->img->instances[0].y += cos(player->player_angle + M_PI_2) * 5;
+		minimap->img->instances[0].x += sin(player->player_angle + M_PI_2) * 5;
+	}
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		player->player_angle += M_PI / 180 * 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		player->player_angle -= M_PI / 180 * 5;
+	minimap->view_dir->instances[0].y = minimap->img->instances[0].y + 10 * cos(player->player_angle);
+	minimap->view_dir->instances[0].x = minimap->img->instances[0].x + 10 * sin(player->player_angle);
 }
 
 void	game_loop(void *param)
@@ -42,10 +58,9 @@ void	game_loop(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	draw(game);
 	// mouse handling
 	// minimap
 	// collision
 	// enemy
-	keys(game);
+	keys(game->mlx, &game->minimap, &game->player);
 }

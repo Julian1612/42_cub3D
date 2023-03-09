@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/09 20:01:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/09 21:02:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /* ************************************************************************** */
 
 # include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+# include "minimap.h" // t_minimap
 
 /* ************************************************************************** */
 /* DEFINES																	  */
@@ -25,10 +26,6 @@
 
 # define WIDTH 512
 # define HEIGHT 512
-# define PLAYER_SIZE 2
-# define DIRECTION 2
-# define WALL_BLOCK 64
-# define NBR_OF_RAYS 1
 # define ERROR -1
 # define SUCCESS 0
 
@@ -66,6 +63,7 @@ typedef struct s_map
 	t_hexcolor	floor_color;
 }	t_map;
 
+// @note weapon is pointer because the player can change weapons
 typedef struct s_player
 {
 	float			x;
@@ -73,7 +71,7 @@ typedef struct s_player
 	int				head_x;
 	int				head_y;
 	float			player_angle;
-	t_weapon		*weapon; // @note pointer because the player can change weapons
+	t_weapon		*weapon;
 }	t_player;
 
 // @note enemies are always oriented towards the player
@@ -94,6 +92,7 @@ typedef struct s_game
 	mlx_image_t		*img_a;
 	mlx_image_t		*img_b;
 	t_map			map;
+	t_minimap		minimap;
 	t_player		player;
 	t_enemy			*enemies;
 }	t_game;

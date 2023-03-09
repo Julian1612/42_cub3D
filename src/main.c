@@ -6,15 +6,17 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/09 20:02:36 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/09 21:01:25 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
+#include "minimap.h" // minimap_initialize
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
 #include <stdlib.h> // malloc
 #include <stdio.h> // printf
 #include <stdbool.h> // bool
+#include <math.h> // M_PI
 
 int	test_parse(t_game *game)
 {
@@ -60,6 +62,9 @@ int	initialize_mlx_data(t_game *game)
 	game->map.south.texture = &game->map.south.xpm->texture;
 	game->map.north.texture = &game->map.north.xpm->texture;
 	// @todo sprite initialization
+	if (minimap_initialize(&game->minimap, game->mlx, game->map.map) == ERROR)
+		return (ERROR);
+	game->player.player_angle = M_PI;
 	return (SUCCESS);
 }
 
