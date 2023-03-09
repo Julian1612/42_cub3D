@@ -15,6 +15,12 @@
 	- char **sprites
 		- sprite[SPRITE] = /path/to/sprite.xpm
 
+- texture struct t_texture
+	- int width
+	- int height
+	- char *path
+	- int *data
+
 - player struct t_player
 	- int position_x
 	- int position_y

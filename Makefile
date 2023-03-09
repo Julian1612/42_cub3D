@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
+#    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/01 14:33:12 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/09 19:46:32 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 				src/player_position:
 
-SRC			=	main.c \
+SRC			=	errexit.c game_loop.c main.c \
 				check_args.c check_file.c error_messages.c parser.c put_file_content_in_arr.c \
 				errors_textures.c free_textures.c get_path_utils.c get_path.c get_rgb_values.c \
 				get_textures.c \
