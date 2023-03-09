@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/08 14:02:36 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:34:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 int			find_line(char *cub_file_path, char *direction, char **line_content);
 static int	get_texture_file_path(char **texture_path, char *line_content);
 
+// quasi ne while die einmal durch geht vergelicht strstr ob in der line eine definition da, wenn ja dann
+// rein laden in struct.
+// flag die gesetzt wird wenn die map gefunde wurde, wenn dann noch eine weitere texture definition gefunden wird
+// dann error
+// am ende gucken ob die essentials da sind, wenn nicht dann erro
+// die get rgb funktion auch hier direkt mit machen das mach nicht nochmal durber eiern muss
+// einfach if c oder f dann rgb values rein schallern
 int	get_path(char *direction, char **texture_path, char *cub_file_path)
 {
 	int		i;

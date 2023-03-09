@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:29:46 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/06 14:04:43 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:34:15 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,37 @@ static int	get_map_height(char **raw_map, int i, int *map_height);
 static int	fill_map(char **map, char **raw_map, int start_map, int map_height);
 static int	fill_line(char *map, char *raw_map);
 
-int	map_to_arr(char **raw_map, t_map *map_data, int start_map)
+int	init_map_arr(char **line, t_map *map_data, int fd, char *cub_file_path)
 {
 	int		map_width;
 	int		map_height;
 
-	if (get_map_width(raw_map, start_map, &map_width))
+	if (get_map_width(line, fd, &map_width))
 		return (1);
-	map_data->map_width = map_width;
-	if (get_map_height(raw_map, start_map, &map_height))
+	if (get_map_height(line, fd, &map_height))
 		return (1);
-	map_data->map_height = map_height;
 	if (malloc_map(&map_data->map, map_height, map_width))
 		return (1);
-	if (fill_map(map_data->map, raw_map, start_map, map_height))
+	if (fill_map(map_data->map, map_height))
 		return (1);
-	
 	return (0);
 }
 
-static int	get_map_width(char **raw_map, int i, int *map_width)
+static int	get_map_width(char *cub_file_path, char **line, int *map_width)
 {
+	int	fd;
+	char *line;
+	int i;
+
+
+	fd = open(cub_file_path, O_RDONLY);
 	*map_width = 0;
-	while (raw_map[i] != NULL)
+	// error message
+	if (fd == -1)
+		return (1);
+	while (i < file_len - 1)
 	{
+		*line = get_next_line(fd);
 		if ((int) ft_strlen(raw_map[i]) > (*map_width))
 			(*map_width) = ft_strlen(raw_map[i]);
 		i++;
