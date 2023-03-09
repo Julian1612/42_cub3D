@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/09 21:09:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/09 21:27:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,30 @@ void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player)
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
-		minimap->img->instances[0].y += cos(player->player_angle) * 5;
-		minimap->img->instances[0].x += sin(player->player_angle) * 5;
+		minimap->player->instances[0].y += cos(player->player_angle) * 5;
+		minimap->player->instances[0].x += sin(player->player_angle) * 5;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
-		minimap->img->instances[0].y -= cos(player->player_angle) * 5;
-		minimap->img->instances[0].x -= sin(player->player_angle) * 5;
+		minimap->player->instances[0].y -= cos(player->player_angle) * 5;
+		minimap->player->instances[0].x -= sin(player->player_angle) * 5;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
-		minimap->img->instances[0].y += cos(player->player_angle - M_PI_2) * 5;
-		minimap->img->instances[0].x += sin(player->player_angle - M_PI_2) * 5;
+		minimap->player->instances[0].y += cos(player->player_angle - M_PI_2) * 5;
+		minimap->player->instances[0].x += sin(player->player_angle - M_PI_2) * 5;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
-		minimap->img->instances[0].y += cos(player->player_angle + M_PI_2) * 5;
-		minimap->img->instances[0].x += sin(player->player_angle + M_PI_2) * 5;
+		minimap->player->instances[0].y += cos(player->player_angle + M_PI_2) * 5;
+		minimap->player->instances[0].x += sin(player->player_angle + M_PI_2) * 5;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		player->player_angle += M_PI / 180 * 5;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		player->player_angle -= M_PI / 180 * 5;
-	minimap->view_dir->instances[0].y = minimap->img->instances[0].y + 10 * cos(player->player_angle);
-	minimap->view_dir->instances[0].x = minimap->img->instances[0].x + 10 * sin(player->player_angle);
+	minimap->view_dir->instances[0].y = minimap->player->instances[0].y + 10 * cos(player->player_angle);
+	minimap->view_dir->instances[0].x = minimap->player->instances[0].x + 10 * sin(player->player_angle);
 }
 
 void	game_loop(void *param)

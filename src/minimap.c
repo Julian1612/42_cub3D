@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 20:37:20 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/09 21:17:41 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/09 21:27:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,21 @@ static int	minimap_draw_walls(mlx_image_t *walls, mlx_t *mlx, char **map)
 
 int	minimap_initialize(t_minimap *minimap, mlx_t *mlx, char **map)
 {
-	minimap->img = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
+	minimap->player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
 	minimap->view_dir = mlx_new_image(mlx, DIRECTION, DIRECTION);
 	minimap->walls = mlx_new_image(mlx, WALL_BLOCK, WALL_BLOCK);
-	if (!minimap->img || !minimap->view_dir || !minimap->walls)
+	if (!minimap->player || !minimap->view_dir || !minimap->walls)
 		return (ERROR);
-	minimap->img->pixels = ft_memset(minimap->img->pixels, 255,
-			minimap->img->width * minimap->img->height * sizeof(int));
+	minimap->player->pixels = ft_memset(minimap->player->pixels, 255,
+			minimap->player->width * minimap->player->height * sizeof(int));
 	minimap->view_dir->pixels = ft_memset(minimap->view_dir->pixels, 255,
 			minimap->view_dir->width * minimap->view_dir->height * sizeof(int));
 	minimap->walls->pixels = ft_memset(minimap->walls->pixels, 255,
 			minimap->walls->width * minimap->walls->height * sizeof(int));
-	if (!minimap->img->pixels || !minimap->view_dir->pixels
+	if (!minimap->player->pixels || !minimap->view_dir->pixels
 		|| !minimap->walls->pixels)
 		return (ERROR);
-	if (mlx_image_to_window(mlx, minimap->img, 60, 80) == ERROR)
+	if (mlx_image_to_window(mlx, minimap->player, 60, 80) == ERROR)
 		return (ERROR);
 	if (mlx_image_to_window(mlx, minimap->view_dir, 0, 0) == ERROR)
 		return (ERROR);
