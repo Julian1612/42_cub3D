@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/10 15:25:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/10 21:09:47 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	test_parse(t_game *game)
 	game->map.floor_color = 0x000000FF;
 	game->player.x = 0;
 	game->player.y = 0;
-	game->player.view_dir = M_PI;
+	game->player.view_dir = 0;
 	game->player.weapon = NULL;
 	return (SUCCESS);
 }

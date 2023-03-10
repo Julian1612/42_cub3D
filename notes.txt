@@ -1,3 +1,20 @@
+-------------knowledge--------------
+
+- sin und cos werte ergeben sich aus dem einheitskreis und sind immer zwischen -1 und 1
+	- sin und cos werte sind die x und y werte eines punktes auf dem kreis
+	- sin ist y und cos ist x
+- winkel eines rechtwinkligen dreiecks
+	- sin = gegenkathete/hypotenuse
+	- cos = ankathete/hypotenuse
+	- tan = gegenkathete/ankathete
+		- tan ist der rechte winkel
+	- grad wert = sin^-1(ergebnis)
+	-> für jeden winkel werden 2 seitenlängen benötigt
+- player->y += cos(player->view_dir) * ROT_SPEED;
+	- Erklärung: player->y bewegt sich in die richtung des winkels player->view_dir
+- mit cos(winkel) erhält man den schnittpunkt des vektors mit dem einheitskreis
+
+
 -------------raycasting--------------
 
 values that have to be determined:

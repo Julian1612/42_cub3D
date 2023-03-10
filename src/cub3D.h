@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/10 15:24:53 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/10 17:31:05 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define WIDTH 960
-# define HEIGHT 540
+# define WIDTH 640
+# define HEIGHT 400
 # define ERROR -1
 # define SUCCESS 0
+# define BLOCK_SIZE 64
 
 /* ************************************************************************** */
 /* TYPEDEFS																	  */
@@ -105,11 +106,19 @@ typedef struct s_game
 	t_enemy			*enemies;
 }	t_game;
 
+// @note maybe move this into raycaster header
+typedef struct s_ray
+{
+	int		nearest_x;
+	int		nearest_y;
+	float	dir;
+}	t_ray;
+
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
-void	debug_print_game(t_game *game);
+void	debug_print_player(t_player *player);
 
 void	errexit_msg(char *msg);
 void	errexit_mlx_errno(void);
@@ -122,5 +131,7 @@ int		render_world(t_game *game);
 void	hook(void *param);
 
 int		cast_ray(t_game *game, float ray_angle);
+
+void	debug_print_ray(t_ray *ray);
 
 #endif

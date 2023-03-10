@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/10 15:25:58 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/10 16:05:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@
 
 #define PLAYER_SIZE 2
 #define DIRECTION 2
-#define WALL_BLOCK 60
 
 static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
 {
 	minimap->player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
 	minimap->view_dir = mlx_new_image(mlx, DIRECTION, DIRECTION);
-	minimap->walls = mlx_new_image(mlx, WALL_BLOCK, WALL_BLOCK);
+	minimap->walls = mlx_new_image(mlx, BLOCK_SIZE, BLOCK_SIZE);
 	if (!minimap->player || !minimap->view_dir || !minimap->walls)
 		return (ERROR);
 	minimap->player->pixels = ft_memset(minimap->player->pixels, 255,
