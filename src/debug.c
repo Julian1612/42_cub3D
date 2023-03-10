@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/10 15:43:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/10 23:45:16 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 void	debug_print_player(t_player *player)
 {
 	printf(BLUE"============ PLAYER ============\n"RESET);
-	printf("player x:   %d\n", player->x);
-	printf("player y:   %d\n", player->y);
+	printf("player x:   %f\n", player->x);
+	printf("player y:   %f\n", player->y);
 	printf("player dir: %f\n", player->view_dir);
 	printf("\n");
 }
@@ -43,8 +43,8 @@ void	debug_print_player(t_player *player)
 void	debug_print_ray(t_ray *ray)
 {
 	printf(BLUE"============ RAY ============\n"RESET);
-	printf("ray x:   %d\n", ray->nearest_x);
-	printf("ray y:   %d\n", ray->nearest_y);
+	printf("ray x:   %f\n", ray->nearest_x);
+	printf("ray y:   %f\n", ray->nearest_y);
 	printf("ray dir: %f\n", ray->dir);
 	printf("\n");
 }

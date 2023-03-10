@@ -2,3 +2,4 @@
 obj
 libraries/libft/obj
 cub3D
+libraries/libft/libft.a

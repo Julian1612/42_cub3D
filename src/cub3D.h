@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/10 17:31:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/10 23:55:38 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ typedef struct s_weapon
 
 typedef struct s_minimap
 {
-	float			x;
-	float			y;
-	float			width;
-	float			height;
+	double			x;
+	double			y;
+	double			width;
+	double			height;
 	mlx_image_t		*player;
 	mlx_image_t		*walls;
 	mlx_image_t		*view_dir;
@@ -77,17 +77,17 @@ typedef struct s_map
 // @note weapon is pointer because the player can change weapons
 typedef struct s_player
 {
-	int				x;
-	int				y;
-	float			view_dir;
+	double			x;
+	double			y;
+	double			view_dir;
 	t_weapon		*weapon;
 }	t_player;
 
 // @note enemies are always oriented towards the player
 typedef struct s_enemy
 {
-	float			x;
-	float			y;
+	double			x;
+	double			y;
 	t_texture		*texture;
 	char			health;
 	char			*speed;
@@ -109,9 +109,9 @@ typedef struct s_game
 // @note maybe move this into raycaster header
 typedef struct s_ray
 {
-	int		nearest_x;
-	int		nearest_y;
-	float	dir;
+	double	nearest_x;
+	double	nearest_y;
+	double	dir;
 }	t_ray;
 
 /* ************************************************************************** */
@@ -130,7 +130,7 @@ int		render_world(t_game *game);
 
 void	hook(void *param);
 
-int		cast_ray(t_game *game, float ray_angle);
+int		cast_ray(t_game *game, double ray_angle);
 
 void	debug_print_ray(t_ray *ray);
 
