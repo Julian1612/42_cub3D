@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/09 21:09:07 by lorbke           ###   ########.fr        #
+#    Updated: 2023/03/10 15:24:03 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 				src/player_position:
 
-SRC			=	minimap.c errexit.c game_loop.c main.c
+SRC			=	raycaster.c debug.c render.c initialize.c errexit.c hook.c main.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
@@ -48,7 +48,7 @@ libft:
 libmlx:
 	@$(MAKE) -C $(LIBMLX)
 
-obj/%.o: %.c
+obj/%.o: %.c cub3D.h
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 $(NAME): obj $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/09 21:02:48 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/10 15:24:53 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@
 /* ************************************************************************** */
 
 # include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
-# include "minimap.h" // t_minimap
 
 /* ************************************************************************** */
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define WIDTH 512
-# define HEIGHT 512
+# define WIDTH 960
+# define HEIGHT 540
 # define ERROR -1
 # define SUCCESS 0
 
@@ -51,6 +50,17 @@ typedef struct s_weapon
 	char			*reload_time;
 }	t_weapon;
 
+typedef struct s_minimap
+{
+	float			x;
+	float			y;
+	float			width;
+	float			height;
+	mlx_image_t		*player;
+	mlx_image_t		*walls;
+	mlx_image_t		*view_dir;
+}	t_minimap;
+
 typedef struct s_map
 {
 	char		**map;
@@ -66,11 +76,9 @@ typedef struct s_map
 // @note weapon is pointer because the player can change weapons
 typedef struct s_player
 {
-	float			x;
-	float			y;
-	int				head_x;
-	int				head_y;
-	float			player_angle;
+	int				x;
+	int				y;
+	float			view_dir;
 	t_weapon		*weapon;
 }	t_player;
 
@@ -101,8 +109,18 @@ typedef struct s_game
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
-void	game_loop(void *param);
+void	debug_print_game(t_game *game);
+
 void	errexit_msg(char *msg);
 void	errexit_mlx_errno(void);
+
+int		initialize_mlx_all(t_game *game);
+
+int		render_minimap(t_minimap *minimap, mlx_t *mlx, char **map);
+int		render_world(t_game *game);
+
+void	hook(void *param);
+
+int		cast_ray(t_game *game, float ray_angle);
 
 #endif
