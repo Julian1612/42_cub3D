@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MLX42.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 00:33:01 by W2Wizard          #+#    #+#             */
-/*   Updated: 2023/02/24 21:27:30 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/08 18:12:05 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -564,7 +564,7 @@ xpm_t* mlx_load_xpm42(const char* path);
  *
  * @param[in] texture The texture to free.
  */
-void mlx_delete_texture(mlx_texture_t* texture);
+void mlx_delete_texture(mlx_texture_t* );
 
 /**
  * Deletes an XPM42 texture by freeing its allocated data.
