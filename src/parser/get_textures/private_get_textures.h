@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:24:04 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/08 10:45:10 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:52:05 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ char	*cpy_line(char **des, char *src, int len);
 
 char	**get_line_content(char *raw_line);
 
-int     find_line(char *cub_file_path, char *direction, char **line_content);
+// int     find_line(char *cub_file_path, char *direction, char **line_content);
 
-void    remove_letter(char **line_content, char letter);
+int	remove_letter(char **line_content);
 
-int     get_path(char *direction, char **texture_path, char *cub_file_path);
+int	get_path(t_map *map_data, char *cub_file_path);
 
 int     get_map_color(char *rgb_values, int *rgb_arr, char *cub_file_path);
 

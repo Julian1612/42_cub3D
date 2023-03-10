@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:13:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/09 16:13:06 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/10 10:06:24 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	check_data_type(char *path, char *data_type);
 
-int	check_file(t_parser *parser_data, char *cub_file_path, char *data_type)
+int	check_file(char *cub_file_path, char *data_type)
 {
 	int	fd;
 
@@ -31,7 +31,6 @@ int	check_file(t_parser *parser_data, char *cub_file_path, char *data_type)
 		error_message(3);
 		return (1);
 	}
-	parser_data->cub_file_path = cub_file_path;
 	return (0);
 }
 

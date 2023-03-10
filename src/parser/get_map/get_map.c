@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:08:23 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/09 17:36:30 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:18:17 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ int	get_map(t_map *map_data, char *cub_file_path)
 		return (1);
 	// if (remove_newline_from_arr(raw_map, start_map))
 	// 	return (1);
-
 	if (init_map_arr(line, map_data, fd, cub_file_path))
 		return (1);
 	// if (check_map(map_data->map))

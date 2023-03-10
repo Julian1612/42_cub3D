@@ -6,13 +6,13 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/08 10:47:17 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/10 10:16:26 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=   -g 
-# -Wall -Wextra -Werror 
+CFLAGS		=   -g
+# -Wall -Wextra -Werror
 LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft
 GARBAGE		=	./libraries/garbage_collector
@@ -22,14 +22,16 @@ VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 
 SRC			=	main.c \
 				check_args.c check_file.c error_messages.c parser.c \
-				errors_textures.c free_textures.c get_path_utils.c get_path.c get_rgb_values.c \
+				get_path_utils.c get_path.c get_rgb_values.c \
 				get_textures.c \
-				check_map.c check_wall_horizontal.c check_wall_vertical.c errors_map.c get_map.c \
-				malloc_map.c map_to_arr.c\
-				init_player_position.c
+				errors_textures.c
+				# free_textures.c
+				# check_map.c check_wall_horizontal.c check_wall_vertical.c errors_map.c get_map.c \
+				# malloc_map.c map_to_arr.c\
+				# init_player_position.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
-LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a 
+LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
 # $(GARBAGE)/libwastewiz.a
 OBJS		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
 OBJ_DIR		= ./obj/
@@ -45,7 +47,7 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: libft libmlx garbage_collector $(NAME) 
+all: libft libmlx garbage_collector $(NAME)
 
 obj:
 	@mkdir -p $(OBJ_DIR)

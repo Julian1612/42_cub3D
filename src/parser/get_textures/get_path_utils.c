@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:17:26 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/08 10:05:01 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:52:00 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*cpy_line(char **des, char *src, int len)
 	*des = malloc(sizeof(char) * (len + 1));
 	if (*des == NULL)
 	{
+		// exit wenn malloc fail
 		error_textures(4);
 		return (NULL);
 	}
@@ -99,17 +100,26 @@ char	**get_line_content(char *raw_line)
 // 	return (len);
 // }
 
-void	remove_letter(char **line_content, char letter)
+int	remove_letter(char **line_content)
 {
 	int	i;
 
 	i = 0;
 	while (line_content[0][i] != '\0')
 	{
-		if (line_content[0][i] == letter)
+		if (line_content[0][i] == 'F')
+		{
 			line_content[0][i] = ' ';
+			return (1);
+		}
+		else if (line_content[0][i] == 'C')
+		{
+			line_content[0][i] = ' ';
+			return (2);
+		}
 		i++;
 	}
+	return (0);
 }
 
 

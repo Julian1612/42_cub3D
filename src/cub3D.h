@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/08 10:46:26 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:14:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 
 typedef struct s_map
 {
+	char			*north;
+	char			*south;
 	char			*west;
 	char			*east;
-	char			*south;
-	char			*north;
 	int				floor_rgb_arr[3];
 	int				ceiling_rgb_arr[3];
 	char			**map;
