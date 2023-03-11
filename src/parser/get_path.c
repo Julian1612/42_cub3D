@@ -6,12 +6,12 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/11 14:44:29 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:42:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "private_get_textures.h"
-#include <stdio.h>
+#include "private_parser.h"
+#include <stdlib.h>
 
 // static int	get_data_texture(char *raw_line, char **path);
 // static int	get_path_of_texture(char **path, char **line_content);
@@ -21,13 +21,13 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i);
 
 static int	get_texture_file_path(t_map *map_data, char *line, int i)
 {
-	char **splitted_str;
-	char *texture_path;
+	char	**splitted_str;
+	char	*texture_path;
 
 	splitted_str = ft_split(line, ' ');
 	if (splitted_str == NULL)
 	{
-		error_textures(4);
+		// error_textures(4);
 		return (1);
 	}
 	if (i == 0)
@@ -42,19 +42,10 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 	return (0);
 }
 
-// quasi ne while die einmal durch geht vergelicht strstr ob in der line eine definition da, wenn ja dann
-// rein laden in struct.
-// die get rgb funktion auch hier direkt mit machen das mach nicht nochmal durber eiern muss
-// einfach if c oder f dann rgb values rein schallern
-// wenn er auf den anfang der map stößt dann eine funktion die die map in ein array schreibt und einfach bis zum ende rein lad wenn dann
-// noche eine definition drin ist muss das spater beim map checken abgefangen werden
-int check_for_texture(t_map *map_data, char *line)
+int	check_for_texture(t_map *map_data, char *line)
 {
-	// macro definieren der alle sachen enthalt (we, ea, so etc.) und den dann in einer while durch gehen und
-	// vergleichen ob verhanden wie unten schon gemacht nor halt das es ein varibaler macro is in dem man nyr ein mal anpassen
-	// falls noch eine neue texture hinzu kommt
-	char *definitions[4] = {"NO", "SO", "WE", "EA"};
-	int	i;
+	static char	*definitions[4] = {"NO", "SO", "WE", "EA"};
+	int			i;
 
 	i = 0;
 	while (i < 4)
@@ -118,12 +109,11 @@ static int	get_rgb_values(t_map *map_data, char *line)
 		map_data->floor_rgb_arr[1] = ft_atoi(splitted_str[1]);
 		map_data->floor_rgb_arr[2] = ft_atoi(splitted_str[2]);
 	}
-
 	ft_free_arr(splitted_str);
 	return (0);
 }
 
-int check_for_rgb(t_map *map_data, char *line)
+int	check_for_rgb(t_map *map_data, char *line)
 {
 	if (ft_strnstr(line, "C", ft_strlen(line)) != NULL
 		|| ft_strnstr(line, "F", ft_strlen(line)) != NULL)
@@ -134,36 +124,9 @@ int check_for_rgb(t_map *map_data, char *line)
 	return (0);
 }
 
-int	init_map(t_map *map_data, char *line, int fd)
+int	check_line(t_map *map_data, char *line, int fd)
 {
-	char	*map_str;
-
-	map_str = ft_strdup(line);
-	while (line != NULL)
-	{
-		line = get_next_line(fd);
-		if (line != NULL)
-			map_str = ft_strjoin(map_str, line);
-	}
-	map_data->map = ft_split(map_str, '\n');
-	return (0);
-}
-
-int check_for_map(t_map *map_data, char *line, int fd)
-{
-	int i;
-
-	i = 0;
-	while (line[i] != '\0' && line[i] == ' ')
-		i++;
-	if (line[i] == '1')
-		init_map(map_data, line, fd);
-	return (0);
-}
-
-int check_line(t_map *map_data, char *line, int fd)
-{
-	if(check_for_texture(map_data, line))
+	if (check_for_texture(map_data, line))
 		return (0);
 	// else if check for bonus textures return 0
 	else if (check_for_rgb(map_data, line))
@@ -193,7 +156,7 @@ static int	get_file_len(char *path)
 	return (len);
 }
 
-int	get_path(t_map *map_data, char *cub_file_path)
+int	get_map_data(t_map *map_data, char *cub_file_path)
 {
 	int		i;
 	char	*line;
@@ -217,71 +180,10 @@ int	get_path(t_map *map_data, char *cub_file_path)
 			error_message(4);
 			return (1);
 		}
-		if(check_line(map_data, line, fd))
+		if (check_line(map_data, line, fd))
 			break ;
 		free(line);
 		i++;
 	}
 	return (0);
 }
-
-
-// int	find_line(char *cub_file_path, char *direction, char **line_content)
-// {
-// 	int		i;
-// 	int		fd;
-// 	int		file_len;
-// 	char	*line;
-
-// 	i = 0;
-// 	fd = open(cub_file_path, O_RDONLY);
-// 	if (fd == -1)
-// 	{
-// 		error_message(2);
-// 		return (1);
-// 	}
-// 	file_len = get_file_len(cub_file_path);
-// 	while (i < file_len - 1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (line == NULL && i != file_len - 1)
-// 		{
-// 			error_message(4);
-// 			return (1);
-// 		}
-// 		if (ft_strnstr(line, direction, ft_strlen(line)) != NULL)
-// 		{
-// 			cpy_line(line_content, line, ft_strlen(line));
-// 			break ;
-// 		}
-// 		free(line);
-// 		i++;
-// 	}
-// 	// printf("line_content: %s\n", line_content);
-// 	// if (check_for_errors(raw_map, direction, count))
-// 	// 	return (1);
-// 	return (0);
-// }
-
-
-// // static int	get_data_texture(char *raw_line, char **path)
-// // {
-// // 	char	*line_content;
-
-// // 	line_content = *get_line_content(raw_line);
-// // 	if (line_content == NULL)
-// // 		return (1);
-// // 	if (get_path_texture(path, line_content))
-// // 	{
-// // 		ft_free_arr(&line_content);
-// // 		return (1);
-// // 	}
-// // 	if (check_file(*path, "xpm"))
-// // 	{
-// // 		ft_free_arr(&line_content);
-// // 		return (1);
-// // 	}
-// // 	ft_free_arr(&line_content);
-// // 	return (0);
-// // }
-

@@ -6,11 +6,11 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 15:17:26 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/10 14:52:00 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:43:15 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "private_get_textures.h"
+#include "private_parser.h"
 #include <stdio.h>
 
 // static int	get_file_len(char *path);
@@ -20,12 +20,11 @@ char	*cpy_line(char **des, char *src, int len)
 	int	i;
 
 	i = 0;
-	// printf("src: %s", src);
 	*des = malloc(sizeof(char) * (len + 1));
 	if (*des == NULL)
 	{
 		// exit wenn malloc fail
-		error_textures(4);
+		// error_textures(4);
 		return (NULL);
 	}
 	while (i < len - 1)
@@ -45,7 +44,7 @@ char	**get_line_content(char *raw_line)
 	line_content = ft_split(raw_line, ' ');
 	if (line_content == NULL)
 	{
-		error_textures(8);
+		// error_textures(8);
 		return (NULL);
 	}
 	return (line_content);
@@ -80,26 +79,6 @@ char	**get_line_content(char *raw_line)
 // 	return (0);
 // }
 
-// static int	get_file_len(char *path)
-// {
-// 	int		len;
-// 	int		fd;
-// 	char	*line;
-
-// 	len = 1;
-// 	fd = open(path, O_RDONLY);
-// 	line = get_next_line(fd);
-// 	while (line != NULL)
-// 	{
-// 		free(line);
-// 		line = get_next_line(fd);
-// 		len++;
-// 	}
-// 	free(line);
-// 	close(fd);
-// 	return (len);
-// }
-
 int	remove_letter(char **line_content)
 {
 	int	i;
@@ -121,5 +100,3 @@ int	remove_letter(char **line_content)
 	}
 	return (0);
 }
-
-
