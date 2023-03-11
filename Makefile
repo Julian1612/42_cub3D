@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/10 10:16:26 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/11 14:35:40 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 
 SRC			=	main.c \
 				check_args.c check_file.c error_messages.c parser.c \
-				get_path_utils.c get_path.c get_rgb_values.c \
+				get_path_utils.c get_path.c \
 				get_textures.c \
 				errors_textures.c
+				# get_rgb_values.c
 				# free_textures.c
 				# check_map.c check_wall_horizontal.c check_wall_vertical.c errors_map.c get_map.c \
 				# malloc_map.c map_to_arr.c\
@@ -47,7 +48,7 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: libft libmlx garbage_collector $(NAME)
+all: libft libmlx $(NAME)
 
 obj:
 	@mkdir -p $(OBJ_DIR)

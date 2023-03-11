@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/10 18:47:09 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:44:29 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,81 +134,22 @@ int check_for_rgb(t_map *map_data, char *line)
 	return (0);
 }
 
-int get_map_dimension(char *cub_file_path, int *map_height, int *map_width, char *)
+int	init_map(t_map *map_data, char *line, int fd)
 {
-	int		fd;
-	char	*line;
-	int		i;
+	char	*map_str;
 
-	i = 0;
-	*map_width = 0;
-	fd = open(cub_file_path, O_RDONLY);
-	if (fd == -1)
-	{
-		error_textures(1);
-		return (1);
-	}
-	while(ft_strnstr(line, ))
+	map_str = ft_strdup(line);
 	while (line != NULL)
 	{
-		while (/* condition */)
-		{
-			/* code */
-		}
-
 		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		if (ft_strlen(line) > map_width)
-			map_width = ft_strlen(line);
-		free(line);
-		map_height++;
+		if (line != NULL)
+			map_str = ft_strjoin(map_str, line);
 	}
-}
-
-int	init_map(t_map *map_data, char *cub_file_path)
-{
-	int		i;
-	int		fd;
-	char	*line;
-	int		file_len;
-
-	i = 0;
-	file_len = get_file_len(cub_file_path);
-	while (i < file_len - 1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL && i != file_len - 1)
-		{
-			error_message(4);
-			return (1);
-		}
-
-	}
-}
-
-int get_map(t_map *map_data, char *line, char *cub_file_path, int fd)
-{
-	int map_height;
-	int map_width;
-
-	if (get_map_dimensions(cub_file_path, &map_height, &map_width))
-		return (1);
-	// malloc map
-	map_data->map = (char **)malloc(sizeof(char *) * (map_height + 1));
-	if (map_data->map == NULL)
-	{
-		error_textures(4);
-		return (1);
-	}
-	map_data->map[map_height] = NULL;
-	// init map
-	if (init_map(map_data, cub_file_path))
-		return (1);
+	map_data->map = ft_split(map_str, '\n');
 	return (0);
 }
 
-int check_for_map(t_map *map_data, char *line, char *cub_file_path, int fd)
+int check_for_map(t_map *map_data, char *line, int fd)
 {
 	int i;
 
@@ -216,24 +157,40 @@ int check_for_map(t_map *map_data, char *line, char *cub_file_path, int fd)
 	while (line[i] != '\0' && line[i] == ' ')
 		i++;
 	if (line[i] == '1')
-	{
-		get_map(map_data, line, cub_file_path);
-		return (1);
-	}
+		init_map(map_data, line, fd);
 	return (0);
 }
 
-int check_line(t_map *map_data, char *line, char *cub_file_path, int fd)
+int check_line(t_map *map_data, char *line, int fd)
 {
-	// in der line is eine texture definition return 0
 	if(check_for_texture(map_data, line))
 		return (0);
 	// else if check for bonus textures return 0
 	else if (check_for_rgb(map_data, line))
 		return (0);
-	else if (check_for_map(map_data, line, cub_file_path))
+	else if (check_for_map(map_data, line, fd))
 		return (1);
 	return (0);
+}
+
+static int	get_file_len(char *path)
+{
+	int		len;
+	int		fd;
+	char	*line;
+
+	len = 1;
+	fd = open(path, O_RDONLY);
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+		len++;
+	}
+	free(line);
+	close(fd);
+	return (len);
 }
 
 int	get_path(t_map *map_data, char *cub_file_path)
@@ -260,7 +217,7 @@ int	get_path(t_map *map_data, char *cub_file_path)
 			error_message(4);
 			return (1);
 		}
-		if(check_line(map_data, line, cub_file_path, fd))
+		if(check_line(map_data, line, fd))
 			break ;
 		free(line);
 		i++;
@@ -268,25 +225,6 @@ int	get_path(t_map *map_data, char *cub_file_path)
 	return (0);
 }
 
-// static int	get_file_len(char *path)
-// {
-// 	int		len;
-// 	int		fd;
-// 	char	*line;
-
-// 	len = 1;
-// 	fd = open(path, O_RDONLY);
-// 	line = get_next_line(fd);
-// 	while (line != NULL)
-// 	{
-// 		free(line);
-// 		line = get_next_line(fd);
-// 		len++;
-// 	}
-// 	free(line);
-// 	close(fd);
-// 	return (len);
-// }
 
 // int	find_line(char *cub_file_path, char *direction, char **line_content)
 // {
