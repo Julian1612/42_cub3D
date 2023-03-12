@@ -77,7 +77,7 @@ $(OBJ_PATH):
 
 $(OBJ_PATH)/%.o: %.c
 	@echo -e -n "$(YELLOW)Compiling: $(RESET)"
-	$(CC) $(FLAGS) $(ADD_FLAGS) -I. -c $< -o $@
+	$(CC) $(CFLAGS) $(ADD_FLAGS) -I. -c $< -o $@
 
 # phony targets
 all: $(NAME)
