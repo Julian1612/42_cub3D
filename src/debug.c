@@ -51,9 +51,9 @@ void	debug_print_ray(t_ray *ray)
 {
 	printf(BLUE"============ RAY ============\n"RESET);
 	printf("vec x cross:\n");
-	debug_print_coor(&ray->cross_x);
+	debug_print_coor(&ray->nx_latitude);
 	printf("vec y cross:\n");
-	debug_print_coor(&ray->cross_y);
+	debug_print_coor(&ray->nx_longitude);
 	printf("ray dir: %f\n", ray->dir);
 	printf("\n");
 }

@@ -50,10 +50,10 @@ int	cast_ray(t_game *game, double ray_dir)
 	t_ray	ray;
 
 	ray.dir = ray_dir;
-	ray.cross_y.y = get_nearest_intersection_y(game->player.y, ray_dir);
-	ray.cross_y.x = get_opposite_length(ray.cross_y.y, ray_dir);
-	ray.cross_x.x = get_nearest_intersection_x(game->player.x, ray_dir);
-	ray.cross_x.y = get_opposite_length(ray.cross_x.x, ray_dir);
+	ray.nx_longitude.y = get_nearest_intersection_y(game->player.y, ray_dir);
+	ray.nx_longitude.x = get_opposite_length(ray.nx_longitude.y, ray_dir);
+	ray.nx_latitude.x = get_nearest_intersection_x(game->player.x, ray_dir);
+	ray.nx_latitude.y = get_opposite_length(ray.nx_latitude.x, ray_dir);
 	debug_print_ray(&ray);
 	return (SUCCESS);
 }

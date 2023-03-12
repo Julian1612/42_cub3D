@@ -17,8 +17,8 @@
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
 
-#define PLAYER_SIZE 20
-#define DIRECTION 20
+#define PLAYER_SIZE 2
+#define DIRECTION 2
 
 static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
 {
@@ -27,9 +27,9 @@ static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
 	minimap->walls = mlx_new_image(mlx, BLOCK_SIZE, BLOCK_SIZE);
 	if (!minimap->player || !minimap->view_dir || !minimap->walls)
 		return (ERROR);
-	minimap->player->pixels = ft_memset(minimap->player->pixels, 155,
+	minimap->player->pixels = ft_memset(minimap->player->pixels, 150,
 			minimap->player->width * minimap->player->height * sizeof(int));
-	minimap->view_dir->pixels = ft_memset(minimap->view_dir->pixels, 255,
+	minimap->view_dir->pixels = ft_memset(minimap->view_dir->pixels, 150,
 			minimap->view_dir->width * minimap->view_dir->height * sizeof(int));
 	minimap->walls->pixels = ft_memset(minimap->walls->pixels, 255,
 			minimap->walls->width * minimap->walls->height * sizeof(int));

@@ -36,8 +36,8 @@ int	test_parse(t_game *game)
 	game->map.north.path = "textures/east.xpm42";
 	game->map.ceiling_color = 0x00FF0000;
 	game->map.floor_color = 0x000000FF;
-	game->player.x = BLOCK_SIZE - 20 - 5;
-	game->player.y = BLOCK_SIZE - 20 - 5;
+	game->player.x = BLOCK_SIZE - 5;
+	game->player.y = BLOCK_SIZE - 5;
 	game->player.view_dir = 0;
 	game->player.weapon = NULL;
 	return (SUCCESS);

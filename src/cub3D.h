@@ -115,8 +115,8 @@ typedef struct s_coor
 // @note maybe move this into raycaster header
 typedef struct s_ray
 {
-	t_coor	cross_x;
-	t_coor	cross_y;
+	t_coor	nx_latitude;
+	t_coor	nx_longitude;
 	double	dir;
 }	t_ray;
 
