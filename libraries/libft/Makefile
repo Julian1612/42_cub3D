@@ -66,7 +66,8 @@ endif
 #	RULES						  #
 ###################################
 
-# file targets
+all: $(NAME)
+
 $(NAME): $(OBJ_PATH) $(OBJ)
 	@echo -e -n "$(BLUE)Creating: libft library: $(RESET)"
 	$(AR) $(NAME) $(OBJ)
@@ -78,9 +79,6 @@ $(OBJ_PATH):
 $(OBJ_PATH)/%.o: %.c
 	@echo -e -n "$(YELLOW)Compiling: $(RESET)"
 	$(CC) $(CFLAGS) $(ADD_FLAGS) -I. -c $< -o $@
-
-# phony targets
-all: $(NAME)
 
 clean:
 	$(RM) -r $(OBJ_PATH)
