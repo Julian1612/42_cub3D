@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/10 23:45:16 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/12 17:35:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,20 @@ void	debug_print_player(t_player *player)
 	printf("\n");
 }
 
+void	debug_print_coor(t_coor *coor)
+{
+	printf("x:   %f\n", coor->x);
+	printf("y:   %f\n", coor->y);
+	printf("\n");
+}
+
 void	debug_print_ray(t_ray *ray)
 {
 	printf(BLUE"============ RAY ============\n"RESET);
-	printf("ray x:   %f\n", ray->nearest_x);
-	printf("ray y:   %f\n", ray->nearest_y);
+	printf("vec x cross:\n");
+	debug_print_coor(&ray->cross_x);
+	printf("vec y cross:\n");
+	debug_print_coor(&ray->cross_y);
 	printf("ray dir: %f\n", ray->dir);
 	printf("\n");
 }

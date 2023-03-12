@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/10 23:55:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/12 17:35:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,17 @@ typedef struct s_game
 	t_enemy			*enemies;
 }	t_game;
 
+typedef struct s_coor
+{
+	double	x;
+	double	y;
+}	t_coor;
+
 // @note maybe move this into raycaster header
 typedef struct s_ray
 {
-	double	nearest_x;
-	double	nearest_y;
+	t_coor	cross_x;
+	t_coor	cross_y;
 	double	dir;
 }	t_ray;
 
