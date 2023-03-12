@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/11 16:42:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/12 11:31:35 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,39 @@
 // static int	get_data_texture(char *raw_line, char **path);
 // static int	get_path_of_texture(char **path, char **line_content);
 // static int	get_path_texture(char **texture_path, char *line_content);
-int			find_line(char *cub_file_path, char *direction, char **line_content);
 static int	get_texture_file_path(t_map *map_data, char *line, int i);
+
+int	get_file_data(t_map *map_data, char *cub_file_path)
+{
+	int		i;
+	char	*line;
+	int		file_len;
+	int		fd;
+
+	i = 0;
+	line = NULL;
+	file_len = get_file_len(cub_file_path);
+	fd = open(cub_file_path, O_RDONLY);
+	if (fd == -1)
+	{
+		error_message(2);
+		return (1);
+	}
+	while (i < file_len - 1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL && i != file_len - 1)
+		{
+			error_message(4);
+			return (1);
+		}
+		if (check_line(map_data, line, fd))
+			break ;
+		free(line);
+		i++;
+	}
+	return (0);
+}
 
 static int	get_texture_file_path(t_map *map_data, char *line, int i)
 {
@@ -42,7 +73,7 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 	return (0);
 }
 
-int	check_for_texture(t_map *map_data, char *line)
+static int	check_for_texture(t_map *map_data, char *line)
 {
 	static char	*definitions[4] = {"NO", "SO", "WE", "EA"};
 	int			i;
@@ -113,6 +144,7 @@ static int	get_rgb_values(t_map *map_data, char *line)
 	return (0);
 }
 
+
 int	check_for_rgb(t_map *map_data, char *line)
 {
 	if (ft_strnstr(line, "C", ft_strlen(line)) != NULL
@@ -124,6 +156,7 @@ int	check_for_rgb(t_map *map_data, char *line)
 	return (0);
 }
 
+// eigns file checkline.c
 int	check_line(t_map *map_data, char *line, int fd)
 {
 	if (check_for_texture(map_data, line))
@@ -154,36 +187,4 @@ static int	get_file_len(char *path)
 	free(line);
 	close(fd);
 	return (len);
-}
-
-int	get_map_data(t_map *map_data, char *cub_file_path)
-{
-	int		i;
-	char	*line;
-	int		file_len;
-	int		fd;
-
-	i = 0;
-	line = NULL;
-	file_len = get_file_len(cub_file_path);
-	fd = open(cub_file_path, O_RDONLY);
-	if (fd == -1)
-	{
-		error_message(2);
-		return (1);
-	}
-	while (i < file_len - 1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL && i != file_len - 1)
-		{
-			error_message(4);
-			return (1);
-		}
-		if (check_line(map_data, line, fd))
-			break ;
-		free(line);
-		i++;
-	}
-	return (0);
 }

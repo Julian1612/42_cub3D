@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/11 16:28:18 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/12 11:03:06 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**get_line_content(char *raw_line);
 
 int	remove_letter(char **line_content);
 
-int	get_map_data(t_map *map_data, char *cub_file_path);
+int	get_file_data(t_map *map_data, char *cub_file_path);
 
 int     get_map_color(char *rgb_values, int *rgb_arr, char *cub_file_path);
 

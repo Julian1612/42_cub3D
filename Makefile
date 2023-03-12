@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/11 16:23:19 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/12 10:48:42 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 SRC			=	main.c \
 				check_args.c check_file.c error_messages.c parser.c \
 				get_path_utils.c get_path.c \
-				get_textures.c get_map.c\
+				get_map.c\
 				errors_textures.c
 				# get_rgb_values.c
 				# free_textures.c
