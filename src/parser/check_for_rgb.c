@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 15:15:21 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:08:08 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	get_rgb_values(t_map *map_data, char *line);
 static int	check_rgb_values(char **line_content);
+static void	init_struct(t_map *map_data, char **splitted_str, int boundary);
 static int	remove_letter(char **line_content);
 
 int	check_for_rgb(t_map *map_data, char *line)
@@ -47,18 +48,7 @@ static int	get_rgb_values(t_map *map_data, char *line)
 	boundary = remove_letter(splitted_str);
 	if (check_rgb_values(&line))
 		return (1);
-	if (boundary == 1)
-	{
-		map_data->ceiling_rgb_arr[0] = ft_atoi(splitted_str[0]);
-		map_data->ceiling_rgb_arr[1] = ft_atoi(splitted_str[1]);
-		map_data->ceiling_rgb_arr[2] = ft_atoi(splitted_str[2]);
-	}
-	else if (boundary == 2)
-	{
-		map_data->floor_rgb_arr[0] = ft_atoi(splitted_str[0]);
-		map_data->floor_rgb_arr[1] = ft_atoi(splitted_str[1]);
-		map_data->floor_rgb_arr[2] = ft_atoi(splitted_str[2]);
-	}
+	init_struct(map_data, splitted_str, boundary);
 	ft_free_arr(splitted_str);
 	return (0);
 }
@@ -78,6 +68,22 @@ static int	check_rgb_values(char **line_content)
 		return (1);
 	}
 	return (0);
+}
+
+static void	init_struct(t_map *map_data, char **splitted_str, int boundary)
+{
+	if (boundary == 1)
+	{
+		map_data->ceiling_rgb_arr[0] = ft_atoi(splitted_str[0]);
+		map_data->ceiling_rgb_arr[1] = ft_atoi(splitted_str[1]);
+		map_data->ceiling_rgb_arr[2] = ft_atoi(splitted_str[2]);
+	}
+	else if (boundary == 2)
+	{
+		map_data->floor_rgb_arr[0] = ft_atoi(splitted_str[0]);
+		map_data->floor_rgb_arr[1] = ft_atoi(splitted_str[1]);
+		map_data->floor_rgb_arr[2] = ft_atoi(splitted_str[2]);
+	}
 }
 
 static int	remove_letter(char **line_content)
@@ -101,4 +107,3 @@ static int	remove_letter(char **line_content)
 	}
 	return (0);
 }
-
