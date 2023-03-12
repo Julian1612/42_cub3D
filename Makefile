@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/12 10:48:42 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/12 15:30:41 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,12 @@ VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 				src/player_position:
 
 SRC			=	main.c \
-				check_args.c check_file.c error_messages.c parser.c \
-				get_path_utils.c get_path.c \
-				get_map.c\
-				errors_textures.c
+				parser.c check_args.c check_file.c check_for_map.c check_for_rgb.c \
+				check_for_texture.c error_messages.c get_file_data.c
+
+				# get_path_utils.c get_file_data.c \
+				# get_map.c\
+				# errors_textures.c
 				# get_rgb_values.c
 				# free_textures.c
 				# check_map.c check_wall_horizontal.c check_wall_vertical.c errors_map.c get_map.c \
