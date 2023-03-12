@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 15:00:24 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:02:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 
 static int	get_file_len(char *path);
+static int	get_fd(char *path);
 static int	check_line(t_map *map_data, char *line, int fd);
 
 int	get_file_data(t_map *map_data, char *cub_file_path)
@@ -24,14 +25,8 @@ int	get_file_data(t_map *map_data, char *cub_file_path)
 	int		fd;
 
 	i = 0;
-	line = NULL;
 	file_len = get_file_len(cub_file_path);
-	fd = open(cub_file_path, O_RDONLY);
-	if (fd == -1)
-	{
-		error_message(2);
-		return (1);
-	}
+	fd = get_fd(cub_file_path);
 	while (i < file_len - 1)
 	{
 		line = get_next_line(fd);
@@ -46,6 +41,19 @@ int	get_file_data(t_map *map_data, char *cub_file_path)
 		i++;
 	}
 	return (0);
+}
+
+static int	get_fd(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+	{
+		error_message(2);
+		return (1);
+	}
+	return (fd);
 }
 
 static int	get_file_len(char *path)
