@@ -22,7 +22,7 @@ VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 SRC			=	raycaster.c debug.c render.c initialize.c errexit.c hook.c main.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
-LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
 OBJS		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
 OBJ_DIR		= ./obj/
 
