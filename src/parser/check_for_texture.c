@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 15:16:54 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:38:14 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 	splitted_str = ft_split(line, ' ');
 	if (splitted_str == NULL)
 	{
-		// error_textures(4);
+		error_message(4);
 		return (1);
 	}
 	if (i == 0)
@@ -63,8 +63,7 @@ char	*cpy_line(char **des, char *src, int len)
 	*des = malloc(sizeof(char) * (len + 1));
 	if (*des == NULL)
 	{
-		// exit wenn malloc fail
-		// error_textures(4);
+		error_message(4);
 		return (NULL);
 	}
 	while (i < len - 1)

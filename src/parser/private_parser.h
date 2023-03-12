@@ -6,13 +6,24 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 15:31:43 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:29:13 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRIVATE_PARSER_H
 # define PRIVATE_PARSER_H
 # include "../cub3D.h"
+
+typedef struct s_map
+{
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	int				floor_rgb_arr[3];
+	int				ceiling_rgb_arr[3];
+	char			**map;
+}					t_map;
 
 /* check_args.c */
 int		check_args(int *argc, char **argv);

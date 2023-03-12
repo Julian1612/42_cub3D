@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 16:08:08 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:47:05 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	get_rgb_values(t_map *map_data, char *line)
 	}
 	if (ft_arrlen(splitted_str) != 3)
 	{
-		error_textures(14);
+		error_textures(4);
 		return (1);
 	}
 	boundary = remove_letter(splitted_str);
@@ -58,13 +58,13 @@ static int	check_rgb_values(char **line_content)
 	if (ft_atoi(line_content[0]) > 255 || ft_atoi(line_content[1]) > 255
 		|| ft_atoi(line_content[2]) > 255)
 	{
-		error_textures(17);
+		error_textures(5);
 		return (1);
 	}
 	if (ft_atoi(line_content[0]) < 0 || ft_atoi(line_content[1]) < 0
 		|| ft_atoi(line_content[2]) < 0)
 	{
-		error_textures(17);
+		error_textures(5);
 		return (1);
 	}
 	return (0);

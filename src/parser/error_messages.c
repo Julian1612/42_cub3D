@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 17:11:13 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:22:43 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,31 @@ void	error_message(int error_code)
 
 void	error_textures(int error_code)
 {
-	if (error_code == 5)
-		printf("Error!\nMultiple texture definitions\n");
-	else if (error_code == 6)
+	if (error_code == 1)
 		printf("Error!\nFailed getting path of texture\n");
-	else if (error_code == 7)
+	else if (error_code == 2)
 		printf("Error!\nFile is empty\n");
-	else if (error_code == 8)
+	else if (error_code == 3)
 		printf("Error!\nFilepath to .xpm file is missing\n");
-	else if (error_code == 9)
+	else if (error_code == 4)
 		printf("Error!\nThe values for the RGBs are missing\n");
-	else if (error_code == 10)
+	else if (error_code == 5)
 		printf("Error!\nRGB value out of range\n");
 }
 
 void	error_get_map(int error_code)
 {
-	if (error_code == 13)
+	if (error_code == 1)
 		printf("Error!\nMap is not surrounded by walls\n");
-	else if (error_code == 14)
+	else if (error_code == 2)
 		printf("Error!\nfile contains no map\n");
-	else if (error_code == 15)
+	else if (error_code == 3)
 	{
 		printf("Error!\nMap is in incorrect position. ");
 		printf("Please place the map under the texture declarations\n");
 	}
-	else if (error_code == 16)
+	else if (error_code == 4)
 		printf("Error!\nEmpty line in map\n");
-	else if (error_code == 17)
+	else if (error_code == 5)
 		printf("Error!\nInvalid character in map\n");
 }

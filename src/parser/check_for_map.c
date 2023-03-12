@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:06 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 15:13:55 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:19:41 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	check_for_map(t_map *map_data, char *line, int fd)
 	while (line[i] != '\0' && line[i] == ' ')
 		i++;
 	if (line[i] == '1')
+	{
 		init_map(map_data, line, fd);
+		return (1);
+	}
 	return (0);
 }
 
@@ -32,6 +35,11 @@ static int	init_map(t_map *map_data, char *line, int fd)
 	char	*map_str;
 
 	map_str = ft_strdup(line);
+	if (map_str == NULL)
+	{
+		error_message(4);
+		return (1);
+	}
 	while (line != NULL)
 	{
 		line = get_next_line(fd);
