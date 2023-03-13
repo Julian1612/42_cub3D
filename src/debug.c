@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/13 14:53:33 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	debug_print_coor(t_coor *coor)
 void	debug_print_ray(t_ray *ray)
 {
 	printf(BLUE"============ RAY ============\n"RESET);
-	printf("vec x cross:\n");
+	printf("next latitude ( __ ):\n");
 	debug_print_coor(&ray->nx_latitude);
-	printf("vec y cross:\n");
+	printf("next longitute ( | ):\n");
 	debug_print_coor(&ray->nx_longitude);
 	printf("ray dir: %f\n", ray->dir);
 	printf("\n");
