@@ -6,24 +6,17 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 17:29:13 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:56:08 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRIVATE_PARSER_H
 # define PRIVATE_PARSER_H
 # include "../cub3D.h"
-
-typedef struct s_map
-{
-	char			*north;
-	char			*south;
-	char			*west;
-	char			*east;
-	int				floor_rgb_arr[3];
-	int				ceiling_rgb_arr[3];
-	char			**map;
-}					t_map;
+# define NBR_B_TEXTURES 3
+# define DOOR "D"
+# define BARREL "B"
+# define ENEMY "E"
 
 /* check_args.c */
 int		check_args(int *argc, char **argv);
@@ -32,7 +25,7 @@ int		check_args(int *argc, char **argv);
 int		check_file(char *cub_file_path, char *data_type);
 
 /* check_for_bonus_textures.c */
-int		check_for_map(t_map *map_data, char *line, int fd);
+int		check_for_bonus_texture(t_map *map_data, char *line);
 
 /* check_for_map.c */
 int		check_for_map(t_map *map_data, char *line, int fd);
@@ -43,6 +36,9 @@ int		check_for_rgb(t_map *map_data, char *line);
 /* check_for_textures.c */
 int		check_for_texture(t_map *map_data, char *line);
 char	*cpy_line(char **des, char *src, int len);
+
+/* check_map.c */
+int		check_map(t_map *map_data);
 
 /* error_messages.c */
 void	error_message(int error_code);

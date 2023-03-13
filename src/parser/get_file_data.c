@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 17:34:40 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:57:21 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static int	init_struct(t_map *map_data);
+static void	init_struct_null(t_map *map_data);
 static int	get_file_len(char *path);
 static int	get_fd(char *path);
 static int	check_line(t_map *map_data, char *line, int fd);
@@ -29,8 +29,7 @@ int	get_file_data(t_map *map_data, char *cub_file_path)
 	i = 0;
 	file_len = get_file_len(cub_file_path);
 	fd = get_fd(cub_file_path);
-	if (init_struct_null(map_data))
-		return (1);
+	init_struct_null(map_data);
 	while (i < file_len - 1)
 	{
 		line = get_next_line(fd);
@@ -44,7 +43,7 @@ int	get_file_data(t_map *map_data, char *cub_file_path)
 	return (0);
 }
 
-static int	init_struct(t_map *map_data)
+static void	init_struct_null(t_map *map_data)
 {
 	map_data->north = NULL;
 	map_data->south = NULL;
@@ -96,7 +95,8 @@ static int	check_line(t_map *map_data, char *line, int fd)
 {
 	if (check_for_texture(map_data, line))
 		return (0);
-	// else if check for bonus textures return 0
+	else if (check_for_bonus_texture(map_data, line))
+		return (0);
 	else if (check_for_rgb(map_data, line))
 		return (0);
 	else if (check_for_map(map_data, line, fd))

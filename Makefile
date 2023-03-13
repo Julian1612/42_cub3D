@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/12 17:11:18 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/13 10:59:18 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 
 SRC			=	main.c \
 				parser.c check_args.c check_file.c check_for_map.c check_for_rgb.c \
-				check_for_texture.c error_messages.c get_file_data.c
+				check_for_texture.c error_messages.c get_file_data.c check_for_bonus_texture.c \
+				check_map.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a

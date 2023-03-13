@@ -6,12 +6,11 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:06 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 17:19:41 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/13 09:59:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
-#include <stdio.h>
 
 static int	init_map(t_map *map_data, char *line, int fd);
 

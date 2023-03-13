@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 17:32:52 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:51:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	parser(int *argc, char **argv, t_map *map_data)
 		return (1);
 	if (get_file_data(map_data, argv[1]))
 		return (1);
-	// if (check_map(map_data))
+	if (check_map(map_data))
+		return (1);
+	// if (check_if_all_textures_are_set(map_data))
 	// 	return (1);
 	return (0);
 }
