@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 17:35:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/13 21:32:51 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define ERROR -1
 # define SUCCESS 0
 # define BLOCK_SIZE 64
+# define WALL '1'
 
 /* ************************************************************************** */
 /* TYPEDEFS																	  */
@@ -136,7 +137,7 @@ int		render_world(t_game *game);
 
 void	hook(void *param);
 
-int		cast_ray(t_game *game, double ray_angle);
+double	cast_ray(t_game *game, double ray_angle);
 
 void	debug_print_ray(t_ray *ray);
 
