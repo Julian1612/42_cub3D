@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/13 14:53:33 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/14 14:34:52 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,22 @@ void	debug_print_player(t_player *player)
 	printf("player x:   %f\n", player->x);
 	printf("player y:   %f\n", player->y);
 	printf("player dir: %f\n", player->view_dir);
-	printf("\n");
 }
 
 void	debug_print_coor(t_coor *coor)
 {
 	printf("x:   %f\n", coor->x);
 	printf("y:   %f\n", coor->y);
-	printf("\n");
 }
 
-void	debug_print_ray(t_ray *ray)
+void	debug_print_ray(t_ray *ray, double ray_length_lat, double ray_length_long)
 {
 	printf(BLUE"============ RAY ============\n"RESET);
 	printf("next latitude ( __ ):\n");
 	debug_print_coor(&ray->nx_latitude);
+	printf("ray length latitude: %f\n\n", ray_length_lat);
 	printf("next longitute ( | ):\n");
 	debug_print_coor(&ray->nx_longitude);
+	printf("ray length longitude: %f\n\n", ray_length_long);
 	printf("ray dir: %f\n", ray->dir);
-	printf("\n");
 }

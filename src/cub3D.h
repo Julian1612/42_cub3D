@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/13 21:32:51 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/14 14:33:20 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_minimap
 typedef struct s_map
 {
 	char		**map;
+	int			width;
+	int			height;
 	t_texture	west;
 	t_texture	east;
 	t_texture	south;
@@ -132,13 +134,13 @@ void	errexit_mlx_errno(void);
 
 int		initialize_mlx_all(t_game *game);
 
-int		render_minimap(t_minimap *minimap, mlx_t *mlx, char **map);
+int		render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
 int		render_world(t_game *game);
 
 void	hook(void *param);
 
 double	cast_ray(t_game *game, double ray_angle);
 
-void	debug_print_ray(t_ray *ray);
+void	debug_print_ray(t_ray *ray, double ray_length_lat, double ray_length_long);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 00:37:17 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/14 15:34:33 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	test_parse(t_game *game)
 							"1111111111111111"};
 
 	game->map.map = map;
+	game->map.width = 16;
+	game->map.height = 9;
 	game->map.west.path = "textures/east.xpm42";
 	game->map.east.path = "textures/east.xpm42";
 	game->map.south.path = "textures/east.xpm42";
@@ -51,7 +53,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (initialize_mlx_all(&game) == ERROR)
 		errexit_mlx_errno();
-	if (render_minimap(&game.minimap, game.mlx, game.map.map) == ERROR)
+	if (render_minimap(&game.minimap, game.mlx, &game.map) == ERROR)
 		errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
 		errexit_mlx_errno();

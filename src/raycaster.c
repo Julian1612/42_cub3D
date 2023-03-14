@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:41:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/14 00:22:53 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/14 15:57:51 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ double	get_nearest_latitude(double coor_x, double ray_dir)
 
 	// @note why cos?
 	if (cos(ray_dir) >= 0)
-		nearest = (BLOCK_SIZE - fmod(coor_x, BLOCK_SIZE)) * -1;
-	else
 		nearest = fmod(coor_x, BLOCK_SIZE);
+	else
+		nearest = (BLOCK_SIZE - fmod(coor_x, BLOCK_SIZE)) * -1;
 	return (nearest);
 }
 
@@ -55,20 +55,47 @@ int	get_triangle_opposite(double adjacent, double ray_dir)
 	return (opposite);
 }
 
-bool	is_wall(char **map, double x, double y)
+bool	is_wall(t_map *map, double x, double y)
 {
 	int		map_x;
 	int		map_y;
+	int		map_width;
+	int		map_height;
 
-	if (x > 16 * BLOCK_SIZE || x < 0)
+	map_width = map->width - 1;
+	map_height = map->height - 1;
+	if (x > map->width * BLOCK_SIZE || x < 0)
 		return (true);
-	if (y > 9 * BLOCK_SIZE || y < 0)
+	if (y > map->height * BLOCK_SIZE || y < 0)
 		return (true);
 	map_x = (int)(x / BLOCK_SIZE);
 	map_y = (int)(y / BLOCK_SIZE);
-	if (map[map_y][map_x] == WALL)
+	if (map->map[map_y][map_x] == WALL)
 		return (true);
 	return (false);
+}
+
+double	add_preserve_sign(double a, double b)
+{
+	if (a < 0)
+		return (a - b);
+	return (a + b);
+}
+
+double	get_abs(double a)
+{
+	if (a < 0)
+		return (a * -1);
+	return (a);
+}
+
+void	get_nearest(t_ray *ray, double ray_dir, t_player *player)
+{
+	ray->nx_latitude.y = get_nearest_latitude(player->y, ray_dir);
+	ray->nx_latitude.x = get_triangle_opposite(ray->nx_latitude.y, ray_dir);
+	ray->nx_longitude.x = get_nearest_longitude(player->x, ray_dir);
+	// @note why do I have to add M_PI_2 to the ray_dir?
+	ray->nx_longitude.y = get_triangle_opposite(ray->nx_longitude.x, ray_dir + M_PI_2);
 }
 
 // @note returns the distance to the next wall (ray length)
@@ -79,42 +106,24 @@ double	cast_ray(t_game *game, double ray_dir)
 	double	ray_length_lat;
 
 	ray.dir = ray_dir;
-	ray.nx_latitude.y = get_nearest_latitude(game->player.y, ray_dir);
-	ray.nx_latitude.x = get_triangle_opposite(ray.nx_latitude.y, ray_dir);
-	ray.nx_longitude.x = get_nearest_longitude(game->player.x, ray_dir);
-	// @note why do I have to add M_PI_2 to the ray_dir?
-	ray.nx_longitude.y = get_triangle_opposite(ray.nx_longitude.x, ray_dir + M_PI_2);
-	debug_print_ray(&ray);
-	while (!is_wall(game->map.map, game->player.y + ray.nx_latitude.y, game->player.x + ray.nx_latitude.x) &&
-		!is_wall(game->map.map, game->player.y + ray.nx_longitude.y, game->player.x + ray.nx_longitude.x))
-	{
-		if (ray.nx_latitude.y >= 0)
-			ray.nx_latitude.y += ray.nx_latitude.y;
-		else
-			ray.nx_latitude.y -= ray.nx_latitude.y;
-		if (ray.nx_latitude.x >= 0)
-			ray.nx_latitude.x += ray.nx_latitude.x;
-		else
-			ray.nx_latitude.x -= ray.nx_latitude.x;
-		if (ray.nx_longitude.y >= 0)
-			ray.nx_longitude.y += ray.nx_longitude.y;
-		else
-			ray.nx_longitude.y -= ray.nx_longitude.y;
-		if (ray.nx_longitude.x >= 0)
-			ray.nx_longitude.x += ray.nx_longitude.x;
-		else
-			ray.nx_longitude.x -= ray.nx_longitude.x;
-	}
-	if (is_wall(game->map.map, game->player.y + ray.nx_longitude.y, game->player.x + ray.nx_longitude.x))
-	{
-		ray_length_long = sqrt((ray.nx_longitude.x * ray.nx_longitude.x) + (ray.nx_longitude.y * ray.nx_longitude.y));
-		// if (ray_length_long < ray_length_lat)
-			return (ray_length_long);
-	}
-	if (is_wall(game->map.map, game->player.y + ray.nx_latitude.y, game->player.x + ray.nx_latitude.x))
-	{
-		ray_length_lat = sqrt((ray.nx_latitude.x * ray.nx_latitude.x) + (ray.nx_latitude.y * ray.nx_latitude.y));
+	get_nearest(&ray, ray_dir, &game->player);
+	ray_length_long = 1000000;
+	ray_length_lat = 1000000;
+	if (ray.nx_longitude.x < 0)
+		ray.nx_longitude.x -= 1;
+	if (ray.nx_longitude.y < 0)
+		ray.nx_longitude.y -= 1;
+	if (ray.nx_latitude.x < 0)
+		ray.nx_latitude.x -= 1;
+	if (ray.nx_latitude.y < 0)
+		ray.nx_latitude.y -= 1;
+	if (is_wall(&game->map, game->player.x + ray.nx_longitude.x, game->player.y + ray.nx_longitude.y))
+		ray_length_long = sqrt(get_abs(ray.nx_longitude.x * ray.nx_longitude.x) + get_abs(ray.nx_longitude.y * ray.nx_longitude.y));
+	if (is_wall(&game->map, game->player.x + ray.nx_latitude.x, game->player.y + ray.nx_latitude.y))
+		ray_length_lat = sqrt(get_abs(ray.nx_latitude.x * ray.nx_latitude.x) + get_abs(ray.nx_latitude.y * ray.nx_latitude.y));
+	debug_print_ray(&ray, ray_length_lat, ray_length_long);
+	if (ray_length_lat < ray_length_long)
 		return (ray_length_lat);
-	}
-	return (0);
+	else
+		return (ray_length_long);
 }

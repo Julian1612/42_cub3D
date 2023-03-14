@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/14 00:38:03 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/14 13:19:47 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define WALL_IDENT '1'
 #define FOV 60
 
-int	render_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
+int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
 {
 	int	i;
 	int	j;
@@ -26,15 +26,13 @@ int	render_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
 	i = 0;
 	j = 0;
 	// @todo replace with actual map width and height
-	map_width = 16;
-	map_height = 9;
-	while ((i * BLOCK_SIZE) < (map_height * BLOCK_SIZE))
+	while ((i * BLOCK_SIZE) < (map->height * BLOCK_SIZE))
 	{
-		while ((j * BLOCK_SIZE) < (map_width * BLOCK_SIZE))
+		while ((j * BLOCK_SIZE) < (map->width * BLOCK_SIZE))
 		{
-			if (map[i][j] == WALL_IDENT)
+			if (map->map[i][j] == WALL_IDENT)
 			{
-				if (mlx_image_to_window(mlx, minimap->walls, i * BLOCK_SIZE, j * BLOCK_SIZE) == ERROR)
+				if (mlx_image_to_window(mlx, minimap->walls, j * BLOCK_SIZE, i * BLOCK_SIZE) == ERROR)
 					return (ERROR);
 			}
 			j++;
