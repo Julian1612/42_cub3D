@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:43:55 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 14:50:36 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/14 17:46:38 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,19 @@
 
 static int	check_first_line(t_map *map_data);
 static int	check_last_line(t_map *map_data);
-static int	map_is_closed(t_map *map_data);
-static int	check_for_invalid_chars(t_map *map_data);
 static int	check_if_map_is_closed(t_map *map_data);
+static int	check_line(t_map *map_data, int i, int j);
 
 int	check_map(t_map *map_data)
 {
+	if (map_data->map == NULL)
+		return (error_get_map(2));
 	if (check_first_line(map_data))
 		return (1);
 	if (check_last_line(map_data))
 		return (1);
 	if (check_if_map_is_closed(map_data))
 		return (1);
-	// if (check_for_invalid_chars(map_data))
-	// 	return (1);
 	return (0);
 }
 
@@ -70,149 +69,47 @@ static int	check_last_line(t_map *map_data)
 	return (0);
 }
 
-// static int	check_if_map_is_closed(t_map *map_data)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	next_line_len;
-// 	int	previous_line_len;
-
-// 	i = 1;
-// 	while (map_data->map[i + 1] != NULL)
-// 	{
-// 		j = 0;
-// 		// printf("map_data->map[%d] = %s\n", i, map_data->map[i]);
-// 		next_line_len = ft_strlen(map_data->map[i + 1]);
-// 		previous_line_len = ft_strlen(map_data->map[i - 1]);
-// 		while (map_data->map[i][j] == ' ')
-// 			j++;
-// 		if (map_data->map[i][j] == '0')
-// 		{
-// 			error_get_map(1);
-// 			return (1);
-// 		}
-// 		while (map_data->map[i][j] != '\0')
-// 		{
-// 			if (map_data->map[i][j] == '0')
-// 			{
-// 				if (j > 0 && map_data->map[i][j - 1] == ' ')
-// 				{
-// 					error_get_map(1);
-// 					return (1);
-// 				}
-// 				else if (map_data->map[i][j + 1] == '\0'
-// 					|| map_data->map[i][j + 1] == ' ')
-// 				{
-// 					error_get_map(1);
-// 					return (1);
-// 				}
-// 				else if (next_line_len >= j && map_data->map[i + 1][j] == ' ')
-// 				{
-// 					error_get_map(1);
-// 					return (1);
-// 				}
-// 				else if (next_line_len < j)
-// 				{
-// 					error_get_map(1);
-// 					return (1);
-// 				}
-// 				else if (previous_line_len >= j && map_data->map[i - 1][j] == ' ')
-// 				{
-// 					error_get_map(1);
-// 					return (1);
-// 				}
-// 				else if (previous_line_len > j)
-// 				{
-// 					error_get_map(1);
-// 					return (1);
-// 				}
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
 static int	check_if_map_is_closed(t_map *map_data)
 {
 	int	i;
 	int	j;
-	int	next_line_len;
-	int	previous_line_len;
 
 	i = 1;
 	while (map_data->map[i + 1] != NULL)
 	{
 		j = 0;
-		// printf("map_data->map[%d] = %s\n", i, map_data->map[i]);
-		next_line_len = ft_strlen(map_data->map[i + 1]);
-		previous_line_len = ft_strlen(map_data->map[i - 1]);
 		while (map_data->map[i][j] == ' ')
 			j++;
 		if (map_data->map[i][j] == '0')
-		{
-			error_get_map(1);
+			return (error_get_map(1));
+		if (check_line(map_data, i, j))
 			return (1);
-		}
-		while (map_data->map[i][j] != '\0')
-		{
-			if (map_data->map[i][j] == '0')
-			{
-				if (j > 0 && map_data->map[i][j - 1] == ' ')
-				{
-					printf("1\n");
-					error_get_map(1);
-					return (1);
-				}
-				else if (map_data->map[i][j + 1] == '\0'
-					|| map_data->map[i][j + 1] == ' ')
-				{
-					error_get_map(1);
-					return (1);
-				}
-				else if ((next_line_len >= j && map_data->map[i + 1][j] == ' ')
-					|| (previous_line_len >= j && map_data->map[i - 1][j] == ' '))
-				{
-					error_get_map(1);
-					return (1);
-				}
-				else if (next_line_len < j || previous_line_len < j)
-				{
-					error_get_map(1);
-					return (1);
-				}
-			}
-			j++;
-		}
 		i++;
 	}
 	return (0);
 }
 
-// static int	check_if
-static int	check_for_invalid_chars(t_map *map_data)
+static int	check_line(t_map *map_data, int i, int j)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map_data->map[i] != NULL)
+	while (map_data->map[i][j] != '\0')
 	{
-		j = 0;
-		while (map_data->map[i][j] != '\0')
+		if (map_data->map[i][j] == '0')
 		{
-			if (map_data->map[i][j] != '0' || map_data->map[i][j] != '1'
-				|| map_data->map[i][j] != 'C' || map_data->map[i][j] != 'F'
-				|| map_data->map[i][j] != 'D' || map_data->map[i][j] != 'B'
-				|| map_data->map[i][j] != 'E')
-			{
-				error_get_map(5);
-				return (1);
-			}
-			j++;
+			if (j > 0 && map_data->map[i][j - 1] == ' ')
+				return (error_get_map(1));
+			else if (map_data->map[i][j + 1] == '\0'
+				|| map_data->map[i][j + 1] == ' ')
+				return (error_get_map(1));
+			else if ((ft_strlen(map_data->map[i + 1]) >= j
+					&& map_data->map[i + 1][j] == ' ')
+				|| (ft_strlen(map_data->map[i - 1]) >= j
+					&& map_data->map[i - 1][j] == ' '))
+				return (error_get_map(1));
+			else if (ft_strlen(map_data->map[i + 1]) < j
+				|| ft_strlen(map_data->map[i - 1]) < j)
+				return (error_get_map(1));
 		}
-		i++;
+		j++;
 	}
 	return (0);
 }

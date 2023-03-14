@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 13:33:42 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:36:22 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	main(int argc, char **argv)
 	t_map			map_data;
 
 	if (parser(&argc, argv, &map_data))
-		printf("Error\n");
+		return (1);
+	printf("map passed paser\n");
 	// printf("map_data->north: %s\n", map_data.north);
 	// printf("map_data->south: %s\n", map_data.south);
 	// printf("map_data->east: %s\n", map_data.east);

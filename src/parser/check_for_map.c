@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:06 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 13:24:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:30:40 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	check_for_map(t_map *map_data, char *line, int fd)
 	return (0);
 }
 
-// heir i wie kacke weil der nicht beaked wenn ne newline im der map is breake wen so
 static int	init_map(t_map *map_data, char *line, int fd)
 {
 	char	*map_str;
@@ -47,7 +46,7 @@ static int	init_map(t_map *map_data, char *line, int fd)
 		if (line != NULL)
 			map_str = ft_strjoin(map_str, line);
 		if (line != NULL && line[0] == '\n')
-			break;
+			break ;
 	}
 	map_data->map = ft_split(map_str, '\n');
 	return (0);
