@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/14 00:38:19 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/14 20:12:51 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin
 
-#define SPEED 5
+#define SPEED 2
 
 void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player)
 {
@@ -38,6 +38,15 @@ void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player)
 		player->view_dir += M_PI / 180 * SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		player->view_dir -= M_PI / 180 * SPEED;
+	if (mlx_is_key_down(mlx, MLX_KEY_1))
+		player->view_dir = 0;
+	if (mlx_is_key_down(mlx, MLX_KEY_2))
+		player->view_dir = M_PI / 2;
+	if (mlx_is_key_down(mlx, MLX_KEY_3))
+		player->view_dir = M_PI;
+	if (mlx_is_key_down(mlx, MLX_KEY_4))
+		player->view_dir = M_PI * 1.5;
+
 }
 
 // void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player)

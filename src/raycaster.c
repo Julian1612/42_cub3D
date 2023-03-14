@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:41:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/14 15:57:51 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/14 21:00:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ double	get_nearest_latitude(double coor_x, double ray_dir)
 
 	// @note why cos?
 	if (cos(ray_dir) >= 0)
-		nearest = fmod(coor_x, BLOCK_SIZE);
+		nearest = (BLOCK_SIZE - fmod(coor_x, BLOCK_SIZE));
 	else
-		nearest = (BLOCK_SIZE - fmod(coor_x, BLOCK_SIZE)) * -1;
+		nearest = fmod(coor_x, BLOCK_SIZE) * -1;
 	return (nearest);
 }
 
@@ -68,8 +68,9 @@ bool	is_wall(t_map *map, double x, double y)
 		return (true);
 	if (y > map->height * BLOCK_SIZE || y < 0)
 		return (true);
-	map_x = (int)(x / BLOCK_SIZE);
-	map_y = (int)(y / BLOCK_SIZE);
+	map_x = (int)(ceil(x) / BLOCK_SIZE);
+	map_y = (int)(ceil(y) / BLOCK_SIZE);
+	printf("map_x: %d, map_y: %d\n", map_x, map_y);
 	if (map->map[map_y][map_x] == WALL)
 		return (true);
 	return (false);
@@ -104,23 +105,26 @@ double	cast_ray(t_game *game, double ray_dir)
 	t_ray	ray;
 	double	ray_length_long;
 	double	ray_length_lat;
+	double	add;
 
 	ray.dir = ray_dir;
 	get_nearest(&ray, ray_dir, &game->player);
 	ray_length_long = 1000000;
 	ray_length_lat = 1000000;
-	if (ray.nx_longitude.x < 0)
-		ray.nx_longitude.x -= 1;
-	if (ray.nx_longitude.y < 0)
-		ray.nx_longitude.y -= 1;
-	if (ray.nx_latitude.x < 0)
-		ray.nx_latitude.x -= 1;
-	if (ray.nx_latitude.y < 0)
-		ray.nx_latitude.y -= 1;
-	if (is_wall(&game->map, game->player.x + ray.nx_longitude.x, game->player.y + ray.nx_longitude.y))
-		ray_length_long = sqrt(get_abs(ray.nx_longitude.x * ray.nx_longitude.x) + get_abs(ray.nx_longitude.y * ray.nx_longitude.y));
-	if (is_wall(&game->map, game->player.x + ray.nx_latitude.x, game->player.y + ray.nx_latitude.y))
-		ray_length_lat = sqrt(get_abs(ray.nx_latitude.x * ray.nx_latitude.x) + get_abs(ray.nx_latitude.y * ray.nx_latitude.y));
+	add = ray.nx_longitude.y;
+	while (!is_wall(&game->map, game->player.x + ray.nx_longitude.x, game->player.y + ray.nx_longitude.y))
+	{
+		ray.nx_longitude.x = add_preserve_sign(ray.nx_longitude.x, BLOCK_SIZE);
+		ray.nx_longitude.y += add;
+	}
+	add = ray.nx_latitude.x;
+	while (!is_wall(&game->map, game->player.x + ray.nx_latitude.x, game->player.y + ray.nx_latitude.y))
+	{
+		ray.nx_latitude.x += add;
+		ray.nx_latitude.y = add_preserve_sign(ray.nx_latitude.y, BLOCK_SIZE);
+	}
+	ray_length_long = sqrt(get_abs(ray.nx_longitude.x * ray.nx_longitude.x) + get_abs(ray.nx_longitude.y * ray.nx_longitude.y));
+	ray_length_lat = sqrt(get_abs(ray.nx_latitude.x * ray.nx_latitude.x) + get_abs(ray.nx_latitude.y * ray.nx_latitude.y));
 	debug_print_ray(&ray, ray_length_lat, ray_length_long);
 	if (ray_length_lat < ray_length_long)
 		return (ray_length_lat);
