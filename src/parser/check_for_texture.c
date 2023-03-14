@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 18:02:16 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:31:17 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char	*cpy_line(char **des, char *src, int len)
 	(*des)[i] = '\0';
 	return (*des);
 }
-
 
 int	check_for_bonus_texture(t_map *map_data, char *line)
 {

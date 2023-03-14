@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 18:16:16 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/14 21:16:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	error_textures(int error_code)
 
 	else if (error_code == 6)
 		printf("Error!\nFile path for wall texture is missing\n");
+	else if (error_code == 7)
+		printf("Error!\nFile path for bonus texture is missing\n");
 	printf("========================================\n");
 	return (1);
 }
