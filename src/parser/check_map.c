@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:43:55 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 17:46:38 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/15 09:55:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ static int	check_line(t_map *map_data, int i, int j)
 				|| (ft_strlen(map_data->map[i - 1]) >= j
 					&& map_data->map[i - 1][j] == ' '))
 				return (error_get_map(1));
-			else if (ft_strlen(map_data->map[i + 1]) < j
-				|| ft_strlen(map_data->map[i - 1]) < j)
+			else if (ft_strlen(map_data->map[i + 1]) <= j
+				|| ft_strlen(map_data->map[i - 1]) <= j)
 				return (error_get_map(1));
 		}
 		j++;

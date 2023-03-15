@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/13 10:57:21 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:08:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ int	get_file_data(t_map *map_data, char *cub_file_path)
 
 	i = 0;
 	file_len = get_file_len(cub_file_path);
+	if (file_len == 1)
+	{
+		error_textures(2);
+		return (1);
+	}
 	fd = get_fd(cub_file_path);
 	init_struct_null(map_data);
 	while (i < file_len - 1)

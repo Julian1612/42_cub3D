@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 21:34:06 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:06:55 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	parser(int *argc, char **argv, t_map *map_data)
 		return (1);
 	if (get_file_data(map_data, argv[1]))
 		return (1);
-	if (check_map(map_data))
-		return (1);
 	if (check_mandatory_textures(map_data))
+		return (1);
+	if (check_map(map_data))
 		return (1);
 	if (check_bonus_textures(map_data))
 		return (1);
@@ -123,11 +123,10 @@ static int	check_for_invalid_definitions(t_map *map_data)
 	int			j;
 
 	i = 0;
-	while (map_data->map[i] == NULL)
+	while (map_data->map[i] != NULL)
 	{
-		printf("hi\n");
 		j = 0;
-		while (map_data->map[i][j])
+		while (map_data->map[i][j] != '\0')
 		{
 			if (map_data->map[i][j] != '0' && map_data->map[i][j] != '1'
 				&& map_data->map[i][j] != 'N' && map_data->map[i][j] != 'S'
@@ -139,6 +138,5 @@ static int	check_for_invalid_definitions(t_map *map_data)
 		}
 		i++;
 	}
-	return (0);
 	return (0);
 }

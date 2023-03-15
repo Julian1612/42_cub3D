@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 21:16:04 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:04:07 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,17 @@ int	error_textures(int error_code)
 	else if (error_code == 3)
 		printf("Error!\nFilepath to .xpm file is missing\n");
 	else if (error_code == 4)
+	{
 		printf("Error!\nRGB codes missing\n");
+		printf("or on the wrong position\n");
+	}
 	else if (error_code == 5)
 		printf("Error!\nRGB value out of range\n");
-
 	else if (error_code == 6)
+	{
 		printf("Error!\nFile path for wall texture is missing\n");
+		printf("or on the wrong position\n");
+	}
 	else if (error_code == 7)
 		printf("Error!\nFile path for bonus texture is missing\n");
 	printf("========================================\n");
