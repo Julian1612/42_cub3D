@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 20:02:41 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/16 18:17:29 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int		initialize_mlx_all(t_game *game);
 
 int		render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
 int		render_world(t_game *game);
+void	render_ceilfloor(mlx_t *mlx, mlx_image_t *img);
 
 void	hook(void *param);
 

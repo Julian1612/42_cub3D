@@ -6,14 +6,14 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/14 13:19:47 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/16 18:17:39 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // cub3D structs
 #include <stdio.h> // @note remove
+#include <math.h> // PI
 
-#define WALL_IDENT '1'
 #define FOV 60
 
 int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
@@ -30,7 +30,7 @@ int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
 	{
 		while ((j * BLOCK_SIZE) < (map->width * BLOCK_SIZE))
 		{
-			if (map->map[i][j] == WALL_IDENT)
+			if (map->map[i][j] == WALL)
 			{
 				if (mlx_image_to_window(mlx, minimap->walls, j * BLOCK_SIZE, i * BLOCK_SIZE) == ERROR)
 					return (ERROR);
@@ -85,9 +85,88 @@ int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
 // 	return (SUCCESS);
 // }
 
+static unsigned int	convert_to_hexcode(
+	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+{
+	unsigned int	rgba;
+
+	rgba = r;
+	rgba = (rgba << 8) + g;
+	rgba = (rgba << 8) + b;
+	rgba = (rgba << 8) + a;
+	return (rgba);
+}
+
+void	color_image(mlx_t *mlx, mlx_image_t *img, unsigned int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < img->height)
+	{
+		while (j < img->width)
+		{
+			mlx_put_pixel(img, j, i, color);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
+void	paint_reflection(mlx_image_t *img, double wall_dist, int x)
+{
+	int	wall_height;
+	int	y;
+
+	wall_height = (int)(HEIGHT / wall_dist);
+	y = HEIGHT / 2 - wall_height / 2;
+	while (y < HEIGHT / 2 + wall_height / 2)
+	{
+		mlx_put_pixel(img, x, y, convert_to_hexcode(0, 150, 0, 255));
+		y++;
+	}
+}
+
+void	render_ceilfloor(mlx_t *mlx, mlx_image_t *img)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < HEIGHT)
+	{
+		while (j < WIDTH)
+		{
+			if (i < HEIGHT / 2)
+				mlx_put_pixel(img, j, i, convert_to_hexcode(0, 0, 255, 255));
+			else
+				mlx_put_pixel(img, j, i, convert_to_hexcode(255, 0, 0, 255));
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
 int	render_world(t_game *game)
 {
+	double	wall_dist;
+	double	ray_dir;
+	int		i;
+
 	debug_print_player(&game->player);
-	printf("ray length: %f\n", cast_ray(game, game->player.view_dir));
+	ray_dir = game->player.view_dir - (M_2_PI / 2);
+	i = 0;
+	while (i < WIDTH)
+	{
+		ray_dir += M_2_PI / game->mlx->width;
+		wall_dist = cast_ray(game, ray_dir);
+		paint_reflection(game->img_a, wall_dist, i);
+		i++;
+	}
 	return (SUCCESS);
 }

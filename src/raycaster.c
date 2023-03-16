@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:41:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/15 13:25:10 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/16 18:23:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,12 @@ bool	is_wall(t_map *map, double x, double y)
 
 	map_width = map->width - 1;
 	map_height = map->height - 1;
-	if (x > map->width * BLOCK_SIZE || x < 0)
+	map_x = (int)(x / BLOCK_SIZE);
+	map_y = (int)(y / BLOCK_SIZE);
+	if (map_x > map->width - 1 || map_x < 0)
 		return (true);
-	if (y > map->height * BLOCK_SIZE || y < 0)
+	if (map_y > map->height - 1 || map_y < 0)
 		return (true);
-	map_x = (int)(ceil(x) / BLOCK_SIZE);
-	map_y = (int)(ceil(y) / BLOCK_SIZE);
-	printf("map_x: %d, map_y: %d\n", map_x, map_y);
 	if (map->map[map_y][map_x] == WALL)
 		return (true);
 	return (false);
