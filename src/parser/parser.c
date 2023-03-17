@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 10:16:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 15:29:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static int	check_args(int *argc, char **argv)
 {
 	if (*argc != 2)
 	{
-		error_message(1);
+		error_message(1, NULL);
 		return (1);
 	}
 	if (argv[1][0] == '\0')
 	{
-		error_message(1);
+		error_message(1, NULL);
 		return (1);
 	}
 	return (0);
@@ -64,13 +64,13 @@ static int	check_file(char *cub_file_path, char *data_type)
 	fd = open(cub_file_path, O_RDONLY);
 	if (fd < 0)
 	{
-		error_message(2);
+		error_message(2, NULL);
 		return (1);
 	}
 	close(fd);
 	if (check_data_type(cub_file_path, data_type))
 	{
-		error_message(3);
+		error_message(3, NULL);
 		return (1);
 	}
 	return (0);
@@ -105,7 +105,7 @@ static int	check_for_invalid_definitions(t_map *map_data)
 				&& map_data->map[i][j] != 'W' && map_data->map[i][j] != 'E'
 				&& map_data->map[i][j] != 'D' && map_data->map[i][j] != 'B'
 				&& map_data->map[i][j] != 'E' && map_data->map[i][j] != ' ')
-				return (error_get_map(5));
+				return (error_get_map(5, map_data));
 			j++;
 		}
 		i++;

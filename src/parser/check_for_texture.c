@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/16 16:36:33 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 15:42:42 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 	splitted_str_len = ft_strlen(splitted_str[1]);
 	if (splitted_str == NULL)
 	{
-		error_message(4);
+		error_message(4, map_data);
 		return (1);
 	}
 	if (i == 0)
@@ -54,7 +54,7 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 		cpy_line(&map_data->west, splitted_str[1], splitted_str_len);
 	else if (i == 3)
 		cpy_line(&map_data->east, splitted_str[1], splitted_str_len);
-	ft_free_arr(splitted_str);
+	ft_free_arr((void **)splitted_str);
 	return (0);
 }
 
@@ -66,7 +66,7 @@ char	*cpy_line(char **des, char *src, int len)
 	*des = malloc(sizeof(char) * (len + 1));
 	if (*des == NULL)
 	{
-		error_message(4);
+		error_message(4, NULL);
 		return (NULL);
 	}
 	while (i < len - 1)
@@ -106,15 +106,15 @@ static int	get_bonus_texture_file_path(t_map *map_data, char *line, int i)
 	splitted_str_len = ft_strlen(splitted_str[1]);
 	if (splitted_str == NULL)
 	{
-		error_message(4);
+		error_message(4, map_data);
 		return (1);
 	}
-	if (i == 0)
-		cpy_line(&map_data->door, splitted_str[1], splitted_str_len);
-	else if (i == 1)
-		cpy_line(&map_data->barrel, splitted_str[1], splitted_str_len);
-	else if (i == 2)
-		cpy_line(&map_data->enemy, splitted_str[1], splitted_str_len);
-	ft_free_arr(splitted_str);
+	// if (i == 0)
+	// 	cpy_line(&map_data->door, splitted_str[1], splitted_str_len);
+	// else if (i == 1)
+	// 	cpy_line(&map_data->barrel, splitted_str[1], splitted_str_len);
+	// else if (i == 2)
+	// 	cpy_line(&map_data->enemy, splitted_str[1], splitted_str_len);
+	ft_free_arr((void **)splitted_str);
 	return (0);
 }

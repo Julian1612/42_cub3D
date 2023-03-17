@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 09:37:44 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 15:39:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ int	get_file_data(t_map *map_data, char *cub_file_path)
 	file_len = get_file_len(cub_file_path);
 	if (file_len == 1)
 	{
-		error_textures(2);
+		error_textures(2, map_data);
 		return (1);
 	}
-	fd = get_fd(cub_file_path);
+	fd = open(cub_file_path, O_RDONLY);
+	if (fd == -1)
+		return (error_message(2, map_data));
 	init_struct_null(map_data);
 	while (i < file_len - 1)
 	{
@@ -63,18 +65,18 @@ static void	init_struct_null(t_map *map_data)
 	map_data->map = NULL;
 }
 
-static int	get_fd(char *path)
-{
-	int	fd;
+// static int	get_fd(char *path)
+// {
+// 	int	fd;
 
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-	{
-		error_message(2);
-		return (1);
-	}
-	return (fd);
-}
+// 	fd = open(path, O_RDONLY);
+// 	if (fd == -1)
+// 	{
+// 		error_message(2);
+// 		return (1);
+// 	}
+// 	return (fd);
+// }
 
 static int	get_file_len(char *path)
 {

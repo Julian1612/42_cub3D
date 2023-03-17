@@ -6,14 +6,14 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 09:35:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 15:41:59 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
 
 static int	get_rgb_values(t_map *map_data, char *line);
-static int	check_rgb_values(char **line_content);
+static int	check_rgb_values(t_map *map_data, char **line_content);
 static void	init_struct(t_map *map_data, char **splitted_str, int boundary);
 static int	remove_letter(char **line_content);
 
@@ -36,25 +36,25 @@ static int	get_rgb_values(t_map *map_data, char *line)
 	boundary = 0;
 	splitted_str = ft_split(line, ',');
 	if (splitted_str == NULL)
-		return (error_message(4));
-	if (ft_arrlen(splitted_str) != 3)
+		return (error_message(4, map_data));
+	if (ft_arrlen((void **)splitted_str) != 3)
 		return (0);
 	boundary = remove_letter(splitted_str);
-	if (check_rgb_values(&line))
-		return (1);
+	if (check_rgb_values(map_data, &line))
+		return (0);
 	init_struct(map_data, splitted_str, boundary);
-	ft_free_arr(splitted_str);
+	ft_free_arr((void **)splitted_str);
 	return (0);
 }
 
-static int	check_rgb_values(char **line_content)
+static int	check_rgb_values(t_map *map_data, char **line_content)
 {
 	if (ft_atoi(line_content[0]) > 255 || ft_atoi(line_content[1]) > 255
 		|| ft_atoi(line_content[2]) > 255)
-		return (error_textures(5));
+		return (error_textures(5, map_data));
 	if (ft_atoi(line_content[0]) < 0 || ft_atoi(line_content[1]) < 0
 		|| ft_atoi(line_content[2]) < 0)
-		return (error_textures(5));
+		return (error_textures(5, map_data));
 	return (0);
 }
 

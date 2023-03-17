@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 10:28:57 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 15:27:22 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int		check_mandatory_textures(t_map *map_data);
 int		check_bonus_textures(t_map *map_data);
 
 /* error_messages.c */
-int		error_message(int error_code);
-int		error_textures(int error_code);
-int		error_get_map(int error_code);
+int		error_message(int error_code, t_map *map_data);
+int		error_textures(int error_code, t_map *map_data);
+int		error_get_map(int error_code, t_map *map_data);
 
 /* get_file_data.c */
 int		get_file_data(t_map *map_data, char *cub_file_path);

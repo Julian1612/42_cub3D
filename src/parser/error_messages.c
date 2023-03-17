@@ -6,14 +6,16 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 09:53:27 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 15:42:45 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
 #include <stdio.h>
 
-int	error_message(int error_code)
+static void	free_struct(t_map *map_data);
+
+int	error_message(int error_code, t_map *map_data)
 {
 	printf("========================================\n");
 	if (error_code == 1)
@@ -25,10 +27,11 @@ int	error_message(int error_code)
 	else if (error_code == 4)
 		printf("Error!\nMalloc failed\n");
 	printf("========================================\n");
+	free_struct(map_data);
 	return (1);
 }
 
-int	error_textures(int error_code)
+int	error_textures(int error_code, t_map *map_data)
 {
 	printf("========================================\n");
 	if (error_code == 1)
@@ -52,10 +55,11 @@ int	error_textures(int error_code)
 	else if (error_code == 7)
 		printf("Error!\nFile path for bonus texture is missing\n");
 	printf("========================================\n");
+	free_struct(map_data);
 	return (1);
 }
 
-int	error_get_map(int error_code)
+int	error_get_map(int error_code, t_map *map_data)
 {
 	printf("========================================\n");
 	if (error_code == 1)
@@ -65,5 +69,26 @@ int	error_get_map(int error_code)
 	else if (error_code == 5)
 		printf("Error!\nInvalid character in map\n");
 	printf("========================================\n");
+	free_struct(map_data);
 	return (1);
+}
+
+static void	free_struct(t_map *map_data)
+{
+	if (map_data == NULL)
+		return ;
+	if (map_data->north != NULL)
+		free(map_data->north);
+	if (map_data->south != NULL)
+		free(map_data->south);
+	if (map_data->west != NULL)
+		free(map_data->west);
+	if (map_data->east != NULL)
+		free(map_data->east);
+	if (ft_arrlen((void **)map_data->floor_rgb_arr) > 0)
+		ft_free_arr((void **)map_data->floor_rgb_arr);
+	if (ft_arrlen((void **)map_data->ceiling_rgb_arr) > 0)
+		ft_free_arr((void **)map_data->ceiling_rgb_arr);
+	if (map_data->map != NULL)
+		ft_free_arr((void **)map_data->map);
 }

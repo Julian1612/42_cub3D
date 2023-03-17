@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 10:28:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:22:45 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#define WIDTH 512
-#define HEIGHT 512
-#define PLAYER_SIZE 2
-#define DIRECTION 2
-#define WALL_BLOCK 64
-#define NBR_OF_RAYS 1
 
 void	play_music(void)
 {
@@ -37,5 +31,12 @@ int	main(int argc, char **argv)
 	if (parser(&argc, argv, &map_data))
 		return (1);
 	play_music();
+	free(map_data.west);
+	free(map_data.east);
+	free(map_data.south);
+	free(map_data.north);
+	ft_free_arr((void **)map_data.map);
+	// ft_free_arr((void **)map_data.ceiling_rgb_arr);
+	// ft_free_arr((void **)map_data.floor_rgb_arr);
 	return (0);
 }

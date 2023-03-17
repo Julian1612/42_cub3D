@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 08:03:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/11 14:30:02 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:18:19 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	str[j + i] = '\0';
+	free(s1);
 	return (str);
 }
