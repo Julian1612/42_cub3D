@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/14 14:34:52 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/17 14:16:21 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	debug_print_coor(t_coor *coor)
 	printf("y:   %f\n", coor->y);
 }
 
-void	debug_print_ray(t_ray *ray, double ray_length_lat, double ray_length_long)
+void	debug_print_ray(t_ray *ray)
 {
 	printf(BLUE"============ RAY ============\n"RESET);
 	printf("next latitude ( __ ):\n");
-	debug_print_coor(&ray->nx_latitude);
-	printf("ray length latitude: %f\n\n", ray_length_lat);
+	debug_print_coor(&ray->latitude);
+	printf("ray length latitude: %f\n\n", ray->lat_len);
 	printf("next longitute ( | ):\n");
-	debug_print_coor(&ray->nx_longitude);
-	printf("ray length longitude: %f\n\n", ray_length_long);
+	debug_print_coor(&ray->longitude);
+	printf("ray length longitude: %f\n\n", ray->long_len);
 	printf("ray dir: %f\n", ray->dir);
 }

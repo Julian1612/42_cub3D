@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/14 15:34:24 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/17 13:14:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
 {
 	minimap->player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
 	minimap->view_dir = mlx_new_image(mlx, DIRECTION, DIRECTION);
-	minimap->walls = mlx_new_image(mlx, BLOCK_SIZE, BLOCK_SIZE);
+	minimap->walls = mlx_new_image(mlx, MM_BLOCK_SIZE, MM_BLOCK_SIZE);
 	if (!minimap->player || !minimap->view_dir || !minimap->walls)
 		return (ERROR);
 	minimap->player->pixels = ft_memset(minimap->player->pixels, 150,
@@ -58,8 +58,8 @@ static int	initialize_textures(t_game *game)
 
 int	initialize_mlx_all(t_game *game)
 {
-	game->mlx = mlx_init(game->map.width * BLOCK_SIZE, game->map.height * BLOCK_SIZE, "cub3D", false);
-	game->img_a = mlx_new_image(game->mlx, game->map.width * BLOCK_SIZE, game->map.height * BLOCK_SIZE);
+	game->mlx = mlx_init(game->map.width * MM_BLOCK_SIZE, game->map.height * MM_BLOCK_SIZE, "cub3D", false);
+	game->img_a = mlx_new_image(game->mlx, game->map.width * MM_BLOCK_SIZE, game->map.height * MM_BLOCK_SIZE);
 	if (game->mlx == NULL || game->img_a == NULL)
 		return (ERROR);
 	if (initialize_textures(game) == ERROR)
