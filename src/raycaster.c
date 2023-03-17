@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:41:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/16 18:23:40 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/17 12:29:23 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ bool	is_wall(t_map *map, double x, double y)
 	map_height = map->height - 1;
 	map_x = (int)(x / BLOCK_SIZE);
 	map_y = (int)(y / BLOCK_SIZE);
-	if (map_x > map->width - 1 || map_x < 0)
+	if (map_x > map_width || map_x < 0)
 		return (true);
-	if (map_y > map->height - 1 || map_y < 0)
+	if (map_y > map_height || map_y < 0)
 		return (true);
 	if (map->map[map_y][map_x] == WALL)
 		return (true);
@@ -124,9 +124,9 @@ double	cast_ray(t_game *game, double ray_dir)
 	}
 	ray_length_long = sqrt(get_abs(ray.nx_longitude.x * ray.nx_longitude.x) + get_abs(ray.nx_longitude.y * ray.nx_longitude.y));
 	ray_length_lat = sqrt(get_abs(ray.nx_latitude.x * ray.nx_latitude.x) + get_abs(ray.nx_latitude.y * ray.nx_latitude.y));
-	debug_print_ray(&ray, ray_length_lat, ray_length_long);
+	// debug_print_ray(&ray, ray_length_lat, ray_length_long);
 	if (ray_length_lat < ray_length_long)
-		return (ray_length_lat);
+		return (ray_length_lat / BLOCK_SIZE);
 	else
-		return (ray_length_long);
+		return (ray_length_long / BLOCK_SIZE);
 }

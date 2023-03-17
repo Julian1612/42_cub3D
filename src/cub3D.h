@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/16 18:17:29 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/17 12:36:03 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define WIDTH 640
-# define HEIGHT 400
+# define WIDTH 1280
+# define HEIGHT 800
 # define ERROR -1
 # define SUCCESS 0
 # define BLOCK_SIZE 64

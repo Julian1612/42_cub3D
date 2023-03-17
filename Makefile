@@ -6,12 +6,12 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/10 15:24:03 by lorbke           ###   ########.fr        #
+#    Updated: 2023/03/17 12:37:11 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=   -g
+CFLAGS		=   -g -O3
 # -Wall -Wextra -Werror 
 LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft

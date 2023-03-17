@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/16 18:24:36 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/17 12:18:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,27 @@ void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player)
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		player->y -= SPEED;
+	{
+		player->y += cos(player->view_dir) * SPEED;
+		player->x += sin(player->view_dir) * SPEED;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		player->y += SPEED;
+	{
+		// @note offset = unit circle value of view_dir * speed
+		player->y -= cos(player->view_dir) * SPEED;
+		player->x -= sin(player->view_dir) * SPEED;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		player->x += SPEED;
+	{
+		player->y += cos(player->view_dir - M_PI_2) * SPEED;
+		player->x += sin(player->view_dir - M_PI_2) * SPEED;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		player->x -= SPEED;
+	{
+		// @note radian rotated by 90 degrees to offset movement
+		player->y += cos(player->view_dir + M_PI_2) * SPEED;
+		player->x += sin(player->view_dir + M_PI_2) * SPEED;
+	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		player->view_dir += M_PI / 180 * SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))

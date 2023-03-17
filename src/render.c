@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/16 18:17:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/17 12:34:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ void	paint_reflection(mlx_image_t *img, double wall_dist, int x)
 	int	wall_height;
 	int	y;
 
+	if (wall_dist < 1)
+		wall_dist = 1;
 	wall_height = (int)(HEIGHT / wall_dist);
 	y = HEIGHT / 2 - wall_height / 2;
 	while (y < HEIGHT / 2 + wall_height / 2)
@@ -156,14 +158,16 @@ int	render_world(t_game *game)
 {
 	double	wall_dist;
 	double	ray_dir;
+	double	fov;
 	int		i;
 
-	debug_print_player(&game->player);
-	ray_dir = game->player.view_dir - (M_2_PI / 2);
+	// debug_print_player(&game->player);
+	fov = M_2_PI;
+	ray_dir = game->player.view_dir - (fov / 2);
 	i = 0;
 	while (i < WIDTH)
 	{
-		ray_dir += M_2_PI / game->mlx->width;
+		ray_dir += fov / game->mlx->width;
 		wall_dist = cast_ray(game, ray_dir);
 		paint_reflection(game->img_a, wall_dist, i);
 		i++;
