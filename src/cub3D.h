@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 14:16:30 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/17 18:01:42 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define HEIGHT 400
 # define ERROR -1
 # define SUCCESS 0
-# define BLOCK_SIZE 1
 # define MM_BLOCK_SIZE 64
 # define WALL '1'
 

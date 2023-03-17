@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 14:27:19 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/17 15:20:25 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	test_parse(t_game *game)
 	game->map.north.path = "textures/east.xpm42";
 	game->map.ceiling_color = 0x00FF0000;
 	game->map.floor_color = 0x000000FF;
-	game->player.x = MM_BLOCK_SIZE - 5;
-	game->player.y = MM_BLOCK_SIZE - 5;
+	game->player.x = 258;
+	game->player.y = 308;
 	game->player.view_dir = 0;
 	game->player.weapon = NULL;
 	return (SUCCESS);
