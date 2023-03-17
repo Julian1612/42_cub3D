@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/12 17:47:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:35:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	check_for_rgb(t_map *map_data, char *line)
 	if (ft_strnstr(line, "C", ft_strlen(line)) != NULL
 		|| ft_strnstr(line, "F", ft_strlen(line)) != NULL)
 	{
-		get_rgb_values(map_data, line);
-		return (1);
+		if (get_rgb_values(map_data, line))
+			return (1);
 	}
 	return (0);
 }
@@ -36,15 +36,9 @@ static int	get_rgb_values(t_map *map_data, char *line)
 	boundary = 0;
 	splitted_str = ft_split(line, ',');
 	if (splitted_str == NULL)
-	{
-		error_textures(4);
-		return (1);
-	}
+		return (error_message(4));
 	if (ft_arrlen(splitted_str) != 3)
-	{
-		error_textures(4);
-		return (1);
-	}
+		return (0);
 	boundary = remove_letter(splitted_str);
 	if (check_rgb_values(&line))
 		return (1);
@@ -57,16 +51,10 @@ static int	check_rgb_values(char **line_content)
 {
 	if (ft_atoi(line_content[0]) > 255 || ft_atoi(line_content[1]) > 255
 		|| ft_atoi(line_content[2]) > 255)
-	{
-		error_textures(5);
-		return (1);
-	}
+		return (error_textures(5));
 	if (ft_atoi(line_content[0]) < 0 || ft_atoi(line_content[1]) < 0
 		|| ft_atoi(line_content[2]) < 0)
-	{
-		error_textures(5);
-		return (1);
-	}
+		return (error_textures(5));
 	return (0);
 }
 

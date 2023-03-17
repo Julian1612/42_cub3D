@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/15 11:04:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:53:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,6 @@ int	error_get_map(int error_code)
 		printf("Error!\nMap is invalid\n");
 	else if (error_code == 2)
 		printf("Error!\nfile contains no map\n");
-	// else if (error_code == 3)
-	// {
-	// 	printf("Error!\nMap is in incorrect position. ");
-	// 	printf("Please place the map under the texture declarations\n");
-	// }
-	// else if (error_code == 4)
-	// 	printf("Error!\nEmpty line in map\n");
 	else if (error_code == 5)
 		printf("Error!\nInvalid character in map\n");
 	printf("========================================\n");

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/14 17:56:50 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:55:25 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 # define DOOR "D"
 # define BARREL "B"
 # define ENEMY "E"
-
-/* check_file.c */
-int		check_file(char *cub_file_path, char *data_type);
 
 /* check_for_bonus_textures.c */
 int		check_for_bonus_texture(t_map *map_data, char *line);
@@ -36,6 +33,10 @@ char	*cpy_line(char **des, char *src, int len);
 
 /* check_map.c */
 int		check_map(t_map *map_data);
+
+/* check_textures.c */
+int		check_mandatory_textures(t_map *map_data);
+int		check_bonus_textures(t_map *map_data);
 
 /* error_messages.c */
 int		error_message(int error_code);
