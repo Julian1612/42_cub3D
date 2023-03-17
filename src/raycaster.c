@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:41:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/17 12:29:23 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/17 12:55:53 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ double	cast_ray(t_game *game, double ray_dir)
 	while (!is_wall(&game->map, game->player.x + ray.nx_longitude.x, game->player.y + ray.nx_longitude.y))
 	{
 		ray.nx_longitude.x = add_preserve_sign(ray.nx_longitude.x, BLOCK_SIZE);
-		ray.nx_longitude.y += add;
+		ray.nx_longitude.y = add_preserve_sign(ray.nx_longitude.y, add);
 	}
 	add = get_triangle_opposite(BLOCK_SIZE, ray_dir);
 	while (!is_wall(&game->map, game->player.x + ray.nx_latitude.x, game->player.y + ray.nx_latitude.y))
 	{
-		ray.nx_latitude.x += add;
+		ray.nx_latitude.x = add_preserve_sign(ray.nx_latitude.x, add);
 		ray.nx_latitude.y = add_preserve_sign(ray.nx_latitude.y, BLOCK_SIZE);
 	}
 	ray_length_long = sqrt(get_abs(ray.nx_longitude.x * ray.nx_longitude.x) + get_abs(ray.nx_longitude.y * ray.nx_longitude.y));
