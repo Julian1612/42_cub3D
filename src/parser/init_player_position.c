@@ -6,13 +6,13 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/03 15:07:56 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:18:40 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "private_player_position.h"
+#include "private_parser.h"
 
-int	init_player_position(t_map *map_data, t_player *player)
+int	init_player_position(t_map *map_data)
 {
 	int	i;
 	int	j;
@@ -26,9 +26,9 @@ int	init_player_position(t_map *map_data, t_player *player)
 			if (map_data->map[i][j] == 'N' || map_data->map[i][j] == 'S'
 				|| map_data->map[i][j] == 'E' || map_data->map[i][j] == 'W')
 			{
-				player->x = j + 0.5;
-				player->y = i + 0.5;
-				player->direction = map_data->map[i][j];
+				map_data->starting_pos_x = j;
+				map_data->starting_pos_y = i;
+				map_data->starting_dir = map_data->map[i][j];
 				return (0);
 			}
 			j++;

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 09:57:45 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:16:23 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	parser(int *argc, char **argv, t_map *map_data)
 	if (check_bonus_textures(map_data))
 		return (1);
 	if (check_for_invalid_definitions(map_data))
+		return (1);
+	if (init_player_position(map_data))
 		return (1);
 	return (0);
 }

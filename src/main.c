@@ -6,13 +6,12 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/11 11:51:22 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:28:23 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "parser.h"
-#include "player_position.h"
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -28,14 +27,15 @@
 
 void	play_music(void)
 {
-	system("afplay ./preussengloria.mp3 &");
+	system("afplay ./sound_track/preussengloria.mp3 &");
 }
-
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
+	t_map	map_data;
+
+	if (parser(&argc, argv, &map_data))
+		return (1);
 	play_music();
-  return (0);
+	return (0);
 }
