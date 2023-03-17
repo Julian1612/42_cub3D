@@ -6,28 +6,28 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/02/27 14:47:30 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/17 09:55:16 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=   -Wall -Wextra -Werror -g
+CFLAGS		=   -g
+# -Wall -Wextra -Werror
 LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft
+GARBAGE		=	./libraries/garbage_collector
 CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 				src/player_position:
 
 SRC			=	main.c \
-				check_args.c check_file.c error_messages.c parser.c put_file_content_in_arr.c \
-				errors_textures.c free_textures.c get_path_utils.c get_path.c get_rgb_values.c \
-				get_textures.c \
-				check_map.c check_wall_horizontal.c check_wall_vertical.c errors_map.c get_map.c \
-				malloc_map.c map_to_arr.c\
-				init_player_position.c
+				parser.c check_for_map.c check_for_rgb.c \
+				check_textures.c check_for_texture.c error_messages.c \
+				get_file_data.c check_map.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L /Users/$(USER)/goinfre/.brew/opt/glfw/lib/ $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+# $(GARBAGE)/libwastewiz.a
 OBJS		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
 OBJ_DIR		= ./obj/
 
@@ -53,10 +53,16 @@ libft:
 libmlx:
 	@$(MAKE) -C $(LIBMLX)
 
+# garbage_collector:
+# 	@$(MAKE) -C $(GARBAGE)
+
 obj/%.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 $(NAME): obj $(OBJS)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+
+n: obj $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:

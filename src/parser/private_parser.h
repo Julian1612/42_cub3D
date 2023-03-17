@@ -6,35 +6,47 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/27 14:11:25 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/17 09:55:25 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRIVATE_PARSER_H
 # define PRIVATE_PARSER_H
 # include "../cub3D.h"
-# include "get_map.h"
-# include "get_textures.h"
+# define NBR_B_TEXTURES 3
+# define DOOR "D"
+# define BARREL "B"
+# define ENEMY "E"
 
-// parser.c
+/* check_for_bonus_textures.c */
+int		check_for_bonus_texture(t_map *map_data, char *line);
+
+/* check_for_map.c */
+int		check_for_map(t_map *map_data, char *line, int fd);
+
+/* check_for_rgb.c */
+int		check_for_rgb(t_map *map_data, char *line);
+
+/* check_for_textures.c */
+int		check_for_texture(t_map *map_data, char *line);
+char	*cpy_line(char **des, char *src, int len);
+
+/* check_map.c */
+int		check_map(t_map *map_data);
+
+/* check_textures.c */
+int		check_mandatory_textures(t_map *map_data);
+int		check_bonus_textures(t_map *map_data);
+
+/* error_messages.c */
+int		error_message(int error_code);
+int		error_textures(int error_code);
+int		error_get_map(int error_code);
+
+/* get_file_data.c */
+int		get_file_data(t_map *map_data, char *cub_file_path);
+
+/* parser.c */
 int		parser(int *argc, char **argv, t_map *map_data);
-
-// check_args.c
-int		check_args(int *argc, char **argv);
-
-// check_file.c
-int		check_file(char *str, char *data_type);
-
-// put_file_content_in_arr.c
-int		put_file_content_in_arr(char ***raw_map, char *path);
-
-// get_textures.c
-int		get_textures(t_map *map_data, char **raw_map);
-
-// get_map.c
-int		get_map(t_map *map_data, char **raw_map);
-
-// error_message.c
-void	error_message(int error_code);
 
 #endif
