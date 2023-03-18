@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 15:42:45 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/18 11:05:38 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,6 @@ static void	free_struct(t_map *map_data)
 		free(map_data->west);
 	if (map_data->east != NULL)
 		free(map_data->east);
-	if (ft_arrlen((void **)map_data->floor_rgb_arr) > 0)
-		ft_free_arr((void **)map_data->floor_rgb_arr);
-	if (ft_arrlen((void **)map_data->ceiling_rgb_arr) > 0)
-		ft_free_arr((void **)map_data->ceiling_rgb_arr);
 	if (map_data->map != NULL)
 		ft_free_arr((void **)map_data->map);
 }
