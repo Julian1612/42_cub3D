@@ -6,12 +6,12 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/19 16:20:05 by lorbke           ###   ########.fr        #
+#    Updated: 2023/03/19 17:03:29 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=   -g -O3
+CFLAGS		=   #-O3
 # -Wall -Wextra -Werror 
 LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft
@@ -68,5 +68,9 @@ fclean: clean
 	@$(MAKE) -C $(LIBMLX) fclean
 
 re: clean all
+
+debug: CFLAGS += -O0 -DDEBUG=1 -g
+debug: clean all
+	@$(MAKE) clean
 
 .PHONY: all, clean, fclean, re, libmlx, libft

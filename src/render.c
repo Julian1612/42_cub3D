@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/19 16:21:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/19 17:05:52 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int	render_world(t_game *game)
 	double	fov;
 	int		i;
 
-	// debug_print_player(&game->player);
+	debug_print_player(&game->player);
 	fov = M_2_PI;
 	ray_dir = game->player.view_dir - (fov / 2);
 	i = 0;

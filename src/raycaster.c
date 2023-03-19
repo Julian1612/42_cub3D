@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:41:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/19 16:23:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/19 17:05:32 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,25 +102,6 @@ void	init_ray(t_ray	*ray, double ray_dir, t_player *player)
 	ray->long_len = 1000000;
 }
 
-void	set_transparent(mlx_image_t *image)
-{
-	int		i;
-	int		j;
-	int		color;
-
-	i = 0;
-	while (i < image->width)
-	{
-		j = 0;
-		while (j < image->height)
-		{
-			mlx_put_pixel(image, i, j, convert_to_hexcode(0, 0, 0, 0));
-			j++;
-		}
-		i++;
-	}
-}
-
 double	extend_until_wall_long(mlx_image_t *image, t_map *map, t_player *player, double ray_x, double ray_y, double ray_dir)
 {
 	double	add;
@@ -140,13 +121,8 @@ double	extend_until_wall_long(mlx_image_t *image, t_map *map, t_player *player, 
 			ray_y += get_y_from_x(UNIT, ray_dir);
 		else
 			ray_y -= get_y_from_x(UNIT, ray_dir);
-		// printf("ray_y: %f\n", ray_y);
 		new_x = player_x + ray_x;
-		// printf("new_x: %f\n", new_x);
 		new_y = player_y + ray_y;
-		// printf("new_y: %f\n", new_y);
-		// if (new_x >= 0 && new_y >= 0 && new_x * MM_BLOCK_SIZE < image->width && new_y * MM_BLOCK_SIZE < image->height)
-		// 	mlx_put_pixel(image, new_x * MM_BLOCK_SIZE, new_y * MM_BLOCK_SIZE, convert_to_hexcode(0, 255, 0, 255));
 	}
 	return (sqrt(get_abs(ray_x * ray_x) + get_abs(ray_y * ray_y)));
 }
@@ -170,11 +146,8 @@ double	extend_until_wall_lat(mlx_image_t *image, t_map *map, t_player *player, d
 			ray_x += get_x_from_y(UNIT, ray_dir);
 		else
 			ray_x -= get_x_from_y(UNIT, ray_dir);
-		// printf("ray_x: %f\n", ray_x);
 		new_x = player_x + ray_x;
 		new_y = player_y + ray_y;
-		// if (new_x >= 0 && new_y >= 0 && new_x * MM_BLOCK_SIZE < image->width && new_y * MM_BLOCK_SIZE < image->height)
-		// 	mlx_put_pixel(image, new_x * MM_BLOCK_SIZE, new_y * MM_BLOCK_SIZE, convert_to_hexcode(255, 0, 0, 255));
 	}
 	return (sqrt(get_abs(ray_x * ray_x) + get_abs(ray_y * ray_y)));
 }
@@ -185,10 +158,9 @@ double	cast_ray(t_game *game, double ray_dir)
 	t_ray	ray;
 
 	init_ray(&ray, ray_dir, &game->player);
-	// set_transparent(game->img_a);
 	ray.long_len = extend_until_wall_long(game->img_a, &game->map, &game->player, ray.longitude.x, ray.longitude.y, ray_dir);
 	ray.lat_len = extend_until_wall_lat(game->img_a, &game->map, &game->player, ray.latitude.x, ray.latitude.y, ray_dir);
-	// debug_print_ray(&ray);
+	debug_print_ray(&ray);
 	if (ray.lat_len < ray.long_len)
 		return (ray.lat_len);
 	else
