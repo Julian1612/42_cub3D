@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:41:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/18 19:04:18 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/19 16:14:57 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,10 @@ double	extend_until_wall_long(mlx_image_t *image, t_map *map, t_player *player, 
 	while (!is_wall(map, new_x, new_y))
 	{
 		ray_x = add_preserve_sign(ray_x, UNIT);
-		ray_y = add_preserve_sign(ray_y, get_y_from_x(UNIT, ray_dir));
+		if (ray_x >= 0)
+			ray_y += get_y_from_x(UNIT, ray_dir);
+		else
+			ray_y -= get_y_from_x(UNIT, ray_dir);
 		// printf("ray_y: %f\n", ray_y);
 		new_x = player_x + ray_x;
 		// printf("new_x: %f\n", new_x);
@@ -163,7 +166,10 @@ double	extend_until_wall_lat(mlx_image_t *image, t_map *map, t_player *player, d
 	while (!is_wall(map, new_x, new_y))
 	{
 		ray_y = add_preserve_sign(ray_y, UNIT);
-		ray_x = add_preserve_sign(ray_x, get_x_from_y(UNIT, ray_dir));
+		if (ray_y >= 0)
+			ray_x += get_x_from_y(UNIT, ray_dir);
+		else
+			ray_x -= get_x_from_y(UNIT, ray_dir);
 		// printf("ray_x: %f\n", ray_x);
 		new_x = player_x + ray_x;
 		new_y = player_y + ray_y;
