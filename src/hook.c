@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/19 16:28:20 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/19 17:21:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,5 @@ void	hook(void *param)
 	// collision
 	// enemy
 	keys(game->mlx, &game->minimap, &game->player);
-	render_ceilfloor(game->mlx, game->img_a);
 	render_world(game);
 }

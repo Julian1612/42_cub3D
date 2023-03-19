@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/19 17:05:52 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/19 17:26:37 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,23 +104,25 @@ void	color_image(mlx_t *mlx, mlx_image_t *img, unsigned int color)
 	}
 }
 
-void	paint_reflection(mlx_image_t *img, double wall_dist, int x)
+void	paint_reflection(mlx_image_t *img, double obj_dist, int x)
 {
-	int	wall_height;
-	int	y;
+	t_hexcolor	reflec_color;
+	int			reflec_height;
+	int			y;
 
-	if (wall_dist < 1)
-		wall_dist = 1;
-	wall_height = (int)(HEIGHT / wall_dist);
-	y = HEIGHT / 2 - wall_height / 2;
-	while (y < HEIGHT / 2 + wall_height / 2)
+	reflec_color = convert_to_hexcode(0, 150, 0, 255);
+	if (obj_dist < 1)
+		obj_dist = 1;
+	reflec_height = (int)(HEIGHT / obj_dist);
+	y = HEIGHT / 2 - reflec_height / 2;
+	while (y < HEIGHT / 2 + reflec_height / 2)
 	{
-		mlx_put_pixel(img, x, y, convert_to_hexcode(0, 150, 0, 255));
+		mlx_put_pixel(img, x, y, reflec_color);
 		y++;
 	}
 }
 
-void	render_ceilfloor(mlx_t *mlx, mlx_image_t *img)
+void	paint_ceilfloor(mlx_t *mlx, mlx_image_t *img, t_hexcolor ceil, t_hexcolor floor)
 {
 	int	i;
 	int	j;
@@ -132,9 +134,9 @@ void	render_ceilfloor(mlx_t *mlx, mlx_image_t *img)
 		while (j < WIDTH)
 		{
 			if (i < HEIGHT / 2)
-				mlx_put_pixel(img, j, i, convert_to_hexcode(0, 0, 255, 255));
+				mlx_put_pixel(img, j, i, ceil);
 			else
-				mlx_put_pixel(img, j, i, convert_to_hexcode(255, 0, 0, 255));
+				mlx_put_pixel(img, j, i, floor);
 			j++;
 		}
 		j = 0;
@@ -142,6 +144,7 @@ void	render_ceilfloor(mlx_t *mlx, mlx_image_t *img)
 	}
 }
 
+// @todo render img_b in background and switch between them
 int	render_world(t_game *game)
 {
 	double	wall_dist;
@@ -150,6 +153,7 @@ int	render_world(t_game *game)
 	int		i;
 
 	debug_print_player(&game->player);
+	paint_ceilfloor(game->mlx, game->img_a, game->map.ceiling_color, game->map.floor_color);
 	fov = M_2_PI;
 	ray_dir = game->player.view_dir - (fov / 2);
 	i = 0;
