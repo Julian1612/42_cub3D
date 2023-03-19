@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 12:59:55 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/19 16:19:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define HEIGHT 800
 # define ERROR -1
 # define SUCCESS 0
-# define BLOCK_SIZE 64
+# define MM_BLOCK_SIZE 64
 # define WALL '1'
 
 /* ************************************************************************** */
@@ -115,13 +115,15 @@ typedef struct s_coor
 	double	y;
 }	t_coor;
 
-// @note maybe move this into raycaster header
+// @note move this?
 typedef struct s_ray
 {
-	t_coor	nx_latitude;
-	t_coor	nx_longitude;
-	double	dir;
-}	t_ray;
+	double		dir;
+	t_coor		latitude;
+	t_coor		longitude;
+	double		lat_len;
+	double		long_len;
+}				t_ray;
 
 /* ************************************************************************** */
 /* FUNCTIONS																  */
@@ -142,6 +144,9 @@ void	hook(void *param);
 
 double	cast_ray(t_game *game, double ray_angle);
 
-void	debug_print_ray(t_ray *ray, double ray_length_lat, double ray_length_long);
+void	debug_print_ray(t_ray *ray);
+
+unsigned int	convert_to_hexcode(
+	unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 
 #endif

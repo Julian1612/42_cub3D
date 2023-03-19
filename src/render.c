@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/17 12:34:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/19 16:21:06 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
 	i = 0;
 	j = 0;
 	// @todo replace with actual map width and height
-	while ((i * BLOCK_SIZE) < (map->height * BLOCK_SIZE))
+	while ((i * MM_BLOCK_SIZE) < (map->height * MM_BLOCK_SIZE))
 	{
-		while ((j * BLOCK_SIZE) < (map->width * BLOCK_SIZE))
+		while ((j * MM_BLOCK_SIZE) < (map->width * MM_BLOCK_SIZE))
 		{
 			if (map->map[i][j] == WALL)
 			{
-				if (mlx_image_to_window(mlx, minimap->walls, j * BLOCK_SIZE, i * BLOCK_SIZE) == ERROR)
+				if (mlx_image_to_window(mlx, minimap->walls, j * MM_BLOCK_SIZE, i * MM_BLOCK_SIZE) == ERROR)
 					return (ERROR);
 			}
 			j++;
@@ -59,18 +59,18 @@ int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
 // 	// @todo replace with actual map width and height
 // 	map_width = 16;
 // 	map_height = 9;
-// 	while ((i * BLOCK_SIZE) < (map_height * BLOCK_SIZE))
+// 	while ((i * MM_BLOCK_SIZE) < (map_height * MM_BLOCK_SIZE))
 // 	{
-// 		while ((j * BLOCK_SIZE) < (map_width * BLOCK_SIZE))
+// 		while ((j * MM_BLOCK_SIZE) < (map_width * MM_BLOCK_SIZE))
 // 		{
 // 			if (i % 2 == 0 && j % 2 == 0)
 // 			{
-// 				if (mlx_image_to_window(mlx, minimap->walls, i * BLOCK_SIZE, j * BLOCK_SIZE) == ERROR)
+// 				if (mlx_image_to_window(mlx, minimap->walls, i * MM_BLOCK_SIZE, j * MM_BLOCK_SIZE) == ERROR)
 // 					return (ERROR);
 // 			}
 // 			if (i % 2 != 0 && j % 2 != 0)
 // 			{
-// 				if (mlx_image_to_window(mlx, minimap->walls, i * BLOCK_SIZE, j * BLOCK_SIZE) == ERROR)
+// 				if (mlx_image_to_window(mlx, minimap->walls, i * MM_BLOCK_SIZE, j * MM_BLOCK_SIZE) == ERROR)
 // 					return (ERROR);
 // 			}
 // 			j++;
@@ -84,18 +84,6 @@ int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
 // 		return (ERROR);
 // 	return (SUCCESS);
 // }
-
-static unsigned int	convert_to_hexcode(
-	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
-{
-	unsigned int	rgba;
-
-	rgba = r;
-	rgba = (rgba << 8) + g;
-	rgba = (rgba << 8) + b;
-	rgba = (rgba << 8) + a;
-	return (rgba);
-}
 
 void	color_image(mlx_t *mlx, mlx_image_t *img, unsigned int color)
 {

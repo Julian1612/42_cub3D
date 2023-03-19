@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/17 12:37:11 by lorbke           ###   ########.fr        #
+#    Updated: 2023/03/19 16:20:05 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 				src/player_position:
 
-SRC			=	raycaster.c debug.c render.c initialize.c errexit.c hook.c main.c
+SRC			=	raycaster.c debug.c render.c initialize.c errexit.c hook.c utils.c main.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a

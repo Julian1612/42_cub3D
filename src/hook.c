@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/17 12:18:40 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/19 16:24:05 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin
 
-#define SPEED 1
+#define SPEED 5
 
 void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player)
 {
