@@ -6,15 +6,17 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 13:33:25 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:40:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
+#include <math.h>
 #include <stdio.h>
 
+static double	get_view_direction(char direction);
 // there is no error message and no freee in case of error
-int	init_player_position(t_map *map_data)
+int	init_player_position(t_map *map_data, t_player *player_pos)
 {
 	int	i;
 	int	j;
@@ -28,9 +30,9 @@ int	init_player_position(t_map *map_data)
 			if (map_data->map[i][j] == 'N' || map_data->map[i][j] == 'S'
 				|| map_data->map[i][j] == 'E' || map_data->map[i][j] == 'W')
 			{
-				map_data->starting_pos_x = j;
-				map_data->starting_pos_y = i;
-				map_data->starting_dir = map_data->map[i][j];
+				player_pos->x = j;
+				player_pos->y = i;
+				player_pos->view_dir = get_view_direction(map_data->map[i][j]);
 				return (0);
 			}
 			j++;
@@ -38,4 +40,17 @@ int	init_player_position(t_map *map_data)
 		i++;
 	}
 	return (error_get_map(4, map_data));
+}
+
+static double	get_view_direction(char direction)
+{
+	if (direction == 'N')
+		return (M_PI);
+	else if (direction == 'S')
+		return (0);
+	else if (direction == 'E')
+		return (M_PI * 3 / 2);
+	else if (direction == 'W')
+		return (M_PI / 2);
+	return (0);
 }

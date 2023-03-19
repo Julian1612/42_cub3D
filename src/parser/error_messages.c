@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 13:32:42 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:21:18 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ static void	free_struct(t_map *map_data)
 {
 	if (map_data == NULL)
 		return ;
-	if (map_data->north != NULL)
-		free(map_data->north);
-	if (map_data->south != NULL)
-		free(map_data->south);
-	if (map_data->west != NULL)
-		free(map_data->west);
-	if (map_data->east != NULL)
-		free(map_data->east);
+	if (map_data->north.path != NULL)
+		free(map_data->north.path);
+	if (map_data->south.path != NULL)
+		free(map_data->south.path);
+	if (map_data->west.path != NULL)
+		free(map_data->west.path);
+	if (map_data->east.path != NULL)
+		free(map_data->east.path);
 	if (map_data->map != NULL)
 		ft_free_arr((void **)map_data->map);
 }

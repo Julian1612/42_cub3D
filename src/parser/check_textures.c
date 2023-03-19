@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 13:56:46 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:09:52 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,17 @@ static int	check_char(t_map *map_data, char character);
 
 int	check_mandatory_textures(t_map *map_data)
 {
-	if (map_data->north == NULL)
+	if (map_data->north.path == NULL)
 		return (error_textures(6, map_data));
-	else if (map_data->south == NULL)
+	else if (map_data->south.path == NULL)
 		return (error_textures(6, map_data));
-	else if (map_data->west == NULL)
+	else if (map_data->west.path == NULL)
 		return (error_textures(6, map_data));
-	else if (map_data->east == NULL)
+	else if (map_data->east.path == NULL)
 		return (error_textures(6, map_data));
-	else if (map_data->floor_rgb_arr[0] == -1
-		|| map_data->floor_rgb_arr[1] == -1
-		|| map_data->floor_rgb_arr[2] == -1)
+	else if (map_data->floor_color == -1)
 		return (error_textures(4, map_data));
-	else if (map_data->ceiling_rgb_arr[0] == -1
-		|| map_data->ceiling_rgb_arr[1] == -1
-		|| map_data->ceiling_rgb_arr[2] == -1)
+	else if (map_data->ceiling_color == -1)
 		return (error_textures(4, map_data));
 	return (0);
 }

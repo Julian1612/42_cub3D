@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 15:56:54 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:22:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,16 @@ static int	check_for_invalid_definitions(t_map *map_data);
 
 static void	init_struct_null(t_map *map_data)
 {
-	map_data->north = NULL;
-	map_data->south = NULL;
-	map_data->west = NULL;
-	map_data->east = NULL;
-	map_data->floor_rgb_arr[0] = -1;
-	map_data->floor_rgb_arr[1] = -1;
-	map_data->floor_rgb_arr[2] = -1;
-	map_data->ceiling_rgb_arr[0] = -1;
-	map_data->ceiling_rgb_arr[1] = -1;
-	map_data->ceiling_rgb_arr[2] = -1;
+	map_data->north.path = NULL;
+	map_data->south.path = NULL;
+	map_data->west.path = NULL;
+	map_data->east.path = NULL;
+	map_data->ceiling_color = -1;
+	map_data->floor_color = -1;
 	map_data->map = NULL;
 }
 
-int	parser(int *argc, char **argv, t_map *map_data)
+int	parser(int *argc, char **argv, t_map *map_data, t_player *player_pos)
 {
 	init_struct_null(map_data);
 	if (check_args(argc, argv))
@@ -53,7 +49,7 @@ int	parser(int *argc, char **argv, t_map *map_data)
 		return (1);
 	if (check_for_invalid_definitions(map_data))
 		return (1);
-	if (init_player_position(map_data))
+	if (init_player_position(map_data, player_pos))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/18 15:58:01 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:36:00 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,25 @@ static int	check_rgb_values(t_map *map_data, char **line_content)
 	return (0);
 }
 
+unsigned int	convert_to_hexcode(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+{
+	unsigned int	rgba;
+
+	rgba = r;
+	rgba = (rgba << 8) + g;
+	rgba = (rgba << 8) + b;
+	rgba = (rgba << 8) + a;
+	return (rgba);
+}
+
 static void	init_struct(t_map *map_data, char **splitted_str, int boundary)
 {
 	if (boundary == 1)
-	{
-		map_data->ceiling_rgb_arr[0] = ft_atoi(splitted_str[0]);
-		map_data->ceiling_rgb_arr[1] = ft_atoi(splitted_str[1]);
-		map_data->ceiling_rgb_arr[2] = ft_atoi(splitted_str[2]);
-	}
+		map_data->ceiling_color = convert_to_hexcode(ft_atoi(splitted_str[0]),
+				ft_atoi(splitted_str[1]), ft_atoi(splitted_str[2]), 100);
 	else if (boundary == 2)
-	{
-		map_data->floor_rgb_arr[0] = ft_atoi(splitted_str[0]);
-		map_data->floor_rgb_arr[1] = ft_atoi(splitted_str[1]);
-		map_data->floor_rgb_arr[2] = ft_atoi(splitted_str[2]);
-	}
+		map_data->floor_color = convert_to_hexcode(ft_atoi(splitted_str[0]),
+				ft_atoi(splitted_str[1]), ft_atoi(splitted_str[2]), 100);
 }
 
 static int	remove_letter(char **line_content)

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 15:27:22 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:38:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int		error_get_map(int error_code, t_map *map_data);
 int		get_file_data(t_map *map_data, char *cub_file_path);
 
 /* init_player_position.c */
-int		init_player_position(t_map *map_data);
+int	init_player_position(t_map *map_data, t_player *player_pos);
 
 /* parser.c */
-int		parser(int *argc, char **argv, t_map *map_data);
+int	parser(int *argc, char **argv, t_map *map_data, t_player *player_pos);
 
 #endif

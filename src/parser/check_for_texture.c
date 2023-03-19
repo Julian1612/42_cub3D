@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 13:51:04 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:40:24 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 		return (1);
 	}
 	if (i == 0)
-		cpy_line(&map_data->north, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->north.path, splitted_str[1], splitted_str_len);
 	else if (i == 1)
-		cpy_line(&map_data->south, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->south.path, splitted_str[1], splitted_str_len);
 	else if (i == 2)
-		cpy_line(&map_data->west, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->west.path, splitted_str[1], splitted_str_len);
 	else if (i == 3)
-		cpy_line(&map_data->east, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->east.path, splitted_str[1], splitted_str_len);
 	ft_free_arr((void **)splitted_str);
 	return (0);
 }

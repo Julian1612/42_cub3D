@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/18 14:22:39 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/19 18:42:18 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ obj/%.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 $(NAME): obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -Wno-gnu-include-next -I./LeakSanitizer/include -L./LeakSanitizer -llsan -lc++ -L/usr/lib/x86_64-linux-gnu -o cub3D
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -Wno-gnu-include-next -I./LeakSanitizer/include -o cub3D
 
 n: obj $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS)
