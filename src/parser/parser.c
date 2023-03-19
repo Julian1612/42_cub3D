@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/18 13:59:22 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:56:54 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,24 @@ static int	check_file(char *cub_file_path, char *data_type);
 static int	check_data_type(char *path, char *data_type);
 static int	check_for_invalid_definitions(t_map *map_data);
 
+static void	init_struct_null(t_map *map_data)
+{
+	map_data->north = NULL;
+	map_data->south = NULL;
+	map_data->west = NULL;
+	map_data->east = NULL;
+	map_data->floor_rgb_arr[0] = -1;
+	map_data->floor_rgb_arr[1] = -1;
+	map_data->floor_rgb_arr[2] = -1;
+	map_data->ceiling_rgb_arr[0] = -1;
+	map_data->ceiling_rgb_arr[1] = -1;
+	map_data->ceiling_rgb_arr[2] = -1;
+	map_data->map = NULL;
+}
+
 int	parser(int *argc, char **argv, t_map *map_data)
 {
+	init_struct_null(map_data);
 	if (check_args(argc, argv))
 		return (1);
 	if (check_file(argv[1], "cub"))

@@ -6,12 +6,14 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 10:18:40 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 13:33:25 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
+#include <stdio.h>
 
+// there is no error message and no freee in case of error
 int	init_player_position(t_map *map_data)
 {
 	int	i;
@@ -35,5 +37,5 @@ int	init_player_position(t_map *map_data)
 		}
 		i++;
 	}
-	return (1);
+	return (error_get_map(4, map_data));
 }

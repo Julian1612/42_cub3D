@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/18 11:05:38 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 13:32:42 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	error_get_map(int error_code, t_map *map_data)
 		printf("Error!\nfile contains no map\n");
 	else if (error_code == 5)
 		printf("Error!\nInvalid character in map\n");
+	else if (error_code == 4)
+		printf("Error!\nNo starting position found\n");
 	printf("========================================\n");
 	free_struct(map_data);
 	return (1);

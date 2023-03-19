@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/18 10:47:26 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:23:59 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void	play_music(void)
-{
-	system("afplay ./sound_track/preussengloria.mp3 &");
-}
+// void	play_music(void)
+// {
+// 	system("afplay ./sound_track/preussengloria.mp3 &");
+// }
 
 int	main(int argc, char **argv)
 {
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 
 	if (parser(&argc, argv, &map_data))
 		return (1);
-	play_music();
+	// play_music();
 	free(map_data.west);
 	free(map_data.east);
 	free(map_data.south);

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 15:42:42 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 13:51:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,7 @@ static int	get_bonus_texture_file_path(t_map *map_data, char *line, int i)
 	splitted_str = ft_split(line, ' ');
 	splitted_str_len = ft_strlen(splitted_str[1]);
 	if (splitted_str == NULL)
-	{
-		error_message(4, map_data);
-		return (1);
-	}
+		return (error_message(4, map_data));
 	// if (i == 0)
 	// 	cpy_line(&map_data->door, splitted_str[1], splitted_str_len);
 	// else if (i == 1)

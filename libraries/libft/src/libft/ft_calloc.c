@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 08:08:57 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/18 13:57:53 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 11:40:09 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	*ft_calloc(size_t count, size_t size)
 	// if (rtn == NULL)
 	// 	return (NULL);
 	// ft_memset(rtn, '\0', (count * size));
-	return (1);
+	// return (1);
 }
