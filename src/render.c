@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/17 13:14:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/18 18:08:34 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,18 @@ int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
 // 		return (ERROR);
 // 	return (SUCCESS);
 // }
+
+unsigned int	convert_to_hexcode(
+	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+{
+	unsigned int	rgba;
+
+	rgba = r;
+	rgba = (rgba << 8) + g;
+	rgba = (rgba << 8) + b;
+	rgba = (rgba << 8) + a;
+	return (rgba);
+}
 
 int	render_world(t_game *game)
 {

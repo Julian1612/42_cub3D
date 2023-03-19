@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 18:01:42 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/18 18:08:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void	errexit_mlx_errno(void);
 
 int		initialize_mlx_all(t_game *game);
 
+unsigned int	convert_to_hexcode(
+	unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 int		render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
 int		render_world(t_game *game);
 

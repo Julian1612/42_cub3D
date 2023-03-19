@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/17 13:14:17 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/18 18:36:18 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	initialize_mlx_all(t_game *game)
 {
 	game->mlx = mlx_init(game->map.width * MM_BLOCK_SIZE, game->map.height * MM_BLOCK_SIZE, "cub3D", false);
 	game->img_a = mlx_new_image(game->mlx, game->map.width * MM_BLOCK_SIZE, game->map.height * MM_BLOCK_SIZE);
+	mlx_image_to_window(game->mlx, game->img_a, 0, 0);
 	if (game->mlx == NULL || game->img_a == NULL)
 		return (ERROR);
 	if (initialize_textures(game) == ERROR)
