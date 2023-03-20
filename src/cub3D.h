@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 17:58:26 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:23:54 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ typedef struct s_map
 	t_texture	east;
 	t_texture	south;
 	t_texture	north;
-	t_texture	*sprites;
+	t_texture	door;
+	t_texture	barrel;
+	t_texture	enemy;
 	t_hexcolor	ceiling_color;
 	t_hexcolor	floor_color;
 }	t_map;

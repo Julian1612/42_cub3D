@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 18:09:52 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:25:33 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int	check_bonus_textures(t_map *map_data)
 
 static int	check_char(t_map *map_data, char character)
 {
-	// if (character == 'D' && map_data->door == NULL)
-	// 	return (error_textures(7));
-	// else if (character == 'B' && map_data->barrel == NULL)
-	// 	return (error_textures(7));
-	// else if (character == 'E' && map_data->enemy == NULL)
-	// 	return (error_textures(7));
+	if (character == 'D' && map_data->door.path == NULL)
+		return (error_textures(7, map_data));
+	else if (character == 'B' && map_data->barrel.path == NULL)
+		return (error_textures(7, map_data));
+	else if (character == 'E' && map_data->enemy.path == NULL)
+		return (error_textures(7, map_data));
 	return (0);
 }

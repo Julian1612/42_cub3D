@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 17:40:24 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:24:42 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,12 @@ static int	get_bonus_texture_file_path(t_map *map_data, char *line, int i)
 	splitted_str_len = ft_strlen(splitted_str[1]);
 	if (splitted_str == NULL)
 		return (error_message(4, map_data));
-	// if (i == 0)
-	// 	cpy_line(&map_data->door, splitted_str[1], splitted_str_len);
-	// else if (i == 1)
-	// 	cpy_line(&map_data->barrel, splitted_str[1], splitted_str_len);
-	// else if (i == 2)
-	// 	cpy_line(&map_data->enemy, splitted_str[1], splitted_str_len);
+	if (i == 0)
+		cpy_line(&map_data->door.path, splitted_str[1], splitted_str_len);
+	else if (i == 1)
+		cpy_line(&map_data->barrel.path, splitted_str[1], splitted_str_len);
+	else if (i == 2)
+		cpy_line(&map_data->enemy.path, splitted_str[1], splitted_str_len);
 	ft_free_arr((void **)splitted_str);
 	return (0);
 }
