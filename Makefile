@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/19 18:42:18 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/20 10:06:09 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 SRC			=	main.c \
 				parser.c check_for_map.c check_for_rgb.c \
 				check_textures.c check_for_texture.c error_messages.c \
-				get_file_data.c check_map.c init_player_position.c \
+				get_file_data.c check_map.c init_player_position.c utils.c \
 
 HEADERS		= -I $(LIBFT)
 # -I ./include -I $(LIBMLX)/include/MLX42

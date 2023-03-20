@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 18:40:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/20 09:58:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 static double	get_view_direction(char direction);
-// there is no error message and no freee in case of error
+
 int	init_player_position(t_map *map_data, t_player *player_pos)
 {
 	int	i;

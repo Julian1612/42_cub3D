@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 16:32:15 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:05:31 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdio.h>
 
 static int	read_map_data(t_map *map_data, int fd, int file_len);
-static void	init_struct_null(t_map *map_data);
 static int	get_file_len(char *path);
 static int	check_line(t_map *map_data, char *line, int fd);
 
