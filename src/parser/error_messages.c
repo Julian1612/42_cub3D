@@ -6,14 +6,16 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 09:53:27 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:21:18 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
 #include <stdio.h>
 
-int	error_message(int error_code)
+static void	free_struct(t_map *map_data);
+
+int	error_message(int error_code, t_map *map_data)
 {
 	printf("========================================\n");
 	if (error_code == 1)
@@ -25,10 +27,11 @@ int	error_message(int error_code)
 	else if (error_code == 4)
 		printf("Error!\nMalloc failed\n");
 	printf("========================================\n");
+	free_struct(map_data);
 	return (1);
 }
 
-int	error_textures(int error_code)
+int	error_textures(int error_code, t_map *map_data)
 {
 	printf("========================================\n");
 	if (error_code == 1)
@@ -52,10 +55,11 @@ int	error_textures(int error_code)
 	else if (error_code == 7)
 		printf("Error!\nFile path for bonus texture is missing\n");
 	printf("========================================\n");
+	free_struct(map_data);
 	return (1);
 }
 
-int	error_get_map(int error_code)
+int	error_get_map(int error_code, t_map *map_data)
 {
 	printf("========================================\n");
 	if (error_code == 1)
@@ -64,6 +68,25 @@ int	error_get_map(int error_code)
 		printf("Error!\nfile contains no map\n");
 	else if (error_code == 5)
 		printf("Error!\nInvalid character in map\n");
+	else if (error_code == 4)
+		printf("Error!\nNo starting position found\n");
 	printf("========================================\n");
+	free_struct(map_data);
 	return (1);
+}
+
+static void	free_struct(t_map *map_data)
+{
+	if (map_data == NULL)
+		return ;
+	if (map_data->north.path != NULL)
+		free(map_data->north.path);
+	if (map_data->south.path != NULL)
+		free(map_data->south.path);
+	if (map_data->west.path != NULL)
+		free(map_data->west.path);
+	if (map_data->east.path != NULL)
+		free(map_data->east.path);
+	if (map_data->map != NULL)
+		ft_free_arr((void **)map_data->map);
 }

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/17 10:28:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:35:21 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,29 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#define WIDTH 512
-#define HEIGHT 512
-#define PLAYER_SIZE 2
-#define DIRECTION 2
-#define WALL_BLOCK 64
-#define NBR_OF_RAYS 1
 
-void	play_music(void)
+// void	play_music(void)
+// {
+// 	system("afplay ./sound_track/preussengloria.mp3 &");
+// }
+
+void free_map_struct(t_map *map_data)
 {
-	system("afplay ./sound_track/preussengloria.mp3 &");
+	free(map_data->west.path);
+	free(map_data->east.path);
+	free(map_data->south.path);
+	free(map_data->north.path);
+	ft_free_arr((void **)map_data->map);
 }
 
 int	main(int argc, char **argv)
 {
-	t_map	map_data;
+	t_map		map_data;
+	t_player	player_pos;
 
-	if (parser(&argc, argv, &map_data))
+	if (parser(&argc, argv, &map_data, &player_pos))
 		return (1);
-	play_music();
+	// play_music();
+	free_map_struct(&map_data);
 	return (0);
 }
