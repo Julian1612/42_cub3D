@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 15:41:11 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/20 17:11:13 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 /* INCLUDES																	  */
 /* ************************************************************************** */
 
-# include "parser.h"
 # include "../libraries/libft/src/libft/libft.h"
 # include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
 # include "../libraries/libft/src/get_next_line/get_next_line.h"
@@ -154,53 +153,8 @@ void	hook(void *param);
 
 double	cast_ray(t_game *game, double ray_angle);
 
-void	debug_print_ray(t_ray *ray);
-
 unsigned int	convert_to_hexcode(
 	unsigned char r, unsigned char g, unsigned char b, unsigned char a);
-	mlx_image_t		*img_a;
-	mlx_image_t		*img_b;
-	t_map			map;
-	t_minimap		minimap;
-	t_player		player;
-	t_enemy			*enemies;
-}	t_game;
-
-typedef struct s_coor
-{
-	double	x;
-	double	y;
-}	t_coor;
-
-// @note move this?
-typedef struct s_ray
-{
-	double		dir;
-	t_coor		latitude;
-	t_coor		longitude;
-	double		lat_len;
-	double		long_len;
-}				t_ray;
-
-/* ************************************************************************** */
-/* FUNCTIONS																  */
-/* ************************************************************************** */
-
-void	debug_print_player(t_player *player);
-
-void	errexit_msg(char *msg);
-void	errexit_mlx_errno(void);
-
-int		initialize_mlx_all(t_game *game);
-
-unsigned int	convert_to_hexcode(
-	unsigned char r, unsigned char g, unsigned char b, unsigned char a);
-int		render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
-int		render_world(t_game *game);
-
-void	hook(void *param);
-
-double	cast_ray(t_game *game, double ray_angle);
 
 void	debug_print_ray(t_ray *ray);
 
