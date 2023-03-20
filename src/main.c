@@ -6,60 +6,41 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 17:25:57 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/20 15:44:16 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
-#include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
-#include <stdlib.h> // malloc
-#include <stdio.h> // printf
-#include <stdbool.h> // bool
-#include <math.h> // M_PI
+#include "cub3D.h"
+#include "parser.h"
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
 
-int	test_parse(t_game *game)
+// void	play_music(void)
+// {
+// 	system("afplay ./sound_track/preussengloria.mp3 &");
+// }
+
+void free_map_struct(t_map *map_data)
 {
-	static char	*map[17] = {"1111111111111111",
-							"1000100000000001",
-							"1000100000000001",
-							"1000100000000011",
-							"1000000000000111",
-							"1000100000001111",
-							"1000100000011111",
-							"1100100000111111",
-							"1111111111111111"};
-
-	game->map.map = map;
-	game->map.width = 16;
-	game->map.height = 9;
-	game->map.west.path = "textures/east.xpm42";
-	game->map.east.path = "textures/east.xpm42";
-	game->map.south.path = "textures/east.xpm42";
-	game->map.north.path = "textures/east.xpm42";
-	game->map.ceiling_color = convert_to_hexcode(0, 0, 0, 0);
-	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
-	game->player.x = MM_BLOCK_SIZE * 2;
-	game->player.y = MM_BLOCK_SIZE * 2;
-	game->player.view_dir = 0;
-	game->player.weapon = NULL;
-	return (SUCCESS);
+	free(map_data->west.path);
+	free(map_data->east.path);
+	free(map_data->south.path);
+	free(map_data->north.path);
+	ft_free_arr((void **)map_data->map);
 }
 
 int	main(int argc, char **argv)
 {
-	t_game	game;
+	t_map		map_data;
+	t_player	player_pos;
 
-	if (test_parse(&game))
-		return (EXIT_FAILURE);
-	if (initialize_mlx_all(&game) == ERROR)
-		errexit_mlx_errno();
-	// if (render_minimap(&game.minimap, game.mlx, &game.map) == ERROR)
-	// 	errexit_mlx_errno();
-	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
-		errexit_mlx_errno();
-	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
-		errexit_mlx_errno();
-	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
-	return (EXIT_SUCCESS);
+	if (parser(&argc, argv, &map_data, &player_pos))
+		return (1);
+	// play_music();
+	free_map_struct(&map_data);
+	return (0);
 }

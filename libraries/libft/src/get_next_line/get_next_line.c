@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 09:27:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/08 12:11:46 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:51:28 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
+	if (fd == -1)
+	{
+		free(buffer);
+		buffer = NULL;
+		return (NULL);
+	}
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd > 1024)
 		return (NULL);
 	buffer = get_buffer(buffer, fd);
@@ -94,8 +100,6 @@ size_t	gnl_strlen(const char *a)
 		return (0);
 	i = 0;
 	while (a[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }

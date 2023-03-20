@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 08:08:57 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 11:40:09 by jschneid         ###   ########.fr       */
+/*   Created: 2023/02/22 13:19:57 by jschneid          #+#    #+#             */
+/*   Updated: 2023/03/19 18:37:40 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-void	*ft_calloc(size_t count, size_t size);
+typedef struct s_map t_map;
+typedef struct s_player t_player;
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	// void	*rtn;
+// parser
+int	parser(int *argc, char **argv, t_map *map_data, t_player *player_pos);
 
-	// if (size > 0 && (SIZE_MAX / size) < count)
-	// 	return (NULL);
-	// rtn = malloc(count * size);
-	// if (rtn == NULL)
-	// 	return (NULL);
-	// ft_memset(rtn, '\0', (count * size));
-	// return (1);
-}
+#endif

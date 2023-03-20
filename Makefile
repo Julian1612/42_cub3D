@@ -6,20 +6,23 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/19 17:08:09 by lorbke           ###   ########.fr        #
+#    Updated: 2023/03/20 15:38:51 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
 CFLAGS		=   #-O3
-# -Wall -Wextra -Werror 
+# -Wall -Wextra -Werror
 LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft
+GARBAGE		=	./libraries/garbage_collector
 CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
-				src/player_position:
 
-SRC			=	raycaster.c debug.c render.c initialize.c errexit.c hook.c utils.c main.c
+SRC			=	main.c \
+				parser.c check_for_map.c check_for_rgb.c \
+				check_textures.c check_for_texture.c error_messages.c \
+				get_file_data.c check_map.c init_player_position.c utils.c \
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
@@ -37,7 +40,7 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: libft libmlx $(NAME) 
+all: libft $(NAME)
 
 obj:
 	@mkdir -p $(OBJ_DIR)
@@ -48,22 +51,28 @@ libft:
 libmlx:
 	@$(MAKE) -C $(LIBMLX)
 
-obj/%.o: %.c cub3D.h
+# garbage_collector:
+# 	@$(MAKE) -C $(GARBAGE)
+
+obj/%.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 $(NAME): obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -Wno-gnu-include-next -I./LeakSanitizer/include -o cub3D
 
 n: obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS)
+#  -Wno-gnu-include-next -I./LeakSanitizer/include -L./LeakSanitizer -llsan -lc++-o $(NAME)
 
 clean:
 	@rm -rf obj
+	@$(MAKE) -C $(LIBFT) clean
+	# @$(MAKE) -C $(LIBMLX) clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT) fclean
-	@$(MAKE) -C $(LIBMLX) fclean
+	# @$(MAKE) -C $(LIBMLX) fclean
 
 re: clean all
 
