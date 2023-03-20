@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:41:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/19 16:14:57 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/20 13:18:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,11 @@ double	extend_until_wall_long(mlx_image_t *image, t_map *map, t_player *player, 
 		if (new_x >= 0 && new_y >= 0 && new_x * MM_BLOCK_SIZE < image->width && new_y * MM_BLOCK_SIZE < image->height)
 			mlx_put_pixel(image, new_x * MM_BLOCK_SIZE, new_y * MM_BLOCK_SIZE, convert_to_hexcode(0, 255, 0, 255));
 	}
+	if (ray_x < 0)
+	{
+		ray_x += UNIT;
+		ray_y += get_y_from_x(UNIT, ray_dir);
+	}
 	return (sqrt(get_abs(ray_x * ray_x) + get_abs(ray_y * ray_y)));
 }
 
@@ -175,6 +180,11 @@ double	extend_until_wall_lat(mlx_image_t *image, t_map *map, t_player *player, d
 		new_y = player_y + ray_y;
 		if (new_x >= 0 && new_y >= 0 && new_x * MM_BLOCK_SIZE < image->width && new_y * MM_BLOCK_SIZE < image->height)
 			mlx_put_pixel(image, new_x * MM_BLOCK_SIZE, new_y * MM_BLOCK_SIZE, convert_to_hexcode(255, 0, 0, 255));
+	}
+	if (ray_y < 0)
+	{
+		ray_y += UNIT;
+		ray_x += get_x_from_y(UNIT, ray_dir);
 	}
 	return (sqrt(get_abs(ray_x * ray_x) + get_abs(ray_y * ray_y)));
 }
