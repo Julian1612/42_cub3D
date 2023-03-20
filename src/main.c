@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 10:14:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:35:21 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	main(int argc, char **argv)
 	if (parser(&argc, argv, &map_data, &player_pos))
 		return (1);
 	// play_music();
-	printf("map_data.floor_color: %d\n", map_data.floor_color);
-	printf("map_data.ceiling_color: %d\n", map_data.ceiling_color);
 	free_map_struct(&map_data);
 	return (0);
 }

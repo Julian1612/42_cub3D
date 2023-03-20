@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 10:15:33 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/20 13:32:05 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ unsigned int	convert_to_hexcode(unsigned char r, unsigned char g,
 {
 	unsigned int	rgba;
 
-	printf("r: %d, g: %d, b: %d, a: %d\n", r, g, b, a);
 	rgba = r;
 	rgba = (rgba << 8) + g;
 	rgba = (rgba << 8) + b;
