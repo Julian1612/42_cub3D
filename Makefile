@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
+#    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/20 17:12:21 by lorbke           ###   ########.fr        #
+#    Updated: 2023/03/21 11:02:30 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
 CFLAGS		=   #-O3
 # -Wall -Wextra -Werror
-LIBMLX		=	./libraries/mlx/
+LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 GARBAGE		=	./libraries/garbage_collector
 CC			=	cc
