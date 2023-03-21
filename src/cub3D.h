@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/21 01:11:57 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/21 01:41:23 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ typedef struct s_ray
 {
 	t_coor	dir;
 	t_coor	origin;
+	int		map_x;
+	int		map_y;
 	t_coor	step;
 	t_coor	hypotenuse;
 	t_coor	length;
