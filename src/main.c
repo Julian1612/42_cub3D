@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 21:21:27 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:07:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,54 @@ static void error(void)
 	exit(EXIT_FAILURE);
 }
 
+static mlx_image_t *test;
+
+void draw_sqr(void* param)
+{
+	int j;
+	int i;
+
+	i = 0;
+	while (i < 10)
+	{
+		j = 0;
+		while(j < 10)
+		{
+			uint32_t color = convert_to_hexcode(255, 255, 255, 255);
+			mlx_put_pixel(test, i, j, color);
+			j++;
+		}
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (parser(&argc, argv, &game.map, &game.player))
-		return (EXIT_FAILURE);
+	// if (parser(&argc, argv, &game.map, &game.player))
+	// 	return (EXIT_FAILURE);
 	if (initialize_mlx_all(&game) == ERROR)
 		errexit_mlx_errno();
 	if (render_minimap(&game.minimap, game.mlx, &game.map) == ERROR)
 		errexit_mlx_errno();
-	// Try to load the file
-	mlx_texture_t* texture = mlx_load_png("./textures/example.png");
-	if (!texture)
-		error();
-
-	// Convert texture to a displayable image
-	mlx_image_t* img = mlx_texture_to_image(game.mlx, texture);
-	if (!img)
-		error();
-
-	// Display the image
-	if (mlx_image_to_window(game.mlx, img, 0, 0) < 0)
-		error();
-	// if (mlx_loop_hook(game.mlx, &hook, &game) == false)
-	// 	errexit_mlx_errno();
-	// if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
-	// 	errexit_mlx_errno();
+	if (!(test = mlx_new_image(game.mlx, 128, 128)))
+	{
+		mlx_close_window(game.mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(game.mlx, test, 10, 10) == -1)
+	{
+		mlx_close_window(game.mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
+		errexit_mlx_errno();
+	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
+		errexit_mlx_errno();
+	mlx_loop_hook(game.mlx, draw_sqr, game.mlx);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
