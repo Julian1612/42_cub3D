@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/19 17:04:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/21 01:12:01 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void	debug_print_coor(t_coor *coor)
 
 void	debug_print_ray(t_ray *ray)
 {
-	if (DEBUG == 0)
-		return ;
-	printf(BLUE"============ RAY ============\n"RESET);
-	printf("next latitude ( __ ):\n");
-	debug_print_coor(&ray->latitude);
-	printf("ray length latitude: %f\n\n", ray->lat_len);
-	printf("next longitute ( | ):\n");
-	debug_print_coor(&ray->longitude);
-	printf("ray length longitude: %f\n\n", ray->long_len);
-	printf("ray dir: %f\n", ray->dir);
+	// if (DEBUG == 0)
+	// 	return ;
+	// printf(BLUE"============ RAY ============\n"RESET);
+	// printf("next latitude ( __ ):\n");
+	// debug_print_coor(&ray->latitude);
+	// printf("ray length latitude: %f\n\n", ray->lat_len);
+	// printf("next longitute ( | ):\n");
+	// debug_print_coor(&ray->longitude);
+	// printf("ray length longitude: %f\n\n", ray->long_len);
+	// printf("ray dir: %f\n", ray->dir);
 }

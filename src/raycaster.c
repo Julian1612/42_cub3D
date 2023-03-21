@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 14:41:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/19 17:05:32 by lorbke           ###   ########.fr       */
+/*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
+/*   Updated: 2023/03/21 01:14:06 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,151 +18,91 @@
 
 #define UNIT 1
 
-// @note angle (ray_dir) is known
-// @note this function calculates the adjacent side of a triangle
-// @note adjacent side = y distance to the next longitude
-double	get_nearest_longitude(double coor_x, double ray_dir)
+void	set_transparent(mlx_image_t *image)
 {
-	double	nearest;
+	int		i;
+	int		j;
+	int		color;
 
-	if (sin(ray_dir) >= 0)
-		nearest = UNIT - fmod(coor_x, UNIT);
-	else
-		nearest = fmod(coor_x, UNIT) * -1;
-	return (nearest);
-}
-
-// @note angle (ray_dir) is known
-// @note this function calculates the adjacent side of a triangle
-// @note adjacent side = x distance to the next latitude
-double	get_nearest_latitude(double coor_y, double ray_dir)
-{
-	double	nearest;
-
-	if (cos(ray_dir) >= 0)
-		nearest = UNIT - fmod(coor_y, UNIT);
-	else
-		nearest = fmod(coor_y, UNIT) * -1;
-	return (nearest);
-}
-
-// @note angle (ray_dir) is known, adjacent side is known
-// @note formula: adjacent side * tan(angle) = opposite side of triangle
-double	get_y_from_x(double x, double ray_dir)
-{
-	double	y;
-
-	y = x / tan(ray_dir);
-	return (y);
-}
-
-double	get_x_from_y(double y, double ray_dir)
-{
-	double	x;
-
-	// y *= -1;
-	x = y * tan(ray_dir);
-	return (x);
-}
-
-// @todo remove checks later
-bool	is_wall(t_map *map, double x, double y)
-{
-	// printf("x: %f, y: %f\n", x, y);
-	if (x < 0 || y < 0 || x >= map->width || y >= map->height)
-		return (true);
-	if (map->map[(int)y][(int)x] == WALL)
-		return (true);
-	return (false);
-}
-
-double	add_preserve_sign(double a, double b)
-{
-	if (a < 0)
-		return (a - b);
-	return (a + b);
-}
-
-double	get_abs(double a)
-{
-	if (a < 0)
-		return (a * -1);
-	return (a);
-}
-
-// @todo remove MM_BLOCK_SIZE from calculations
-void	init_ray(t_ray	*ray, double ray_dir, t_player *player)
-{
-	ray->dir = ray_dir;
-	ray->longitude.x = get_nearest_longitude(player->x / MM_BLOCK_SIZE, ray_dir);
-	ray->longitude.y = get_y_from_x(ray->longitude.x, ray_dir);
-	ray->latitude.y = get_nearest_latitude(player->y / MM_BLOCK_SIZE, ray_dir);
-	ray->latitude.x = get_x_from_y(ray->latitude.y, ray_dir);
-	ray->lat_len = 1000000;
-	ray->long_len = 1000000;
-}
-
-double	extend_until_wall_long(mlx_image_t *image, t_map *map, t_player *player, double ray_x, double ray_y, double ray_dir)
-{
-	double	add;
-	double	new_x;
-	double	new_y;
-	double	player_x;
-	double	player_y;
-
-	player_x = player->x / MM_BLOCK_SIZE;
-	player_y = player->y / MM_BLOCK_SIZE;
-	new_x = player_x + ray_x;
-	new_y = player_y + ray_y;
-	while (!is_wall(map, new_x, new_y))
+	i = 0;
+	while (i < image->width)
 	{
-		ray_x = add_preserve_sign(ray_x, UNIT);
-		if (ray_x >= 0)
-			ray_y += get_y_from_x(UNIT, ray_dir);
-		else
-			ray_y -= get_y_from_x(UNIT, ray_dir);
-		new_x = player_x + ray_x;
-		new_y = player_y + ray_y;
+		j = 0;
+		while (j < image->height)
+		{
+			mlx_put_pixel(image, i, j, convert_to_hexcode(0, 0, 0, 0));
+			j++;
+		}
+		i++;
 	}
-	return (sqrt(get_abs(ray_x * ray_x) + get_abs(ray_y * ray_y)));
 }
 
-double	extend_until_wall_lat(mlx_image_t *image, t_map *map, t_player *player, double ray_x, double ray_y, double ray_dir)
+void	init_ray(t_ray *ray, t_game *game, double ray_dir)
 {
-	double	add;
-	double	new_x;
-	double	new_y;
-	double	player_x;
-	double	player_y;
-
-	player_x = player->x / MM_BLOCK_SIZE;
-	player_y = player->y / MM_BLOCK_SIZE;
-	new_x = player_x + ray_x;
-	new_y = player_y + ray_y;
-	while (!is_wall(map, new_x, new_y))
+	ray->dir.x = sin(ray_dir);
+	ray->dir.y = cos(ray_dir);
+	ray->origin.x = game->player.x / MM_BLOCK_SIZE;
+	ray->origin.y = game->player.y / MM_BLOCK_SIZE;
+	ray->hypotenuse.x = sqrt(1 + (ray->dir.y / ray->dir.x) * (ray->dir.y / ray->dir.x));
+	ray->hypotenuse.y = sqrt(1 + (ray->dir.x / ray->dir.y) * (ray->dir.x / ray->dir.y));
+	if (ray->dir.x < 0)
 	{
-		ray_y = add_preserve_sign(ray_y, UNIT);
-		if (ray_y >= 0)
-			ray_x += get_x_from_y(UNIT, ray_dir);
-		else
-			ray_x -= get_x_from_y(UNIT, ray_dir);
-		new_x = player_x + ray_x;
-		new_y = player_y + ray_y;
+		ray->step.x = -UNIT;
+		ray->length.x = (ray->origin.x - ceil(ray->origin.x - 1)) * ray->hypotenuse.x;
 	}
-	return (sqrt(get_abs(ray_x * ray_x) + get_abs(ray_y * ray_y)));
+	else
+	{
+		ray->step.x = UNIT;
+		ray->length.x = (ceil(ray->origin.x) - ray->origin.x) * ray->hypotenuse.x;
+	}
+	if (ray->dir.y < 0)
+	{
+		ray->step.y = -UNIT;
+		ray->length.y = (ray->origin.y - ceil(ray->origin.y - 1)) * ray->hypotenuse.y;
+	}
+	else
+	{
+		ray->step.y = UNIT;
+		ray->length.y = (ceil(ray->origin.y) - ray->origin.y) * ray->hypotenuse.y;
+	}
 }
 
-// @todo add parameter for collision object
+double	extend_ray(mlx_image_t *img, t_ray *ray, char **map)
+{
+	bool	hit;
+	t_coor	next;
+
+	hit = false;
+	next = ray->origin;
+	while (hit == false)
+	{
+		if (ray->length.x < ray->length.y)
+		{
+			next.x += ray->step.x;
+			ray->length.x += ray->hypotenuse.x;
+		}
+		else
+		{
+			next.y += ray->step.y;
+			ray->length.y += ray->hypotenuse.y;
+		}
+		if (map[(int)next.y][(int)next.x] == WALL)
+			hit = true;
+	}
+	if (ray->length.x < ray->length.y)
+		return (fabs(ray->length.x));
+	else
+		return (fabs(ray->length.y));
+}
+
 double	cast_ray(t_game *game, double ray_dir)
 {
 	t_ray	ray;
+	double	res;
 
-	init_ray(&ray, ray_dir, &game->player);
-	ray.long_len = extend_until_wall_long(game->img_a, &game->map, &game->player, ray.longitude.x, ray.longitude.y, ray_dir);
-	ray.lat_len = extend_until_wall_lat(game->img_a, &game->map, &game->player, ray.latitude.x, ray.latitude.y, ray_dir);
-	debug_print_ray(&ray);
-	if (ray.lat_len < ray.long_len)
-		return (ray.lat_len);
-	else
-		return (ray.long_len);
+	init_ray(&ray, game, ray_dir);
+	// why do we need to subtract UNIT?
+	res = extend_ray(game->img_a, &ray, game->map.map) - UNIT;
+	// printf("res: %f\n", res);
+	return (res);
 }
