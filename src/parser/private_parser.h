@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 10:05:55 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/21 10:14:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int				init_player_position(t_map *map_data, t_player *player_pos);
 
 /* parser.c */
 int				parser(int *argc, char **argv, t_map *map_data, t_player *player_pos);
+int				check_data_type(char *path, char *data_type);
 
 /* utils.c */
 void			init_struct_null(t_map *map_data);
