@@ -6,14 +6,14 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/21 14:39:48 by lorbke           ###   ########.fr        #
+#    Updated: 2023/03/21 14:42:08 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
 CFLAGS		=   #-O3
 # -Wall -Wextra -Werror
-LIBMLX		=	./libraries/mlx/
+LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 GARBAGE		=	./libraries/garbage_collector
 CC			=	cc
