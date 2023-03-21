@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 22:32:42 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/21 00:50:10 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,11 @@ typedef struct s_coor
 // @note move this?
 typedef struct s_ray
 {
-	double		dir;
-	t_coor		latitude;
-	t_coor		longitude;
-	double		lat_len;
-	double		long_len;
+	t_coor	dir;
+	t_coor	origin;
+	t_coor	step;
+	t_coor	hypotenuse;
+	t_coor	length;
 }				t_ray;
 
 /* ************************************************************************** */
