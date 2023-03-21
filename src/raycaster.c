@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/21 01:08:50 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/21 01:10:12 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ double	cast_ray(t_game *game, double ray_dir)
 
 	init_ray(&ray, game, ray_dir);
 	set_transparent(game->img_a);
+	// why do we need to subtract UNIT?
 	res = extend_ray(game->img_a, &ray, game->map.map) - UNIT;
 	// printf("res: %f\n", res);
 	return (res);
