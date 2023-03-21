@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/21 14:57:09 by jschneid         ###   ########.fr        #
+#    Updated: 2023/03/21 18:52:14 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,14 @@ LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 GARBAGE		=	./libraries/garbage_collector
 CC			=	cc
-VPATH		=	src: src/parser: \
+VPATH		=	src: src/parser: src/minimap:\
 
 SRC			=	main.c \
 				parser.c check_for_map.c check_for_rgb.c parser_utils.c \
 				check_textures.c check_for_texture.c error_messages.c \
 				get_file_data.c check_map.c init_player_position.c \
 				debug.c errexit.c hook.c initialize.c raycaster.c render.c utils.c
+				minimap.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
