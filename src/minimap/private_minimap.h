@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:12 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/21 18:39:49 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/22 10:23:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 # define PRIVATE_MINIMAP_H
 # include "../cub3D.h"
 
-int		render_minimap(t_minimap *minimap_data);
+// int		draw_minimap(t_minimap *minimap_data);
 
 #endif

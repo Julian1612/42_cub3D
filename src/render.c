@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/21 18:53:35 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:53:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	paint_ceilfloor(mlx_t *mlx, mlx_image_t *img, t_hexcolor ceil, t_hexcolor f
 	}
 }
 
-// @todo render img_b in background and switch between them
+// @todo render img_b inst background and switch between them
 int	render_world(t_game *game)
 {
 	double	wall_dist;

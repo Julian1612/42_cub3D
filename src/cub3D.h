@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/21 17:49:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/22 10:22:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
 # define WALL '1'
-
 # ifndef DEBUG
 #  define DEBUG 0
 # endif

@@ -6,11 +6,12 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/21 18:40:54 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:49:23 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game
+#include "minimap.h"
 #include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin
@@ -118,5 +119,5 @@ void	hook(void *param)
 	// enemy
 	keys(game->mlx, &game->minimap, &game->player);
 	render_world(game);
-	render_minimap(game);
+	// draw_minimap(&game->minimap);
 }
