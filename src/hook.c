@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/22 15:49:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:00:40 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,5 @@ void	hook(void *param)
 	keys(game->mlx, &game->minimap, &game->player);
 	render_world(game);
 	// draw_minimap(&game->minimap);
+	// draw_player(game);
 }
