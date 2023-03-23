@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/23 13:28:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:44:21 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int argc, char **argv)
 
 	if (parser(&argc, argv, &game.map, &game.player))
 		return (EXIT_FAILURE);
+
 	if (initialize_mlx_all(&game) == ERROR)
 		errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
@@ -73,6 +74,8 @@ int	main(int argc, char **argv)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
+	game.minimap.player->instances[0].x = game.player.x;
+	game.minimap.player->instances[0].y = game.player.y;
 
 	// create minimap
 	if (!(game.minimap.walls = mlx_new_image(game.mlx, WIDTH, HEIGHT)))

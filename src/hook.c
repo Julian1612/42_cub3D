@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/23 14:33:00 by jschneid         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/03/23 15:41:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3D.h" // t_game
 #include "minimap.h"
@@ -16,7 +17,8 @@
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin
 
-#define SPEED 3
+#define SPEED 1
+#define DIVIDE 10 // @note why is this needed? fuck this shit
 
 ///////////////////////
 
@@ -33,37 +35,37 @@ void	keys(t_game *game, t_minimap *minimap, t_player *player)
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		player->y += cos(player->view_dir) * SPEED;
-		player->x += sin(player->view_dir) * SPEED;
+		player->y += cos(player->view_dir) * SPEED / DIVIDE;
+		player->x += sin(player->view_dir) * SPEED / DIVIDE;
 		game->minimap.player->instances[0].x += sin(player->view_dir - M_PI_2) * SPEED;
 		game->minimap.player->instances[0].y += cos(player->view_dir - M_PI_2) * SPEED;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
-		player->y -= cos(player->view_dir) * SPEED;
-		player->x -= sin(player->view_dir) * SPEED;
-		game->minimap.player->instances[0].y
+		player->y -= cos(player->view_dir) * SPEED / DIVIDE;
+		player->x -= sin(player->view_dir) * SPEED / DIVIDE;
+		game->minimap.player->instances[0].y += cos(player->view_dir + M_PI_2) * SPEED;
 		game->minimap.player->instances[0].x += sin(player->view_dir + M_PI_2) * SPEED;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
-		player->y += cos(player->view_dir - M_PI_2) * SPEED;
-		player->x += sin(player->view_dir - M_PI_2) * SPEED;
+		player->y += cos(player->view_dir - M_PI_2) * SPEED / DIVIDE;
+		player->x += sin(player->view_dir - M_PI_2) * SPEED / DIVIDE;
 		game->minimap.player->instances[0].y -= cos(player->view_dir) * SPEED;
 		game->minimap.player->instances[0].x -= sin(player->view_dir) * SPEED;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
 		// @note radian rotated by 90 degrees to offset movement
-		player->y += cos(player->view_dir + M_PI_2) * SPEED;
-		player->x += sin(player->view_dir + M_PI_2) * SPEED;
+		player->y += cos(player->view_dir + M_PI_2) * SPEED / DIVIDE;
+		player->x += sin(player->view_dir + M_PI_2) * SPEED / DIVIDE;
 		game->minimap.player->instances[0].y += cos(player->view_dir) * SPEED;
 		game->minimap.player->instances[0].x += sin(player->view_dir) * SPEED;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-		player->view_dir += M_PI / 180 * SPEED / 2; // @note radian rotated by 5 degrees (1pi = 180 degrees)
+		player->view_dir += M_PI / 180 * SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-		player->view_dir -= M_PI / 180 * SPEED / 2;
+		player->view_dir -= M_PI / 180 * SPEED;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_1))
 		player->view_dir = 0;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_2))

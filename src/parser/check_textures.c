@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 17:07:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/21 10:57:29 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@ static int	check_char(t_map *map_data, char character);
 
 int	check_mandatory_textures(t_map *map_data)
 {
-	if (map_data->north.path == NULL)
+	if (map_data->north.path == NULL
+		|| check_data_type(map_data->north.path, "xpm"))
 		return (error_textures(6, map_data));
-	else if (map_data->south.path == NULL)
+	else if (map_data->south.path == NULL
+		|| check_data_type(map_data->south.path, "xpm"))
 		return (error_textures(6, map_data));
-	else if (map_data->west.path == NULL)
+	else if (map_data->west.path == NULL
+		|| check_data_type(map_data->west.path, "xpm"))
 		return (error_textures(6, map_data));
-	else if (map_data->east.path == NULL)
+	else if (map_data->east.path == NULL
+		|| check_data_type(map_data->east.path, "xpm"))
 		return (error_textures(6, map_data));
 	else if (map_data->floor_color == -1)
 		return (error_textures(4, map_data));
@@ -54,11 +58,14 @@ int	check_bonus_textures(t_map *map_data)
 
 static int	check_char(t_map *map_data, char character)
 {
-	if (character == 'D' && map_data->door.path == NULL)
+	if (character == 'D' && (map_data->door.path == NULL
+		|| check_data_type(map_data->door.path, "xpm")))
 		return (error_textures(7, map_data));
-	else if (character == 'B' && map_data->barrel.path == NULL)
+	else if (character == 'B' && (map_data->door.path == NULL
+		|| check_data_type(map_data->door.path, "xpm")))
 		return (error_textures(7, map_data));
-	else if (character == 'E' && map_data->enemy.path == NULL)
+	else if (character == 'E' && (map_data->door.path == NULL
+		|| check_data_type(map_data->door.path, "xpm")))
 		return (error_textures(7, map_data));
 	return (0);
 }

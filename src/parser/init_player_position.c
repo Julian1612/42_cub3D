@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_position.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 17:23:42 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/23 15:42:48 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static double	get_view_direction(char direction);
 
-int	init_player_position(t_map *map_data, t_player *player_pos)
+int	 init_player_position(t_map *map_data, t_player *player_pos)
 {
 	int	i;
 	int	j;
@@ -32,6 +32,7 @@ int	init_player_position(t_map *map_data, t_player *player_pos)
 			{
 				player_pos->x = j;
 				player_pos->y = i;
+
 				player_pos->view_dir = get_view_direction(map_data->map[i][j]);
 				return (0);
 			}

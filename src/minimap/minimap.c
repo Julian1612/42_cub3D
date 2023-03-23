@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/23 10:08:57 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:45:40 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	draw_minimap(t_game *game)
 		{
 			// printf("\x1b[31mdraw_minimap; j = %d\n\x1b[0m\n", j);
 			if (game->map.map[i][j] == '1')
-				draw_wall(&game->minimap, i, j, 10);
+				draw_wall(&game->minimap, i, j, 5);
 			j++;
 		}
 		// printf("\x1b[0m\nend-line--------------------\n\x1b[0m\n");
