@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/23 09:47:30 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:28:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(game.mlx, game.minimap.player, 0, 0) == -1)
+	if (mlx_image_to_window(game.mlx, game.minimap.player, 100, 100) == -1)
 	{
 		mlx_close_window(game.mlx);
 		puts(mlx_strerror(mlx_errno));
