@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/23 13:13:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/23 20:52:04 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 #include <math.h> // cos, sin, tan
 #include <stdio.h> // @note remove
 #include <stdbool.h> // bool
+#include <float.h> // DBL_MAX
 
-#define UNIT 1
+#define UNIT 1.0f
 
 void	set_transparent(mlx_image_t *image)
 {
@@ -41,12 +42,14 @@ void	init_ray(t_ray *ray, t_game *game, double ray_dir)
 {
 	ray->dir.x = sin(ray_dir);
 	ray->dir.y = cos(ray_dir);
-	ray->origin.x = game->player.x / MM_BLOCK_SIZE;
-	ray->origin.y = game->player.y / MM_BLOCK_SIZE;
+	ray->origin.x = game->player.x;
+	ray->origin.y = game->player.y;
 	ray->map_x = (int)ray->origin.x;
 	ray->map_y = (int)ray->origin.y;
-	ray->hypotenuse.x = sqrt(UNIT + (ray->dir.y * ray->dir.y) / (ray->dir.x * ray->dir.x));
-	ray->hypotenuse.y = sqrt(UNIT + (ray->dir.x * ray->dir.x) / (ray->dir.y * ray->dir.y));
+	// @note potential division by zero
+	// @note genius math to get hypotenuse length to next intersection
+	ray->hypotenuse.x = fabs(UNIT / ray->dir.x);
+	ray->hypotenuse.y = fabs(UNIT / ray->dir.y);
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -UNIT;
