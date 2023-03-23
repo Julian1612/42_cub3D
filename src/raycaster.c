@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/21 01:43:24 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/23 13:13:05 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	init_ray(t_ray *ray, t_game *game, double ray_dir)
 	ray->origin.y = game->player.y / MM_BLOCK_SIZE;
 	ray->map_x = (int)ray->origin.x;
 	ray->map_y = (int)ray->origin.y;
-	ray->hypotenuse.x = sqrt(1 + (ray->dir.y / ray->dir.x) * (ray->dir.y / ray->dir.x));
-	ray->hypotenuse.y = sqrt(1 + (ray->dir.x / ray->dir.y) * (ray->dir.x / ray->dir.y));
+	ray->hypotenuse.x = sqrt(UNIT + (ray->dir.y * ray->dir.y) / (ray->dir.x * ray->dir.x));
+	ray->hypotenuse.y = sqrt(UNIT + (ray->dir.x * ray->dir.x) / (ray->dir.y * ray->dir.y));
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -UNIT;
@@ -71,31 +71,24 @@ void	init_ray(t_ray *ray, t_game *game, double ray_dir)
 
 double	extend_ray(mlx_image_t *img, t_ray *ray, char **map)
 {
-	bool	hit;
-	bool	side;
+	double	temp;
 
-	hit = false;
-	while (hit == false)
+	while (map[ray->map_y][ray->map_x] != WALL)
 	{
 		if (ray->length.x < ray->length.y)
 		{
 			ray->map_x += ray->step.x;
+			temp = ray->length.x;
 			ray->length.x += ray->hypotenuse.x;
-			side = false;
 		}
 		else
 		{
 			ray->map_y += ray->step.y;
+			temp = ray->length.y;
 			ray->length.y += ray->hypotenuse.y;
-			side = true;
 		}
-		if (map[ray->map_y][ray->map_x] == WALL)
-			hit = true;
 	}
-	if (side == false)
-		return ((ray->map_x - ray->origin.x + (1 - ray->step.x) / 2) / ray->dir.x);
-	else
-		return ((ray->map_y - ray->origin.y + (1 - ray->step.y) / 2) / ray->dir.y);
+	return (temp);
 }
 
 double	cast_ray(t_game *game, double ray_dir)

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/19 17:27:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/22 18:39:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	paint_ceilfloor(mlx_t *mlx, mlx_image_t *img, t_hexcolor ceil, t_hexcolor f
 	}
 }
 
-// @todo render img_b in background and switch between them
+// @todo render ceilfloor and reflection together to avoid double paints
 int	render_world(t_game *game)
 {
 	double	wall_dist;
