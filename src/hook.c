@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/23 15:41:04 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:29:16 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,30 @@ void	keys(t_game *game, t_minimap *minimap, t_player *player)
 	{
 		player->y += cos(player->view_dir) * SPEED / DIVIDE;
 		player->x += sin(player->view_dir) * SPEED / DIVIDE;
-		game->minimap.player->instances[0].x += sin(player->view_dir - M_PI_2) * SPEED;
-		game->minimap.player->instances[0].y += cos(player->view_dir - M_PI_2) * SPEED;
+		game->minimap.player->instances[0].y += cos(player->view_dir + M_PI_2) * SPEED;
+		game->minimap.player->instances[0].x += sin(player->view_dir + M_PI_2) * SPEED;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
 		player->y -= cos(player->view_dir) * SPEED / DIVIDE;
 		player->x -= sin(player->view_dir) * SPEED / DIVIDE;
-		game->minimap.player->instances[0].y += cos(player->view_dir + M_PI_2) * SPEED;
-		game->minimap.player->instances[0].x += sin(player->view_dir + M_PI_2) * SPEED;
+		game->minimap.player->instances[0].x += sin(player->view_dir - M_PI_2) * SPEED;
+		game->minimap.player->instances[0].y += cos(player->view_dir - M_PI_2) * SPEED;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
 		player->y += cos(player->view_dir - M_PI_2) * SPEED / DIVIDE;
 		player->x += sin(player->view_dir - M_PI_2) * SPEED / DIVIDE;
 		game->minimap.player->instances[0].y -= cos(player->view_dir) * SPEED;
-		game->minimap.player->instances[0].x -= sin(player->view_dir) * SPEED;
+		game->minimap.player->instances[0].y += cos(player->view_dir) * SPEED;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
 		// @note radian rotated by 90 degrees to offset movement
 		player->y += cos(player->view_dir + M_PI_2) * SPEED / DIVIDE;
 		player->x += sin(player->view_dir + M_PI_2) * SPEED / DIVIDE;
-		game->minimap.player->instances[0].y += cos(player->view_dir) * SPEED;
 		game->minimap.player->instances[0].x += sin(player->view_dir) * SPEED;
+		game->minimap.player->instances[0].x -= sin(player->view_dir) * SPEED;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		player->view_dir += M_PI / 180 * SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)

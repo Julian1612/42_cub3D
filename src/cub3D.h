@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/23 15:25:36 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:19:54 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define WIDTH 1280
 # define HEIGHT 800
-# define ERROR -1
+# define ERROR 1
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
 # define WALL '1'
@@ -147,6 +147,7 @@ void	errexit_msg(char *msg);
 void	errexit_mlx_errno(void);
 
 int		initialize_mlx_all(t_game *game);
+int		initialize_minimap(t_minimap *minimap, mlx_t *mlx, t_player *player);
 
 int		render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
 int		render_world(t_game *game);

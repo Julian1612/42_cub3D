@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/23 15:44:21 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:28:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,6 @@
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
 
-
-// void draw_sqr(void* param)
-// {
-// 	t_game	*game;
-
-// 	game = (t_game *)param;
-// 	int j;
-// 	int i;
-
-// 	i = 0;
-// 	while (i < 10)
-// 	{
-// 		j = 0;
-// 		while(j < 10)
-// 		{
-// 			uint32_t color = convert_to_hexcode(255, 255, 255, 255);
-// 			mlx_put_pixel(game->minimap.test, i, j, color);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
 // void	play_music(void)
 // {
 // 	system("afplay ./sound_track/preussengloria.mp3 &");
@@ -53,47 +30,15 @@ int	main(int argc, char **argv)
 
 	if (parser(&argc, argv, &game.map, &game.player))
 		return (EXIT_FAILURE);
-
 	if (initialize_mlx_all(&game) == ERROR)
 		errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
 		errexit_mlx_errno();
 	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
 		errexit_mlx_errno();
-
-	// player
-	if (!(game.minimap.player = mlx_new_image(game.mlx, 5, 5)))
-	{
-		mlx_close_window(game.mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(game.mlx, game.minimap.player, 100, 100) == -1)
-	{
-		mlx_close_window(game.mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	game.minimap.player->instances[0].x = game.player.x;
-	game.minimap.player->instances[0].y = game.player.y;
-
-	// create minimap
-	if (!(game.minimap.walls = mlx_new_image(game.mlx, WIDTH, HEIGHT)))
-	{
-		mlx_close_window(game.mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(game.mlx, game.minimap.walls, 0, 0) == -1)
-	{
-		mlx_close_window(game.mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	// create player
+	if (initialize_minimap(&game.minimap, game.mlx, &game.player) == ERROR)
+		errexit_mlx_errno();
 	draw_minimap(&game);
-	// mlx_loop_hook(game.mlx, &ft_randomize, &game);
-	// mlx_loop_hook(game.mlx, &ft_hook, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);

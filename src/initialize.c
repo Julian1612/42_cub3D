@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/20 17:16:25 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/24 14:23:37 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,55 @@
 #define PLAYER_SIZE 2
 #define DIRECTION 2
 
-static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
+// static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
+// {
+// 	minimap->player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
+// 	minimap->view_dir = mlx_new_image(mlx, DIRECTION, DIRECTION);
+// 	minimap->walls = mlx_new_image(mlx, MM_BLOCK_SIZE, MM_BLOCK_SIZE);
+// 	if (!minimap->player || !minimap->view_dir || !minimap->walls)
+// 		return (ERROR);
+// 	minimap->player->pixels = ft_memset(minimap->player->pixels, 150,
+// 			minimap->player->width * minimap->player->height * sizeof(int));
+// 	minimap->view_dir->pixels = ft_memset(minimap->view_dir->pixels, 150,
+// 			minimap->view_dir->width * minimap->view_dir->height * sizeof(int));
+// 	minimap->walls->pixels = ft_memset(minimap->walls->pixels, 255,
+// 			minimap->walls->width * minimap->walls->height * sizeof(int));
+// 	if (!minimap->player->pixels || !minimap->view_dir->pixels
+// 		|| !minimap->walls->pixels)
+// 		return (ERROR);
+// 	return (SUCCESS);
+// }
+
+int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, t_player *player)
 {
-	minimap->player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
-	minimap->view_dir = mlx_new_image(mlx, DIRECTION, DIRECTION);
-	minimap->walls = mlx_new_image(mlx, MM_BLOCK_SIZE, MM_BLOCK_SIZE);
-	if (!minimap->player || !minimap->view_dir || !minimap->walls)
-		return (ERROR);
-	minimap->player->pixels = ft_memset(minimap->player->pixels, 150,
-			minimap->player->width * minimap->player->height * sizeof(int));
-	minimap->view_dir->pixels = ft_memset(minimap->view_dir->pixels, 150,
-			minimap->view_dir->width * minimap->view_dir->height * sizeof(int));
-	minimap->walls->pixels = ft_memset(minimap->walls->pixels, 255,
-			minimap->walls->width * minimap->walls->height * sizeof(int));
-	if (!minimap->player->pixels || !minimap->view_dir->pixels
-		|| !minimap->walls->pixels)
-		return (ERROR);
+	if (!(minimap->player = mlx_new_image(mlx, 5, 5)))
+	{
+		mlx_close_window(mlx);
+		// puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(mlx, minimap->player, 100, 100) == -1)
+	{
+		mlx_close_window(mlx);
+		// puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	minimap->player->instances[0].x = player->x;
+	minimap->player->instances[0].y = player->y;
+
+	// create minimap
+	if (!(minimap->walls = mlx_new_image(mlx, WIDTH, HEIGHT)))
+	{
+		mlx_close_window(mlx);
+		// puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(mlx, minimap->walls, 0, 0) == -1)
+	{
+		mlx_close_window(mlx);
+		// puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
 	return (SUCCESS);
 }
 
@@ -64,7 +97,7 @@ int	initialize_mlx_all(t_game *game)
 		return (ERROR);
 	// if (initialize_textures(game) == ERROR)
 	// 	return (ERROR);
-	if (initialize_minimap(&game->minimap, game->mlx, game->map.map) == ERROR)
-		return (ERROR);
+	// if (initialize_minimap(&game->minimap, game->mlx, game->map.map) == ERROR)
+	// 	return (ERROR);
 	return (SUCCESS);
 }

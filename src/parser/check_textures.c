@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/21 10:57:29 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:40:47 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_mandatory_textures(t_map *map_data)
 		return (error_textures(4, map_data));
 	else if (map_data->ceiling_color == -1)
 		return (error_textures(4, map_data));
-	return (0);
+	return (SUCCSES);
 }
 
 int	check_bonus_textures(t_map *map_data)
@@ -48,14 +48,15 @@ int	check_bonus_textures(t_map *map_data)
 		while (map_data->map[i][j])
 		{
 			if (check_char(map_data, map_data->map[i][j]))
-				return (1);
+				return (ERROR);
 			j++;
 		}
 		i++;
 	}
-	return (0);
+	return (SUCCSES);
 }
 
+// @todo test
 static int	check_char(t_map *map_data, char character)
 {
 	if (character == 'D' && (map_data->door.path == NULL
@@ -67,5 +68,5 @@ static int	check_char(t_map *map_data, char character)
 	else if (character == 'E' && (map_data->door.path == NULL
 		|| check_data_type(map_data->door.path, "xpm")))
 		return (error_textures(7, map_data));
-	return (0);
+	return (SUCCSES);
 }

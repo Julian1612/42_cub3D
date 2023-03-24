@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/22 09:31:08 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:36:47 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	check_for_rgb(t_map *map_data, char *line)
 		|| ft_strnstr(line, "F", ft_strlen(line)) != NULL)
 	{
 		if (get_rgb_values(map_data, line))
-			return (1);
+			return (ERROR);
 	}
-	return (0);
+	return (SUCCSES);
 }
 
 static int	get_rgb_values(t_map *map_data, char *line)
@@ -41,14 +41,14 @@ static int	get_rgb_values(t_map *map_data, char *line)
 	if (ft_arrlen((void **)splitted_str) != 3)
 	{
 		ft_free_arr((void **)splitted_str);
-		return (0);
+		return (SUCCSES);
 	}
 	boundary = remove_letter(splitted_str);
 	if (check_rgb_values(map_data, splitted_str))
-		return (0);
+		return (SUCCSES);
 	init_struct(map_data, splitted_str, boundary);
 	ft_free_arr((void **)splitted_str);
-	return (0);
+	return (SUCCSES);
 }
 
 static int	check_rgb_values(t_map *map_data, char **line_content)
@@ -61,7 +61,7 @@ static int	check_rgb_values(t_map *map_data, char **line_content)
 	if (ft_atoi(line_content[0]) < 0 || ft_atoi(line_content[1]) < 0
 		|| ft_atoi(line_content[2]) < 0)
 		return (error_textures(5, map_data));
-	return (0);
+	return (SUCCSES);
 }
 
 static void	init_struct(t_map *map_data, char **splitted_str, int boundary)
@@ -84,7 +84,7 @@ static int	remove_letter(char **line_content)
 		if (line_content[0][i] == 'F')
 		{
 			line_content[0][i] = ' ';
-			return (1);
+			return (ERROR);
 		}
 		else if (line_content[0][i] == 'C')
 		{
@@ -93,5 +93,5 @@ static int	remove_letter(char **line_content)
 		}
 		i++;
 	}
-	return (0);
+	return (SUCCSES);
 }

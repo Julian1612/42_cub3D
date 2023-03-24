@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 10:05:31 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:37:12 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	get_file_data(t_map *map_data, char *cub_file_path)
 	if (fd == -1)
 		return (error_message(2, map_data));
 	if (read_map_data(map_data, fd, file_len))
-		return (1);
+		return (ERROR);
 	close(fd);
-	return (0);
+	return (SUCCSES);
 }
 
 static int	read_map_data(t_map *map_data, int fd, int file_len)
@@ -45,7 +45,7 @@ static int	read_map_data(t_map *map_data, int fd, int file_len)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			return (1);
+			return (ERROR);
 		if (check_line(map_data, line, fd))
 			break ;
 		free(line);
@@ -58,7 +58,7 @@ static int	read_map_data(t_map *map_data, int fd, int file_len)
 		free(line);
 		line = NULL;
 	}
-	return (0);
+	return (SUCCSES);
 }
 
 static int	get_file_len(char *path)
@@ -84,12 +84,12 @@ static int	get_file_len(char *path)
 static int	check_line(t_map *map_data, char *line, int fd)
 {
 	if (check_for_texture(map_data, line))
-		return (0);
+		return (SUCCSES);
 	else if (check_for_bonus_texture(map_data, line))
-		return (0);
+		return (SUCCSES);
 	else if (check_for_rgb(map_data, line))
-		return (1);
+		return (ERROR);
 	else if (check_for_map(map_data, line, fd))
-		return (1);
-	return (0);
+		return (ERROR);
+	return (SUCCSES);
 }

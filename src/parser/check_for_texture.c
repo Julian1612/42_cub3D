@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 13:24:42 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:36:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	check_for_texture(t_map *map_data, char *line)
 		if (ft_strnstr(line, definitions[i], ft_strlen(line)) != NULL)
 		{
 			get_texture_file_path(map_data, line, i);
-			return (1);
+			return (ERROR);
 		}
 		i++;
 	}
-	return (0);
+	return (SUCCSES);
 }
 
 static int	get_texture_file_path(t_map *map_data, char *line, int i)
@@ -44,7 +44,7 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 	if (splitted_str == NULL)
 	{
 		error_message(4, map_data);
-		return (1);
+		return (ERROR);
 	}
 	if (i == 0)
 		cpy_line(&map_data->north.path, splitted_str[1], splitted_str_len);
@@ -55,7 +55,7 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 	else if (i == 3)
 		cpy_line(&map_data->east.path, splitted_str[1], splitted_str_len);
 	ft_free_arr((void **)splitted_str);
-	return (0);
+	return (SUCCSES);
 }
 
 char	*cpy_line(char **des, char *src, int len)
@@ -89,11 +89,11 @@ int	check_for_bonus_texture(t_map *map_data, char *line)
 		if (ft_strnstr(line, definitions[i], ft_strlen(line)) != NULL)
 		{
 			get_bonus_texture_file_path(map_data, line, i);
-			return (1);
+			return (ERROR);
 		}
 		i++;
 	}
-	return (0);
+	return (SUCCSES);
 }
 
 static int	get_bonus_texture_file_path(t_map *map_data, char *line, int i)
@@ -113,5 +113,5 @@ static int	get_bonus_texture_file_path(t_map *map_data, char *line, int i)
 	else if (i == 2)
 		cpy_line(&map_data->enemy.path, splitted_str[1], splitted_str_len);
 	ft_free_arr((void **)splitted_str);
-	return (0);
+	return (SUCCSES);
 }

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/21 10:35:37 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:55:40 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@ int	parser(int *argc, char **argv, t_map *map_data, t_player *player_pos)
 {
 	init_struct_null(map_data);
 	if (check_args(argc, argv))
-		return (1);
+		return (ERROR);
 	if (check_file(argv[1], "cub"))
-		return (1);
+		return (ERROR);
 	if (get_file_data(map_data, argv[1]))
-		return (1);
+		return (ERROR);
 	if (check_mandatory_textures(map_data))
-		return (1);
+		return (ERROR);
 	if (check_map(map_data))
-		return (1);
+		return (ERROR);
 	if (check_bonus_textures(map_data))
-		return (1);
+		return (ERROR);
 	if (check_for_invalid_definitions(map_data))
-		return (1);
+		return (ERROR);
 	if (init_player_position(map_data, player_pos))
-		return (1);
-	return (0);
+		return (ERROR);
+	return (SUCCSES);
 }
 
 static int	check_args(int *argc, char **argv)
@@ -47,14 +47,14 @@ static int	check_args(int *argc, char **argv)
 	if (*argc != 2)
 	{
 		error_message(1, NULL);
-		return (1);
+		return (ERROR);
 	}
 	if (argv[1][0] == '\0')
 	{
 		error_message(1, NULL);
-		return (1);
+		return (ERROR);
 	}
-	return (0);
+	return (SUCCSES);
 }
 
 static int	check_file(char *cub_file_path, char *data_type)
@@ -65,15 +65,15 @@ static int	check_file(char *cub_file_path, char *data_type)
 	if (fd < 0)
 	{
 		error_message(2, NULL);
-		return (1);
+		return (ERROR);
 	}
 	close(fd);
 	if (check_data_type(cub_file_path, data_type))
 	{
 		error_message(3, NULL);
-		return (1);
+		return (ERROR);
 	}
-	return (0);
+	return (SUCCSES);
 }
 
 int	check_data_type(char *path, char *data_type)
@@ -85,8 +85,8 @@ int	check_data_type(char *path, char *data_type)
 	len_type = ft_strlen(data_type);
 	if (path_len >= len_type
 		&& ft_strncmp(path + (path_len - len_type), data_type, len_type))
-		return (1);
-	return (0);
+		return (ERROR);
+	return (SUCCSES);
 }
 
 static int	check_for_invalid_definitions(t_map *map_data)
@@ -110,5 +110,5 @@ static int	check_for_invalid_definitions(t_map *map_data)
 		}
 		i++;
 	}
-	return (0);
+	return (SUCCSES);
 }

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:43:55 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 16:00:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:36:54 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	check_map(t_map *map_data)
 	if (map_data->map == NULL)
 		return (error_get_map(2, map_data));
 	if (check_first_line(map_data))
-		return (1);
+		return (ERROR);
 	if (check_last_line(map_data))
-		return (1);
+		return (ERROR);
 	if (check_if_map_is_closed(map_data))
-		return (1);
-	return (0);
+		return (ERROR);
+	return (SUCCSES);
 }
 
 static int	check_first_line(t_map *map_data)
@@ -42,11 +42,11 @@ static int	check_first_line(t_map *map_data)
 			&& map_data->map[0][i] != ' ')
 		{
 			error_get_map(1, map_data);
-			return (1);
+			return (ERROR);
 		}
 		i++;
 	}
-	return (0);
+	return (SUCCSES);
 }
 
 static int	check_last_line(t_map *map_data)
@@ -62,11 +62,11 @@ static int	check_last_line(t_map *map_data)
 			&& map_data->map[map_len][i] != ' ')
 		{
 			error_get_map(1, map_data);
-			return (1);
+			return (ERROR);
 		}
 		i++;
 	}
-	return (0);
+	return (SUCCSES);
 }
 
 static int	check_if_map_is_closed(t_map *map_data)
@@ -83,10 +83,10 @@ static int	check_if_map_is_closed(t_map *map_data)
 		if (map_data->map[i][j] == '0')
 			return (error_get_map(1, map_data));
 		if (check_line(map_data, i, j))
-			return (1);
+			return (ERROR);
 		i++;
 	}
-	return (0);
+	return (SUCCSES);
 }
 
 static int	check_line(t_map *map_data, int i, int j)
@@ -111,5 +111,5 @@ static int	check_line(t_map *map_data, int i, int j)
 		}
 		j++;
 	}
-	return (0);
+	return (SUCCSES);
 }

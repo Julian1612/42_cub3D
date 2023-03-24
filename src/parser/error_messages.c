@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/21 10:16:43 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:35:30 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	error_message(int error_code, t_map *map_data)
 		printf("Error!\nMalloc failed\n");
 	printf("========================================\n");
 	free_struct(map_data);
-	return (1);
+	return (ERROR);
 }
 
 int	error_textures(int error_code, t_map *map_data)
@@ -56,7 +56,7 @@ int	error_textures(int error_code, t_map *map_data)
 		printf("Error!\nFile path for bonus texture is missing or got wrong datatype\n");
 	printf("========================================\n");
 	free_struct(map_data);
-	return (1);
+	return (ERROR);
 }
 
 int	error_get_map(int error_code, t_map *map_data)
@@ -72,7 +72,7 @@ int	error_get_map(int error_code, t_map *map_data)
 		printf("Error!\nNo starting position found\n");
 	printf("========================================\n");
 	free_struct(map_data);
-	return (1);
+	return (ERROR);
 }
 
 static void	free_struct(t_map *map_data)

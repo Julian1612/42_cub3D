@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/23 15:25:48 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:44:41 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define DOOR "D"
 # define BARREL "B"
 # define ENEMY "E"
+# define SUCCSES 0
+# define ERROR 1
 
 /* check_for_bonus_textures.c */
 int				check_for_bonus_texture(t_map *map_data, char *line);
