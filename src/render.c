@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/24 15:04:45 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/24 15:13:42 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	color_image(mlx_t *mlx, mlx_image_t *img, unsigned int color)
 	}
 }
 
-void	paint_reflection(mlx_image_t *img, double obj_dist, int x)
+void	paint_reflection(mlx_image_t *img, t_hexcolor ceil, t_hexcolor floor, double obj_dist, int x)
 {
 	t_hexcolor	reflec_color;
 	int			reflec_height;
@@ -75,37 +75,24 @@ void	paint_reflection(mlx_image_t *img, double obj_dist, int x)
 	if (obj_dist < 1)
 		obj_dist = 1;
 	reflec_height = (int)(HEIGHT / obj_dist);
-	y = HEIGHT / 2 - reflec_height / 2;
+	y = 0;
+	while (y < HEIGHT / 2 - reflec_height / 2)
+	{
+		mlx_put_pixel(img, x, y, ceil);
+		y++;
+	}
 	while (y < HEIGHT / 2 + reflec_height / 2)
 	{
 		mlx_put_pixel(img, x, y, reflec_color);
 		y++;
 	}
-}
-
-void	paint_ceilfloor(mlx_t *mlx, mlx_image_t *img, t_hexcolor ceil, t_hexcolor floor)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < HEIGHT)
+	while (y < HEIGHT)
 	{
-		while (j < WIDTH)
-		{
-			if (i < HEIGHT / 2)
-				mlx_put_pixel(img, j, i, ceil);
-			else
-				mlx_put_pixel(img, j, i, floor);
-			j++;
-		}
-		j = 0;
-		i++;
+		mlx_put_pixel(img, x, y, floor);
+		y++;
 	}
 }
 
-// @todo render ceilfloor and reflection together to avoid double paints
 int	render_world(t_game *game)
 {
 	double	wall_dist;
@@ -114,7 +101,6 @@ int	render_world(t_game *game)
 	int		i;
 
 	debug_print_player(&game->player);
-	paint_ceilfloor(game->mlx, game->img_a, game->map.ceiling_color, game->map.floor_color);
 	fov = 1;
 	ray_dir = game->player.view_dir - (fov / 2);
 	i = 0;
@@ -123,7 +109,7 @@ int	render_world(t_game *game)
 		ray_dir += fov / game->mlx->width;
 		wall_dist = cast_ray(game, ray_dir);
 		wall_dist *= cos(ray_dir - game->player.view_dir);
-		paint_reflection(game->img_a, wall_dist, i);
+		paint_reflection(game->img_a, game->map.ceiling_color, game->map.floor_color, wall_dist, i);
 		i++;
 	}
 	return (SUCCESS);
