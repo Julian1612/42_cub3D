@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/23 22:02:42 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/24 15:04:45 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,22 +111,18 @@ int	render_world(t_game *game)
 	double	wall_dist;
 	double	ray_dir;
 	double	fov;
-	double	v_cos;
-	double	adjacent;
 	int		i;
 
 	debug_print_player(&game->player);
 	paint_ceilfloor(game->mlx, game->img_a, game->map.ceiling_color, game->map.floor_color);
-	fov = M_2_PI;
+	fov = 1;
 	ray_dir = game->player.view_dir - (fov / 2);
 	i = 0;
 	while (i < WIDTH)
 	{
 		ray_dir += fov / game->mlx->width;
 		wall_dist = cast_ray(game, ray_dir);
-		adjacent = 2 * i / (double)WIDTH - 1;
-		v_cos = adjacent / wall_dist;
-		wall_dist = wall_dist * cos(v_cos);
+		wall_dist *= cos(ray_dir - game->player.view_dir);
 		paint_reflection(game->img_a, wall_dist, i);
 		i++;
 	}
