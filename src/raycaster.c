@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/21 01:10:12 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/24 17:59:59 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,25 @@ void	init_ray(t_ray *ray, t_game *game, double ray_dir)
 	}
 }
 
+void	print_cardinal(double x, double y, double xstep, double ystep)
+{
+	if (x < y)
+	{
+		if (xstep < 0)
+			ft_putstr_fd("WEST", 1);
+		else
+			ft_putstr_fd("EAST", 1);
+	}
+	else
+	{
+		printf("xstep: %f\n", xstep);
+		if (ystep < 0)
+			ft_putstr_fd("NORTH", 1);
+		else
+			ft_putstr_fd("SOUTH", 1);
+	}
+}
+
 double	extend_ray(mlx_image_t *img, t_ray *ray, char **map)
 {
 	bool	hit;
@@ -90,6 +109,7 @@ double	extend_ray(mlx_image_t *img, t_ray *ray, char **map)
 		if (map[(int)next.y][(int)next.x] == WALL)
 			hit = true;
 	}
+	print_cardinal(ray->length.x, ray->length.y, ray->step.x, ray->step.y);
 	if (ray->length.x < ray->length.y)
 		return (fabs(ray->length.x));
 	else
