@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/24 17:43:57 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/24 18:43:22 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,21 @@
 
 #define UNIT 1.0f
 
-void	set_transparent(mlx_image_t *image)
+void	set_cardinal(enum e_cardinals *cardinal, t_ray *ray, t_map *map)
 {
-	int		i;
-	int		j;
-	int		color;
-
-	i = 0;
-	while (i < image->width)
+	if (ray->length.x < ray->length.y)
 	{
-		j = 0;
-		while (j < image->height)
-		{
-			mlx_put_pixel(image, i, j, convert_to_hexcode(0, 0, 0, 0));
-			j++;
-		}
-		i++;
+		if (ray->step.y < 0)
+			*cardinal = WEST;
+		else
+			*cardinal = EAST;
+	}
+	else
+	{
+		if (ray->step.x < 0)
+			*cardinal = NORTH;
+		else
+			*cardinal = SOUTH;
 	}
 }
 
@@ -101,5 +100,6 @@ double	cast_ray(t_game *game, double ray_dir)
 
 	init_ray(&ray, game, ray_dir);
 	res = extend_ray(game->img_a, &ray, game->map.map);
+	set_cardinal(&game->cardinal, &ray, &game->map);
 	return (res);
 }

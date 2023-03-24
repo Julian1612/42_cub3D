@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/23 20:22:55 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/24 18:18:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@
 # ifndef DEBUG
 #  define DEBUG 0
 # endif
+
+/* ************************************************************************** */
+/* ENUMS																	  */
+/* ************************************************************************** */
+
+enum e_cardinals
+{
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST
+};
 
 /* ************************************************************************** */
 /* TYPEDEFS																	  */
@@ -111,6 +123,7 @@ typedef struct s_game
 	t_minimap		minimap;
 	t_player		player;
 	t_enemy			*enemies;
+	enum e_cardinals	cardinal;
 }	t_game;
 
 typedef struct s_coor
