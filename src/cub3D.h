@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/24 14:19:54 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 17:30:03 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "../libraries/libft/src/libft/libft.h"
 # include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
 # include "../libraries/libft/src/get_next_line/get_next_line.h"
-
+# include <stdbool.h>
 /* ************************************************************************** */
 /* DEFINES																	  */
 /* ************************************************************************** */
@@ -63,6 +63,7 @@ typedef struct s_minimap
 	double			y;
 	double			width;
 	double			height;
+	int				visible;
 	mlx_image_t		*player;
 	mlx_image_t		*walls;
 	mlx_image_t		*view_dir;

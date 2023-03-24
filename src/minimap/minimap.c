@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/24 14:55:10 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 18:40:58 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@ void draw_player(t_game *game)
 	uint32_t	color;
 
 	i = 0;
+	if (game->minimap.visible == 0)
+		color = convert_to_hexcode(255, 0, 0, 255);
+	else
+		color = convert_to_hexcode(0, 0, 0, 0);
+	game->minimap.player->instances[0].x = game->player.x * 5;
+	game->minimap.player->instances[0].y = game->player.y * 5;
 	while (i < game->minimap.player->height)
 	{
 		j = 0;
 		while (j < game->minimap.player->width)
 		{
-			color = convert_to_hexcode(255, 0, 0, 255);
 			mlx_put_pixel(game->minimap.player, j, i, color);
 			j++;
 		}
@@ -47,7 +52,7 @@ void draw_minimap_wall(t_minimap *minimap_data, int i, int j)
 		l = j * WALL_SIZE;
 		while(l < (j * WALL_SIZE) + WALL_SIZE)
 		{
-			color = convert_to_hexcode(169, 169, 169, 255);
+			color = convert_to_hexcode(255, 255, 255, 255);
 			mlx_put_pixel(minimap_data->walls, l, k, color);
 			l++;
 		}

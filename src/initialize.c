@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/24 15:27:08 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 18:43:43 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,6 @@ int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, t_player *player)
 		// puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	// minimap->player->instances[0].x = player->x;
-	// minimap->player->instances[0].y = player->y;
-	printf("player->x: %f\n", player->x);
-	printf("player->y: %f\n", player->y);
-	minimap->player->instances[0].x = 50;
-	minimap->player->instances[0].y = 50;
-
 	// create minimap
 	if (!(minimap->walls = mlx_new_image(mlx, WIDTH, HEIGHT)))
 	{
@@ -74,6 +67,7 @@ int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, t_player *player)
 		// puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
+	minimap->visible = 1;
 	return (SUCCESS);
 }
 

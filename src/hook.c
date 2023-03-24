@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/24 16:17:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/24 18:46:17 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,16 @@ void	keys(t_game *game, t_minimap *minimap, t_player *player)
 		player->view_dir = M_PI;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_4))
 		player->view_dir = M_PI * 1.5;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_5))
+	{
+		if (minimap->visible == 1)
+		{
+			minimap->visible = 0;
+
+		}
+		else
+			minimap->visible = 1;
+	}
 }
 
 // void	keys(mlx_t *game->mlx, t_minimap *minimap, t_player *player)
@@ -126,7 +136,6 @@ void	hook(void *param)
 	// enemy
 	keys(game, &game->minimap, &game->player);
 	render_world(game);
+	printf("game->minimap.visible = %d\n", game->minimap.visible);
 	draw_player(game);
-	game->minimap.player->instances[0].x = game->player.x * 5;
-	game->minimap.player->instances[0].y = game->player.y * 5;
 }
