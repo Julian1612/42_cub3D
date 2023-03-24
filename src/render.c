@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/24 15:13:42 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/24 17:38:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,22 @@ int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
 	return (SUCCESS);
 }
 
-void	color_image(mlx_t *mlx, mlx_image_t *img, unsigned int color)
-{
-	int	i;
-	int	j;
+// t_hexcolor	get_reflec_color(double ray_dir)
+// {
+// 	t_hexcolor	reflec_color;
+// 	double		cardinal;
 
-	i = 0;
-	j = 0;
-	while (i < img->height)
-	{
-		while (j < img->width)
-		{
-			mlx_put_pixel(img, j, i, color);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-}
+// 	cardinal = fmod(ray_dir, 2 * M_PI);
+// 	if (cardinal >= 0 && cardinal < M_PI / 2)
+// 		reflec_color = convert_to_hexcode(0, 150, 0, 255);
+// 	else if (cardinal >= M_PI / 2 && cardinal < M_PI)
+// 		reflec_color = convert_to_hexcode(0, 0, 150, 255);
+// 	else if (cardinal >= M_PI && cardinal < 3 * M_PI / 2)
+// 		reflec_color = convert_to_hexcode(150, 0, 0, 255);
+// 	else if (cardinal >= 3 * M_PI / 2 && cardinal < 2 * M_PI)
+// 		reflec_color = convert_to_hexcode(150, 150, 0, 255);
+// 	return (reflec_color);
+// }
 
 void	paint_reflection(mlx_image_t *img, t_hexcolor ceil, t_hexcolor floor, double obj_dist, int x)
 {
@@ -71,7 +69,7 @@ void	paint_reflection(mlx_image_t *img, t_hexcolor ceil, t_hexcolor floor, doubl
 	int			reflec_height;
 	int			y;
 
-	reflec_color = convert_to_hexcode(0, 150, 0, 255);
+	reflec_color = convert_to_hexcode(255, 0, 255, 255);
 	if (obj_dist < 1)
 		obj_dist = 1;
 	reflec_height = (int)(HEIGHT / obj_dist);
@@ -108,6 +106,7 @@ int	render_world(t_game *game)
 	{
 		ray_dir += fov / game->mlx->width;
 		wall_dist = cast_ray(game, ray_dir);
+		// @note prevent fisheye effect
 		wall_dist *= cos(ray_dir - game->player.view_dir);
 		paint_reflection(game->img_a, game->map.ceiling_color, game->map.floor_color, wall_dist, i);
 		i++;
