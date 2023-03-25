@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/24 18:46:17 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/25 10:50:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 // erstes und zweites if bewegt jetzt den spieler an sich und loscht die lezten bilder
 // muss noch alles angepasst werden so das w a s d passen und die pfeiltasten auch
+
 
 
 void	keys(t_game *game, t_minimap *minimap, t_player *player)
@@ -71,14 +72,15 @@ void	keys(t_game *game, t_minimap *minimap, t_player *player)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_5))
 	{
 		if (minimap->visible == 1)
-		{
 			minimap->visible = 0;
-
-		}
 		else
 			minimap->visible = 1;
+		printf("minimap visible: %d\n", minimap->visible);
+		draw_minimap(game);
 	}
 }
+
+
 
 // void	keys(mlx_t *game->mlx, t_minimap *minimap, t_player *player)
 // {
@@ -136,6 +138,6 @@ void	hook(void *param)
 	// enemy
 	keys(game, &game->minimap, &game->player);
 	render_world(game);
-	printf("game->minimap.visible = %d\n", game->minimap.visible);
+	printf("minimap visible: %d\n", game->minimap.visible);
 	draw_player(game);
 }
