@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/24 18:43:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/25 18:00:06 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,9 @@
 void	set_cardinal(enum e_cardinals *cardinal, t_ray *ray, t_map *map)
 {
 	if (ray->length.x < ray->length.y)
-	{
-		if (ray->step.y < 0)
-			*cardinal = WEST;
-		else
-			*cardinal = EAST;
-	}
+		*cardinal = SOUTH;
 	else
-	{
-		if (ray->step.x < 0)
-			*cardinal = NORTH;
-		else
-			*cardinal = SOUTH;
-	}
+		*cardinal = WEST;
 }
 
 void	init_ray(t_ray *ray, t_game *game, double ray_dir)
@@ -71,26 +61,41 @@ void	init_ray(t_ray *ray, t_game *game, double ray_dir)
 	}
 }
 
-double	extend_ray(mlx_image_t *img, t_ray *ray, char **map)
+double	extend_ray(mlx_image_t *img, t_ray *ray, char **map, enum e_cardinals *cardinal)
 {
-	double	temp;
+	bool	side;
 
 	while (map[ray->map_y][ray->map_x] != WALL)
 	{
 		if (ray->length.x < ray->length.y)
 		{
 			ray->map_x += ray->step.x;
-			temp = ray->length.x;
 			ray->length.x += ray->hypotenuse.x;
+			side = false;
 		}
 		else
 		{
 			ray->map_y += ray->step.y;
-			temp = ray->length.y;
 			ray->length.y += ray->hypotenuse.y;
+			side = true;
 		}
 	}
-	return (temp);
+	if (side)
+	{
+		if (ray->step.y < 0)
+			*cardinal = SOUTH;
+		else
+			*cardinal = NORTH;
+		return (ray->length.y - ray->hypotenuse.y);
+	}
+	else
+	{
+		if (ray->step.x < 0)
+			*cardinal = WEST;
+		else
+			*cardinal = EAST;
+		return (ray->length.x - ray->hypotenuse.x);
+	}
 }
 
 double	cast_ray(t_game *game, double ray_dir)
@@ -99,7 +104,8 @@ double	cast_ray(t_game *game, double ray_dir)
 	double	res;
 
 	init_ray(&ray, game, ray_dir);
-	res = extend_ray(game->img_a, &ray, game->map.map);
-	set_cardinal(&game->cardinal, &ray, &game->map);
+	res = extend_ray(game->img_a, &ray, game->map.map, &game->cardinal);
+	printf("cardinal: %d\n", game->cardinal);
+	// set_cardinal(&game->cardinal, &ray, &game->map);
 	return (res);
 }
