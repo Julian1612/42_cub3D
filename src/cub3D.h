@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/25 16:34:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/25 21:17:36 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@
 # ifndef DEBUG
 #  define DEBUG 0
 # endif
-
-/* ************************************************************************** */
-/* ENUMS																	  */
-/* ************************************************************************** */
-
-enum e_cardinals
-{
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST
-};
 
 /* ************************************************************************** */
 /* TYPEDEFS																	  */
@@ -84,6 +72,7 @@ typedef struct s_map
 	char		**map;
 	int			width;
 	int			height;
+	t_texture	*cardinal;
 	t_texture	west;
 	t_texture	east;
 	t_texture	south;
@@ -123,7 +112,6 @@ typedef struct s_game
 	t_minimap		minimap;
 	t_player		player;
 	t_enemy			*enemies;
-	enum e_cardinals	cardinal;
 }	t_game;
 
 typedef struct s_coor

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/25 21:07:03 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/25 21:16:18 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,30 @@
 
 #define UNIT 1.0f
 
-void	set_cardinal(bool side, enum e_cardinals *cardinal, t_ray *ray)
+void	set_cardinal(t_map *map, t_ray *ray, bool side)
 {
 	if (side)
 	{
 		if (ray->step.y < 0)
-			*cardinal = SOUTH;
+			map->cardinal = &map->south;
 		else
-			*cardinal = NORTH;
+			map->cardinal = &map->north;
 	}
 	else
 	{
 		if (ray->step.x < 0)
-			*cardinal = WEST;
+			map->cardinal = &map->west;
 		else
-			*cardinal = EAST;
+			map->cardinal = &map->east;
 	}
 }
 
-void	init_ray(t_ray *ray, t_game *game, double ray_dir)
+void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 {
 	ray->dir.x = sin(ray_dir);
 	ray->dir.y = cos(ray_dir);
-	ray->origin.x = game->player.x;
-	ray->origin.y = game->player.y;
+	ray->origin.x = x;
+	ray->origin.y = y;
 	ray->map_x = (int)ray->origin.x;
 	ray->map_y = (int)ray->origin.y;
 	// @note potential division by zero
@@ -71,11 +71,11 @@ void	init_ray(t_ray *ray, t_game *game, double ray_dir)
 	}
 }
 
-double	extend_ray(mlx_image_t *img, t_ray *ray, char **map, enum e_cardinals *cardinal)
+double	extend_ray(t_ray *ray, t_map *map)
 {
 	bool	side;
 
-	while (map[ray->map_y][ray->map_x] != WALL)
+	while (map->map[ray->map_y][ray->map_x] != WALL)
 	{
 		if (ray->length.x < ray->length.y)
 		{
@@ -90,7 +90,7 @@ double	extend_ray(mlx_image_t *img, t_ray *ray, char **map, enum e_cardinals *ca
 			side = true;
 		}
 	}
-	set_cardinal(side, cardinal, ray);
+	set_cardinal(map, ray, side);
 	if (side)
 		return (ray->length.y - ray->hypotenuse.y);
 	else
@@ -102,7 +102,7 @@ double	cast_ray(t_game *game, double ray_dir)
 	t_ray	ray;
 	double	res;
 
-	init_ray(&ray, game, ray_dir);
-	res = extend_ray(game->img_a, &ray, game->map.map, &game->cardinal);
+	init_ray(&ray, game->player.x, game->player.y, ray_dir);
+	res = extend_ray(&ray, &game->map);
 	return (res);
 }
