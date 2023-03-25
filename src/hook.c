@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/25 23:29:25 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/25 23:56:45 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,24 @@
 #include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin
+#include <stdbool.h> // bool
 
 #define MOV_SPEED 10 // @note the higher, the slower
 #define ROT_SPEED 1 // @note the higher, the slower
 
-void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player)
+// @note collision problem: if speed is too high, player can move through walls
+bool	check_collision(double x, double y, char **map)
 {
+	if (map[(int)y][(int)x] == WALL)
+		return (true);
+	return (false);
+}
+
+void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
+{
+	double	x;
+	double	y;
+
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(mlx);
@@ -29,25 +41,43 @@ void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player)
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
-		player->y += cos(player->view_dir) / MOV_SPEED;
-		player->x += sin(player->view_dir) / MOV_SPEED;
+		y = player->y + cos(player->view_dir) / MOV_SPEED;
+		x = player->x + sin(player->view_dir) / MOV_SPEED;
+		if (!check_collision(x, y, map))
+		{
+			player->y = y;
+			player->x = x;
+		}
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
-		// @note offset = unit circle value of view_dir * speed
-		player->y -= cos(player->view_dir) / MOV_SPEED;
-		player->x -= sin(player->view_dir) / MOV_SPEED;
+		y = player->y - cos(player->view_dir) / MOV_SPEED;
+		x = player->x - sin(player->view_dir) / MOV_SPEED;
+		if (!check_collision(x, y, map))
+		{
+			player->y = y;
+			player->x = x;
+		}
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
-		player->y += cos(player->view_dir - M_PI_2) / MOV_SPEED;
-		player->x += sin(player->view_dir - M_PI_2) / MOV_SPEED;
+		y = player->y - cos(player->view_dir - M_PI_2) / MOV_SPEED;
+		x = player->x - sin(player->view_dir - M_PI_2) / MOV_SPEED;
+		if (!check_collision(x, y, map))
+		{
+			player->y = y;
+			player->x = x;
+		}
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
-		// @note radian rotated by 90 degrees to offset movement
-		player->y += cos(player->view_dir + M_PI_2) / MOV_SPEED;
-		player->x += sin(player->view_dir + M_PI_2) / MOV_SPEED;
+		y = player->y + cos(player->view_dir - M_PI_2) / MOV_SPEED;
+		x = player->x + sin(player->view_dir - M_PI_2) / MOV_SPEED;
+		if (!check_collision(x, y, map))
+		{
+			player->y = y;
+			player->x = x;
+		}
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		player->view_dir += M_PI / 90 / ROT_SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)
@@ -117,6 +147,6 @@ void	hook(void *param)
 	// minimap
 	// collision
 	// enemy
-	keys(game->mlx, &game->minimap, &game->player);
+	keys(game->mlx, &game->minimap, &game->player, game->map.map);
 	render_world(game);
 }
