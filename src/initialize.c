@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/26 18:37:10 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/26 22:13:49 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int	initialize_minimap(t_game *game)
 {
 	double wall_size;
 
-	if (!(game->minimap.player = mlx_new_image(game->mlx, 15, 15)))
+	if (!(game->minimap.player = mlx_new_image(game->mlx, 5, 5)))
 	{
 		mlx_close_window(game->mlx);
 		// puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (mlx_image_to_window(game->mlx, game->minimap.player, (WIDTH / 2) - ((game->map.width * wall_size) / 2), (HEIGHT / 2) - ((game->map.height * wall_size) / 2)) == -1)
+	if (mlx_image_to_window(game->mlx, game->minimap.player, 0, 0git) == -1)
 	{
 		mlx_close_window(game->mlx);
 		// puts(mlx_strerror(mlx_errno));
@@ -79,9 +79,7 @@ int	initialize_minimap(t_game *game)
 	}
 	get_map_measures(game);
 	wall_size = get_wall_size(&game->minimap);
-	printf("map width: %f, map height: %f\n", game->map.width, game->map.height);
-	printf("%f\n", game->minimap.width);
-	if (mlx_image_to_window(game->mlx, game->minimap.walls, (WIDTH / 2) - ((game->map.width * wall_size) / 2), (HEIGHT / 2) - ((game->map.height * wall_size) / 2)) == -1)
+	if (mlx_image_to_window(game->mlx, game->minimap.walls, 10, 10) == -1)
 	{
 		mlx_close_window(game->mlx);
 		// puts(mlx_strerror(mlx_errno));

@@ -6,27 +6,18 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/26 18:40:11 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/26 22:12:43 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_minimap.h"
 #include <stdio.h>
+#include <math.h>
 # define WALL_SIZE 30
 
-double	get_wall_size(t_minimap *minimap)
+double  get_wall_size(t_minimap *minimap)
 {
-	if (minimap->width > 35)
-		return (10);
-	else if (minimap->height > 30)
-		return (20);
-	// printf("hifasdfasfasdf\n");
-	// else if (minimap->width > 30)
-	// 	return (10);
-	// else if (minimap->width > 20)
-	// 	return (20);
-	// return (30);
-	return (30);
+	return ((double) fmin((WIDTH / 3) / minimap->width, (HEIGHT / 3) / minimap->height));
 }
 
 void draw_player(t_game *game)
@@ -39,8 +30,8 @@ void draw_player(t_game *game)
 	i = 0;
 	wall_size = get_wall_size(&game->minimap);
 	color = convert_to_hexcode(255, 0, 0, 255);
-	game->minimap.player->instances[0].x = game->player.x * wall_size + (WIDTH / 2) - ((game->map.width * wall_size) / 2);
-	game->minimap.player->instances[0].y = game->player.y * wall_size + (HEIGHT / 2) - ((game->map.height * wall_size) / 2);
+	game->minimap.player->instances[0].x = game->player.x * 5;
+	game->minimap.player->instances[0].y = game->player.y * 5;
 	while (i < game->minimap.player->height)
 	{
 		j = 0;
