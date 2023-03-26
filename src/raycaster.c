@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/26 03:25:52 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/26 23:58:57 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,27 @@
 #include <stdbool.h> // bool
 #include <float.h> // DBL_MAX
 
+#include "../libraries/mlx/include/MLX42/MLX42.h" // @note remove
+
 #define UNIT 1.0f
 
 void	set_cardinal(t_map *map, t_ray *ray, bool side)
 {
-	int	tex_x;
-	int	tex_y;
-
-	tex_x = (int)fmod(ray->origin.x, UNIT) * 100;
-	tex_y = (int)fmod(ray->origin.y, UNIT) * 100;
 	if (side)
 	{
 		if (ray->step.y < 0)
-			map->tex_stripe = &map->south.texture->pixels[ray->map_y * map->south.texture->width + tex_x];
+			map->cardinal = &map->south;
 		else
-			map->tex_stripe = &map->north.texture->pixels[ray->map_y * map->north.texture->width + tex_x];
+			map->cardinal = &map->north;
+		map->adjacent_len = ray->map_y - ray->origin.y;
 	}
 	else
 	{
 		if (ray->step.x < 0)
-			map->tex_stripe = &map->west.texture->pixels[ray->map_x * map->west.texture->width + tex_y];
+			map->cardinal = &map->west;
 		else
-			map->tex_stripe = &map->east.texture->pixels[ray->map_x * map->east.texture->width + tex_y];
+			map->cardinal = &map->east;
+		map->adjacent_len = ray->map_x - ray->origin.x;
 	}
 }
 

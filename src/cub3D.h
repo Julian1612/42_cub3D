@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/26 01:09:20 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/26 23:55:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ typedef struct s_map
 	char		**map;
 	int			width;
 	int			height;
-	uint8_t		*tex_stripe;
+	t_texture	*cardinal;
+	int			adjacent_len;
 	t_texture	west;
 	t_texture	east;
 	t_texture	south;
