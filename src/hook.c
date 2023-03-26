@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/25 10:50:01 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:16:08 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 void	keys(t_game *game, t_minimap *minimap, t_player *player)
 {
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE) || mlx_is_key_down(game->mlx, MLX_KEY_Q))
 	{
 		mlx_close_window(game->mlx);
 		errexit_msg("Escape pressed. Exiting program.");
@@ -71,12 +71,18 @@ void	keys(t_game *game, t_minimap *minimap, t_player *player)
 		player->view_dir = M_PI * 1.5;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_5))
 	{
-		if (minimap->visible == 1)
-			minimap->visible = 0;
+		if (game->minimap.visible == 1)
+		{
+			game->minimap.visible = 0;
+			game->minimap.walls->instances[0].z = 1;
+			game->minimap.player->instances[0].z = 1;
+		}
 		else
-			minimap->visible = 1;
-		printf("minimap visible: %d\n", minimap->visible);
-		draw_minimap(game);
+		{
+			game->minimap.visible = 1;
+			game->minimap.walls->instances[0].z = 0;
+			game->minimap.player->instances[0].z = 0;
+		}
 	}
 }
 
@@ -138,6 +144,5 @@ void	hook(void *param)
 	// enemy
 	keys(game, &game->minimap, &game->player);
 	render_world(game);
-	printf("minimap visible: %d\n", game->minimap.visible);
 	draw_player(game);
 }

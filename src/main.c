@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/25 10:49:48 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/26 14:19:13 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
 
-// void	play_music(void)
+// void play_music(void)
 // {
-// 	system("afplay ./sound_track/preussengloria.mp3 &");
+// 	system("while :; do afplay sound_track/erika.mp3 && afplay sound_track/preussengloria.mp3 && afplay sound_track/march.mp3; done");
 // }
+
 
 int	main(int argc, char **argv)
 {
@@ -36,8 +37,9 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
 		errexit_mlx_errno();
-	if (initialize_minimap(&game.minimap, game.mlx, &game.player) == ERROR)
-		errexit_mlx_errno();
+	if (initialize_minimap(&game) == ERROR)
+		 errexit_mlx_errno();
+	// play_music();
 	draw_minimap(&game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);

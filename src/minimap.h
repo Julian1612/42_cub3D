@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:42:33 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/25 10:50:04 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/26 16:34:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,7 @@
 
 void	draw_player(t_game *game);
 int		draw_minimap(t_game *game);
+void	get_map_measures(t_game *game);
+double	get_wall_size(t_minimap *minimap);
 
 #endif
