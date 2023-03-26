@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/25 21:16:18 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/26 03:25:52 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,24 @@
 
 void	set_cardinal(t_map *map, t_ray *ray, bool side)
 {
+	int	tex_x;
+	int	tex_y;
+
+	tex_x = (int)fmod(ray->origin.x, UNIT) * 100;
+	tex_y = (int)fmod(ray->origin.y, UNIT) * 100;
 	if (side)
 	{
 		if (ray->step.y < 0)
-			map->cardinal = &map->south;
+			map->tex_stripe = &map->south.texture->pixels[ray->map_y * map->south.texture->width + tex_x];
 		else
-			map->cardinal = &map->north;
+			map->tex_stripe = &map->north.texture->pixels[ray->map_y * map->north.texture->width + tex_x];
 	}
 	else
 	{
 		if (ray->step.x < 0)
-			map->cardinal = &map->west;
+			map->tex_stripe = &map->west.texture->pixels[ray->map_x * map->west.texture->width + tex_y];
 		else
-			map->cardinal = &map->east;
+			map->tex_stripe = &map->east.texture->pixels[ray->map_x * map->east.texture->width + tex_y];
 	}
 }
 

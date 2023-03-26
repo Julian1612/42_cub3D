@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/25 23:56:45 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/26 00:09:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #define ROT_SPEED 1 // @note the higher, the slower
 
 // @note collision problem: if speed is too high, player can move through walls
+// @todo drifting collision
 bool	check_collision(double x, double y, char **map)
 {
 	if (map[(int)y][(int)x] == WALL)

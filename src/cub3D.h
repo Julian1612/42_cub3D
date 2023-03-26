@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/25 23:36:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/26 01:09:20 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 /* TYPEDEFS																	  */
 /* ************************************************************************** */
 
-typedef unsigned int	t_hexcolor;
+typedef uint32_t	t_hexcolor;
 
 typedef struct s_texture
 {
@@ -72,7 +72,7 @@ typedef struct s_map
 	char		**map;
 	int			width;
 	int			height;
-	t_texture	*cardinal;
+	uint8_t		*tex_stripe;
 	t_texture	west;
 	t_texture	east;
 	t_texture	south;

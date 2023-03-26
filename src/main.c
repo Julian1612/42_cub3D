@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/23 18:03:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/26 01:54:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,14 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (initialize_mlx_all(&game) == ERROR)
 		errexit_mlx_errno();
-	// if (render_minimap(&game.minimap, game.mlx, &game.map) == ERROR)
-	// 	errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
 		errexit_mlx_errno();
 	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
 		errexit_mlx_errno();
+	// uint32_t xy[2] = {1, 1};
+	// u_int32_t wh[2] = {10, 10};
+	// mlx_image_t *test = mlx_texture_area_to_image(game.mlx, game.map.north.texture, xy, xy);
+	// mlx_image_to_window(game.mlx, test, 0, 0);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);

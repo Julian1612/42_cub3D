@@ -6,70 +6,42 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/25 21:17:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/26 03:22:06 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // cub3D structs
 #include <stdio.h> // @note remove
 #include <math.h> // PI
+#include <string.h> // @note memmove, remove
 
 #define FOV 60
 
-int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
+void	paint_reflection(t_game *game, double obj_dist, int x)
 {
-	int	i;
-	int	j;
-	int	map_width;
-	int	map_height;
-
-	i = 0;
-	j = 0;
-	while ((i * MM_BLOCK_SIZE) < (map->height * MM_BLOCK_SIZE))
-	{
-		while ((j * MM_BLOCK_SIZE) < (map->width * MM_BLOCK_SIZE))
-		{
-			if (map->map[i][j] == WALL)
-			{
-				if (mlx_image_to_window(mlx, minimap->walls, j * MM_BLOCK_SIZE, i * MM_BLOCK_SIZE) == ERROR)
-					return (ERROR);
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	if (mlx_image_to_window(mlx, minimap->player, 0, 0) == ERROR)
-		return (ERROR);
-	if (mlx_image_to_window(mlx, minimap->view_dir, 0, 0) == ERROR)
-		return (ERROR);
-	return (SUCCESS);
-}
-
-void	paint_reflection(mlx_image_t *img, t_hexcolor ceil, t_hexcolor floor, double obj_dist, int x)
-{
-	t_hexcolor	reflec_color;
 	int			reflec_height;
 	int			y;
+	int			i;
 
-	reflec_color = convert_to_hexcode(0, 155, 0, 255);
 	if (obj_dist < 1)
 		obj_dist = 1;
 	reflec_height = (int)(HEIGHT / obj_dist);
 	y = 0;
 	while (y < HEIGHT / 2 - reflec_height / 2)
 	{
-		mlx_put_pixel(img, x, y, ceil);
+		mlx_put_pixel(game->img_a, x, y, game->map.ceiling_color);
 		y++;
 	}
+	i = 0;
 	while (y < HEIGHT / 2 + reflec_height / 2)
 	{
-		mlx_put_pixel(img, x, y, reflec_color);
+		game->img_a->pixels[y * WIDTH - 1 + x] = game->map.tex_stripe[i];
+		i++;
 		y++;
 	}
 	while (y < HEIGHT)
 	{
-		mlx_put_pixel(img, x, y, floor);
+		mlx_put_pixel(game->img_a, x, y, game->map.floor_color);
 		y++;
 	}
 }
@@ -79,20 +51,20 @@ int	render_world(t_game *game)
 	double	wall_dist;
 	double	ray_dir;
 	double	fov;
-	int		i;
+	int		x;
 
 	debug_print_player(&game->player);
 	fov = 1;
 	ray_dir = game->player.view_dir - (fov / 2);
-	i = 0;
-	while (i < WIDTH)
+	x = 0;
+	while (x < WIDTH)
 	{
 		ray_dir += fov / game->mlx->width;
 		wall_dist = cast_ray(game, ray_dir);
 		// @note prevent fisheye effect
-		wall_dist *= cos(ray_dir - game->player.view_dir);
-		paint_reflection(game->img_a, game->map.ceiling_color, game->map.floor_color, wall_dist, i);
-		i++;
+		wall_dist *= cos(game->player.view_dir - ray_dir);
+		paint_reflection(game, wall_dist, x);
+		x++;
 	}
 	return (SUCCESS);
 }
