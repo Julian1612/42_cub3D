@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/18 18:08:34 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/27 23:35:50 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,6 @@ unsigned int	convert_to_hexcode(
 int	render_world(t_game *game)
 {
 	debug_print_player(&game->player);
-	printf("ray length: %f\n", cast_ray(game, game->player.view_dir));
+	cast_ray(game, game->player.view_dir);
 	return (SUCCESS);
 }

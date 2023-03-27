@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/27 23:19:48 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/28 00:47:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ void	set_cardinal(t_map *map, t_ray *ray, bool side)
 
 void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 {
+	ray->angle = ray_dir;
 	ray->dir.x = sin(ray_dir);
 	ray->dir.y = cos(ray_dir);
-	ray->origin.x = x;
-	ray->origin.y = y;
+	ray->origin.x = x / MM_BLOCK_SIZE;
+	ray->origin.y = y / MM_BLOCK_SIZE;
 	ray->map_x = (int)ray->origin.x;
 	ray->map_y = (int)ray->origin.y;
 	// @note potential division by zero
@@ -79,30 +80,54 @@ void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 	}
 }
 
-double	extend_ray(t_ray *ray, t_map *map)
+double	extend_ray(t_ray *ray, t_map *map, t_game *game)
 {
 	bool	side;
 
+	ray->op_step.x = 0;
+	ray->op_step.y = 0;
 	while (map->map[ray->map_y][ray->map_x] != WALL)
 	{
 		if (ray->length.x < ray->length.y)
 		{
 			ray->map_x += ray->step.x;
 			ray->length.x += ray->hypotenuse.x;
+			ray->op_step.y = fmod(ray->map_x / tan(ray->angle), UNIT);
+			mlx_put_pixel(game->img_a, ray->map_x * MM_BLOCK_SIZE, (ray->op_step.y + ray->map_y) * MM_BLOCK_SIZE, convert_to_hexcode(255, 0, 0, 255));
 			side = false;
 		}
 		else
 		{
 			ray->map_y += ray->step.y;
 			ray->length.y += ray->hypotenuse.y;
+			ray->op_step.x = fmod(ray->map_y * tan(ray->angle), UNIT);
+			mlx_put_pixel(game->img_a, (ray->op_step.x + ray->map_x) * MM_BLOCK_SIZE, ray->map_y * MM_BLOCK_SIZE, convert_to_hexcode(0, 255, 0, 255));
 			side = true;
 		}
 	}
-	set_cardinal(map, ray, side);
+	// set_cardinal(map, ray, side);
 	if (side)
 		return (ray->length.y - ray->hypotenuse.y);
 	else
 		return (ray->length.x - ray->hypotenuse.x);
+}
+
+void	set_transparent(mlx_image_t *img)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < img->width)
+	{
+		j = 0;
+		while (j < img->height)
+		{
+			mlx_put_pixel(img, i, j, convert_to_hexcode(0, 0, 0, 0));
+			j++;
+		}
+		i++;
+	}
 }
 
 double	cast_ray(t_game *game, double ray_dir)
@@ -111,7 +136,8 @@ double	cast_ray(t_game *game, double ray_dir)
 	double	res;
 
 	init_ray(&ray, game->player.x, game->player.y, ray_dir);
-	res = extend_ray(&ray, &game->map);
+	set_transparent(game->img_a);
+	res = extend_ray(&ray, &game->map, game);
 	debug_print_ray(&ray);
 	return (res);
 }

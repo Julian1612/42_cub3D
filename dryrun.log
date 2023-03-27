@@ -1,0 +1,28 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/lorbke/Coding/42_cub3D'
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ./libraries/libft
+ 
+make[1]: Entering directory `/Users/lorbke/Coding/42_cub3D/libraries/libft'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/Users/lorbke/Coding/42_cub3D/libraries/libft'
+ 
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ./libraries/MLX
+ 
+make[1]: brew: Command not found
+make[1]: Entering directory `/Users/lorbke/Coding/42_cub3D/libraries/mlx'
+
+make: brew: Command not found
+
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/Users/lorbke/Coding/42_cub3D/libraries/mlx'
+mkdir -p ./obj/
+cc -g -o obj/raycaster.o -c src/raycaster.c -I ./include -I ./libraries/MLX/include/MLX42 -I ./libraries/libft && printf "\033[32;1m\033[1m\rCompiling: raycaster.c\r\e[35C[OK]\n\033[0m"
+cc -g -o obj/debug.o -c src/debug.c -I ./include -I ./libraries/MLX/include/MLX42 -I ./libraries/libft && printf "\033[32;1m\033[1m\rCompiling: debug.c\r\e[35C[OK]\n\033[0m"
+cc -g -o obj/render.o -c src/render.c -I ./include -I ./libraries/MLX/include/MLX42 -I ./libraries/libft && printf "\033[32;1m\033[1m\rCompiling: render.c\r\e[35C[OK]\n\033[0m"
+cc -g -o obj/initialize.o -c src/initialize.c -I ./include -I ./libraries/MLX/include/MLX42 -I ./libraries/libft && printf "\033[32;1m\033[1m\rCompiling: initialize.c\r\e[35C[OK]\n\033[0m"
+cc -g -o obj/errexit.o -c src/errexit.c -I ./include -I ./libraries/MLX/include/MLX42 -I ./libraries/libft && printf "\033[32;1m\033[1m\rCompiling: errexit.c\r\e[35C[OK]\n\033[0m"
+cc -g -o obj/hook.o -c src/hook.c -I ./include -I ./libraries/MLX/include/MLX42 -I ./libraries/libft && printf "\033[32;1m\033[1m\rCompiling: hook.c\r\e[35C[OK]\n\033[0m"
+cc -g -o obj/main.o -c src/main.c -I ./include -I ./libraries/MLX/include/MLX42 -I ./libraries/libft && printf "\033[32;1m\033[1m\rCompiling: main.c\r\e[35C[OK]\n\033[0m"
+cc ./obj/raycaster.o ./obj/debug.o ./obj/render.o ./obj/initialize.o ./obj/errexit.o ./obj/hook.o ./obj/main.o -lglfw -L/lib ./libraries/MLX/libmlx42.a ./libraries/libft/libft.a -I ./include -I ./libraries/MLX/include/MLX42 -I ./libraries/libft -o cub3D
+make: Leaving directory `/Users/lorbke/Coding/42_cub3D'
+ 
