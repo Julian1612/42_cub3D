@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/26 23:58:57 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/27 20:48:00 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	set_cardinal(t_map *map, t_ray *ray, bool side)
 			map->cardinal = &map->south;
 		else
 			map->cardinal = &map->north;
-		map->adjacent_len = ray->map_y - ray->origin.y;
+		// printf("\nadjacent: %f\n", ray->map_y - ray->origin.y);
+		// printf("hypotenuse: %f\n", ray->length.x);
+		// printf("offset: %f\n", sqrt(pow(ray->map_y - ray->origin.y, 2)) / pow(ray->length.x, 2));
+		map->adjacent_len = sqrt(pow(ray->map_y - ray->origin.y, 2)) / pow(ray->length.x, 2);
 	}
 	else
 	{
@@ -37,7 +40,10 @@ void	set_cardinal(t_map *map, t_ray *ray, bool side)
 			map->cardinal = &map->west;
 		else
 			map->cardinal = &map->east;
-		map->adjacent_len = ray->map_x - ray->origin.x;
+		// printf("\nadjacent: %f\n", ray->map_x - ray->origin.x);
+		// printf("hypotenuse: %f\n", ray->length.y);
+		// printf("offset: %f\n", sqrt(pow(ray->map_x - ray->origin.x, 2)) / pow(ray->length.y, 2));
+		map->adjacent_len = sqrt(pow(ray->map_x - ray->origin.x, 2)) / pow(ray->length.y, 2);
 	}
 }
 

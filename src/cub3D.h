@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/26 23:55:48 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/27 20:11:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_map
 	int			width;
 	int			height;
 	t_texture	*cardinal;
-	int			adjacent_len;
+	double		adjacent_len;
 	t_texture	west;
 	t_texture	east;
 	t_texture	south;
