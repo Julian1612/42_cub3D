@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/27 11:04:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:23:38 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,5 +143,5 @@ void	hook(void *param)
 	keys(game, &game->minimap, &game->player);
 	render_world(game);
 	draw_minimap(game);
-	draw_player(game);
+	// draw_player(game);
 }
