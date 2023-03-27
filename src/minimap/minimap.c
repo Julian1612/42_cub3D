@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/26 22:12:43 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:02:08 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 double  get_wall_size(t_minimap *minimap)
 {
-	return ((double) fmin((WIDTH / 3) / minimap->width, (HEIGHT / 3) / minimap->height));
+	return ((double) fmin((WIDTH) / minimap->width, (HEIGHT) / minimap->height));
 }
 
 void draw_player(t_game *game)
@@ -30,8 +30,8 @@ void draw_player(t_game *game)
 	i = 0;
 	wall_size = get_wall_size(&game->minimap);
 	color = convert_to_hexcode(255, 0, 0, 255);
-	game->minimap.player->instances[0].x = game->player.x * 5;
-	game->minimap.player->instances[0].y = game->player.y * 5;
+	game->minimap.player->instances[0].x = (game->player.x * wall_size) + wall_size;
+	game->minimap.player->instances[0].y = (game->player.y * wall_size) + wall_size;
 	while (i < game->minimap.player->height)
 	{
 		j = 0;
