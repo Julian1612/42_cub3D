@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/27 20:48:00 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/27 23:15:15 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ void	set_cardinal(t_map *map, t_ray *ray, bool side)
 			map->cardinal = &map->south;
 		else
 			map->cardinal = &map->north;
-		// printf("\nadjacent: %f\n", ray->map_y - ray->origin.y);
-		// printf("hypotenuse: %f\n", ray->length.x);
-		// printf("offset: %f\n", sqrt(pow(ray->map_y - ray->origin.y, 2)) / pow(ray->length.x, 2));
 		map->adjacent_len = sqrt(pow(ray->map_y - ray->origin.y, 2)) / pow(ray->length.x, 2);
 	}
 	else
@@ -40,9 +37,6 @@ void	set_cardinal(t_map *map, t_ray *ray, bool side)
 			map->cardinal = &map->west;
 		else
 			map->cardinal = &map->east;
-		// printf("\nadjacent: %f\n", ray->map_x - ray->origin.x);
-		// printf("hypotenuse: %f\n", ray->length.y);
-		// printf("offset: %f\n", sqrt(pow(ray->map_x - ray->origin.x, 2)) / pow(ray->length.y, 2));
 		map->adjacent_len = sqrt(pow(ray->map_x - ray->origin.x, 2)) / pow(ray->length.y, 2);
 	}
 }
@@ -62,21 +56,25 @@ void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -UNIT;
+		ray->op_step.y = -UNIT / ray->dir.y;
 		ray->length.x = (ray->origin.x - ray->map_x) * ray->hypotenuse.x;
 	}
 	else
 	{
 		ray->step.x = UNIT;
+		ray->op_step.y = UNIT / ray->dir.y;
 		ray->length.x = (ray->map_x + UNIT - ray->origin.x) * ray->hypotenuse.x;
 	}
 	if (ray->dir.y < 0)
 	{
 		ray->step.y = -UNIT;
+		ray->op_step.x = -UNIT / ray->dir.x;
 		ray->length.y = (ray->origin.y - ray->map_y) * ray->hypotenuse.y;
 	}
 	else
 	{
 		ray->step.y = UNIT;
+		ray->op_step.x = UNIT / ray->dir.x;
 		ray->length.y = (ray->map_y + UNIT - ray->origin.y) * ray->hypotenuse.y;
 	}
 }
@@ -114,5 +112,6 @@ double	cast_ray(t_game *game, double ray_dir)
 
 	init_ray(&ray, game->player.x, game->player.y, ray_dir);
 	res = extend_ray(&ray, &game->map);
+	debug_print_ray(&ray);
 	return (res);
 }
