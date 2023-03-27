@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/21 00:50:10 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/27 23:23:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
 # define WALL '1'
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 /* ************************************************************************** */
 /* TYPEDEFS																	  */
@@ -68,6 +72,8 @@ typedef struct s_map
 	char		**map;
 	int			width;
 	int			height;
+	t_texture	*cardinal;
+	double		adjacent_len;
 	t_texture	west;
 	t_texture	east;
 	t_texture	south;
@@ -121,7 +127,10 @@ typedef struct s_ray
 {
 	t_coor	dir;
 	t_coor	origin;
+	int		map_x;
+	int		map_y;
 	t_coor	step;
+	t_coor	op_step;
 	t_coor	hypotenuse;
 	t_coor	length;
 }				t_ray;

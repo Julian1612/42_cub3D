@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/17 18:33:30 by lorbke           ###   ########.fr        #
+#    Updated: 2023/03/27 23:24:44 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,13 +59,15 @@ n: obj $(OBJS)
 
 clean:
 	@rm -rf obj
-	@$(MAKE) -C $(LIBFT) clean
-	@$(MAKE) -C $(LIBMLX) clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT) fclean
 	@$(MAKE) -C $(LIBMLX) fclean
+
+debug: CFLAGS += -O0 -DDEBUG=1 -g
+debug: clean all
+	@$(MAKE) clean
 
 re: clean all
 
