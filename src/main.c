@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/27 11:03:11 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:44:45 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	if (initialize_minimap(&game) == ERROR)
 		 errexit_mlx_errno();
+	if (initialize_minimap_i(&game) == ERROR)
+		errexit_mlx_errno();
 	// play_music();
 	// draw_minimap(&game);
 	mlx_loop(game.mlx);

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/27 15:50:22 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:32:55 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,29 @@
 
 double  get_wall_size(t_minimap *minimap)
 {
-	return ((double) fmin((WIDTH) / minimap->width, (HEIGHT) / minimap->height));
+	// return ((double) fmin((WIDTH) / minimap->width, (HEIGHT) / minimap->height));
+	return (WALL_SIZE);
 }
 
-void draw_player(t_game *game)
+void draw_player(t_minimap *minimap, int i, int j)
 {
-	int			i;
-	int			j;
-	int			wall_size;
-	uint32_t	color;
+	int k;
+	int l;
+	int wall_size;
+	uint32_t color;
 
-	wall_size = get_wall_size(&game->minimap);
 	color = convert_to_hexcode(255, 0, 0, 255);
-	game->minimap.player->instances[0].x = (game->player.x * wall_size) + wall_size;
-	game->minimap.player->instances[0].y = (game->player.y * wall_size) + wall_size;
-	i = (int)game->player.y - 2;
-	while (i < (int)game->player.y + 2)
+	wall_size = get_wall_size(minimap);
+	k = i * wall_size;
+	while (k < (i * wall_size) + wall_size) // 800 is the height of the window should be macro
 	{
-		j = (int)game->player.x - 2;
-		while (j < (int)game->player.x + 2)
+		l = j * wall_size;
+		while(l < (j * wall_size) + wall_size)
 		{
-			mlx_put_pixel(game->minimap.player, j, i, color);
-			j++;
+			mlx_put_pixel(minimap->smm_walls, l, k, color);
+			l++;
 		}
-		i++;
+		k++;
 	}
 }
 
@@ -48,18 +47,19 @@ void draw_minimap_wall(t_minimap *minimap, int i, int j)
 {
 	int k;
 	int l;
-	int wall_size;
+	double wall_size;
 	uint32_t color;
 
 	color = convert_to_hexcode(81, 86, 82, 255);
 	wall_size = get_wall_size(minimap);
-	k = 0;
-	while (k < wall_size) // 800 is the height of the window should be macro
+	printf("wall_size: %f\n", wall_size);
+	k = i * wall_size;
+	while (k < (i * wall_size) + wall_size) // 800 is the height of the window should be macro
 	{
-		l = 0;
-		while(l <  wall_size)
+		l = j * wall_size;
+		while(l < (j * wall_size) + wall_size)
 		{
-			mlx_put_pixel(minimap->walls, l, k, color);
+			mlx_put_pixel(minimap->smm_walls, l, k, color);
 			l++;
 		}
 		k++;
@@ -76,13 +76,14 @@ void draw_minimap_floor(t_minimap *minimap, int i, int j)
 
 	color = convert_to_hexcode(200, 200, 200, 150);
 	wall_size = get_wall_size(minimap);
+	printf("wwwwwall_size: %d\n", wall_size);
 	k = i * wall_size;
-	while (k < (i * wall_size) + wall_size && k < 800) // 800 is the height of the window mshould be macro
+	while (k < (i * wall_size) + wall_size) // 800 is the height of the window should be macro
 	{
 		l = j * wall_size;
 		while(l < (j * wall_size) + wall_size)
 		{
-			mlx_put_pixel(minimap->walls, l, k, color);
+			mlx_put_pixel(minimap->smm_walls, l, k, color);
 			l++;
 		}
 		k++;
@@ -94,36 +95,48 @@ int	draw_minimap(t_game *game)
 {
 	int	i;
 	int	j;
+	int	test1 = 0;
+	int	test2;
+	int wall_size = get_wall_size(&game->minimap);
 
-	i = (int)game->player.y - 2;
-	// while (game->map.map[i] != NULL)
-	// {
-	// 	j = 0;
-	// 	while (game->map.map[i][j] != '\0')
-	// 	{
-	// 		if (game->map.map[i][j] == '1')
-	// 			draw_minimap_wall(&game->minimap, i, j);
-	// 		// else if (game->map.map[i][j] != ' ' && game->map.map[i][j] != '1')
-	// 		// 	draw_minimap_floor(&game->minimap, i, j);
-	// 		// else if (game->map.map[i][j] == 'E')
-	// 		// 	draw_minimap_enemy(&game->minimap, i, j);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-	while (i < (int)game->player.y + 3)
+	i = (int) (game->player.y - 2);
+	mlx_delete_image(game->mlx, game->minimap.smm_walls);
+	if (!(game->minimap.smm_walls = mlx_new_image(game->mlx, wall_size * 5, wall_size * 5)))
 	{
-		j = (int)game->player.x - 2;
-		while (j < (int)game->player.x + 3)
-		{
-			printf("%c", game->map.map[i][j]);
-			if (game->map.map[i][j] == '1')
-				draw_minimap_wall(&game->minimap, i, j);
-			j++;
-		}
-		printf("\n");
-		i++;
+		mlx_close_window(game->mlx);
+		// puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
 	}
+	printf("-----------------------------\n");
+	printf("player x = %d, player y = %d\n", (int) game->player.y, (int) game->player.x);
+	while (i <= game->player.y + 2 && game->map.map[i] != NULL)
+	{
+		j = (int) game->player.x - 2;
+		test2 = 0;
+		while (j <= game->player.x + 2 && game->map.map[i][j] != '\0')
+		{
+			if (i == (int) game->player.y && j == (int) game->player.x)
+				draw_player(&game->minimap, test1, test2);
+			else if (game->map.map[i][j] == '1')
+				draw_minimap_wall(&game->minimap, test1, test2);
+			else if (game->map.map[i][j] != ' ' && game->map.map[i][j] != '1')
+				draw_minimap_floor(&game->minimap, test1, test2);
+			// else if (game->map.map[i][j] == 'E')
+			// 	draw_minimap_enemy(&game->minimap, i, j);
+			j++;
+			test2++;
+		}
+		printf("i = %d\n", i);
+		i++;
+		test1++;
+	}
+	if (mlx_image_to_window(game->mlx, game->minimap.smm_walls, 0, 0) == -1)
+	{
+		mlx_close_window(game->mlx);
+		// puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	printf("-----------------------------\n");
 	return (0);
 }
 
@@ -148,5 +161,104 @@ void	get_map_measures(t_game *game)
 	game->map.height = i;
 	game->minimap.width = game->map.width;
 	game->minimap.height = game->map.height;
+}
+
+double  get_wall_size_i(t_minimap *minimap)
+{
+	return ((double) fmin((WIDTH) / minimap->width, (HEIGHT) / minimap->height));
+}
+
+void draw_player_i(t_game *game)
+{
+	int			i;
+	int			j;
+	int			wall_size;
+	uint32_t	color;
+
+	i = 0;
+	wall_size = get_wall_size_i(&game->minimap);
+	color = convert_to_hexcode(255, 0, 0, 255);
+	game->minimap.player->instances[0].x = (game->player.x * wall_size) + wall_size;
+	game->minimap.player->instances[0].y = (game->player.y * wall_size) + wall_size;
+	while (i < game->minimap.player->height)
+	{
+		j = 0;
+		while (j < game->minimap.player->width)
+		{
+			mlx_put_pixel(game->minimap.player, j, i, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void draw_minimap_wall_i(t_minimap *minimap, int i, int j)
+{
+	int k;
+	int l;
+	int wall_size;
+	uint32_t color;
+
+	color = convert_to_hexcode(81, 86, 82, 255);
+	wall_size = get_wall_size_i(minimap);
+	k = i * wall_size;
+	while (k < (i * wall_size) + wall_size) // 800 is the height of the window should be macro
+	{
+		l = j * wall_size;
+		while(l < (j * wall_size) + wall_size)
+		{
+			mlx_put_pixel(minimap->lmm_walls, l, k, color);
+			l++;
+		}
+		k++;
+	}
+}
+
+
+void draw_minimap_floor_i(t_minimap *minimap, int i, int j)
+{
+	int k;
+	int l;
+	int wall_size;
+	uint32_t color;
+
+	color = convert_to_hexcode(200, 200, 200, 150);
+	wall_size = get_wall_size_i(minimap);
+	k = i * wall_size;
+	while (k < (i * wall_size) + wall_size && k < 800) // 800 is the height of the window mshould be macro
+	{
+		l = j * wall_size;
+		while(l < (j * wall_size) + wall_size)
+		{
+			mlx_put_pixel(minimap->lmm_walls, l, k, color);
+			l++;
+		}
+		k++;
+	}
+}
+
+
+int	draw_minimap_i(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->map.map[i] != NULL)
+	{
+		j = 0;
+		while (game->map.map[i][j] != '\0')
+		{
+			if (game->map.map[i][j] == '1')
+				draw_minimap_wall_i(&game->minimap, i, j);
+			else if (game->map.map[i][j] != ' ' && game->map.map[i][j] != '1')
+				draw_minimap_floor_i(&game->minimap, i, j);
+			// else if (game->map.map[i][j] == 'E')
+			// 	draw_minimap_enemy(&game->minimap, i, j);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 

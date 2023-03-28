@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/27 15:23:38 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:44:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	keys(t_game *game, t_minimap *minimap, t_player *player)
 		if (game->minimap.visible == 1)
 		{
 			game->minimap.visible = 0;
-			game->minimap.walls->instances[0].z = 1;
+			game->minimap.lmm_walls->instances[0].z = 1;
 			game->minimap.player->instances[0].z = 1;
 		}
 		else
 		{
 			game->minimap.visible = 1;
-			game->minimap.walls->instances[0].z = 0;
+			game->minimap.lmm_walls->instances[0].z = 0;
 			game->minimap.player->instances[0].z = 0;
 		}
 	}
@@ -143,5 +143,7 @@ void	hook(void *param)
 	keys(game, &game->minimap, &game->player);
 	render_world(game);
 	draw_minimap(game);
+	draw_minimap_i(game);
+	draw_player_i(game);
 	// draw_player(game);
 }

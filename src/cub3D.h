@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/26 16:25:43 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:36:15 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ typedef struct s_minimap
 	double			height;
 	int				visible;
 	mlx_image_t		*player;
-	mlx_image_t		*walls;
+	mlx_image_t		*lmm_walls;
+	mlx_image_t		*smm_walls;
 	mlx_image_t		*view_dir;
 }	t_minimap;
 
@@ -149,6 +150,7 @@ void	errexit_mlx_errno(void);
 
 int		initialize_mlx_all(t_game *game);
 int	initialize_minimap(t_game *game);
+int	initialize_minimap_i(t_game *game);
 
 int		render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
 int		render_world(t_game *game);
