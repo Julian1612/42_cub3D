@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/28 18:44:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/28 22:30:26 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,30 +84,31 @@ void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 // y_length = x_length * ray->dir.y + y_offset
 // y_offset = y_length % UNIT
 
+double	add_preserve_sign(double a, double b)
+{
+	if (a < 0)
+		return (a - b);
+	return (a + b);
+}
+
 double	get_y_offset(t_ray *ray)
 {
 	double	x_length;
 	double	y_length;
-	double	y_offset;
 
-	x_length = fabs(ray->origin.x - ray->map_x);
-	y_offset = fmod(ray->origin.y, ray->step.x);
-	y_length = x_length / tan(ray->angle) + y_offset;
-	// return (y_length);
-	return (fmod(y_length, UNIT));
+	x_length = ray->map_x - ray->origin.x;
+	y_length = x_length / tan(ray->angle);
+	return (y_length);
 }
 
 double	get_x_offset(t_ray *ray)
 {
 	double	y_length;
 	double	x_length;
-	double	x_offset;
 
-	y_length = fabs(ray->origin.y - ray->map_y);
-	x_offset = fmod(ray->origin.x, ray->step.y);
-	x_length = y_length * tan(ray->angle) + x_offset;
-	// return (x_length);
-	return (fmod(x_length, UNIT));
+	y_length = ray->map_y - ray->origin.y;
+	x_length = y_length * tan(ray->angle);
+	return (x_length);
 }
 
 
@@ -124,7 +125,7 @@ double	extend_ray(t_ray *ray, t_map *map, t_game *game)
 			ray->map_x += ray->step.x;
 			ray->length.x += ray->hypotenuse.x;
 			ray->op_step.y = get_y_offset(ray);
-			mlx_put_pixel(game->img_a, ray->map_x * MM_BLOCK_SIZE, (ray->map_y + ray->op_step.y) * MM_BLOCK_SIZE, convert_to_hexcode(255, 0, 0, 255));
+			mlx_put_pixel(game->img_a, ray->map_x * MM_BLOCK_SIZE, (ray->origin.y + ray->op_step.y) * MM_BLOCK_SIZE, convert_to_hexcode(255, 0, 0, 255));
 			side = false;
 		}
 		else
@@ -132,7 +133,7 @@ double	extend_ray(t_ray *ray, t_map *map, t_game *game)
 			ray->map_y += ray->step.y;
 			ray->length.y += ray->hypotenuse.y;
 			ray->op_step.x = get_x_offset(ray);
-			mlx_put_pixel(game->img_a, (ray->map_x + ray->op_step.x) * MM_BLOCK_SIZE, ray->map_y * MM_BLOCK_SIZE, convert_to_hexcode(0, 255, 0, 255));
+			mlx_put_pixel(game->img_a, (ray->origin.x + ray->op_step.x) * MM_BLOCK_SIZE, ray->map_y * MM_BLOCK_SIZE, convert_to_hexcode(0, 255, 0, 255));
 			side = true;
 		}
 	}
