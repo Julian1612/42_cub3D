@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/28 18:25:17 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/28 23:08:27 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,26 +86,20 @@ double	get_y_offset(t_ray *ray)
 {
 	double	x_length;
 	double	y_length;
-	double	y_offset;
 
-	x_length = fabs(ray->origin.x - ray->map_x);
-	y_offset = fmod(ray->origin.y, UNIT);
-	y_length = x_length * ray->dir.y + y_offset;
-	// return (y_length);
-	return (fmod(y_length, UNIT));
+	x_length = ray->map_x - ray->origin.x;
+	y_length = x_length / tan(ray->angle);
+	return (y_length);
 }
 
 double	get_x_offset(t_ray *ray)
 {
 	double	y_length;
 	double	x_length;
-	double	x_offset;
 
-	y_length = fabs(ray->origin.y - ray->map_y);
-	x_offset = fmod(ray->origin.x, UNIT);
-	x_length = y_length * ray->dir.x + x_offset;
-	// return (x_length);
-	return (fmod(x_length, UNIT));
+	y_length = ray->map_y - ray->origin.y;
+	x_length = y_length * tan(ray->angle);
+	return (x_length);
 }
 
 
@@ -131,12 +125,12 @@ double	extend_ray(t_ray *ray, t_map *map, t_game *game)
 	set_cardinal(map, ray, side);
 	if (side)
 	{
-		map->adjacent_len = get_x_offset(ray);
+		map->stripe = ray->origin.x + get_x_offset(ray);
 		return (ray->length.y - ray->hypotenuse.y);
 	}
 	else
 	{
-		map->adjacent_len = get_y_offset(ray);
+		map->stripe = ray->origin.y + get_y_offset(ray);
 		return (ray->length.x - ray->hypotenuse.x);
 	}
 }

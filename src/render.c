@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/28 18:30:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/28 23:09:22 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,20 @@ void	switch_pixel(mlx_image_t *img, int x, int y, uint8_t src[4])
 	img->pixels[dest + 3] = src[3];
 }
 
-void	paint_reflection(t_game *game, double obj_dist, int x, double ray_offset)
+void	paint_reflection(t_game *game, double obj_dist, int x)
 {
 	int		reflec_height;
 	int		y;
 	int		i;
 	double	step;
-	double	block_offset;
 	int		tex_x;
 	int		tex_y;
 
 	if (obj_dist < 1)
 		obj_dist = 1;
-	reflec_height = (int)(HEIGHT / obj_dist);
+	reflec_height = (int)((HEIGHT) / obj_dist);
 	step = (double)(game->map.cardinal->texture->height - 1) / reflec_height;
-	tex_x = game->map.cardinal->texture->width * game->map.adjacent_len;
-	// tex_x -= tex_x % 4;
+	tex_x = (game->map.cardinal->texture->width - 1) * game->map.stripe;
 	y = 0;
 	while (y < HEIGHT / 2 - reflec_height / 2)
 	{
@@ -66,24 +64,15 @@ void	paint_reflection(t_game *game, double obj_dist, int x, double ray_offset)
 	while (y < HEIGHT / 2 + reflec_height / 2)
 	{
 		tex_y = i * step;
-		// printf("tex_x: %d, tex_y: %d\n", tex_x, tex_y);
 		switch_pixel(game->img_a, x, y, &game->map.cardinal->texture->pixels[coor_to_pixel(game->map.cardinal->texture->width, tex_x, tex_y)]);
 		i++;
 		y++;
 	}
-	// printf("\n\nadjacent_len: %i\n", game->map.adjacent_len);
-	// printf("ray_offset: %f\n", ray_offset);
-	// printf("block_offset: %f\n", block_offset);
-	// printf("\nstep: %f\n", step);
-	// printf("reflec_height: %i\n", reflec_height);
-	// printf("y: %i\n", y);
-	// printf("tex_x: %d, tex_y: %d\n", tex_x, tex_y);
 	while (y < HEIGHT)
 	{
 		mlx_put_pixel(game->img_a, x, y, game->map.floor_color);
 		y++;
 	}
-	// exit(0);
 }
 
 int	render_world(t_game *game)
@@ -103,7 +92,7 @@ int	render_world(t_game *game)
 		wall_dist = cast_ray(game, ray_dir);
 		// @note prevent fisheye effect
 		wall_dist *= cos(game->player.view_dir - ray_dir);
-		paint_reflection(game, wall_dist, x, game->player.view_dir - ray_dir);
+		paint_reflection(game, wall_dist, x);
 		x++;
 	}
 	// exit(0);
