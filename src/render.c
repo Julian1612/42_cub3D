@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/28 18:23:23 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/28 18:30:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	paint_reflection(t_game *game, double obj_dist, int x, double ray_offset)
 		obj_dist = 1;
 	reflec_height = (int)(HEIGHT / obj_dist);
 	step = (double)(game->map.cardinal->texture->height - 1) / reflec_height;
-	tex_x = game->map.adjacent_len;
+	tex_x = game->map.cardinal->texture->width * game->map.adjacent_len;
 	// tex_x -= tex_x % 4;
 	y = 0;
 	while (y < HEIGHT / 2 - reflec_height / 2)
