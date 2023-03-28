@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/27 23:15:15 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/28 18:25:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	set_cardinal(t_map *map, t_ray *ray, bool side)
 			map->cardinal = &map->south;
 		else
 			map->cardinal = &map->north;
-		map->adjacent_len = sqrt(pow(ray->map_y - ray->origin.y, 2)) / pow(ray->length.x, 2);
 	}
 	else
 	{
@@ -37,12 +36,12 @@ void	set_cardinal(t_map *map, t_ray *ray, bool side)
 			map->cardinal = &map->west;
 		else
 			map->cardinal = &map->east;
-		map->adjacent_len = sqrt(pow(ray->map_x - ray->origin.x, 2)) / pow(ray->length.y, 2);
 	}
 }
 
 void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 {
+	ray->angle = ray_dir;
 	ray->dir.x = sin(ray_dir);
 	ray->dir.y = cos(ray_dir);
 	ray->origin.x = x;
@@ -56,30 +55,61 @@ void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -UNIT;
-		ray->op_step.y = -UNIT / ray->dir.y;
 		ray->length.x = (ray->origin.x - ray->map_x) * ray->hypotenuse.x;
 	}
 	else
 	{
 		ray->step.x = UNIT;
-		ray->op_step.y = UNIT / ray->dir.y;
 		ray->length.x = (ray->map_x + UNIT - ray->origin.x) * ray->hypotenuse.x;
 	}
 	if (ray->dir.y < 0)
 	{
 		ray->step.y = -UNIT;
-		ray->op_step.x = -UNIT / ray->dir.x;
 		ray->length.y = (ray->origin.y - ray->map_y) * ray->hypotenuse.y;
 	}
 	else
 	{
 		ray->step.y = UNIT;
-		ray->op_step.x = UNIT / ray->dir.x;
 		ray->length.y = (ray->map_y + UNIT - ray->origin.y) * ray->hypotenuse.y;
 	}
 }
 
-double	extend_ray(t_ray *ray, t_map *map)
+// ray hit coordinates / ray block offset
+// ray->origin = origin coordinates
+// x_length = ray->origin.x + map_x
+// angle = ray->angle
+// y offset = origin.y % UNIT
+// y_length = x_length * ray->dir.y + y_offset
+// y_offset = y_length % UNIT
+
+double	get_y_offset(t_ray *ray)
+{
+	double	x_length;
+	double	y_length;
+	double	y_offset;
+
+	x_length = fabs(ray->origin.x - ray->map_x);
+	y_offset = fmod(ray->origin.y, UNIT);
+	y_length = x_length * ray->dir.y + y_offset;
+	// return (y_length);
+	return (fmod(y_length, UNIT));
+}
+
+double	get_x_offset(t_ray *ray)
+{
+	double	y_length;
+	double	x_length;
+	double	x_offset;
+
+	y_length = fabs(ray->origin.y - ray->map_y);
+	x_offset = fmod(ray->origin.x, UNIT);
+	x_length = y_length * ray->dir.x + x_offset;
+	// return (x_length);
+	return (fmod(x_length, UNIT));
+}
+
+
+double	extend_ray(t_ray *ray, t_map *map, t_game *game)
 {
 	bool	side;
 
@@ -100,9 +130,33 @@ double	extend_ray(t_ray *ray, t_map *map)
 	}
 	set_cardinal(map, ray, side);
 	if (side)
+	{
+		map->adjacent_len = get_x_offset(ray);
 		return (ray->length.y - ray->hypotenuse.y);
+	}
 	else
+	{
+		map->adjacent_len = get_y_offset(ray);
 		return (ray->length.x - ray->hypotenuse.x);
+	}
+}
+
+void	set_transparent(mlx_image_t *img)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < img->width)
+	{
+		j = 0;
+		while (j < img->height)
+		{
+			mlx_put_pixel(img, i, j, convert_to_hexcode(0, 0, 0, 0));
+			j++;
+		}
+		i++;
+	}
 }
 
 double	cast_ray(t_game *game, double ray_dir)
@@ -111,7 +165,8 @@ double	cast_ray(t_game *game, double ray_dir)
 	double	res;
 
 	init_ray(&ray, game->player.x, game->player.y, ray_dir);
-	res = extend_ray(&ray, &game->map);
+	// set_transparent(game->img_a);
+	res = extend_ray(&ray, &game->map, game);
 	debug_print_ray(&ray);
 	return (res);
 }

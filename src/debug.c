@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/27 23:13:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/28 18:12:53 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	debug_print_ray(t_ray *ray)
 	printf("map y:   %d\n", ray->map_y);
 	printf("step.x:   %f\n", ray->step.x);
 	printf("step.y:   %f\n", ray->step.y);
-	printf("op_step.x:   %f\n", ray->op_step.x);
-	printf("op_step.y:   %f\n", ray->op_step.y);
 	printf("hypotenuse.x:   %f\n", ray->hypotenuse.x);
 	printf("hypotenuse.y:   %f\n", ray->hypotenuse.y);
 	printf("length.x:   %f\n", ray->length.x);

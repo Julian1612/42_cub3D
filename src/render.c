@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/27 20:20:34 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/28 18:23:23 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <math.h> // PI
 #include <string.h> // @note memmove, remove
 #include <stdlib.h> // @note exit, remove
+#include <unistd.h> // @note remove
 
 #define FOV 60
 
@@ -53,9 +54,7 @@ void	paint_reflection(t_game *game, double obj_dist, int x, double ray_offset)
 		obj_dist = 1;
 	reflec_height = (int)(HEIGHT / obj_dist);
 	step = (double)(game->map.cardinal->texture->height - 1) / reflec_height;
-	block_offset = fabs(ray_offset * game->map.adjacent_len);
-	tex_x = block_offset * (game->map.cardinal->texture->width);
-	// tex_x = game->map.adjacent_len;
+	tex_x = game->map.adjacent_len;
 	// tex_x -= tex_x % 4;
 	y = 0;
 	while (y < HEIGHT / 2 - reflec_height / 2)
@@ -84,17 +83,7 @@ void	paint_reflection(t_game *game, double obj_dist, int x, double ray_offset)
 		mlx_put_pixel(game->img_a, x, y, game->map.floor_color);
 		y++;
 	}
-		// exit(0);
-}
-
-double	calc_mini_offset(t_game *game, double ray_dir)
-{
-	double player_opposite;
-	double ray_opposite;
-
-	player_opposite = tan(game->player.view_dir) * game->map.adjacent_len;
-	ray_opposite = tan(ray_dir) * game->map.adjacent_len;
-	return (ray_opposite - player_opposite);
+	// exit(0);
 }
 
 int	render_world(t_game *game)
