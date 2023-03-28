@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/28 00:47:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/28 17:58:25 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,59 @@ void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -UNIT;
-		ray->op_step.y = -UNIT / ray->dir.y;
 		ray->length.x = (ray->origin.x - ray->map_x) * ray->hypotenuse.x;
 	}
 	else
 	{
 		ray->step.x = UNIT;
-		ray->op_step.y = UNIT / ray->dir.y;
 		ray->length.x = (ray->map_x + UNIT - ray->origin.x) * ray->hypotenuse.x;
 	}
 	if (ray->dir.y < 0)
 	{
 		ray->step.y = -UNIT;
-		ray->op_step.x = -UNIT / ray->dir.x;
 		ray->length.y = (ray->origin.y - ray->map_y) * ray->hypotenuse.y;
 	}
 	else
 	{
 		ray->step.y = UNIT;
-		ray->op_step.x = UNIT / ray->dir.x;
 		ray->length.y = (ray->map_y + UNIT - ray->origin.y) * ray->hypotenuse.y;
 	}
 }
+
+// ray hit coordinates / ray block offset
+// ray->origin = origin coordinates
+// x_length = ray->origin.x + map_x
+// angle = ray->angle
+// y offset = origin.y % UNIT
+// y_length = x_length * ray->dir.y + y_offset
+// y_offset = y_length % UNIT
+
+double	get_y_offset(t_ray *ray)
+{
+	double	x_length;
+	double	y_length;
+	double	y_offset;
+
+	x_length = fabs(ray->origin.x - ray->map_x);
+	y_offset = fmod(ray->origin.y, UNIT);
+	y_length = x_length * ray->dir.y + y_offset;
+	// return (y_length);
+	return (fmod(y_length, UNIT));
+}
+
+double	get_x_offset(t_ray *ray)
+{
+	double	y_length;
+	double	x_length;
+	double	x_offset;
+
+	y_length = fabs(ray->origin.y - ray->map_y);
+	x_offset = fmod(ray->origin.x, UNIT);
+	x_length = y_length * ray->dir.x + x_offset;
+	// return (x_length);
+	return (fmod(x_length, UNIT));
+}
+
 
 double	extend_ray(t_ray *ray, t_map *map, t_game *game)
 {
@@ -92,16 +123,16 @@ double	extend_ray(t_ray *ray, t_map *map, t_game *game)
 		{
 			ray->map_x += ray->step.x;
 			ray->length.x += ray->hypotenuse.x;
-			ray->op_step.y = fmod(ray->map_x / tan(ray->angle), UNIT);
-			mlx_put_pixel(game->img_a, ray->map_x * MM_BLOCK_SIZE, (ray->op_step.y + ray->map_y) * MM_BLOCK_SIZE, convert_to_hexcode(255, 0, 0, 255));
+			ray->op_step.y = get_y_offset(ray);
+			mlx_put_pixel(game->img_a, ray->map_x * MM_BLOCK_SIZE, (ray->map_y + ray->op_step.y) * MM_BLOCK_SIZE, convert_to_hexcode(255, 0, 0, 255));
 			side = false;
 		}
 		else
 		{
 			ray->map_y += ray->step.y;
 			ray->length.y += ray->hypotenuse.y;
-			ray->op_step.x = fmod(ray->map_y * tan(ray->angle), UNIT);
-			mlx_put_pixel(game->img_a, (ray->op_step.x + ray->map_x) * MM_BLOCK_SIZE, ray->map_y * MM_BLOCK_SIZE, convert_to_hexcode(0, 255, 0, 255));
+			ray->op_step.x = get_x_offset(ray);
+			mlx_put_pixel(game->img_a, (ray->map_x + ray->op_step.x) * MM_BLOCK_SIZE, ray->map_y * MM_BLOCK_SIZE, convert_to_hexcode(0, 255, 0, 255));
 			side = true;
 		}
 	}
