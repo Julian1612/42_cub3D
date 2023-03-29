@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/29 20:12:50 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 22:08:01 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_minimap
 	mlx_image_t		*view_dir;
 }	t_minimap;
 
+// @note cardinal and stripe very ugly 
 typedef struct s_map
 {
 	char		**map;
