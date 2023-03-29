@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/26 22:10:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 19:38:12 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,13 @@ static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
 
 static int	initialize_textures(t_game *game)
 {
-	game->map.east.xpm = mlx_load_xpm42(game->map.east.path);
-	game->map.west.xpm = mlx_load_xpm42(game->map.west.path);
-	game->map.south.xpm = mlx_load_xpm42(game->map.south.path);
-	game->map.north.xpm = mlx_load_xpm42(game->map.north.path);
-	if (game->map.west.xpm == NULL || game->map.east.xpm == NULL
-		|| game->map.south.xpm == NULL || game->map.north.xpm == NULL)
+	game->map.east.tex = mlx_load_png(game->map.east.path);
+	game->map.west.tex = mlx_load_png(game->map.west.path);
+	game->map.south.tex = mlx_load_png(game->map.south.path);
+	game->map.north.tex = mlx_load_png(game->map.north.path);
+	if (game->map.west.tex == NULL || game->map.east.tex == NULL
+		|| game->map.south.tex == NULL || game->map.north.tex == NULL)
 		return (ERROR);
-	game->map.west.texture = &game->map.west.xpm->texture;
-	game->map.east.texture = &game->map.east.xpm->texture;
-	game->map.south.texture = &game->map.south.xpm->texture;
-	game->map.north.texture = &game->map.north.xpm->texture;
 	// @todo sprite initialization
 	return (SUCCESS);
 }

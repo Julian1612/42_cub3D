@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/28 23:08:27 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 19:32:38 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ typedef uint32_t	t_hexcolor;
 typedef struct s_texture
 {
 	char			*path;
-	xpm_t			*xpm;
-	mlx_texture_t	*texture;
+	mlx_texture_t	*tex;
 }	t_texture;
 
 // @note ammunition is not implemented

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/26 01:54:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 19:38:44 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	test_parse(t_game *game)
 	game->map.map = map;
 	game->map.width = 16;
 	game->map.height = 9;
-	game->map.west.path = "textures/east.xpm42";
-	game->map.east.path = "textures/east.xpm42";
-	game->map.south.path = "textures/east.xpm42";
-	game->map.north.path = "textures/east.xpm42";
+	game->map.west.path = "textures/west.png";
+	game->map.east.path = "textures/east.png";
+	game->map.south.path = "textures/south.png";
+	game->map.north.path = "textures/north.png";
 	game->map.ceiling_color = convert_to_hexcode(0, 0, 0, 0);
 	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
 	game->player.x = 2;
