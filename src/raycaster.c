@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/29 19:26:36 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 19:27:53 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <stdio.h> // @note remove
 #include <stdbool.h> // bool
 #include <float.h> // DBL_MAX
-
-#include "../libraries/mlx/include/MLX42/MLX42.h" // @note remove
 
 #define UNIT 1.0f
 
@@ -49,7 +47,6 @@ void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 	ray->map_x = (int)ray->origin.x;
 	ray->map_y = (int)ray->origin.y;
 	// @note potential division by zero
-	// @note genius math to get hypotenuse length to next intersection
 	ray->hypotenuse.x = fabs(UNIT / ray->dir.x);
 	ray->hypotenuse.y = fabs(UNIT / ray->dir.y);
 	if (ray->dir.x < 0)
@@ -74,6 +71,7 @@ void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 	}
 }
 
+// @note remove
 // ray hit coordinates / ray block offset
 // ray->origin = origin coordinates
 // x_length = ray->origin.x + map_x
@@ -141,31 +139,12 @@ double	extend_ray(t_ray *ray, t_map *map, t_game *game)
 	}
 }
 
-void	set_transparent(mlx_image_t *img)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < img->width)
-	{
-		j = 0;
-		while (j < img->height)
-		{
-			mlx_put_pixel(img, i, j, convert_to_hexcode(0, 0, 0, 0));
-			j++;
-		}
-		i++;
-	}
-}
-
 double	cast_ray(t_game *game, double ray_dir)
 {
 	t_ray	ray;
 	double	res;
 
 	init_ray(&ray, game->player.x, game->player.y, ray_dir);
-	// set_transparent(game->img_a);
 	res = extend_ray(&ray, &game->map, game);
 	// debug_print_ray(&ray);
 	return (res);
