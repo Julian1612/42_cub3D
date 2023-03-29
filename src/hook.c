@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/29 16:35:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/29 20:20:05 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@
 // erstes und zweites if bewegt jetzt den spieler an sich und loscht die lezten bilder
 // muss noch alles angepasst werden so das w a s d passen und die pfeiltasten auch
 
+void on_keypress(mlx_key_data_t keydata, void* param)
+{
 
+	if (keydata.key == 55)
+		printf("okokok\n");
+}
 
 void	keys(t_game *game, t_minimap *minimap, t_player *player)
 {
@@ -67,13 +72,7 @@ void	keys(t_game *game, t_minimap *minimap, t_player *player)
 		player->view_dir = M_PI;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_4))
 		player->view_dir = M_PI * 1.5;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_5))
-	{
-		if (game->minimap.visible == 1)
-			game->minimap.visible = 0;
-		else
-			game->minimap.visible = 1;
-	}
+	mlx_key_hook(game->mlx, on_keypress, game);
 }
 
 void	hook(void *param)
@@ -87,26 +86,19 @@ void	hook(void *param)
 	// enemy
 	keys(game, &game->minimap, &game->player);
 	render_world(game);
-	printf("game->minimap.visible: %d\n", game->minimap.visible);
 	if (game->minimap.visible == 1)
 	{
-		if (!(game->minimap.smm_walls = mlx_new_image(game->mlx, wall_size * 5, wall_size * 5)))
-		{
-			mlx_close_window(game->mlx);
-			// puts(mlx_strerror(mlx_errno));
-			return(EXIT_FAILURE);
-		}
-		game->minimap.lmm_walls->instances[0].z = 0;
-		game->minimap.player->instances[0].z = 0;
-		game->minimap.smm_walls->instances[0].z = 3;
+		game->minimap.lmm_walls->instances[0].z = 1;
+		game->minimap.player->instances[0].z = 1;
+		game->minimap.smm_walls->instances[0].z = 0;
 		draw_minimap_i(game);
 		draw_player_i(game);
 	}
 	else
 	{
-		game->minimap.lmm_walls->instances[0].z = 1;
-		game->minimap.player->instances[0].z = 1;
-		game->minimap.smm_walls->instances[0].z = 0;
+		game->minimap.lmm_walls->instances[0].z = 0;
+		game->minimap.player->instances[0].z = 0;
+		game->minimap.smm_walls->instances[0].z = 1;
 		draw_minimap(game);
 	}
 	// draw_player(game);
