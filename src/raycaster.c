@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/29 19:07:26 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 19:26:36 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ double	get_y_offset(t_ray *ray)
 	double	x_adjacent;
 	double	y_opposite;
 
-	x_adjacent = ray->map_x - ray->origin.x;
+	if (ray->step.x < 0)
+		x_adjacent = ray->map_x - ray->origin.x + UNIT;
+	else
+		x_adjacent = ray->map_x - ray->origin.x;
 	y_opposite = x_adjacent / tan(ray->angle);
 	return (fmod(y_opposite + ray->origin.y, UNIT));
 }
@@ -97,7 +100,10 @@ double	get_x_offset(t_ray *ray)
 	double	y_adjacent;
 	double	x_opposite;
 
-	y_adjacent = ray->map_y - ray->origin.y;
+	if (ray->step.y < 0)
+		y_adjacent = ray->map_y - ray->origin.y + UNIT;
+	else
+		y_adjacent = ray->map_y - ray->origin.y;
 	x_opposite = y_adjacent * tan(ray->angle);
 	return (fmod(x_opposite + ray->origin.x, UNIT));
 }
