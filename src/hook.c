@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/26 16:55:29 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:42:54 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,4 +150,6 @@ void	hook(void *param)
 	// enemy
 	keys(game->mlx, &game->minimap, &game->player, game->map.map);
 	render_world(game);
+	// @note all images have to be resized here
+	mlx_resize_image(game->img_a, game->mlx->width, game->mlx->height);
 }
