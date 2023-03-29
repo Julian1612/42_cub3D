@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/29 20:38:10 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 22:49:56 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	switch_pixel(mlx_image_t *img, int x, int y, uint8_t src[4])
 
 void	paint_reflection(t_game *game, double obj_dist, int x)
 {
-	int		reflec_height;
+	double	reflec_height;
 	int		y;
 	int		i;
 	double	step;
@@ -50,7 +50,7 @@ void	paint_reflection(t_game *game, double obj_dist, int x)
 	int		tex_y;
 
 	reflec_height = game->mlx->height / obj_dist;
-	step = (double)(game->map.cardinal->tex->height - 1) / reflec_height;
+	step = (game->map.cardinal->tex->height - 1) / reflec_height;
 	tex_x = (game->map.cardinal->tex->width - 1) * game->map.stripe;
 	y = 0;
 	while (y < game->mlx->height && y < game->mlx->height / 2 - reflec_height / 2)
@@ -73,12 +73,15 @@ void	paint_reflection(t_game *game, double obj_dist, int x)
 	}
 }
 
-double	fix_fisheye(double ray_dir, double view_dir, double wall_dist)
+double	fix_fisheye(double ray_dir, double view_dir, double wall_dist, double fov)
 {
-	return (wall_dist * cos(view_dir - ray_dir));
+	double	difference;
+
+	difference = view_dir - ray_dir;
+	wall_dist *= cos(difference);
+	return (wall_dist);
 }
 
-// @todo proper fov handling (cubes are not square)
 int	render_world(t_game *game)
 {
 	double	wall_dist;
@@ -94,11 +97,9 @@ int	render_world(t_game *game)
 	{
 		ray_dir += fov / game->mlx->width;
 		wall_dist = cast_ray(game, ray_dir);
-		wall_dist = fix_fisheye(ray_dir, game->player.view_dir, wall_dist);
+		wall_dist = fix_fisheye(ray_dir, game->player.view_dir, wall_dist, fov);
 		paint_reflection(game, wall_dist, x);
 		x++;
 	}
-	printf("game->mlx->height: %d\n", game->mlx->height);
-	// exit(0);
 	return (SUCCESS);
 }

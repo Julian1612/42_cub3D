@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/29 19:38:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 23:53:33 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ int	test_parse(t_game *game)
 	game->player.weapon = NULL;
 	return (SUCCESS);
 }
+
+// @todo implement player size so that player stops at wall
+// @todo implement fps engine
+// @todo resizing still buggy
+// @todo refactor raycaster to return hit coordinates instead of wall distance
 
 int	main(int argc, char **argv)
 {
