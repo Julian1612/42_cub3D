@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/28 18:12:53 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 16:10:37 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	debug_print_ray(t_ray *ray)
 	if (DEBUG == 0)
 		return ;
 	printf(BLUE"============ RAY ============\n"RESET);
+	printf("ray angle:   %f\n", ray->angle);
 	printf("ray dir x:   %f\n", ray->dir.x);
 	printf("ray dir y:   %f\n", ray->dir.y);
 	printf("ray origin x:   %f\n", ray->origin.x);
