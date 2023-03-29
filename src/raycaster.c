@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/29 17:59:15 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 18:40:19 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,22 +84,27 @@ void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 
 double	get_y_offset(t_ray *ray)
 {
-	double	x_length;
-	double	y_length;
+	double	x_adjacent;
+	double	y_opposite;
+	double	origin_offset;
 
-	x_length = ray->map_x - ray->origin.x;
-	y_length = x_length / tan(ray->angle);
-	return (y_length);
+	x_adjacent = ray->map_x - ray->origin.x;
+	y_opposite = x_adjacent / tan(ray->angle);
+	origin_offset = fmod(ray->origin.y, UNIT);
+	// printf("origin_offset: %f\n", origin_offset);
+	return (fmod(y_opposite, UNIT));
 }
 
 double	get_x_offset(t_ray *ray)
 {
-	double	y_length;
-	double	x_length;
+	double	y_adjacent;
+	double	x_opposite;
+	double	origin_offset;
 
-	y_length = ray->map_y - ray->origin.y;
-	x_length = y_length * tan(ray->angle);
-	return (x_length);
+	y_adjacent = ray->map_y - ray->origin.y;
+	x_opposite = y_adjacent * tan(ray->angle);
+	origin_offset = fmod(ray->origin.x, UNIT);
+	return (fmod(x_opposite, UNIT));
 }
 
 
@@ -125,12 +130,12 @@ double	extend_ray(t_ray *ray, t_map *map, t_game *game)
 	set_cardinal(map, ray, side);
 	if (side)
 	{
-		map->stripe = fmod(ray->origin.x + get_x_offset(ray), UNIT);
+		map->stripe = get_x_offset(ray);
 		return (ray->length.y - ray->hypotenuse.y);
 	}
 	else
 	{
-		map->stripe = fmod(ray->origin.y + get_y_offset(ray), UNIT);
+		map->stripe = get_y_offset(ray);
 		return (ray->length.x - ray->hypotenuse.x);
 	}
 }

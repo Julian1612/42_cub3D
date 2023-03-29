@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/29 17:59:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 18:11:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	paint_reflection(t_game *game, double obj_dist, int x)
 	if (obj_dist < 1)
 		obj_dist = 1;
 	reflec_height = (int)((HEIGHT) / obj_dist);
-	step = (double)(game->map.cardinal->texture->height - 1) / reflec_height;
-	tex_x = (game->map.cardinal->texture->width - 1) * game->map.stripe;
+	step = (double)(game->map.cardinal->texture->height) / reflec_height;
+	tex_x = (game->map.cardinal->texture->width) * game->map.stripe;
 	// tex_x = 0;
 	y = 0;
 	while (y < HEIGHT / 2 - reflec_height / 2)
@@ -76,6 +76,7 @@ void	paint_reflection(t_game *game, double obj_dist, int x)
 	}
 }
 
+// @todo proper fov handling (cubes are not square)
 int	render_world(t_game *game)
 {
 	double	wall_dist;
@@ -93,6 +94,7 @@ int	render_world(t_game *game)
 		wall_dist = cast_ray(game, ray_dir);
 		// @note prevent fisheye effect
 		wall_dist *= cos(game->player.view_dir - ray_dir);
+		// printf("game->map.stripe: %f\n", game->map.stripe);
 		paint_reflection(game, wall_dist, x);
 		x++;
 	}
