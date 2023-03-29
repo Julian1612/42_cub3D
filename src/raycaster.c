@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/29 19:27:53 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:20:21 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,6 @@ double	cast_ray(t_game *game, double ray_dir)
 
 	init_ray(&ray, game->player.x, game->player.y, ray_dir);
 	res = extend_ray(&ray, &game->map, game);
-	// debug_print_ray(&ray);
+	debug_print_ray(&ray);
 	return (res);
 }

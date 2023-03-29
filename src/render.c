@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/29 19:32:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:31:09 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,17 @@ void	paint_reflection(t_game *game, double obj_dist, int x)
 	int		tex_x;
 	int		tex_y;
 
-	if (obj_dist < 1)
-		obj_dist = 1;
-	reflec_height = (int)((HEIGHT) / obj_dist);
+	reflec_height = HEIGHT / obj_dist;
 	step = (double)(game->map.cardinal->tex->height - 1) / reflec_height;
 	tex_x = (game->map.cardinal->tex->width - 1) * game->map.stripe;
-	// tex_x = 0;
 	y = 0;
-	while (y < HEIGHT / 2 - reflec_height / 2)
+	while (y < HEIGHT && y < HEIGHT / 2 - reflec_height / 2)
 	{
 		mlx_put_pixel(game->img_a, x, y, game->map.ceiling_color);
 		y++;
 	}
-	i = 0;
-	while (y < HEIGHT / 2 + reflec_height / 2)
+	i = y - HEIGHT / 2 + reflec_height / 2;
+	while (y < HEIGHT && y < HEIGHT / 2 + reflec_height / 2)
 	{
 		tex_y = i * step;
 		switch_pixel(game->img_a, x, y, &game->map.cardinal->tex->pixels[coor_to_pixel(game->map.cardinal->tex->width, tex_x, tex_y)]);
@@ -76,6 +73,11 @@ void	paint_reflection(t_game *game, double obj_dist, int x)
 	}
 }
 
+double	fix_fisheye(double ray_dir, double view_dir, double wall_dist)
+{
+	return (wall_dist * cos(view_dir - ray_dir));
+}
+
 // @todo proper fov handling (cubes are not square)
 int	render_world(t_game *game)
 {
@@ -85,15 +87,15 @@ int	render_world(t_game *game)
 	int		x;
 
 	debug_print_player(&game->player);
-	fov = 1;
+	fov = (double)WIDTH / HEIGHT;
 	ray_dir = game->player.view_dir - (fov / 2);
 	x = 0;
 	while (x < WIDTH)
 	{
-		ray_dir += fov / game->mlx->width;
+		ray_dir += fov / WIDTH;
 		wall_dist = cast_ray(game, ray_dir);
 		// @note prevent fisheye effect
-		wall_dist *= cos(game->player.view_dir - ray_dir);
+		wall_dist = fix_fisheye(ray_dir, game->player.view_dir, wall_dist);
 		// printf("game->map.stripe: %f\n", game->map.stripe);
 		paint_reflection(game, wall_dist, x);
 		x++;
