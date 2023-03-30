@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/30 18:30:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 20:07:09 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ typedef struct s_rayhit
 {
 	double				stripe;
 	double				distance;
-	enum e_object_id	object;
+	enum e_object_id	wall_id;
 }	t_rayhit;
 
 /* ************************************************************************** */
@@ -156,10 +156,9 @@ void			debug_print_ray(t_ray *ray, t_rayhit *hit);
 void			errexit_msg(char *msg);
 void			errexit_mlx_errno(void);
 
-unsigned int	convert_to_hexcode(unsigned char r, unsigned char g,
+t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 int				coor_to_pixel(int width, int x, int y);
-void			switch_pixel(mlx_image_t *img, int x, int y, uint8_t src[4]);
 
 int				initialize_mlx_data(t_game *game);
 

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 18:34:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 19:18:27 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,21 @@ static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map)
 		hit->distance = ray->length.x - ray->hypotenuse.x;
 }
 
-static void	set_cardinal(t_rayhit *hit, bool y_side, t_coor *step)
+static void	set_hit_wall_id(t_rayhit *hit, bool y_side, t_coor *step)
 {
 	if (y_side)
 	{
 		if (step->y < 0)
-			hit->object = SOUTH;
+			hit->wall_id = SOUTH;
 		else
-			hit->object = NORTH;
+			hit->wall_id = NORTH;
 	}
 	else
 	{
 		if (step->x < 0)
-			hit->object = WEST;
+			hit->wall_id = WEST;
 		else
-			hit->object = EAST;
+			hit->wall_id = EAST;
 	}
 }
 
@@ -134,7 +134,7 @@ void	cast_ray(t_rayhit *hit, t_game *game, double ray_dir)
 
 	init_ray(&ray, game->player.x, game->player.y, ray_dir);
 	set_distance(hit, &ray, &game->map);
-	set_cardinal(hit, ray.y_side, &ray.step);
+	set_hit_wall_id(hit, ray.y_side, &ray.step);
 	set_hit_offset(hit, ray.y_side, &ray);
 	debug_print_ray(&ray, hit);
 }
