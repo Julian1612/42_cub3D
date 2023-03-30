@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/30 15:47:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 16:05:08 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 /* ENUMS																	  */
 /* ************************************************************************** */
 
-enum	e_wall
+enum	e_wall_tex
 {
 	NORTH,
 	EAST,
@@ -84,8 +84,6 @@ typedef struct s_map
 	char		**map;
 	int			width;
 	int			height;
-	t_texture	*cardinal;
-	double		stripe;
 	t_texture	west;
 	t_texture	east;
 	t_texture	south;
@@ -144,38 +142,39 @@ typedef struct s_ray
 	t_coor	step;
 	t_coor	hypotenuse;
 	t_coor	length;
+	bool	y_side;
 }				t_ray;
 
 typedef struct s_rayhit
 {
-	t_coor		coor;
-	double		distance;
-	enum e_wall	wall;
+	double			offset;
+	double			distance;
+	enum e_wall_tex	tex;
 }	t_rayhit;
 
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
-void	debug_print_player(t_player *player);
-void	debug_print_ray(t_ray *ray);
+void			debug_print_player(t_player *player);
+void			debug_print_ray(t_ray *ray, t_rayhit *hit);
 
-void	errexit_msg(char *msg);
-void	errexit_mlx_errno(void);
+void			errexit_msg(char *msg);
+void			errexit_mlx_errno(void);
 
-unsigned int	convert_to_hexcode(
-	unsigned char r, unsigned char g, unsigned char b, unsigned char a);
-int		coor_to_pixel(int width, int x, int y);
-void	switch_pixel(mlx_image_t *img, int x, int y, uint8_t src[4]);
+unsigned int	convert_to_hexcode(unsigned char r, unsigned char g,
+					unsigned char b, unsigned char a);
+int				coor_to_pixel(int width, int x, int y);
+void			switch_pixel(mlx_image_t *img, int x, int y, uint8_t src[4]);
 
-int		initialize_mlx_all(t_game *game);
+int				initialize_mlx_all(t_game *game);
 
-void	hook(void *param);
+void			hook(void *param);
 
-int		render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
-int		render_world(t_game *game);
+int				render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
+int				render_world(t_game *game);
 
-double	cast_ray(t_game *game, double ray_angle);
+t_rayhit		cast_ray(t_game *game, double ray_angle);
 
 
 #endif

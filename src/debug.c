@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 15:44:51 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 16:10:09 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	debug_print_coor(t_coor *coor)
 	printf("y:   %f\n", coor->y);
 }
 
-void	debug_print_ray(t_ray *ray)
+void	debug_print_ray(t_ray *ray, t_rayhit *hit)
 {
 	if (DEBUG == 0)
 		return ;
@@ -67,4 +67,8 @@ void	debug_print_ray(t_ray *ray)
 	printf("hypotenuse.y:   %f\n", ray->hypotenuse.y);
 	printf("length.x:   %f\n", ray->length.x);
 	printf("length.y:   %f\n", ray->length.y);
+	printf(BLUE"============ HIT ============\n"RESET);
+	printf("hit offset:   %f\n", hit->offset);
+	printf("hit dist:   %f\n", hit->distance);
+	printf("hit texture:   %d\n", hit->tex);
 }

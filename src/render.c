@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 14:47:10 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 16:13:01 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ static double	fix_fisheye(double ray_dir, double view_dir, double wall_dist, dou
 
 int	render_world(t_game *game)
 {
-	double	wall_dist;
-	double	ray_dir;
-	double	fov;
-	int		x;
+	t_rayhit	ray_hit;
+	double		ray_dir;
+	double		fov;
+	int			x;
 
 	debug_print_player(&game->player);
 	fov = (double)game->mlx->width / game->mlx->height;
@@ -73,9 +73,9 @@ int	render_world(t_game *game)
 	while (x < game->mlx->width)
 	{
 		ray_dir += fov / game->mlx->width;
-		wall_dist = cast_ray(game, ray_dir);
-		wall_dist = fix_fisheye(ray_dir, game->player.view_dir, wall_dist, fov);
-		paint_reflection(game, wall_dist, x);
+		ray_hit = cast_ray(game, ray_dir);
+		ray_hit.distance = fix_fisheye(ray_dir, game->player.view_dir, ray_hit.distance, fov);
+		paint_reflection(game, ray_hit.distance, x);
 		x++;
 	}
 	return (SUCCESS);
