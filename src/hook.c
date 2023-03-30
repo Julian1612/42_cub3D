@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/30 14:47:17 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/30 15:07:06 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ void on_keypress(mlx_key_data_t keydata, void* param)
 	if (keydata.key == MLX_KEY_F && keydata.action == 0 && game->minimap.visible == 0)
 	{
 		printf("li\n");
-		game->minimap.smm_walls->instances[0].enabled = true;
-		game->minimap.lmm_walls->instances[0].enabled = false;
-		game->minimap.player->instances[0].enabled = false;
+		game->minimap.smm_walls->instances[0].enabled = false;
+		game->minimap.lmm_walls->instances[0].enabled = true;
+		game->minimap.player->instances[0].enabled = true;
 		game->minimap.visible = 1;
 	}
 	else if (keydata.key == MLX_KEY_F && keydata.action == 0 && game->minimap.visible == 1)
 	{
 		printf("la\n");
-		game->minimap.smm_walls->instances[0].enabled = false;
-		game->minimap.lmm_walls->instances[0].enabled = true;
-		game->minimap.player->instances[0].enabled = true;
+		game->minimap.smm_walls->instances[0].enabled = true;
+		game->minimap.lmm_walls->instances[0].enabled = false;
+		game->minimap.player->instances[0].enabled = false;
 		game->minimap.visible = 0;
 	}
 }
@@ -105,7 +105,7 @@ void	hook(void *param)
 	render_world(game);
 	draw_minimap_i(game);
 	draw_player_i(game);
-	if (game->minimap.visible == 1)
+	if (game->minimap.visible == 0)
 		draw_minimap(game);
 	// draw_player(game);
 }
