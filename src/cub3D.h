@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/30 18:23:32 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 18:30:22 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void			hook(void *param);
 
 int				render_world(t_game *game);
 
-t_rayhit		cast_ray(t_game *game, double ray_angle);
+void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
 
 
 #endif

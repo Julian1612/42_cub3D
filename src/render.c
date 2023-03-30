@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 18:22:13 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 18:28:35 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	render_world(t_game *game)
 	while (x < game->mlx->width)
 	{
 		ray_dir += fov / game->mlx->width;
-		ray_hit = cast_ray(game, ray_dir);
+		cast_ray(&ray_hit, game, ray_dir);
 		ray_hit.distance = fix_fisheye(ray_dir, game->player.view_dir, ray_hit.distance, fov);
 		paint_reflection(game, ray_hit.distance, x, ray_hit.object, ray_hit.stripe);
 		x++;

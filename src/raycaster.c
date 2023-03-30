@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 18:26:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 18:34:22 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,47 @@ static void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 	}
 }
 
+static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map)
+{
+	while (map->map[ray->map_y][ray->map_x] != WALL)
+	{
+		if (ray->length.x < ray->length.y)
+		{
+			ray->map_x += ray->step.x;
+			ray->length.x += ray->hypotenuse.x;
+			ray->y_side = false;
+		}
+		else
+		{
+			ray->map_y += ray->step.y;
+			ray->length.y += ray->hypotenuse.y;
+			ray->y_side = true;
+		}
+	}
+	if (ray->y_side)
+		hit->distance = ray->length.y - ray->hypotenuse.y;
+	else
+		hit->distance = ray->length.x - ray->hypotenuse.x;
+}
+
+static void	set_cardinal(t_rayhit *hit, bool y_side, t_coor *step)
+{
+	if (y_side)
+	{
+		if (step->y < 0)
+			hit->object = SOUTH;
+		else
+			hit->object = NORTH;
+	}
+	else
+	{
+		if (step->x < 0)
+			hit->object = WEST;
+		else
+			hit->object = EAST;
+	}
+}
+
 static double	get_y_offset(t_ray *ray)
 {
 	double	x_adjacent;
@@ -79,31 +120,7 @@ static double	get_x_offset(t_ray *ray)
 	return (fmod(x_opposite + ray->origin.x, UNIT));
 }
 
-
-static void	extend_ray(t_ray *ray, t_map *map, t_rayhit *hit)
-{
-	while (map->map[ray->map_y][ray->map_x] != WALL)
-	{
-		if (ray->length.x < ray->length.y)
-		{
-			ray->map_x += ray->step.x;
-			ray->length.x += ray->hypotenuse.x;
-			ray->y_side = false;
-		}
-		else
-		{
-			ray->map_y += ray->step.y;
-			ray->length.y += ray->hypotenuse.y;
-			ray->y_side = true;
-		}
-	}
-	if (ray->y_side)
-		hit->distance = ray->length.y - ray->hypotenuse.y;
-	else
-		hit->distance = ray->length.x - ray->hypotenuse.x;
-}
-
-static void	set_hit_offset(bool	y_side, t_rayhit *hit, t_ray *ray)
+static void	set_hit_offset(t_rayhit *hit, bool y_side, t_ray *ray)
 {
 	if (y_side)
 		hit->stripe = get_x_offset(ray);
@@ -111,33 +128,13 @@ static void	set_hit_offset(bool	y_side, t_rayhit *hit, t_ray *ray)
 		hit->stripe = get_y_offset(ray);
 }
 
-static void	set_cardinal(bool y_side, t_coor *step, t_rayhit *hit)
-{
-	if (y_side)
-	{
-		if (step->y < 0)
-			hit->object = SOUTH;
-		else
-			hit->object = NORTH;
-	}
-	else
-	{
-		if (step->x < 0)
-			hit->object = WEST;
-		else
-			hit->object = EAST;
-	}
-}
-
-t_rayhit	cast_ray(t_game *game, double ray_dir)
+void	cast_ray(t_rayhit *hit, t_game *game, double ray_dir)
 {
 	t_ray			ray;
-	t_rayhit		hit;
 
 	init_ray(&ray, game->player.x, game->player.y, ray_dir);
-	extend_ray(&ray, &game->map, &hit);
-	set_cardinal(ray.y_side, &ray.step, &hit);
-	set_hit_offset(ray.y_side, &hit, &ray);
-	debug_print_ray(&ray, &hit);
-	return (hit);
+	set_distance(hit, &ray, &game->map);
+	set_cardinal(hit, ray.y_side, &ray.step);
+	set_hit_offset(hit, ray.y_side, &ray);
+	debug_print_ray(&ray, hit);
 }
