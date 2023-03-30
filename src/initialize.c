@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 09:58:31 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/30 14:27:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	initialize_minimap(t_game *game)
 		// puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	game->minimap.visible = 1;
 	return (SUCCESS);
 }
 
@@ -51,7 +50,6 @@ int	initialize_minimap_i(t_game *game)
 	wall_size = get_wall_size_i(&game->minimap);
 	int x = (WIDTH - (game->minimap.width * wall_size)) / 2;
 	int y = (HEIGHT - (game->minimap.height * wall_size)) / 2;
-
 	if (!(game->minimap.player = mlx_new_image(game->mlx, wall_size / 2, wall_size / 2)))
 	{
 		mlx_close_window(game->mlx);
