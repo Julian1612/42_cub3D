@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/29 23:53:33 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 14:34:44 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	test_parse(t_game *game)
 	game->map.map = map;
 	game->map.width = 16;
 	game->map.height = 9;
-	game->map.west.path = "textures/west.png";
-	game->map.east.path = "textures/east.png";
-	game->map.south.path = "textures/south.png";
-	game->map.north.path = "textures/north.png";
+	game->map.west.path = "textures/west3.png";
+	game->map.east.path = "textures/east3.png";
+	game->map.south.path = "textures/south3.png";
+	game->map.north.path = "textures/north3.png";
 	game->map.ceiling_color = convert_to_hexcode(0, 0, 0, 0);
 	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
 	game->player.x = 2;
@@ -62,10 +62,6 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
 		errexit_mlx_errno();
-	// uint32_t xy[2] = {1, 1};
-	// u_int32_t wh[2] = {10, 10};
-	// mlx_image_t *test = mlx_texture_area_to_image(game.mlx, game.map.north.texture, xy, xy);
-	// mlx_image_to_window(game.mlx, test, 0, 0);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
