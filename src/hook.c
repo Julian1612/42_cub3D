@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/29 20:20:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/30 10:39:28 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,26 @@
 
 void on_keypress(mlx_key_data_t keydata, void* param)
 {
+	t_game	*game;
 
-	if (keydata.key == 55)
-		printf("okokok\n");
+	game = (t_game *)param;
+	printf("visible: %d\n", game->minimap.visible);
+	if (keydata.key == MLX_KEY_F && keydata.action == 0 && game->minimap.visible == 1)
+	{
+		printf("li\n");
+		game->minimap.smm_walls->instances[0].enabled = false;
+		game->minimap.lmm_walls->instances[0].enabled = false;
+		game->minimap.player->instances[0].enabled = false;
+		game->minimap.visible = 0;
+	}
+	else if (keydata.key == MLX_KEY_F && keydata.action == 0 && game->minimap.visible == 0)
+	{
+		printf("la\n");
+		game->minimap.smm_walls->instances[0].enabled = true;
+		game->minimap.lmm_walls->instances[0].enabled = true;
+		game->minimap.player->instances[0].enabled = true;
+		game->minimap.visible = 1;
+	}
 }
 
 void	keys(t_game *game, t_minimap *minimap, t_player *player)
@@ -86,20 +103,8 @@ void	hook(void *param)
 	// enemy
 	keys(game, &game->minimap, &game->player);
 	render_world(game);
-	if (game->minimap.visible == 1)
-	{
-		game->minimap.lmm_walls->instances[0].z = 1;
-		game->minimap.player->instances[0].z = 1;
-		game->minimap.smm_walls->instances[0].z = 0;
-		draw_minimap_i(game);
-		draw_player_i(game);
-	}
-	else
-	{
-		game->minimap.lmm_walls->instances[0].z = 0;
-		game->minimap.player->instances[0].z = 0;
-		game->minimap.smm_walls->instances[0].z = 1;
-		draw_minimap(game);
-	}
+	draw_minimap_i(game);
+	draw_player_i(game);
+	draw_minimap(game);
 	// draw_player(game);
 }
