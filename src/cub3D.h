@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/28 18:36:15 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:04:47 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define HEIGHT 800
 # define ERROR 1
 # define SUCCESS 0
-# define MM_BLOCK_SIZE 64
+# define MINIMAP_WALL_SIZE 30
 # define WALL '1'
 # ifndef DEBUG
 #  define DEBUG 0
