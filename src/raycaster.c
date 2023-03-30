@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 16:11:48 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 18:26:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static double	get_x_offset(t_ray *ray)
 }
 
 
-static void	extend_ray(t_ray *ray, t_map *map, t_game *game)
+static void	extend_ray(t_ray *ray, t_map *map, t_rayhit *hit)
 {
 	while (map->map[ray->map_y][ray->map_x] != WALL)
 	{
@@ -98,17 +98,17 @@ static void	extend_ray(t_ray *ray, t_map *map, t_game *game)
 		}
 	}
 	if (ray->y_side)
-		ray->length.y -= ray->hypotenuse.y;
+		hit->distance = ray->length.y - ray->hypotenuse.y;
 	else
-		ray->length.x -= ray->hypotenuse.x;
+		hit->distance = ray->length.x - ray->hypotenuse.x;
 }
 
 static void	set_hit_offset(bool	y_side, t_rayhit *hit, t_ray *ray)
 {
 	if (y_side)
-		hit->offset = get_x_offset(ray);
+		hit->stripe = get_x_offset(ray);
 	else
-		hit->offset = get_y_offset(ray);
+		hit->stripe = get_y_offset(ray);
 }
 
 static void	set_cardinal(bool y_side, t_coor *step, t_rayhit *hit)
@@ -116,16 +116,16 @@ static void	set_cardinal(bool y_side, t_coor *step, t_rayhit *hit)
 	if (y_side)
 	{
 		if (step->y < 0)
-			hit->tex = SOUTH;
+			hit->object = SOUTH;
 		else
-			hit->tex = NORTH;
+			hit->object = NORTH;
 	}
 	else
 	{
 		if (step->x < 0)
-			hit->tex = WEST;
+			hit->object = WEST;
 		else
-			hit->tex = EAST;
+			hit->object = EAST;
 	}
 }
 
@@ -135,7 +135,7 @@ t_rayhit	cast_ray(t_game *game, double ray_dir)
 	t_rayhit		hit;
 
 	init_ray(&ray, game->player.x, game->player.y, ray_dir);
-	extend_ray(&ray, &game->map, game);
+	extend_ray(&ray, &game->map, &hit);
 	set_cardinal(ray.y_side, &ray.step, &hit);
 	set_hit_offset(ray.y_side, &hit, &ray);
 	debug_print_ray(&ray, &hit);

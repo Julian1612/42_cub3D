@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/30 14:34:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 18:18:01 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,28 @@
 
 int	test_parse(t_game *game)
 {
-	static char	*map[17] = {"1111111111111111",
-							"1000100000000001",
-							"1000100000000001",
-							"1000100000000011",
-							"1000000000000111",
-							"1000100000001111",
-							"1000100000011111",
-							"1100100000111111",
-							"1111111111111111"};
+	static char			*map[17] =
+	{
+		"1111111111111111",
+		"1000100000000001",
+		"1000100000000001",
+		"1000100000000011",
+		"1000000000000111",
+		"1000100000001111",
+		"1000100000011111",
+		"1100100000111111",
+		"1111111111111111"
+	};
+	static t_texture	objects[4] =
+	{
+		{"textures/north3.png", NULL},
+		{"textures/east3.png", NULL},
+		{"textures/south3.png", NULL},
+		{"textures/west3.png", NULL}
+	};
 
 	game->map.map = map;
-	game->map.width = 16;
-	game->map.height = 9;
-	game->map.west.path = "textures/west3.png";
-	game->map.east.path = "textures/east3.png";
-	game->map.south.path = "textures/south3.png";
-	game->map.north.path = "textures/north3.png";
+	game->map.objects = objects;
 	game->map.ceiling_color = convert_to_hexcode(0, 0, 0, 0);
 	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
 	game->player.x = 2;
@@ -47,7 +52,8 @@ int	test_parse(t_game *game)
 
 // @todo implement player size so that player stops at wall
 // @todo implement fps engine
-// @todo resizing still buggy
+// @todo fix resizing
+// @todo fix camera plane
 // @todo refactor raycaster to return hit coordinates instead of wall distance
 
 int	main(int argc, char **argv)
@@ -56,7 +62,7 @@ int	main(int argc, char **argv)
 
 	if (test_parse(&game))
 		return (EXIT_FAILURE);
-	if (initialize_mlx_all(&game) == ERROR)
+	if (initialize_mlx_data(&game) == ERROR)
 		errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
 		errexit_mlx_errno();

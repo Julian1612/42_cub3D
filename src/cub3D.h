@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/30 16:05:08 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 18:23:32 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 /* ENUMS																	  */
 /* ************************************************************************** */
 
-enum	e_wall_tex
+enum	e_object_id
 {
 	NORTH,
 	EAST,
@@ -82,13 +82,7 @@ typedef struct s_minimap
 typedef struct s_map
 {
 	char		**map;
-	int			width;
-	int			height;
-	t_texture	west;
-	t_texture	east;
-	t_texture	south;
-	t_texture	north;
-	t_texture	*sprites;
+	t_texture	*objects;
 	t_hexcolor	ceiling_color;
 	t_hexcolor	floor_color;
 }	t_map;
@@ -147,9 +141,9 @@ typedef struct s_ray
 
 typedef struct s_rayhit
 {
-	double			offset;
-	double			distance;
-	enum e_wall_tex	tex;
+	double				stripe;
+	double				distance;
+	enum e_object_id	object;
 }	t_rayhit;
 
 /* ************************************************************************** */
@@ -167,11 +161,10 @@ unsigned int	convert_to_hexcode(unsigned char r, unsigned char g,
 int				coor_to_pixel(int width, int x, int y);
 void			switch_pixel(mlx_image_t *img, int x, int y, uint8_t src[4]);
 
-int				initialize_mlx_all(t_game *game);
+int				initialize_mlx_data(t_game *game);
 
 void			hook(void *param);
 
-int				render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
 int				render_world(t_game *game);
 
 t_rayhit		cast_ray(t_game *game, double ray_angle);

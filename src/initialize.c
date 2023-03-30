@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/29 20:40:54 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 18:18:01 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,32 @@ static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
 	return (SUCCESS);
 }
 
+// @note what if a texture is missing and has to be skipped?
 static int	initialize_textures(t_game *game)
 {
-	game->map.east.tex = mlx_load_png(game->map.east.path);
-	game->map.west.tex = mlx_load_png(game->map.west.path);
-	game->map.south.tex = mlx_load_png(game->map.south.path);
-	game->map.north.tex = mlx_load_png(game->map.north.path);
-	if (game->map.west.tex == NULL || game->map.east.tex == NULL
-		|| game->map.south.tex == NULL || game->map.north.tex == NULL)
+	game->map.objects[NORTH].tex = mlx_load_png(game->map.objects[NORTH].path);
+	game->map.objects[EAST].tex = mlx_load_png(game->map.objects[EAST].path);
+	game->map.objects[SOUTH].tex = mlx_load_png(game->map.objects[SOUTH].path);
+	game->map.objects[WEST].tex = mlx_load_png(game->map.objects[WEST].path);
+	if (!game->map.objects[NORTH].tex || !game->map.objects[EAST].tex
+		|| !game->map.objects[SOUTH].tex || !game->map.objects[WEST].tex)
 		return (ERROR);
 	// @todo sprite initialization
 	return (SUCCESS);
 }
 
-int	initialize_mlx_all(t_game *game)
+static int	initialize_environ(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	game->img_a = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
 	if (game->mlx == NULL || game->img_a == NULL)
+		return (ERROR);
+	return (SUCCESS);
+}
+
+int	initialize_mlx_data(t_game *game)
+{
+	if (initialize_environ(game) == ERROR)
 		return (ERROR);
 	if (initialize_textures(game) == ERROR)
 		return (ERROR);

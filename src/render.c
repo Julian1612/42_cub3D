@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 16:13:01 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 18:22:13 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,20 @@
 #include <stdlib.h> // @note exit, remove
 #include <unistd.h> // @note remove
 
-static void	paint_reflection(t_game *game, double obj_dist, int x)
+// draw ceiling
+// reflec_height
+// ending of ceiling (height / 2 - reflec_height / 2)
+
+// draw walls
+// reflec_height
+// tex_y
+// tex_x
+// step
+// ending of walls (height / 2 + reflec_height / 2)
+
+// draw floor
+
+static void	paint_reflection(t_game *game, double obj_dist, int x, enum e_object_id id, double offset)
 {
 	double	reflec_height;
 	int		y;
@@ -27,8 +40,8 @@ static void	paint_reflection(t_game *game, double obj_dist, int x)
 	int		tex_y;
 
 	reflec_height = game->mlx->height / obj_dist;
-	step = (game->map.cardinal->tex->height - 1) / reflec_height;
-	tex_x = (game->map.cardinal->tex->width - 1) * game->map.stripe;
+	step = (game->map.objects[id].tex->height - 1) / reflec_height;
+	tex_x = (game->map.objects[id].tex->width - 1) * offset;
 	y = 0;
 	while (y < game->mlx->height && y < game->mlx->height / 2 - reflec_height / 2)
 	{
@@ -39,7 +52,7 @@ static void	paint_reflection(t_game *game, double obj_dist, int x)
 	while (y < game->mlx->height && y < game->mlx->height / 2 + reflec_height / 2)
 	{
 		tex_y = i * step;
-		switch_pixel(game->img_a, x, y, &game->map.cardinal->tex->pixels[coor_to_pixel(game->map.cardinal->tex->width, tex_x, tex_y)]);
+		switch_pixel(game->img_a, x, y, &game->map.objects[id].tex->pixels[coor_to_pixel(game->map.objects[id].tex->width, tex_x, tex_y)]);
 		i++;
 		y++;
 	}
@@ -75,7 +88,7 @@ int	render_world(t_game *game)
 		ray_dir += fov / game->mlx->width;
 		ray_hit = cast_ray(game, ray_dir);
 		ray_hit.distance = fix_fisheye(ray_dir, game->player.view_dir, ray_hit.distance, fov);
-		paint_reflection(game, ray_hit.distance, x);
+		paint_reflection(game, ray_hit.distance, x, ray_hit.object, ray_hit.stripe);
 		x++;
 	}
 	return (SUCCESS);

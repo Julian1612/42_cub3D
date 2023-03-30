@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 16:10:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 18:22:13 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	debug_print_ray(t_ray *ray, t_rayhit *hit)
 	printf("length.x:   %f\n", ray->length.x);
 	printf("length.y:   %f\n", ray->length.y);
 	printf(BLUE"============ HIT ============\n"RESET);
-	printf("hit offset:   %f\n", hit->offset);
+	printf("hit offset:   %f\n", hit->stripe);
 	printf("hit dist:   %f\n", hit->distance);
-	printf("hit texture:   %d\n", hit->tex);
+	printf("hit texture:   %d\n", hit->object);
 }
