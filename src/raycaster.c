@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/29 20:20:21 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 15:47:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 #define UNIT 1.0f
 
-void	set_cardinal(t_map *map, t_ray *ray, bool side)
+static void	set_cardinal(t_map *map, t_ray *ray, bool side)
 {
 	if (side)
 	{
@@ -37,7 +37,7 @@ void	set_cardinal(t_map *map, t_ray *ray, bool side)
 	}
 }
 
-void	init_ray(t_ray *ray, double x, double y, double ray_dir)
+static void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 {
 	ray->angle = ray_dir;
 	ray->dir.x = sin(ray_dir);
@@ -71,16 +71,7 @@ void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 	}
 }
 
-// @note remove
-// ray hit coordinates / ray block offset
-// ray->origin = origin coordinates
-// x_length = ray->origin.x + map_x
-// angle = ray->angle
-// y offset = origin.y % UNIT
-// y_length = x_length * ray->dir.y + y_offset
-// y_offset = y_length % UNIT
-
-double	get_y_offset(t_ray *ray)
+static double	get_y_offset(t_ray *ray)
 {
 	double	x_adjacent;
 	double	y_opposite;
@@ -93,7 +84,7 @@ double	get_y_offset(t_ray *ray)
 	return (fmod(y_opposite + ray->origin.y, UNIT));
 }
 
-double	get_x_offset(t_ray *ray)
+static double	get_x_offset(t_ray *ray)
 {
 	double	y_adjacent;
 	double	x_opposite;
@@ -107,7 +98,7 @@ double	get_x_offset(t_ray *ray)
 }
 
 
-double	extend_ray(t_ray *ray, t_map *map, t_game *game)
+static double	extend_ray(t_ray *ray, t_map *map, t_game *game)
 {
 	bool	side;
 

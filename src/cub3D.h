@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/29 23:45:24 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 15:47:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define WIDTH 1200
+# define WIDTH 800
 # define HEIGHT 800
 # define ERROR -1
 # define SUCCESS 0
@@ -33,6 +33,18 @@
 # ifndef DEBUG
 #  define DEBUG 0
 # endif
+
+/* ************************************************************************** */
+/* ENUMS																	  */
+/* ************************************************************************** */
+
+enum	e_wall
+{
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST,
+};
 
 /* ************************************************************************** */
 /* TYPEDEFS																	  */
@@ -121,7 +133,7 @@ typedef struct s_coor
 	double	y;
 }	t_coor;
 
-// @note move this?
+// @todo move to raycaster header
 typedef struct s_ray
 {
 	double	angle;
@@ -134,27 +146,36 @@ typedef struct s_ray
 	t_coor	length;
 }				t_ray;
 
+typedef struct s_rayhit
+{
+	t_coor		coor;
+	double		distance;
+	enum e_wall	wall;
+}	t_rayhit;
+
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
 void	debug_print_player(t_player *player);
+void	debug_print_ray(t_ray *ray);
 
 void	errexit_msg(char *msg);
 void	errexit_mlx_errno(void);
 
+unsigned int	convert_to_hexcode(
+	unsigned char r, unsigned char g, unsigned char b, unsigned char a);
+int		coor_to_pixel(int width, int x, int y);
+void	switch_pixel(mlx_image_t *img, int x, int y, uint8_t src[4]);
+
 int		initialize_mlx_all(t_game *game);
+
+void	hook(void *param);
 
 int		render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
 int		render_world(t_game *game);
 
-void	hook(void *param);
-
 double	cast_ray(t_game *game, double ray_angle);
 
-void	debug_print_ray(t_ray *ray);
-
-unsigned int	convert_to_hexcode(
-	unsigned char r, unsigned char g, unsigned char b, unsigned char a);
 
 #endif

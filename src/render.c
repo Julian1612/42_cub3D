@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 13:08:27 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 14:47:10 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,7 @@
 #include <stdlib.h> // @note exit, remove
 #include <unistd.h> // @note remove
 
-#define FOV 60
-
-int	coor_to_pixel(int width, int x, int y)
-{
-	int	pixel;
-
-	pixel = y * width + x;
-	// @note multiply to get from int32 to int8
-	pixel *= 4;
-	return (pixel);
-}
-
-void	switch_pixel(mlx_image_t *img, int x, int y, uint8_t src[4])
-{
-	int	dest;
-
-	dest = coor_to_pixel(img->width, x, y);
-	img->pixels[dest] = src[0];
-	img->pixels[dest + 1] = src[1];
-	img->pixels[dest + 2] = src[2];
-	img->pixels[dest + 3] = src[3];
-}
-
-void	paint_reflection(t_game *game, double obj_dist, int x)
+static void	paint_reflection(t_game *game, double obj_dist, int x)
 {
 	double	reflec_height;
 	int		y;
@@ -73,7 +50,7 @@ void	paint_reflection(t_game *game, double obj_dist, int x)
 	}
 }
 
-double	fix_fisheye(double ray_dir, double view_dir, double wall_dist, double fov)
+static double	fix_fisheye(double ray_dir, double view_dir, double wall_dist, double fov)
 {
 	double	difference;
 
