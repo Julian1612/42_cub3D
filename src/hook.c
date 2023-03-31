@@ -6,10 +6,9 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/31 09:41:36 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/31 09:56:02 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3D.h" // t_game
 #include "minimap.h"
@@ -20,24 +19,21 @@
 #define SPEED 1
 #define DIVIDE 10 // @note why is this needed? fuck this shit
 
-///////////////////////
-
-// erstes und zweites if bewegt jetzt den spieler an sich und loscht die lezten bilder
-// muss noch alles angepasst werden so das w a s d passen und die pfeiltasten auch
-
 void	on_keypress(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 
 	game = (t_game *)param;
-	if (keydata.key == MLX_KEY_F && keydata.action == 0 && game->minimap.visible == 0)
+	if (keydata.key == MLX_KEY_F && keydata.action == 0
+		&& game->minimap.visible == 0)
 	{
 		game->minimap.smm_walls->instances[0].enabled = false;
 		game->minimap.lmm_walls->instances[0].enabled = true;
 		game->minimap.player->instances[0].enabled = true;
 		game->minimap.visible = 1;
 	}
-	else if (keydata.key == MLX_KEY_F && keydata.action == 0 && game->minimap.visible == 1)
+	else if (keydata.key == MLX_KEY_F && keydata.action == 0
+		&& game->minimap.visible == 1)
 	{
 		game->minimap.smm_walls->instances[0].enabled = true;
 		game->minimap.lmm_walls->instances[0].enabled = false;
@@ -65,7 +61,6 @@ void	keys(t_game *game, t_minimap *minimap, t_player *player)
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
-		// @note radian rotated by 90 degrees to offset movement
 		player->y += cos(player->view_dir + M_PI_2) * SPEED / DIVIDE;
 		player->x += sin(player->view_dir + M_PI_2) * SPEED / DIVIDE;
 	}
@@ -75,7 +70,7 @@ void	keys(t_game *game, t_minimap *minimap, t_player *player)
 		player->x += sin(player->view_dir - M_PI_2) * SPEED / DIVIDE;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-		player->view_dir += M_PI / 180 * SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)
+		player->view_dir += M_PI / 180 * SPEED;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		player->view_dir -= M_PI / 180 * SPEED;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_1))

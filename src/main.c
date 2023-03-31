@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/31 09:37:06 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/31 09:54:26 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 // 	system("while :; do afplay sound_track/erika.mp3 && afplay sound_track/preussengloria.mp3 && afplay sound_track/march.mp3; done");
 // }
 
-
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -41,8 +40,6 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	if (initialize_minimap_i(&game) == ERROR)
 		errexit_mlx_errno();
-	draw_minimap_i(&game);
-	draw_player_i(&game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
