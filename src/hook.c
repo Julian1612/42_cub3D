@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/31 09:39:15 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/03/31 09:41:36 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@
 // erstes und zweites if bewegt jetzt den spieler an sich und loscht die lezten bilder
 // muss noch alles angepasst werden so das w a s d passen und die pfeiltasten auch
 
-void on_keypress(mlx_key_data_t keydata, void* param)
+void	on_keypress(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 
 	game = (t_game *)param;
-	printf("visible: %d\n", game->minimap.visible);
 	if (keydata.key == MLX_KEY_F && keydata.action == 0 && game->minimap.visible == 0)
 	{
-		printf("li\n");
 		game->minimap.smm_walls->instances[0].enabled = false;
 		game->minimap.lmm_walls->instances[0].enabled = true;
 		game->minimap.player->instances[0].enabled = true;
@@ -41,7 +39,6 @@ void on_keypress(mlx_key_data_t keydata, void* param)
 	}
 	else if (keydata.key == MLX_KEY_F && keydata.action == 0 && game->minimap.visible == 1)
 	{
-		printf("la\n");
 		game->minimap.smm_walls->instances[0].enabled = true;
 		game->minimap.lmm_walls->instances[0].enabled = false;
 		game->minimap.player->instances[0].enabled = false;
@@ -97,10 +94,6 @@ void	hook(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	// mouse handling
-	// minimap
-	// collision
-	// enemy
 	keys(game, &game->minimap, &game->player);
 	render_world(game);
 	draw_minimap_i(game);
