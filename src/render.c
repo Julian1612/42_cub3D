@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 20:23:12 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 19:04:04 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	draw_ceiling(t_game *game, int wall_height, int x_img)
 
 	ceil_height = game->img_a->height / 2 - wall_height / 2;
 	y_img = 0;
-	while (y_img < ceil_height)
+	while (y_img < game->img_a->height && y_img < ceil_height)
 	{
 		mlx_put_pixel(game->img_a, x_img, y_img, game->map.ceiling_color);
 		y_img++;
@@ -41,15 +41,20 @@ static void	draw_wall(t_game *game, int wall_height, int x_img, t_rayhit *hit)
 
 	scale = (double)(game->map.objects[hit->wall_id].tex->height - 1) / wall_height;
 	x_tex = (game->map.objects[hit->wall_id].tex->width - 1) * hit->stripe;
-	y_img = game->img_a->height / 2 - wall_height / 2;
 	y_tex_iter = 0;
-	while (y_img < game->img_a->height / 2 + wall_height / 2)
+	y_img = game->img_a->height / 2 - wall_height / 2;
+	if (y_img < 0)
+	{
+		y_tex_iter = y_img * -1;
+		y_img = 0;
+	}
+	while (y_img < game->img_a->height && y_img < game->img_a->height / 2 + wall_height / 2)
 	{
 		// @todo improve this ugly shit
-		ft_memcpy(&game->img_a->pixels[
-			coor_to_pixel(game->img_a->width, x_img, y_img)],
-			&game->map.objects[hit->wall_id].tex->pixels[
-			coor_to_pixel(game->map.objects[hit->wall_id].tex->width,
+		ft_memcpy(&game->img_a->pixels
+		[coor_to_pixel(game->img_a->width, x_img, y_img)],
+			&game->map.objects[hit->wall_id].tex->pixels
+		[coor_to_pixel(game->map.objects[hit->wall_id].tex->width,
 				x_tex, y_tex_iter * scale)],
 			4);
 		y_tex_iter++;
@@ -64,7 +69,7 @@ static void	draw_floor(t_game *game, int wall_height, int x_img)
 
 	floor_start = game->img_a->height / 2 + wall_height / 2;
 	y_img = floor_start;
-	while (y_img < game->img_a->height)
+	while (y_img < game->img_a->height && y_img < game->img_a->height)
 	{
 		mlx_put_pixel(game->img_a, x_img, y_img, game->map.floor_color);
 		y_img++;
@@ -97,9 +102,8 @@ int	render_world(t_game *game)
 	{
 		ray_dir += fov / game->img_a->width;
 		cast_ray(&ray_hit, game, ray_dir);
-		ray_hit.distance
-			= fix_fisheye(ray_dir, game->player.view_dir, ray_hit.distance);
-		wall_height = game->img_a->height / ray_hit.distance;
+		ray_hit.dist = fix_fisheye(ray_dir, game->player.view_dir, ray_hit.dist);
+		wall_height = game->img_a->height / ray_hit.dist;
 		draw_ceiling(game, wall_height, x_img);
 		draw_wall(game, wall_height, x_img, &ray_hit);
 		draw_floor(game, wall_height, x_img);

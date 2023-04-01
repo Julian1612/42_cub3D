@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/30 20:07:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 18:36:05 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ typedef struct s_ray
 typedef struct s_rayhit
 {
 	double				stripe;
-	double				distance;
+	double				dist;
 	enum e_object_id	wall_id;
 }	t_rayhit;
 
@@ -167,6 +167,5 @@ void			hook(void *param);
 int				render_world(t_game *game);
 
 void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
-
 
 #endif

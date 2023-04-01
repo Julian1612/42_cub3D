@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 19:18:27 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 18:36:05 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map)
 		}
 	}
 	if (ray->y_side)
-		hit->distance = ray->length.y - ray->hypotenuse.y;
+		hit->dist = ray->length.y - ray->hypotenuse.y;
 	else
-		hit->distance = ray->length.x - ray->hypotenuse.x;
+		hit->dist = ray->length.x - ray->hypotenuse.x;
 }
 
 static void	set_hit_wall_id(t_rayhit *hit, bool y_side, t_coor *step)
