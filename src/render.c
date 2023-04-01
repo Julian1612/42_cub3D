@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 19:05:24 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 19:13:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ int	render_world(t_game *game)
 
 	debug_print_player(&game->player);
 	fov = (double)game->img_a->width / game->img_a->height;
-	ray_dir = game->player.view_dir - (fov / 2);
+	ray_dir = game->player.view_dir + (fov / 2);
 	x_img = 0;
 	while (x_img < game->img_a->width)
 	{
-		ray_dir += fov / game->img_a->width;
+		ray_dir -= fov / game->img_a->width;
 		cast_ray(&ray_hit, game, ray_dir);
 		ray_hit.dist = fix_fisheye(ray_dir, game->player.view_dir, ray_hit.dist);
 		wall_height = game->img_a->height / ray_hit.dist;
