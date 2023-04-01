@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 19:13:17 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 20:29:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static double	fix_fisheye(double ray_dir, double view_dir, double wall_dist)
 	return (wall_dist);
 }
 
+// @todo fix fisheye for angles > 60
 int	render_world(t_game *game)
 {
 	t_rayhit	ray_hit;
