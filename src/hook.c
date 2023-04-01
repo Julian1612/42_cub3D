@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 22:01:02 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 22:27:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,22 @@
 #include <stdbool.h> // bool
 
 #define MOV_SPEED 10 // @note the higher, the slower
-#define ROT_SPEED 1 // @note the higher, the slower
+#define ROT_SPEED 0.5 // @note the higher, the slower
+#define PLAYER_SIZE 0.2 // @todo size of player, switch to actual player size
 
 // @todo drifting collision
 // @note collision problem: if speed is too high, player can move through walls
 // @note function usable for enemies?
 bool	check_collision(double x, double y, char **map)
 {
-	if (map[(int)(y)][(int)(x)] == WALL)
-	{
-		// printf("collision!\n");
+	if (map[(int)(y + PLAYER_SIZE)][(int)(x)] == WALL)
 		return (true);
-	}
-	// printf("no...\n");
+	if (map[(int)(y - PLAYER_SIZE)][(int)(x)] == WALL)
+		return (true);
+	if (map[(int)(y)][(int)(x + PLAYER_SIZE)] == WALL)
+		return (true);
+	if (map[(int)(y)][(int)(x - PLAYER_SIZE)] == WALL)
+		return (true);
 	return (false);
 }
 

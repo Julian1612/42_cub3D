@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/01 21:25:01 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 22:27:21 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef struct s_player
 	double			x;
 	double			y;
 	double			view_dir;
-	double			size;
 	t_weapon		*weapon;
 }	t_player;
 
