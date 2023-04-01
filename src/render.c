@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 19:04:04 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 19:05:24 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static double	fix_fisheye(double ray_dir, double view_dir, double wall_dist)
 	return (wall_dist);
 }
 
-// @todo fix segfault when running into wall
 int	render_world(t_game *game)
 {
 	t_rayhit	ray_hit;
