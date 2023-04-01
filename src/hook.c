@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/31 09:56:02 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:04:29 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	hook(void *param)
 	game = (t_game *)param;
 	keys(game, &game->minimap, &game->player);
 	render_world(game);
-	draw_minimap_i(game);
-	draw_player_i(game);
+	draw_map(game);
+	draw_player_map(game);
 	if (game->minimap.visible == 0)
 		draw_minimap(game);
 	// draw_player(game);
