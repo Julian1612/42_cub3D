@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/30 16:04:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:48:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,25 +143,24 @@ typedef struct s_ray
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
-void	debug_print_player(t_player *player);
+void			debug_print_player(t_player *player);
 
-void	errexit_msg(char *msg);
-void	errexit_mlx_errno(void);
+void			errexit_msg(char *msg);
+void			errexit_mlx_errno(void);
 
-int		initialize_mlx_all(t_game *game);
-int	initialize_minimap(t_game *game);
-int	initialize_minimap_i(t_game *game);
+int				initialize_mlx_all(t_game *game);
+int				initialize_minimap(t_game *game);
+int				initialize_map(t_game *game);
 
-int		render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map);
-int		render_world(t_game *game);
+int				render_world(t_game *game);
 
-void	hook(void *param);
+void			hook(void *param);
 
-double	cast_ray(t_game *game, double ray_angle);
+double			cast_ray(t_game *game, double ray_angle);
 
-unsigned int	convert_to_hexcode(
-	unsigned char r, unsigned char g, unsigned char b, unsigned char a);
+unsigned int	convert_to_hexcode(unsigned char r, unsigned char g,
+					unsigned char b, unsigned char a);
 
-void	debug_print_ray(t_ray *ray);
+void			debug_print_ray(t_ray *ray);
 
 #endif

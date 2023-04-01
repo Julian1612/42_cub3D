@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/01 18:24:39 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:46:25 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #define SPEED 1
 #define DIVIDE 10 // @note why is this needed? fuck this shit
 
-void	on_keypress(mlx_key_data_t keydata, void *param)
+void	change_maps(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 
@@ -81,7 +81,7 @@ void	keys(t_game *game, t_minimap *minimap, t_player *player)
 		player->view_dir = M_PI;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_4))
 		player->view_dir = M_PI * 1.5;
-	mlx_key_hook(game->mlx, on_keypress, game);
+	mlx_key_hook(game->mlx, change_maps, game);
 }
 
 void	hook(void *param)
@@ -91,13 +91,11 @@ void	hook(void *param)
 	game = (t_game *)param;
 	keys(game, &game->minimap, &game->player);
 	render_world(game);
-	// draw_map(game);
 	if (game->minimap.visible == 0)
-		draw_minimap(game);
+		render_minimap(game);
 	else
 	{
 		draw_map(game);
 		draw_player_map(game);
 	}
-	// draw_player(game);
 }

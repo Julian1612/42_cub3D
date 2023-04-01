@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/01 18:14:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:51:58 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,22 @@
 #include <math.h>
 
 static void	draw_square(t_minimap *minimap, int i, int j, char symbol);
+static void	draw_minimap(t_game *game);
 
-int	draw_minimap(t_game *game)
+int	render_minimap(t_game *game)
+{
+
+	mlx_delete_image(game->mlx, game->minimap.smm_walls);
+	game->minimap.smm_walls = mlx_new_image(game->mlx, MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);
+	if (game->minimap.smm_walls == NULL)
+		mlx_close_window(game->mlx);
+	draw_minimap(game);
+	if (mlx_image_to_window(game->mlx, game->minimap.smm_walls, 0, 0) == -1)
+		mlx_close_window(game->mlx);
+	return (0);
+}
+
+static void	draw_minimap(t_game *game)
 {
 	int	i;
 	int	j;
@@ -24,14 +38,7 @@ int	draw_minimap(t_game *game)
 	int	l;
 
 	k = 0;
-	i = (int) (game->player.y - 2);
-	mlx_delete_image(game->mlx, game->minimap.smm_walls);
-	if (!(game->minimap.smm_walls = mlx_new_image(game->mlx, MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5)))
-	{
-		mlx_close_window(game->mlx);
-		// puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
+	i = (int)(game->player.y - 2);
 	while (i <= game->player.y + 2 && game->map.map[i] != NULL)
 	{
 		j = (int) game->player.x - 2;
@@ -48,13 +55,6 @@ int	draw_minimap(t_game *game)
 		i++;
 		k++;
 	}
-	if (mlx_image_to_window(game->mlx, game->minimap.smm_walls, 0, 0) == -1)
-	{
-		mlx_close_window(game->mlx);
-		// puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	return (0);
 }
 
 static void	draw_square(t_minimap *minimap, int i, int j, char symbol)
