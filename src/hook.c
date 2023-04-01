@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 19:15:26 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 21:50:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,35 @@
 #define MOV_SPEED 10 // @note the higher, the slower
 #define ROT_SPEED 1 // @note the higher, the slower
 
-// @note collision problem: if speed is too high, player can move through walls
 // @todo drifting collision
-bool	check_collision(double x, double y, char **map)
+// @note collision problem: if speed is too high, player can move through walls
+// @note function usable for enemies?
+bool	check_collision_x(double x, double y, double offset, char **map)
 {
-	if (map[(int)y][(int)x] == WALL)
+	x += offset;
+	if (map[(int)(y)][(int)(x)] == WALL)
+	{
+		// printf("collision!\n");
 		return (true);
+	}
+	// printf("no...\n");
+	return (false);
+}
+
+bool	check_collision_y(double x, double y, double offset, char **map)
+{
+	y += offset;
+	if (map[(int)(y)][(int)(x)] == WALL)
+	{
+		// printf("collision!\n");
+		return (true);
+	}
+	// printf("no...\n");
 	return (false);
 }
 
 void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 {
-	double	x;
-	double	y;
-
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(mlx);
@@ -42,43 +57,31 @@ void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
-		y = player->y + cos(player->view_dir) / MOV_SPEED;
-		x = player->x + sin(player->view_dir) / MOV_SPEED;
-		if (!check_collision(x, y, map))
-		{
-			player->y = y;
-			player->x = x;
-		}
+		if (!check_collision_x(player->x, player->y, sin(player->view_dir) / MOV_SPEED, map))
+			player->x += sin(player->view_dir) / MOV_SPEED;
+		if (!check_collision_y(player->x, player->y, cos(player->view_dir) / MOV_SPEED, map))
+			player->y += cos(player->view_dir) / MOV_SPEED;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
-		y = player->y - cos(player->view_dir) / MOV_SPEED;
-		x = player->x - sin(player->view_dir) / MOV_SPEED;
-		if (!check_collision(x, y, map))
-		{
-			player->y = y;
-			player->x = x;
-		}
+		if (!check_collision_x(player->x, player->y, -sin(player->view_dir) / MOV_SPEED, map))
+			player->x -= sin(player->view_dir) / MOV_SPEED;
+		if (!check_collision_y(player->x, player->y, -cos(player->view_dir) / MOV_SPEED, map))
+			player->y -= cos(player->view_dir) / MOV_SPEED;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
-		y = player->y + cos(player->view_dir - M_PI_2) / MOV_SPEED;
-		x = player->x + sin(player->view_dir - M_PI_2) / MOV_SPEED;
-		if (!check_collision(x, y, map))
-		{
-			player->y = y;
-			player->x = x;
-		}
+		if (!check_collision_x(player->x, player->y, sin(player->view_dir - M_PI_2) / MOV_SPEED, map))
+			player->x += sin(player->view_dir - M_PI_2) / MOV_SPEED;
+		if (!check_collision_y(player->x, player->y, cos(player->view_dir - M_PI_2) / MOV_SPEED, map))
+			player->y += cos(player->view_dir - M_PI_2) / MOV_SPEED;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
-		y = player->y - cos(player->view_dir - M_PI_2) / MOV_SPEED;
-		x = player->x - sin(player->view_dir - M_PI_2) / MOV_SPEED;
-		if (!check_collision(x, y, map))
-		{
-			player->y = y;
-			player->x = x;
-		}
+		if (!check_collision_x(player->x, player->y, -sin(player->view_dir - M_PI_2) / MOV_SPEED, map))
+			player->x -= sin(player->view_dir - M_PI_2) / MOV_SPEED;
+		if (!check_collision_y(player->x, player->y, -cos(player->view_dir - M_PI_2) / MOV_SPEED, map))
+			player->y -= cos(player->view_dir - M_PI_2) / MOV_SPEED;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		player->view_dir += M_PI / 90 / ROT_SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)

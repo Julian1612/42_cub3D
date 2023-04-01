@@ -40,3 +40,11 @@ values that have to be determined:
 		- pro enum
 			- just a number can be passed
 			- number represents texture in array
+
+
+--------------collision detection--------------
+- if player hits wall on x axis, stop movement on x axis
+- if player hits wall on y axis, stop movement on y axis
+
+- how to check on which axis collision was?
+	- 
