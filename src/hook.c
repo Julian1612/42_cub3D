@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 21:50:17 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 22:01:02 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,8 @@
 // @todo drifting collision
 // @note collision problem: if speed is too high, player can move through walls
 // @note function usable for enemies?
-bool	check_collision_x(double x, double y, double offset, char **map)
+bool	check_collision(double x, double y, char **map)
 {
-	x += offset;
-	if (map[(int)(y)][(int)(x)] == WALL)
-	{
-		// printf("collision!\n");
-		return (true);
-	}
-	// printf("no...\n");
-	return (false);
-}
-
-bool	check_collision_y(double x, double y, double offset, char **map)
-{
-	y += offset;
 	if (map[(int)(y)][(int)(x)] == WALL)
 	{
 		// printf("collision!\n");
@@ -57,30 +44,30 @@ void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
-		if (!check_collision_x(player->x, player->y, sin(player->view_dir) / MOV_SPEED, map))
+		if (!check_collision(player->x + sin(player->view_dir) / MOV_SPEED, player->y, map))
 			player->x += sin(player->view_dir) / MOV_SPEED;
-		if (!check_collision_y(player->x, player->y, cos(player->view_dir) / MOV_SPEED, map))
+		if (!check_collision(player->x, player->y + cos(player->view_dir) / MOV_SPEED, map))
 			player->y += cos(player->view_dir) / MOV_SPEED;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
-		if (!check_collision_x(player->x, player->y, -sin(player->view_dir) / MOV_SPEED, map))
+		if (!check_collision(player->x - sin(player->view_dir) / MOV_SPEED, player->y, map))
 			player->x -= sin(player->view_dir) / MOV_SPEED;
-		if (!check_collision_y(player->x, player->y, -cos(player->view_dir) / MOV_SPEED, map))
+		if (!check_collision(player->x, player->y - cos(player->view_dir) / MOV_SPEED, map))
 			player->y -= cos(player->view_dir) / MOV_SPEED;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
-		if (!check_collision_x(player->x, player->y, sin(player->view_dir - M_PI_2) / MOV_SPEED, map))
+		if (!check_collision(player->x + sin(player->view_dir - M_PI_2) / MOV_SPEED, player->y, map))
 			player->x += sin(player->view_dir - M_PI_2) / MOV_SPEED;
-		if (!check_collision_y(player->x, player->y, cos(player->view_dir - M_PI_2) / MOV_SPEED, map))
+		if (!check_collision(player->x, player->y + cos(player->view_dir - M_PI_2) / MOV_SPEED, map))
 			player->y += cos(player->view_dir - M_PI_2) / MOV_SPEED;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
-		if (!check_collision_x(player->x, player->y, -sin(player->view_dir - M_PI_2) / MOV_SPEED, map))
+		if (!check_collision(player->x - sin(player->view_dir - M_PI_2) / MOV_SPEED, player->y, map))
 			player->x -= sin(player->view_dir - M_PI_2) / MOV_SPEED;
-		if (!check_collision_y(player->x, player->y, -cos(player->view_dir - M_PI_2) / MOV_SPEED, map))
+		if (!check_collision(player->x, player->y - cos(player->view_dir - M_PI_2) / MOV_SPEED, map))
 			player->y -= cos(player->view_dir - M_PI_2) / MOV_SPEED;
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
