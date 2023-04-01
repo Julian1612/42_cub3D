@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/01 17:56:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:14:23 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,7 @@
 #include <stdio.h>
 #include <math.h>
 
-void	draw_square(t_minimap *minimap, int i, int j, char symbol)
-{
-	int			k;
-	int			l;
-	uint32_t	color;
-
-	if (symbol == '1')
-		color = convert_to_hexcode(81, 86, 82, 255);
-	else if (symbol == '0')
-		color = convert_to_hexcode(200, 200, 200, 150);
-	else if (symbol == 'P')
-		color = convert_to_hexcode(0, 200, 200, 150);
-	k = i * MINIMAP_WALL_SIZE;
-	while (k < (i * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
-	{
-		l = j * MINIMAP_WALL_SIZE;
-		while (l < (j * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
-		{
-			mlx_put_pixel(minimap->smm_walls, l, k, color);
-			l++;
-		}
-		k++;
-	}
-}
+static void	draw_square(t_minimap *minimap, int i, int j, char symbol);
 
 int	draw_minimap(t_game *game)
 {
@@ -78,6 +55,31 @@ int	draw_minimap(t_game *game)
 		return(EXIT_FAILURE);
 	}
 	return (0);
+}
+
+static void	draw_square(t_minimap *minimap, int i, int j, char symbol)
+{
+	int			k;
+	int			l;
+	uint32_t	color;
+
+	if (symbol == '1')
+		color = convert_to_hexcode(81, 86, 82, 255);
+	else if (symbol == '0')
+		color = convert_to_hexcode(200, 200, 200, 150);
+	else if (symbol == 'P')
+		color = convert_to_hexcode(0, 200, 200, 150);
+	k = i * MINIMAP_WALL_SIZE;
+	while (k < (i * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
+	{
+		l = j * MINIMAP_WALL_SIZE;
+		while (l < (j * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
+		{
+			mlx_put_pixel(minimap->smm_walls, l, k, color);
+			l++;
+		}
+		k++;
+	}
 }
 
 void	get_map_measures(t_game *game)
