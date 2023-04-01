@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/31 10:22:58 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:54:51 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,18 @@
 #include <stdio.h>
 #include <math.h>
 
-void	draw_player(t_minimap *minimap, int i, int j)
+void	draw_square(t_minimap *minimap, int i, int j, char symbol)
 {
 	int			k;
 	int			l;
 	uint32_t	color;
 
-	color = convert_to_hexcode(255, 0, 0, 255);
-	k = i * MINIMAP_WALL_SIZE;
-	while (k < (i * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
-	{
-		l = j * MINIMAP_WALL_SIZE;
-		while (l < (j * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
-		{
-			mlx_put_pixel(minimap->smm_walls, l, k, color);
-			l++;
-		}
-		k++;
-	}
-}
-
-void	draw_minimap_wall(t_minimap *minimap, int i, int j)
-{
-	int			k;
-	int			l;
-	uint32_t	color;
-
-	color = convert_to_hexcode(81, 86, 82, 255);
-	k = i * MINIMAP_WALL_SIZE;
-	while (k < (i * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
-	{
-		l = j * MINIMAP_WALL_SIZE;
-		while (l < (j * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
-		{
-			mlx_put_pixel(minimap->smm_walls, l, k, color);
-			l++;
-		}
-		k++;
-	}
-}
-
-void	draw_minimap_floor(t_minimap *minimap, int i, int j)
-{
-	int			k;
-	int			l;
-	uint32_t	color;
-
-	color = convert_to_hexcode(200, 200, 200, 150);
+	if (symbol == '1')
+		color = convert_to_hexcode(81, 86, 82, 255);
+	else if (symbol == '0')
+		color = convert_to_hexcode(200, 200, 200, 150);
+	else if (symbol == 'P')
+		color = convert_to_hexcode(0, 200, 200, 150);
 	k = i * MINIMAP_WALL_SIZE;
 	while (k < (i * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
 	{
@@ -97,13 +62,9 @@ int	draw_minimap(t_game *game)
 		while (j <= game->player.x + 2 && game->map.map[i][j] != '\0')
 		{
 			if (i == (int) game->player.y && j == (int) game->player.x)
-				draw_player(&game->minimap, k, l);
-			else if (game->map.map[i][j] == '1')
-				draw_minimap_wall(&game->minimap, k, l);
-			else if (game->map.map[i][j] != ' ' && game->map.map[i][j] != '1')
-				draw_minimap_floor(&game->minimap, k, l);
-			// else if (game->map.map[i][j] == 'E')
-			// 	draw_minimap_enemy(&game->minimap, i, j);
+				draw_square(&game->minimap, k, l, 'P');
+			else
+				draw_square(&game->minimap, k, l, game->map.map[i][j]);
 			j++;
 			l++;
 		}
