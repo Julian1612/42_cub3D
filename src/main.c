@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/01 22:27:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/02 16:49:49 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	test_parse(t_game *game)
 // @todo implement player size so that player stops at wall
 // @todo implement fps engine
 // @todo fix resizing
+// @note mlx_set_window_limit
 // @todo fix camera plane
 // @todo refactor raycaster to return hit coordinates instead of wall distance
 // @todo implement doors
