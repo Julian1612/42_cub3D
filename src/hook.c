@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/02 19:38:56 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/02 19:41:54 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // @todo drifting collision
 // @note collision problem: if speed is too high, player can move through walls
 // @note function usable for enemies?
-bool	check_collision(double x, double y, char **map)
+static bool	check_collision(double x, double y, char **map)
 {
 	if (map[(int)(y + PLAYER_SIZE)][(int)(x)] == WALL)
 		return (true);
@@ -36,7 +36,7 @@ bool	check_collision(double x, double y, char **map)
 	return (false);
 }
 
-void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
+static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
@@ -87,7 +87,7 @@ void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 		player->view_dir = M_PI * 1.5;
 }
 
-bool	skip_frame(mlx_t *mlx, int fps)
+static bool	skip_frame(mlx_t *mlx, int fps)
 {
 	if (mlx->delta_time * fps > 1.1)
 		return (true);
