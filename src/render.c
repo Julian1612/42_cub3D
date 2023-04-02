@@ -109,5 +109,6 @@ int	render_world(t_game *game)
 		draw_floor(game, wall_height, x_img);
 		x_img++;
 	}
+	init_sprite(game);
 	return (SUCCESS);
 }

@@ -91,9 +91,11 @@ void	hook(void *param)
 	// minimap
 	// collision
 	// enemy
-	keys(game->mlx, &game->minimap, &game->player, game->map.map);
 	if (skip_frame(game->mlx, FPS) == false)
+	{
+		keys(game->mlx, &game->minimap, &game->player, game->map.map);
 		render_world(game);
+	}
 	// @note all images have to be resized here
 	mlx_resize_image(game->img_a, game->mlx->width, game->mlx->height);
 }

@@ -32,13 +32,14 @@ int	test_parse(t_game *game)
 		"1100100000111111",
 		"1111111111111111"
 	};
-	static t_texture	objects[5] =
+	static t_texture	objects[6] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
 		{"textures/south.png", NULL},
 		{"textures/west.png", NULL},
 		{"textures/door_front.png", NULL},
+		{"textures/sprite.png", NULL}
 	};
 
 	game->map.map = map;
@@ -60,6 +61,7 @@ int	test_parse(t_game *game)
 // @todo refactor raycaster to return hit coordinates instead of wall distance
 // @todo implement doors
 // @todo refactor hook functions for more readability (logic loop and render loop?)
+// @todo go through code and refactor function parameters
 
 int	main(int argc, char **argv)
 {

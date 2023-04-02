@@ -46,6 +46,7 @@ static int	initialize_textures(t_game *game)
 	game->map.objects[EAST].tex = mlx_load_png(game->map.objects[EAST].path);
 	game->map.objects[SOUTH].tex = mlx_load_png(game->map.objects[SOUTH].path);
 	game->map.objects[WEST].tex = mlx_load_png(game->map.objects[WEST].path);
+	game->map.objects[SPRITE].tex = mlx_load_png(game->map.objects[SPRITE].path);
 	if (!game->map.objects[NORTH].tex || !game->map.objects[EAST].tex
 		|| !game->map.objects[SOUTH].tex || !game->map.objects[WEST].tex)
 		return (ERROR);

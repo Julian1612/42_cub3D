@@ -29,7 +29,7 @@
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
 # define WALL '1'
-# define FPS 60
+# define FPS 200
 
 # ifndef DEBUG
 #  define DEBUG 0
@@ -45,7 +45,8 @@ enum	e_object_id
 	EAST,
 	SOUTH,
 	WEST,
-	DOOR
+	DOOR,
+	SPRITE,
 };
 
 /* ************************************************************************** */
@@ -147,6 +148,13 @@ typedef struct s_rayhit
 	enum e_object_id	wall_id;
 }	t_rayhit;
 
+typedef struct s_sprite
+{
+	double			x;
+	double			y;
+	t_texture		*texture;
+}	t_sprite;
+
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
@@ -168,5 +176,7 @@ void			hook(void *param);
 int				render_world(t_game *game);
 
 void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
+
+void			init_sprite(t_game *game);
 
 #endif
