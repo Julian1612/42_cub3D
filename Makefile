@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/19 17:08:09 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/02 18:47:43 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,16 +37,13 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: libft libmlx $(NAME) 
+all: libft $(NAME) 
 
 obj:
 	@mkdir -p $(OBJ_DIR)
 
 libft:
 	@$(MAKE) -C $(LIBFT)
-
-libmlx:
-	@$(MAKE) -C $(LIBMLX)
 
 obj/%.o: %.c cub3D.h
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
