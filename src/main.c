@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/01 18:39:17 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:52:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,3 @@ int	main(int argc, char **argv)
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }
-

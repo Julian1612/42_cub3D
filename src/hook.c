@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/01 18:46:25 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/02 15:52:13 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ void	hook(void *param)
 	else
 	{
 		draw_map(game);
-		draw_player_map(game);
+		// draw_player_map(game);
 	}
 }
