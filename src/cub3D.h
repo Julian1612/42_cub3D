@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/01 22:27:21 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/02 16:56:05 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 /* INCLUDES																	  */
 /* ************************************************************************** */
 
+# include "../libraries/libft/src/libft/libft.h"
 # include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+# include "../libraries/libft/src/get_next_line/get_next_line.h"
 
 /* ************************************************************************** */
 /* DEFINES																	  */
@@ -87,6 +89,8 @@ typedef struct s_map
 }	t_map;
 
 // @note weapon is pointer because the player can change weapons
+// @note weapon is pointer because the player can change weapons
+// @todo change x and y to coor
 typedef struct s_player
 {
 	double			x;
@@ -166,5 +170,7 @@ void			hook(void *param);
 int				render_world(t_game *game);
 
 void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
+
+void	debug_print_ray(t_ray *ray);
 
 #endif
