@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/01 22:27:21 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/02 19:37:11 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
 # define WALL '1'
+# define FPS 60
 
 # ifndef DEBUG
 #  define DEBUG 0

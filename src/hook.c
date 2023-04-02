@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 22:27:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/02 19:38:56 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,13 @@ void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 		player->view_dir = M_PI * 1.5;
 }
 
+bool	skip_frame(mlx_t *mlx, int fps)
+{
+	if (mlx->delta_time * fps > 1.1)
+		return (true);
+	return (false);
+}
+
 void	hook(void *param)
 {
 	t_game	*game;
@@ -97,7 +104,8 @@ void	hook(void *param)
 	// collision
 	// enemy
 	keys(game->mlx, &game->minimap, &game->player, game->map.map);
-	render_world(game);
+	if (skip_frame(game->mlx, FPS) == false)
+		render_world(game);
 	// @note all images have to be resized here
 	mlx_resize_image(game->img_a, game->mlx->width, game->mlx->height);
 }
