@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 18:21:18 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/02 17:40:19 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	error_textures(int error_code, t_map *map_data)
 	else if (error_code == 2)
 		printf("Error!\nFile is empty\n");
 	else if (error_code == 3)
-		printf("Error!\nFilepath to .xpm file is missing\n");
+		printf("Error!\nFilepath to .png file is missing\n");
 	else if (error_code == 4)
 	{
 		printf("Error!\nRGB codes missing\n");
@@ -79,14 +79,6 @@ static void	free_struct(t_map *map_data)
 {
 	if (map_data == NULL)
 		return ;
-	if (map_data->north.path != NULL)
-		free(map_data->north.path);
-	if (map_data->south.path != NULL)
-		free(map_data->south.path);
-	if (map_data->west.path != NULL)
-		free(map_data->west.path);
-	if (map_data->east.path != NULL)
-		free(map_data->east.path);
 	if (map_data->map != NULL)
 		ft_free_arr((void **)map_data->map);
 }

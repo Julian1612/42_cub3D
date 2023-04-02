@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/21 14:42:08 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/02 17:50:13 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,16 +41,13 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: libft libmlx $(NAME)
+all: libft $(NAME)
 
 obj:
 	@mkdir -p $(OBJ_DIR)
 
 libft:
 	@$(MAKE) -C $(LIBFT)
-
-libmlx:
-	@$(MAKE) -C $(LIBMLX)
 
 # garbage_collector:
 # 	@$(MAKE) -C $(GARBAGE)

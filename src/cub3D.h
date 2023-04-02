@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/02 16:56:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/02 17:26:27 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
 # define WALL '1'
+# define OBJ_COUNT 10
 
 # ifndef DEBUG
 #  define DEBUG 0
@@ -40,12 +41,15 @@
 /* ENUMS																	  */
 /* ************************************************************************** */
 
-enum	e_object_id
+enum	e_obj_id
 {
 	NORTH,
 	EAST,
 	SOUTH,
 	WEST,
+	DOOR,
+	BARREL,
+	ENEMY
 };
 
 /* ************************************************************************** */
@@ -83,12 +87,11 @@ typedef struct s_minimap
 typedef struct s_map
 {
 	char		**map;
-	t_texture	*objects;
+	t_texture	objects[OBJ_COUNT];
 	t_hexcolor	ceiling_color;
 	t_hexcolor	floor_color;
 }	t_map;
 
-// @note weapon is pointer because the player can change weapons
 // @note weapon is pointer because the player can change weapons
 // @todo change x and y to coor
 typedef struct s_player
@@ -146,7 +149,7 @@ typedef struct s_rayhit
 {
 	double				stripe;
 	double				dist;
-	enum e_object_id	wall_id;
+	enum e_obj_id	wall_id;
 }	t_rayhit;
 
 /* ************************************************************************** */
@@ -170,7 +173,5 @@ void			hook(void *param);
 int				render_world(t_game *game);
 
 void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
-
-void	debug_print_ray(t_ray *ray);
 
 #endif

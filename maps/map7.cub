@@ -1,12 +1,12 @@
-WE textures/west.xpm
-EA textures/east.xpm
+WE textures/west.png
+EA textures/east.png
 
 F  240,        240,      240
 
 C     50        ,50      ,50
 
-SO                   textures/south.xpm
-NO  textures/north.xpm
+SO                   textures/south.png
+NO  textures/north.png
 
 1111111111111
 1000000000001

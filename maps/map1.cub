@@ -1,13 +1,13 @@
-WE textures/west.xpm
-EA ./textures/east.xpm
+WE textures/west.png
+EA ./textures/east.png
 
 F  141,        1,      126
 
 C 222,183,183
 
-SO                   textures/south.xpm
-NO textures/north.xpm
-WE ./textures/west.xpm
+SO                   textures/south.png
+NO textures/north.png
+WE ./textures/west.png
 
                111111111111111111111
                10000000000000000000001111111

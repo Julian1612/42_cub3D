@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 13:24:42 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/02 17:32:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 		return (1);
 	}
 	if (i == 0)
-		cpy_line(&map_data->north.path, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->objects[NORTH].path, splitted_str[1], splitted_str_len);
 	else if (i == 1)
-		cpy_line(&map_data->south.path, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->objects[SOUTH].path, splitted_str[1], splitted_str_len);
 	else if (i == 2)
-		cpy_line(&map_data->west.path, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->objects[WEST].path, splitted_str[1], splitted_str_len);
 	else if (i == 3)
-		cpy_line(&map_data->east.path, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->objects[EAST].path, splitted_str[1], splitted_str_len);
 	ft_free_arr((void **)splitted_str);
 	return (0);
 }
@@ -80,13 +80,13 @@ char	*cpy_line(char **des, char *src, int len)
 
 int	check_for_bonus_texture(t_map *map_data, char *line)
 {
-	static char	*definitions[NBR_B_TEXTURES] = {DOOR, BARREL, ENEMY};
+	static char	definitions[NBR_B_TEXTURES] = {CHAR_DOOR, CHAR_BARREL, CHAR_ENEMY};
 	int			i;
 
 	i = 0;
 	while (i < NBR_B_TEXTURES)
 	{
-		if (ft_strnstr(line, definitions[i], ft_strlen(line)) != NULL)
+		if (ft_strchr(line, definitions[i]) != NULL)
 		{
 			get_bonus_texture_file_path(map_data, line, i);
 			return (1);
@@ -107,11 +107,11 @@ static int	get_bonus_texture_file_path(t_map *map_data, char *line, int i)
 	if (splitted_str == NULL)
 		return (error_message(4, map_data));
 	if (i == 0)
-		cpy_line(&map_data->door.path, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->objects[DOOR].path, splitted_str[1], splitted_str_len);
 	else if (i == 1)
-		cpy_line(&map_data->barrel.path, splitted_str[1], splitted_str_len);
-	else if (i == 2)
-		cpy_line(&map_data->enemy.path, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->objects[BARREL].path, splitted_str[1], splitted_str_len);
+	// else if (i == 2)
+	// 	cpy_line(&map_data->enemy.path, splitted_str[1], splitted_str_len);
 	ft_free_arr((void **)splitted_str);
 	return (0);
 }

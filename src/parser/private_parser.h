@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   private_parser.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 10:05:55 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/02 17:27:24 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define PRIVATE_PARSER_H
 # include "../cub3D.h"
 # define NBR_B_TEXTURES 3
-# define DOOR "D"
-# define BARREL "B"
-# define ENEMY "E"
+# define CHAR_DOOR 'D'
+# define CHAR_BARREL 'B'
+# define CHAR_ENEMY 'E'
 
 /* check_for_bonus_textures.c */
 int				check_for_bonus_texture(t_map *map_data, char *line);
