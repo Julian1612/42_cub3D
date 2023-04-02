@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/02 19:30:53 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/02 20:06:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,19 @@ int	test_parse(t_game *game)
 		"1000100000000001",
 		"1000100000000001",
 		"1000100000000011",
-		"1000000000000111",
+		"1000D00000000111",
 		"1000100000001111",
 		"1000100000011111",
 		"1100100000111111",
 		"1111111111111111"
 	};
-	static t_texture	objects[4] =
+	static t_texture	objects[5] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
 		{"textures/south.png", NULL},
-		{"textures/west.png", NULL}
+		{"textures/west.png", NULL},
+		{"textures/door_front.png", NULL},
 	};
 
 	game->map.map = map;
