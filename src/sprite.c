@@ -33,11 +33,14 @@ void	render_sprite(t_sprite *sprite, t_game *game)
 	int	y_iter;
 	int	x_tex;
 	int	y_tex;
+	double	x_offset;
 	int	y_offset;
 
+	x_offset = fmod(sprite->angle, M_PI) * game->img_a->width;
+	printf("x_offset: %f\n", x_offset);
 	y_offset = game->img_a->height / 2;
-	x_start = game->img_a->width / 2 - sprite->width / 2;
-	x_end = game->img_a->width / 2 + sprite->width / 2;
+	x_start = (game->img_a->width / 2 - sprite->width / 2) + x_offset;
+	x_end = x_start + sprite->width ;
 	y_start = sprite->x - sprite->height / 2 + y_offset;
 	y_end = sprite->x + sprite->height / 2 + y_offset;
 
@@ -84,7 +87,7 @@ void	init_sprite(t_game *game)
 	sprite.y = 5;
 	sprite.texture = &game->map.objects[SPRITE];
 	sprite.dist = sqrt(pow(sprite.x - game->player.x, 2) + pow(sprite.y - game->player.y, 2));
-	sprite.angle = atan2(sprite.y - game->player.y, sprite.x - game->player.x) - game->player.view_dir;
+	sprite.angle = atan2(sprite.y - game->player.y, sprite.x - game->player.x) - game->player.view_dir + M_PI / 2;
 	fov = 1;
 	sprite.height = game->img_a->height / sprite.dist;
 	sprite.width = sprite.height;

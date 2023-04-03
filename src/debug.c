@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/03 15:58:33 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/03 19:13:49 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	debug_print_player(t_player *player)
 {
 	if (DEBUG == 0)
 		return ;
-	// printf(BLUE"============ PLAYER ============\n"RESET);
-	// printf("player x:   %f\n", player->x);
-	// printf("player y:   %f\n", player->y);
-	// printf("player dir: %f\n", player->view_dir);
+	printf(BLUE"============ PLAYER ============\n"RESET);
+	printf("player x:   %f\n", player->x);
+	printf("player y:   %f\n", player->y);
+	printf("player dir: %f\n", player->view_dir);
 }
 
 void	debug_print_coor(t_coor *coor)
