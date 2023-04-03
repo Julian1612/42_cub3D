@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/03 13:18:40 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/03 14:29:05 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@
 
 #define MOV_SPEED 10 // @note the higher, the slower
 #define ROT_SPEED 0.5 // @note the higher, the slower
-#define PLAYER_SIZE 0.2 // @todo size of player, switch to actual player size
+#define PLAYER_SIZE 0.2
 
-// @todo drifting collision
-// @note collision problem: if speed is too high, player can move through walls
 // @note function usable for enemies?
 static bool	check_collision(double x, double y, char **map)
 {

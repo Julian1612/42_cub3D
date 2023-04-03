@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/02 20:06:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/03 14:25:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	test_parse(t_game *game)
 		"1000100000000001",
 		"1000100000000001",
 		"1000100000000011",
-		"1000D00000000111",
+		"1000000000000111",
 		"1000100000001111",
 		"1000100000011111",
 		"1100100000111111",
@@ -62,6 +62,7 @@ int	test_parse(t_game *game)
 // @todo implement doors
 // @todo refactor hook functions for more readability (logic loop and render loop?)
 // @todo go through code and refactor function parameters
+// @todo fix the mlx shit
 
 int	main(int argc, char **argv)
 {
