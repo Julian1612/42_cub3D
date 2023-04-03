@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/01 18:52:56 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/02 20:06:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
-#include "parser.h" // parser
-#include "minimap.h"
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
 #include <stdlib.h> // malloc
 #include <stdio.h> // @note remove, printf
@@ -20,11 +18,40 @@
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
 
+int	test_parse(t_game *game)
+{
+	static char			*map[17] =
+	{
+		"1111111111111111",
+		"1000100000000001",
+		"1000100000000001",
+		"1000100000000011",
+		"1000D00000000111",
+		"1000100000001111",
+		"1000100000011111",
+		"1100100000111111",
+		"1111111111111111"
+	};
+	static t_texture	objects[6] =
+	{
+		{"textures/north.png", NULL},
+		{"textures/east.png", NULL},
+		{"textures/south.png", NULL},
+		{"textures/west.png", NULL},
+		{"textures/door_front.png", NULL},
+		{"textures/sprite.png", NULL}
+	};
 
-// void play_music(void)
-// {
-// 	system("while :; do afplay sound_track/erika.mp3 && afplay sound_track/preussengloria.mp3 && afplay sound_track/march.mp3; done");
-// }
+	game->map.map = map;
+	game->map.objects = objects;
+	game->map.ceiling_color = convert_to_hexcode(0, 0, 0, 0);
+	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
+	game->player.x = 2;
+	game->player.y = 2;
+	game->player.view_dir = 0;
+	game->player.weapon = NULL;
+	return (SUCCESS);
+}
 
 // @todo implement player size so that player stops at wall
 // @note fps engine correct like that?
@@ -40,17 +67,13 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (parser(&argc, argv, &game.map, &game.player))
+	if (test_parse(&game))
 		return (EXIT_FAILURE);
 	if (initialize_mlx_data(&game) == ERROR)
 		errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
 		errexit_mlx_errno();
 	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
-		errexit_mlx_errno();
-	if (initialize_minimap(&game) == ERROR)
-		errexit_mlx_errno();
-	if (initialize_map(&game) == ERROR)
 		errexit_mlx_errno();
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);

@@ -75,8 +75,7 @@
 		"unordered_map": "cpp",
 		"utility": "cpp",
 		"vector": "cpp",
-		"stdlib.h": "c",
-		"safe": "c"
+		"stdbool.h": "c"
 	},
 	"C_Cpp.dimInactiveRegions": false
 }
