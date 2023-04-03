@@ -33,6 +33,7 @@ int	initialize_minimap(t_game *game)
 	return (SUCCESS);
 }
 
+// @note what if a texture is missing and has to be skipped?
 int	initialize_map(t_game *game)
 {
 	double	wall_size;
@@ -58,26 +59,34 @@ int	initialize_map(t_game *game)
 
 static int	initialize_textures(t_game *game)
 {
-	game->map.east.xpm = mlx_load_xpm42(game->map.east.path);
-	game->map.west.xpm = mlx_load_xpm42(game->map.west.path);
-	game->map.south.xpm = mlx_load_xpm42(game->map.south.path);
-	game->map.north.xpm = mlx_load_xpm42(game->map.north.path);
-	if (game->map.west.xpm == NULL || game->map.east.xpm == NULL
-		|| game->map.south.xpm == NULL || game->map.north.xpm == NULL)
+	game->map.objects[NORTH].tex = mlx_load_png(game->map.objects[NORTH].path);
+	game->map.objects[EAST].tex = mlx_load_png(game->map.objects[EAST].path);
+	game->map.objects[SOUTH].tex = mlx_load_png(game->map.objects[SOUTH].path);
+	game->map.objects[WEST].tex = mlx_load_png(game->map.objects[WEST].path);
+	game->map.objects[SPRITE].tex = mlx_load_png(game->map.objects[SPRITE].path);
+	if (!game->map.objects[NORTH].tex || !game->map.objects[EAST].tex
+		|| !game->map.objects[SOUTH].tex || !game->map.objects[WEST].tex)
 		return (ERROR);
-	game->map.west.texture = &game->map.west.xpm->texture;
-	game->map.east.texture = &game->map.east.xpm->texture;
-	game->map.south.texture = &game->map.south.xpm->texture;
-	game->map.north.texture = &game->map.north.xpm->texture;
 	// @todo sprite initialization
 	return (SUCCESS);
 }
 
-int	initialize_mlx_all(t_game *game)
+static int	initialize_environ(t_game *game)
 {
-	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
-	game->img_a = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
+	game->img_a = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
 	if (game->mlx == NULL || game->img_a == NULL)
+		return (ERROR);
+	return (SUCCESS);
+}
+
+int	initialize_mlx_data(t_game *game)
+{
+	if (initialize_environ(game) == ERROR)
+		return (ERROR);
+	if (initialize_textures(game) == ERROR)
+		return (ERROR);
+	if (initialize_minimap(&game->minimap, game->mlx, game->map.map) == ERROR)
 		return (ERROR);
 	// if (initialize_textures(game) == ERROR)
 	// 	return (ERROR);

@@ -49,16 +49,27 @@ void	debug_print_coor(t_coor *coor)
 	printf("y:   %f\n", coor->y);
 }
 
-void	debug_print_ray(t_ray *ray)
+void	debug_print_ray(t_ray *ray, t_rayhit *hit)
 {
-	// if (DEBUG == 0)
-	// 	return ;
-	// printf(BLUE"============ RAY ============\n"RESET);
-	// printf("next latitude ( __ ):\n");
-	// debug_print_coor(&ray->latitude);
-	// printf("ray length latitude: %f\n\n", ray->lat_len);
-	// printf("next longitute ( | ):\n");
-	// debug_print_coor(&ray->longitude);
-	// printf("ray length longitude: %f\n\n", ray->long_len);
-	// printf("ray dir: %f\n", ray->dir);
+	if (DEBUG == 0)
+		return ;
+	printf(BLUE"============ RAY ============\n"RESET);
+	printf("ray angle:   %f\n", ray->angle);
+	printf("ray dir x:   %f\n", ray->dir.x);
+	printf("ray dir y:   %f\n", ray->dir.y);
+	printf("ray origin x:   %f\n", ray->origin.x);
+	printf("ray origin y:   %f\n", ray->origin.y);
+	printf("map x:   %d\n", ray->map_x);
+	printf("map y:   %d\n", ray->map_y);
+	printf("step.x:   %f\n", ray->step.x);
+	printf("step.y:   %f\n", ray->step.y);
+	printf("hypotenuse.x:   %f\n", ray->hypotenuse.x);
+	printf("hypotenuse.y:   %f\n", ray->hypotenuse.y);
+	printf("length.x:   %f\n", ray->length.x);
+	printf("length.y:   %f\n", ray->length.y);
+	printf(BLUE"============ HIT ============\n"RESET);
+	printf("hit offset:   %f\n", hit->stripe);
+	printf("hit dist:   %f\n", hit->dist);
+	printf("hit texture:   %d\n", hit->wall_id);
 }
+

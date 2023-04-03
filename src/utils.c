@@ -6,11 +6,14 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/19 16:19:59 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 15:47:59 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	convert_to_hexcode(
+#include "cub3D.h" // typedefs
+#include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+
+t_hexcolor	convert_to_hexcode(
 	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
 	unsigned int	rgba;
@@ -20,4 +23,14 @@ unsigned int	convert_to_hexcode(
 	rgba = (rgba << 8) + b;
 	rgba = (rgba << 8) + a;
 	return (rgba);
+}
+
+int	coor_to_pixel(int width, int x, int y)
+{
+	int	pixel;
+
+	pixel = y * width + x;
+	// @note multiply to get from int32 to int8
+	pixel *= 4;
+	return (pixel);
 }

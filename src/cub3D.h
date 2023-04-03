@@ -25,27 +25,42 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define WIDTH 1280
+# define WIDTH 800
 # define HEIGHT 800
 # define ERROR 1
 # define SUCCESS 0
 # define MINIMAP_WALL_SIZE 30
 # define WALL '1'
+# define FPS 200
+
 # ifndef DEBUG
 #  define DEBUG 0
 # endif
 
 /* ************************************************************************** */
+/* ENUMS																	  */
+/* ************************************************************************** */
+
+enum	e_object_id
+{
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST,
+	DOOR,
+	SPRITE,
+};
+
+/* ************************************************************************** */
 /* TYPEDEFS																	  */
 /* ************************************************************************** */
 
-typedef unsigned int	t_hexcolor;
+typedef uint32_t	t_hexcolor;
 
 typedef struct s_texture
 {
 	char			*path;
-	xpm_t			*xpm;
-	mlx_texture_t	*texture;
+	mlx_texture_t	*tex;
 }	t_texture;
 
 // @note ammunition is not implemented
@@ -73,15 +88,7 @@ typedef struct s_minimap
 typedef struct s_map
 {
 	char		**map;
-	double		width;
-	double		height;
-	t_texture	west;
-	t_texture	east;
-	t_texture	south;
-	t_texture	north;
-	t_texture	door;
-	t_texture	barrel;
-	t_texture	enemy;
+	t_texture	*objects;
 	t_hexcolor	ceiling_color;
 	t_hexcolor	floor_color;
 }	t_map;
@@ -126,10 +133,10 @@ typedef struct s_coor
 	double	y;
 }	t_coor;
 
-// @note move this?
-// @todo remove map_x and map_y
+// @todo move to raycaster header
 typedef struct s_ray
 {
+	double	angle;
 	t_coor	dir;
 	t_coor	origin;
 	int		map_x;
@@ -137,17 +144,46 @@ typedef struct s_ray
 	t_coor	step;
 	t_coor	hypotenuse;
 	t_coor	length;
+	bool	y_side;
 }				t_ray;
+
+typedef struct s_rayhit
+{
+	double				stripe;
+	double				dist;
+	enum e_object_id	wall_id;
+}	t_rayhit;
+
+typedef struct s_sprite
+{
+	double			x;
+	double			y;
+	t_texture		*texture;
+}	t_sprite;
 
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
 void			debug_print_player(t_player *player);
+void			debug_print_ray(t_ray *ray, t_rayhit *hit);
 
 void			errexit_msg(char *msg);
 void			errexit_mlx_errno(void);
 
+t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
+					unsigned char b, unsigned char a);
+int				coor_to_pixel(int width, int x, int y);
+
+int				initialize_mlx_data(t_game *game);
+
+void			hook(void *param);
+
+int				render_world(t_game *game);
+
+void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
+
+void			init_sprite(t_game *game);
 int				initialize_mlx_all(t_game *game);
 int				initialize_minimap(t_game *game);
 int				initialize_map(t_game *game);

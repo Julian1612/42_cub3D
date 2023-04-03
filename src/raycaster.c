@@ -15,38 +15,22 @@
 #include <math.h> // cos, sin, tan
 #include <stdio.h> // @note remove
 #include <stdbool.h> // bool
+#include <float.h> // DBL_MAX
 
-#define UNIT 1
+#define UNIT 1.0f
 
-void	set_transparent(mlx_image_t *image)
+static void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 {
-	int		i;
-	int		j;
-	int		color;
-
-	i = 0;
-	while (i < image->width)
-	{
-		j = 0;
-		while (j < image->height)
-		{
-			mlx_put_pixel(image, i, j, convert_to_hexcode(0, 0, 0, 0));
-			j++;
-		}
-		i++;
-	}
-}
-
-void	init_ray(t_ray *ray, t_game *game, double ray_dir)
-{
+	ray->angle = ray_dir;
 	ray->dir.x = sin(ray_dir);
 	ray->dir.y = cos(ray_dir);
-	ray->origin.x = game->player.x;
-	ray->origin.y = game->player.y;
+	ray->origin.x = x;
+	ray->origin.y = y;
 	ray->map_x = (int)ray->origin.x;
 	ray->map_y = (int)ray->origin.y;
-	ray->hypotenuse.x = sqrt(1 + (ray->dir.y / ray->dir.x) * (ray->dir.y / ray->dir.x));
-	ray->hypotenuse.y = sqrt(1 + (ray->dir.x / ray->dir.y) * (ray->dir.x / ray->dir.y));
+	// @note potential division by zero
+	ray->hypotenuse.x = fabs(UNIT / ray->dir.x);
+	ray->hypotenuse.y = fabs(UNIT / ray->dir.y);
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -UNIT;
@@ -69,36 +53,88 @@ void	init_ray(t_ray *ray, t_game *game, double ray_dir)
 	}
 }
 
-double	extend_ray(mlx_image_t *img, t_ray *ray, char **map)
+static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map)
 {
-	double temp;
-
-	while (map[ray->map_y][ray->map_x] != WALL)
+	while (map->map[ray->map_y][ray->map_x] != WALL)
 	{
 		if (ray->length.x < ray->length.y)
 		{
 			ray->map_x += ray->step.x;
-			temp = ray->length.x;
 			ray->length.x += ray->hypotenuse.x;
+			ray->y_side = false;
 		}
 		else
 		{
 			ray->map_y += ray->step.y;
-			temp = ray->length.y;
 			ray->length.y += ray->hypotenuse.y;
+			ray->y_side = true;
 		}
 	}
-	return (temp);
+	if (ray->y_side)
+		hit->dist = ray->length.y - ray->hypotenuse.y;
+	else
+		hit->dist = ray->length.x - ray->hypotenuse.x;
 }
 
-double	cast_ray(t_game *game, double ray_dir)
+static void	set_hit_wall_id(t_rayhit *hit, bool y_side, t_coor *step)
 {
-	t_ray	ray;
-	double	res;
+	if (y_side)
+	{
+		if (step->y < 0)
+			hit->wall_id = SOUTH;
+		else
+			hit->wall_id = NORTH;
+	}
+	else
+	{
+		if (step->x < 0)
+			hit->wall_id = WEST;
+		else
+			hit->wall_id = EAST;
+	}
+}
 
-	init_ray(&ray, game, ray_dir);
-	// why do we need to subtract UNIT?
-	res = extend_ray(game->img_a, &ray, game->map.map);
-	// printf("res: %f\n", res);
-	return (res);
+static double	get_y_offset(t_ray *ray)
+{
+	double	x_adjacent;
+	double	y_opposite;
+
+	if (ray->step.x < 0)
+		x_adjacent = ray->map_x - ray->origin.x + UNIT;
+	else
+		x_adjacent = ray->map_x - ray->origin.x;
+	y_opposite = x_adjacent / tan(ray->angle);
+	return (fmod(y_opposite + ray->origin.y, UNIT));
+}
+
+static double	get_x_offset(t_ray *ray)
+{
+	double	y_adjacent;
+	double	x_opposite;
+
+	if (ray->step.y < 0)
+		y_adjacent = ray->map_y - ray->origin.y + UNIT;
+	else
+		y_adjacent = ray->map_y - ray->origin.y;
+	x_opposite = y_adjacent * tan(ray->angle);
+	return (fmod(x_opposite + ray->origin.x, UNIT));
+}
+
+static void	set_hit_offset(t_rayhit *hit, bool y_side, t_ray *ray)
+{
+	if (y_side)
+		hit->stripe = get_x_offset(ray);
+	else
+		hit->stripe = get_y_offset(ray);
+}
+
+void	cast_ray(t_rayhit *hit, t_game *game, double ray_dir)
+{
+	t_ray			ray;
+
+	init_ray(&ray, game->player.x, game->player.y, ray_dir);
+	set_distance(hit, &ray, &game->map);
+	set_hit_wall_id(hit, ray.y_side, &ray.step);
+	set_hit_offset(hit, ray.y_side, &ray);
+	debug_print_ray(&ray, hit);
 }

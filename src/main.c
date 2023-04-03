@@ -15,14 +15,26 @@
 #include "minimap.h"
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
 #include <stdlib.h> // malloc
-#include <stdio.h> // printf
+#include <stdio.h> // @note remove, printf
+#include <unistd.h> // @note remove, sleep
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
+
 
 // void play_music(void)
 // {
 // 	system("while :; do afplay sound_track/erika.mp3 && afplay sound_track/preussengloria.mp3 && afplay sound_track/march.mp3; done");
 // }
+
+// @todo implement player size so that player stops at wall
+// @note fps engine correct like that?
+// @todo fix resizing
+// @note mlx_set_window_limit
+// @todo fix camera plane
+// @todo refactor raycaster to return hit coordinates instead of wall distance
+// @todo implement doors
+// @todo refactor hook functions for more readability (logic loop and render loop?)
+// @todo go through code and refactor function parameters
 
 int	main(int argc, char **argv)
 {
@@ -30,7 +42,7 @@ int	main(int argc, char **argv)
 
 	if (parser(&argc, argv, &game.map, &game.player))
 		return (EXIT_FAILURE);
-	if (initialize_mlx_all(&game) == ERROR)
+	if (initialize_mlx_data(&game) == ERROR)
 		errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
 		errexit_mlx_errno();

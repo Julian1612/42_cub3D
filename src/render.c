@@ -11,119 +11,104 @@
 /* ************************************************************************** */
 
 #include "cub3D.h" // cub3D structs
+#include "../libraries/libft/src/libft/libft.h" // ft_memcpy
 #include <stdio.h> // @note remove
 #include <math.h> // PI
+#include <string.h> // @note memmove, remove
+#include <stdlib.h> // @note exit, remove
+#include <unistd.h> // @note remove
 
-
-#define FOV 60
-// int	render_minimap(t_minimap *minimap, mlx_t *mlx, t_map *map)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	map_width;
-// 	int	map_height;
-
-// 	i = 0;
-// 	j = 0;
-// 	while ((i * MM_BLOCK_SIZE) < (map->height * MM_BLOCK_SIZE))
-// 	{
-// 		while ((j * MM_BLOCK_SIZE) < (map->width * MM_BLOCK_SIZE))
-// 		{
-// 			if (map->map[i][j] == WALL)
-// 			{
-// 				if (mlx_image_to_window(mlx, minimap->walls, j * MM_BLOCK_SIZE, i * MM_BLOCK_SIZE) == ERROR)
-// 					return (ERROR);
-// 			}
-// 			j++;
-// 		}
-// 		j = 0;
-// 		i++;
-// 	}
-// 	if (mlx_image_to_window(mlx, minimap->player, 0, 0) == ERROR)
-// 		return (ERROR);
-// 	if (mlx_image_to_window(mlx, minimap->view_dir, 0, 0) == ERROR)
-// 		return (ERROR);
-// 	return (SUCCESS);
-// }
-
-void	color_image(mlx_t *mlx, mlx_image_t *img, unsigned int color)
+static void	draw_ceiling(t_game *game, int wall_height, int x_img)
 {
-	int	i;
-	int	j;
+	int	ceil_height;
+	int	y_img;
 
-	i = 0;
-	j = 0;
-	while (i < img->height)
+	ceil_height = game->img_a->height / 2 - wall_height / 2;
+	y_img = 0;
+	while (y_img < game->img_a->height && y_img < ceil_height)
 	{
-		while (j < img->width)
-		{
-			mlx_put_pixel(img, j, i, color);
-			j++;
-		}
-		j = 0;
-		i++;
+		mlx_put_pixel(game->img_a, x_img, y_img, game->map.ceiling_color);
+		y_img++;
 	}
 }
 
-void	paint_reflection(mlx_image_t *img, double obj_dist, int x)
-{
-	t_hexcolor	reflec_color;
-	int			reflec_height;
-	int			y;
 
-	reflec_color = convert_to_hexcode(0, 150, 0, 255);
-	if (obj_dist < 1)
-		obj_dist = 1;
-	reflec_height = (int)(HEIGHT / obj_dist);
-	y = HEIGHT / 2 - reflec_height / 2;
-	while (y < HEIGHT / 2 + reflec_height / 2)
+static void	draw_wall(t_game *game, int wall_height, int x_img, t_rayhit *hit)
+{
+	double	scale;
+	int		x_tex;
+	int		y_tex_iter;
+	int		y_img;
+
+	scale = (double)(game->map.objects[hit->wall_id].tex->height - 1) / wall_height;
+	x_tex = (game->map.objects[hit->wall_id].tex->width - 1) * hit->stripe;
+	y_tex_iter = 0;
+	y_img = game->img_a->height / 2 - wall_height / 2;
+	if (y_img < 0)
 	{
-		mlx_put_pixel(img, x, y, reflec_color);
-		y++;
+		y_tex_iter = y_img * -1;
+		y_img = 0;
+	}
+	while (y_img < game->img_a->height && y_img < game->img_a->height / 2 + wall_height / 2)
+	{
+		// @todo improve this ugly shit
+		ft_memcpy(&game->img_a->pixels
+		[coor_to_pixel(game->img_a->width, x_img, y_img)],
+			&game->map.objects[hit->wall_id].tex->pixels
+		[coor_to_pixel(game->map.objects[hit->wall_id].tex->width,
+				x_tex, y_tex_iter * scale)],
+			4);
+		y_tex_iter++;
+		y_img++;
 	}
 }
 
-void	paint_ceilfloor(mlx_t *mlx, mlx_image_t *img, t_hexcolor ceil, t_hexcolor floor)
+static void	draw_floor(t_game *game, int wall_height, int x_img)
 {
-	int	i;
-	int	j;
+	int	floor_start;
+	int	y_img;
 
-	i = 0;
-	j = 0;
-	while (i < HEIGHT)
+	floor_start = game->img_a->height / 2 + wall_height / 2;
+	y_img = floor_start;
+	while (y_img < game->img_a->height && y_img < game->img_a->height)
 	{
-		while (j < WIDTH)
-		{
-			if (i < HEIGHT / 2)
-				mlx_put_pixel(img, j, i, ceil);
-			else
-				mlx_put_pixel(img, j, i, floor);
-			j++;
-		}
-		j = 0;
-		i++;
+		mlx_put_pixel(game->img_a, x_img, y_img, game->map.floor_color);
+		y_img++;
 	}
 }
 
-// @todo render img_b inst background and switch between them
+static double	fix_fisheye(double ray_dir, double view_dir, double wall_dist)
+{
+	double	difference;
+
+	difference = view_dir - ray_dir;
+	wall_dist *= cos(difference);
+	return (wall_dist);
+}
+
 int	render_world(t_game *game)
 {
-	double	wall_dist;
-	double	ray_dir;
-	double	fov;
-	int		i;
+	t_rayhit	ray_hit;
+	double		ray_dir;
+	double		wall_height;
+	double		fov;
+	int			x_img;
 
 	debug_print_player(&game->player);
-	paint_ceilfloor(game->mlx, game->img_a, game->map.ceiling_color, game->map.floor_color);
-	fov = M_2_PI;
-	ray_dir = game->player.view_dir - (fov / 2);
-	i = 0;
-	while (i < WIDTH)
+	fov = (double)game->img_a->width / game->img_a->height;
+	ray_dir = game->player.view_dir + (fov / 2);
+	x_img = 0;
+	while (x_img < game->img_a->width)
 	{
-		ray_dir += fov / game->mlx->width;
-		wall_dist = cast_ray(game, ray_dir);
-		paint_reflection(game->img_a, wall_dist, i);
-		i++;
+		ray_dir -= fov / game->img_a->width;
+		cast_ray(&ray_hit, game, ray_dir);
+		ray_hit.dist = fix_fisheye(ray_dir, game->player.view_dir, ray_hit.dist);
+		wall_height = game->img_a->height / ray_hit.dist;
+		draw_ceiling(game, wall_height, x_img);
+		draw_wall(game, wall_height, x_img, &ray_hit);
+		draw_floor(game, wall_height, x_img);
+		x_img++;
 	}
+	init_sprite(game);
 	return (SUCCESS);
 }

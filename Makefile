@@ -50,13 +50,8 @@ obj:
 libft:
 	@$(MAKE) -C $(LIBFT)
 
-libmlx:
-	@$(MAKE) -C $(LIBMLX)
+obj/%.o: %.c cub3D.h
 
-# garbage_collector:
-# 	@$(MAKE) -C $(GARBAGE)
-
-obj/%.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 $(NAME): obj $(OBJS)
