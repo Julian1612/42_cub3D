@@ -31,6 +31,7 @@ displaying images from disk or creating a drawing surface to draw pixels on.
 
 * [Basics](./Basics.md)
 * [Colors](./Colors.md)
+* [Functions](./Functions.md)
 * [Hooks](./Hooks.md)
 * [Images](./Images.md)
 * [Input](./Input.md)
@@ -58,7 +59,7 @@ OpenGL function pointers, compiling the shaders and more.
 
 It returns a mlx_t* which is a structure containing the current window instance.
 With this instance you can manipulate, hook onto and control what happens inside 
-your window instance. For example you would use it to send graphical orders such as 
+your window instance. For example you would use it to send graphical instructions such as 
 creating an image, which is used to display pixel data. You can also detect key
 interactions such as checking if the W, A, S or D key is currently being pressed.
 
@@ -66,7 +67,7 @@ interactions such as checking if the W, A, S or D key is currently being pressed
 |-------------------|--------------------------------------------------------------|
 | `mlx_init()`      | Initialize and run a new window instance.                    |
 | `mlx_loop()`      | Keep the window open as long as a shutdown is not requested. |
-| `mlx_terminate()` | Destroy and cleanup all images and mlx resources.            |
+| `mlx_terminate()` | Destroy and clean up all images and mlx resources.            |
 
 If mlx_init() fails to set up the connection to the graphical system, it will
 return NULL, otherwise a non-null pointer is returned as a handle for the window.
@@ -84,12 +85,23 @@ To do this, simply add the following arguments at the linking stage:
 
 **NOTE: For some UNIX systems the flag for glfw might be with or without a 3 at the end.**
 
+## Build options
+
+When building MLX42 you can pass certain build options to cmake.
+
+The options are passed as follows `cmake -DDEBUG=1 -DGLFW_FETCH=0`.
+
+### Available options
+
+* `DEBUG`: Enables assertion macros and compiles with -g in order for debugging with lldb.
+* `GLFW_FETCH`: Fetches GLFW if it can't be found on the system at all, allows you to then install it with `sudo make install` under the `build/_deps` folder.
+
 ## Debugging
 
 MLX was designed with ease of debugging in mind, therefore if the project is built with
-**make DEBUG=1** it will keep in the assertion macros and notify you of any bad input 
+**cmake -DDEBUG=1** it will keep in the assertion macros and notify you of any bad input
 given to functions. Additionally it comes with its own runtime error checking via
-**mlx_errno** and **mlx_strerror** to properly identify what went wrong during the runtime 
+**mlx_errno** and **mlx_strerror** to properly identify what went wrong during the runtime
 of the library.
 
 ## Notes
@@ -102,7 +114,7 @@ it. That is, no proper way of handling multiple windows.
 
 ## F.A.Q
 
-Q: **_"ItS NoT In ThE SuBjeCt!"_**
+Q: **_"It'S NoT In ThE SuBjeCt!"_**
 
 A: So what? Subjects can change and so if something is not working correctly it should be replaced. Sure you can argue this point but you can also be the reason that it CAN be in the subject instead. Have an open mind :)
 
@@ -112,7 +124,7 @@ A: Officially, _no_. However, ask your head of studies first about using it, see
 
 Q: **_"Is it faster?"_**
 
-A: From my personal projects there was a considerable peformance gain, especially when compiled with `-Ofast`. Projects such as FDF could rotate their maps mindblowingly smooth and even larger maps with a width and height of 1000+ points moved/rotated relatively smooth, in short, yes.
+A: From my personal projects there was a considerable peformance gain, especially when compiled with `-Ofast`. Projects such as FDF could rotate their maps mindblowingly smooth and even larger maps with a width and height of 1000+ points moved/rotated relatively smooth, so in short, yes.
 
 Q: **_"Can I just drag and drop it into my old project and just not do anything?"_**
 

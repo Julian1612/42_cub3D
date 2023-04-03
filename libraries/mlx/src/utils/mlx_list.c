@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   mlx_list.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
+/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/28 01:53:51 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2022/11/26 14:26:23 by jvan-hal      ########   odam.nl         */
+/*   Updated: 2023/02/27 11:31:01 by W2Wizard      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@
 
 int32_t mlx_lstsize(mlx_list_t* lst)
 {
-	int32_t	i = 0;
+	int32_t	i;
 
-	while (lst)
-	{
-		i++;
+	for (i = 0; lst != NULL; i++)
 		lst = lst->next;
-	}
 	return (i);
 }
 
@@ -90,23 +87,6 @@ void mlx_lstadd_front(mlx_list_t** lst, mlx_list_t* new)
 	new->next = *lst;
 	new->prev = NULL;
 	*lst = new;
-}
-
-// TODO: Move this somewhere else...
-bool mlx_equal_image(void* lstcontent, void* value)
-{
-	const mlx_image_t* lcontent = lstcontent;
-	const mlx_image_t* lvalue = value;
-
-	return (lcontent == lvalue);
-}
-
-bool mlx_equal_inst(void* lstcontent, void* value)
-{
-	const draw_queue_t* lcontent = lstcontent;
-	const mlx_image_t* lvalue = value;
-
-	return (lcontent->image == lvalue);
 }
 
 /**
