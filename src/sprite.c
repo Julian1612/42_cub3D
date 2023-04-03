@@ -35,11 +35,11 @@ void	render_sprite(t_sprite *sprite, t_game *game)
 	int	y_tex;
 	int	y_offset;
 
-	y_offset = game->img_a->width / 2 - sprite->y + sprite->dist / cos(sprite->angle);
-	x_start = game->img_a->height / 2 - sprite->texture->tex->height / 2;
-	x_end = game->img_a->height / 2 + sprite->texture->tex->height / 2;
-	y_start = sprite->x - sprite->width / 2 + y_offset;
-	y_end = sprite->x + sprite->width / 2 + y_offset;
+	y_offset = game->img_a->height / 2;
+	x_start = game->img_a->width / 2 - sprite->width / 2;
+	x_end = game->img_a->width / 2 + sprite->width / 2;
+	y_start = sprite->x - sprite->height / 2 + y_offset;
+	y_end = sprite->x + sprite->height / 2 + y_offset;
 
 	printf("x_start: %d, x_end: %d\n", x_start, x_end);
 	printf("y_start: %d, y_end: %d\n", y_start, y_end);
@@ -48,7 +48,7 @@ void	render_sprite(t_sprite *sprite, t_game *game)
 	y_iter = y_start;
 	while (y_iter < y_end)
 	{
-		if (y_iter < 0 || y_iter >= game->img_a->width)
+		if (y_iter < 0 || y_iter >= game->img_a->height)
 		{
 			y_iter++;
 			continue ;
@@ -58,7 +58,7 @@ void	render_sprite(t_sprite *sprite, t_game *game)
 		x_iter = x_start;
 		while (x_iter < x_end)
 		{
-			if (x_iter < 0 || x_iter >= game->img_a->height)
+			if (x_iter < 0 || x_iter >= game->img_a->width)
 			{
 				x_iter++;
 				continue ;
@@ -86,8 +86,8 @@ void	init_sprite(t_game *game)
 	sprite.dist = sqrt(pow(sprite.x - game->player.x, 2) + pow(sprite.y - game->player.y, 2));
 	sprite.angle = atan2(sprite.y - game->player.y, sprite.x - game->player.x) - game->player.view_dir;
 	fov = 1;
-	sprite.height = (sprite.texture->tex->height / sprite.dist) * fov;
-	sprite.width = (sprite.texture->tex->width / sprite.dist) * fov;
+	sprite.height = game->img_a->height / sprite.dist;
+	sprite.width = sprite.height;
 	debug_print_sprite(&sprite);
 	render_sprite(&sprite, game);
 }
