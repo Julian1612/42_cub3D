@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 18:36:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/21 01:45:59 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,3 +72,4 @@ void	debug_print_ray(t_ray *ray, t_rayhit *hit)
 	printf("hit dist:   %f\n", hit->dist);
 	printf("hit texture:   %d\n", hit->wall_id);
 }
+

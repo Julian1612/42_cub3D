@@ -1,0 +1,114 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
+/*   Updated: 2023/03/24 13:55:40 by jschneid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "private_parser.h"
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+static int	check_args(int *argc, char **argv);
+static int	check_file(char *cub_file_path, char *data_type);
+static int	check_for_invalid_definitions(t_map *map_data);
+
+int	parser(int *argc, char **argv, t_map *map_data, t_player *player_pos)
+{
+	init_struct_null(map_data);
+	if (check_args(argc, argv))
+		return (ERROR);
+	if (check_file(argv[1], "cub"))
+		return (ERROR);
+	if (get_file_data(map_data, argv[1]))
+		return (ERROR);
+	if (check_mandatory_textures(map_data))
+		return (ERROR);
+	if (check_map(map_data))
+		return (ERROR);
+	if (check_bonus_textures(map_data))
+		return (ERROR);
+	if (check_for_invalid_definitions(map_data))
+		return (ERROR);
+	if (init_player_position(map_data, player_pos))
+		return (ERROR);
+	return (SUCCSES);
+}
+
+static int	check_args(int *argc, char **argv)
+{
+	if (*argc != 2)
+	{
+		error_message(1, NULL);
+		return (ERROR);
+	}
+	if (argv[1][0] == '\0')
+	{
+		error_message(1, NULL);
+		return (ERROR);
+	}
+	return (SUCCSES);
+}
+
+static int	check_file(char *cub_file_path, char *data_type)
+{
+	int	fd;
+
+	fd = open(cub_file_path, O_RDONLY);
+	if (fd < 0)
+	{
+		error_message(2, NULL);
+		return (ERROR);
+	}
+	close(fd);
+	if (check_data_type(cub_file_path, data_type))
+	{
+		error_message(3, NULL);
+		return (ERROR);
+	}
+	return (SUCCSES);
+}
+
+int	check_data_type(char *path, char *data_type)
+{
+	int	path_len;
+	int	len_type;
+
+	path_len = ft_strlen(path);
+	len_type = ft_strlen(data_type);
+	if (path_len >= len_type
+		&& ft_strncmp(path + (path_len - len_type), data_type, len_type))
+		return (ERROR);
+	return (SUCCSES);
+}
+
+static int	check_for_invalid_definitions(t_map *map_data)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	while (map_data->map[i] != NULL)
+	{
+		j = 0;
+		while (map_data->map[i][j] != '\0')
+		{
+			if (map_data->map[i][j] != '0' && map_data->map[i][j] != '1'
+				&& map_data->map[i][j] != 'N' && map_data->map[i][j] != 'S'
+				&& map_data->map[i][j] != 'W' && map_data->map[i][j] != 'E'
+				&& map_data->map[i][j] != 'D' && map_data->map[i][j] != 'B'
+				&& map_data->map[i][j] != 'E' && map_data->map[i][j] != ' ')
+				return (error_get_map(5, map_data));
+			j++;
+		}
+		i++;
+	}
+	return (SUCCSES);
+}

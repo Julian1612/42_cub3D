@@ -3,23 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
+#    By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/02 18:47:43 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/01 17:48:15 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=   #-O3
-# -Wall -Wextra -Werror 
-LIBMLX		=	./libraries/MLX
+CFLAGS		=	-g
+# -Wall -Wextra -Werror
+LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
+GARBAGE		=	./libraries/garbage_collector
 CC			=	cc
-VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
-				src/player_position:
+VPATH		=	src: src/parser: src/minimap:
 
-SRC			=	sprite.c raycaster.c debug.c render.c initialize.c errexit.c hook.c utils.c main.c
+SRC			=	main.c \
+				parser.c check_for_map.c check_for_rgb.c parser_utils.c \
+				check_textures.c check_for_texture.c error_messages.c \
+				get_file_data.c check_map.c init_player_position.c \
+				debug.c errexit.c hook.c initialize.c raycaster.c render.c utils.c \
+				minimap.c map.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
@@ -37,7 +42,7 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: libft $(NAME) 
+all: libft libmlx $(NAME)
 
 obj:
 	@mkdir -p $(OBJ_DIR)
@@ -46,16 +51,20 @@ libft:
 	@$(MAKE) -C $(LIBFT)
 
 obj/%.o: %.c cub3D.h
+
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 $(NAME): obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -Wno-gnu-include-next -I./LeakSanitizer/include -o cub3D
 
 n: obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS)
+#  -Wno-gnu-include-next -I./LeakSanitizer/include -L./LeakSanitizer -llsan -lc++-o $(NAME)
 
 clean:
 	@rm -rf obj
+	@$(MAKE) -C $(LIBFT) clean
+	@$(MAKE) -C $(LIBMLX) clean
 
 fclean: clean
 	@rm -f $(NAME)

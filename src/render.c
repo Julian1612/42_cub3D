@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/02 19:20:18 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/03/30 11:12:15 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	draw_ceiling(t_game *game, int wall_height, int x_img)
 		y_img++;
 	}
 }
+
 
 static void	draw_wall(t_game *game, int wall_height, int x_img, t_rayhit *hit)
 {
@@ -85,7 +86,6 @@ static double	fix_fisheye(double ray_dir, double view_dir, double wall_dist)
 	return (wall_dist);
 }
 
-// @todo fix fisheye for angles > 60
 int	render_world(t_game *game)
 {
 	t_rayhit	ray_hit;

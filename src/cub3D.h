@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/02 20:05:40 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/01 18:48:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@
 /* INCLUDES																	  */
 /* ************************************************************************** */
 
+# include "../libraries/libft/src/libft/libft.h"
 # include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
-
+# include "../libraries/libft/src/get_next_line/get_next_line.h"
+# include <stdbool.h>
 /* ************************************************************************** */
 /* DEFINES																	  */
 /* ************************************************************************** */
 
 # define WIDTH 800
 # define HEIGHT 800
-# define ERROR -1
+# define ERROR 1
 # define SUCCESS 0
-# define MM_BLOCK_SIZE 64
+# define MINIMAP_WALL_SIZE 30
 # define WALL '1'
 # define FPS 200
 
@@ -76,8 +78,10 @@ typedef struct s_minimap
 	double			y;
 	double			width;
 	double			height;
+	int				visible;
 	mlx_image_t		*player;
-	mlx_image_t		*walls;
+	mlx_image_t		*lmm_walls;
+	mlx_image_t		*smm_walls;
 	mlx_image_t		*view_dir;
 }	t_minimap;
 
@@ -90,6 +94,8 @@ typedef struct s_map
 }	t_map;
 
 // @note weapon is pointer because the player can change weapons
+// @note weapon is pointer because the player can change weapons
+// @todo change x and y to coor
 typedef struct s_player
 {
 	double			x;
@@ -178,5 +184,19 @@ int				render_world(t_game *game);
 void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
 
 void			init_sprite(t_game *game);
+int				initialize_mlx_all(t_game *game);
+int				initialize_minimap(t_game *game);
+int				initialize_map(t_game *game);
+
+int				render_world(t_game *game);
+
+void			hook(void *param);
+
+double			cast_ray(t_game *game, double ray_angle);
+
+unsigned int	convert_to_hexcode(unsigned char r, unsigned char g,
+					unsigned char b, unsigned char a);
+
+void			debug_print_ray(t_ray *ray);
 
 #endif
