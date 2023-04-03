@@ -3,39 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/02 17:04:02 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/03 16:08:10 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
 #include "../libraries/libft/src/libft/libft.h" // ft_strlen
+#include "minimap.h"
 #include <stdlib.h> // NULL
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
+#include <stdio.h> // printf
 
 #define PLAYER_SIZE 2
 #define DIRECTION 2
 
-static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
+// static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
+// {
+// 	minimap->player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
+// 	minimap->view_dir = mlx_new_image(mlx, DIRECTION, DIRECTION);
+// 	minimap->walls = mlx_new_image(mlx, MM_BLOCK_SIZE, MM_BLOCK_SIZE);
+// 	if (!minimap->player || !minimap->view_dir || !minimap->walls)
+// 		return (ERROR);
+// 	minimap->player->pixels = ft_memset(minimap->player->pixels, 150,
+// 			minimap->player->width * minimap->player->height * sizeof(int));
+// 	minimap->view_dir->pixels = ft_memset(minimap->view_dir->pixels, 150,
+// 			minimap->view_dir->width * minimap->view_dir->height * sizeof(int));
+// 	minimap->walls->pixels = ft_memset(minimap->walls->pixels, 255,
+// 			minimap->walls->width * minimap->walls->height * sizeof(int));
+// 	if (!minimap->player->pixels || !minimap->view_dir->pixels
+// 		|| !minimap->walls->pixels)
+// 		return (ERROR);
+// 	return (SUCCESS);
+// }
+
+int	initialize_minimap(t_game *game)
 {
-	minimap->player = mlx_new_image(mlx, PLAYER_SIZE, PLAYER_SIZE);
-	minimap->view_dir = mlx_new_image(mlx, DIRECTION, DIRECTION);
-	minimap->walls = mlx_new_image(mlx, MM_BLOCK_SIZE, MM_BLOCK_SIZE);
-	if (!minimap->player || !minimap->view_dir || !minimap->walls)
+	get_map_measures(game);
+	game->minimap.smm_walls = mlx_new_image(game->mlx,
+			MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);
+	if (game->minimap.smm_walls == NULL)
 		return (ERROR);
-	minimap->player->pixels = ft_memset(minimap->player->pixels, 150,
-			minimap->player->width * minimap->player->height * sizeof(int));
-	minimap->view_dir->pixels = ft_memset(minimap->view_dir->pixels, 150,
-			minimap->view_dir->width * minimap->view_dir->height * sizeof(int));
-	minimap->walls->pixels = ft_memset(minimap->walls->pixels, 255,
-			minimap->walls->width * minimap->walls->height * sizeof(int));
-	if (!minimap->player->pixels || !minimap->view_dir->pixels
-		|| !minimap->walls->pixels)
+	if (mlx_image_to_window(game->mlx, game->minimap.smm_walls, 0, 0) == -1)
 		return (ERROR);
+	return (SUCCESS);
+}
+
+int	initialize_map(t_game *game)
+{
+	double	wall_size;
+	int		height_square;
+	int		width_square;
+
+	get_map_measures(game);
+	wall_size = get_wall_size_map(&game->minimap);
+	height_square = (WIDTH - (game->minimap.width * wall_size)) / 2;
+	width_square = (HEIGHT - (game->minimap.height * wall_size)) / 2;
+	game->minimap.player = mlx_new_image(game->mlx, wall_size / 2, wall_size / 2);
+	game->minimap.lmm_walls = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (game->minimap.player == NULL)
+		return (EXIT_FAILURE);
+	if (mlx_image_to_window(game->mlx, game->minimap.player,height_square, width_square) == -1)
+		return (EXIT_FAILURE);
+	if (game->minimap.lmm_walls == NULL)
+		return (EXIT_FAILURE);
+	if (mlx_image_to_window(game->mlx, game->minimap.lmm_walls, height_square, width_square) == -1)
+		return (EXIT_FAILURE);
+	// game->minimap.visible = 0;
 	return (SUCCESS);
 }
 
@@ -68,7 +106,7 @@ int	initialize_mlx_data(t_game *game)
 		return (ERROR);
 	if (initialize_textures(game) == ERROR)
 		return (ERROR);
-	if (initialize_minimap(&game->minimap, game->mlx, game->map.map) == ERROR)
-		return (ERROR);
+	// if (initialize_minimap(&game->minimap, game->mlx, game->map.map) == ERROR)
+	// 	return (ERROR);
 	return (SUCCESS);
 }

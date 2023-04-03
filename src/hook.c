@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/02 19:48:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/03 17:53:29 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game
 #include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
+#include "minimap.h" // t_minimap
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
@@ -44,6 +45,30 @@ static void	move_player(t_player *player, char **map, double x_offset, double y_
 		player->y += y_offset;
 }
 
+void	change_maps(mlx_key_data_t keydata, void *param)
+{
+	t_minimap	*minimap;
+
+	minimap = (t_minimap *)param;
+	printf("game->minimap.visible: %d\n", minimap->visible);
+	if (keydata.key == MLX_KEY_F && keydata.action == 0
+		&& minimap->visible == 0)
+	{
+		minimap->smm_walls->instances[0].enabled = false;
+		minimap->lmm_walls->instances[0].enabled = true;
+		minimap->player->instances[0].enabled = true;
+		minimap->visible = 1;
+	}
+	else if (keydata.key == MLX_KEY_F && keydata.action == 0
+		&& minimap->visible == 1)
+	{
+		minimap->smm_walls->instances[0].enabled = true;
+		minimap->lmm_walls->instances[0].enabled = false;
+		minimap->player->instances[0].enabled = false;
+		minimap->visible = 0;
+	}
+}
+
 static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
@@ -73,6 +98,7 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 		player->view_dir = M_PI;
 	if (mlx_is_key_down(mlx, MLX_KEY_4))
 		player->view_dir = M_PI * 1.5;
+	mlx_key_hook(mlx, change_maps, minimap);
 }
 
 static bool	skip_frame(mlx_t *mlx, int fps)
@@ -91,7 +117,15 @@ void	hook(void *param)
 	// minimap
 	// collision
 	// enemy
+	printf("game->minimap.visible: %d\n", game->minimap.visible);
 	keys(game->mlx, &game->minimap, &game->player, game->map.map);
+	if (game->minimap.visible == 0)
+		render_minimap(game);
+	else
+	{
+		draw_map(game);
+		draw_player_map(game);
+	}
 	if (skip_frame(game->mlx, FPS) == false)
 		render_world(game);
 	// @note all images have to be resized here

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/02 19:40:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/03 16:03:13 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define HEIGHT 800
 # define ERROR -1
 # define SUCCESS 0
-# define MM_BLOCK_SIZE 64
+# define MINIMAP_WALL_SIZE 64
 # define WALL '1'
 # define FPS 60
 # define OBJ_COUNT 10
@@ -80,6 +80,9 @@ typedef struct s_minimap
 	double			y;
 	double			width;
 	double			height;
+	int				visible;
+	mlx_image_t		*lmm_walls;
+	mlx_image_t		*smm_walls;
 	mlx_image_t		*player;
 	mlx_image_t		*walls;
 	mlx_image_t		*view_dir;
@@ -88,9 +91,12 @@ typedef struct s_minimap
 typedef struct s_map
 {
 	char		**map;
+	double		width;
+	double		height;
 	t_texture	objects[OBJ_COUNT];
 	t_hexcolor	ceiling_color;
 	t_hexcolor	floor_color;
+
 }	t_map;
 
 // @note weapon is pointer because the player can change weapons
@@ -174,5 +180,9 @@ void			hook(void *param);
 int				render_world(t_game *game);
 
 void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
+
+// initzialize.c
+int	initialize_minimap(t_game *game);
+int	initialize_map(t_game *game);
 
 #endif
