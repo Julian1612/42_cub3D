@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/03 11:09:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:29:23 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,17 @@ static void	draw_minimap(t_game *game)
 	int	j;
 	int	k;
 	int	l;
-	int	test = 2;
 
 	k = 0;
 	i = (int)(game->player.y - 2);
-	printf("start -------------------------\n");
-	printf("i = %d\n", i);
 	while (i <= game->player.y + 2 && game->map.map[i] != NULL)
 	{
 		j = (int) game->player.x - 2;
 		if (j < 0)
 			j++;
 		l = 0;
-		printf("------------------------------\n");
-		while (j <= game->player.x + test && game->map.map[i][j] != '\0')
+		while (j <= game->player.x + 2 && game->map.map[i][j] != '\0')
 		{
-			printf("i = %d, j = %d\n", i, j);
 			if (i == (int) game->player.y && j == (int) game->player.x)
 				draw_square(&game->minimap, k, l, 'P');
 			else
@@ -62,7 +57,6 @@ static void	draw_minimap(t_game *game)
 		i++;
 		k++;
 	}
-	printf("end -------------------------\n");
 }
 
 static void	draw_square(t_minimap *minimap, int i, int j, char symbol)
@@ -77,6 +71,8 @@ static void	draw_square(t_minimap *minimap, int i, int j, char symbol)
 		color = convert_to_hexcode(200, 200, 200, 150);
 	else if (symbol == 'P')
 		color = convert_to_hexcode(0, 200, 200, 150);
+	else
+		color = convert_to_hexcode(200, 200, 200, 150);
 	k = i * MINIMAP_WALL_SIZE;
 	while (k < (i * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
 	{
