@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/03 14:24:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/03 15:49:52 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,10 @@ typedef struct s_sprite
 {
 	double			x;
 	double			y;
+	double			dist;
+	double			angle;
+	double			height;
+	double			width;
 	t_texture		*texture;
 }	t_sprite;
 
@@ -161,6 +165,7 @@ typedef struct s_sprite
 
 void			debug_print_player(t_player *player);
 void			debug_print_ray(t_ray *ray, t_rayhit *hit);
+void			debug_print_sprite(t_sprite *sprite);
 
 void			errexit_msg(char *msg);
 void			errexit_mlx_errno(void);
