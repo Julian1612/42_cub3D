@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   private_parser.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/02 17:27:24 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/03 18:13:46 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int				init_player_position(t_map *map_data, t_player *player_pos);
 
 /* parser.c */
 int				parser(int *argc, char **argv, t_map *map_data, t_player *player_pos);
+int				check_data_type(char *path, char *data_type);
 
 /* utils.c */
 void			init_struct_null(t_map *map_data);

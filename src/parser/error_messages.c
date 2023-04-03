@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/02 17:40:19 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/03 18:12:38 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	error_textures(int error_code, t_map *map_data)
 	}
 	else if (error_code == 7)
 		printf("Error!\nFile path for bonus texture is missing\n");
+	else if (error_code == 8)
+		printf("Error!\nFile has not datatype png\n");
 	printf("========================================\n");
 	free_struct(map_data);
 	return (1);

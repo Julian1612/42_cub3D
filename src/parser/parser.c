@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 09:59:19 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/03 18:11:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static int	check_args(int *argc, char **argv);
 static int	check_file(char *cub_file_path, char *data_type);
-static int	check_data_type(char *path, char *data_type);
+int			check_data_type(char *path, char *data_type);
 static int	check_for_invalid_definitions(t_map *map_data);
 
 int	parser(int *argc, char **argv, t_map *map_data, t_player *player_pos)
@@ -77,7 +77,7 @@ static int	check_file(char *cub_file_path, char *data_type)
 	return (0);
 }
 
-static int	check_data_type(char *path, char *data_type)
+int	check_data_type(char *path, char *data_type)
 {
 	int	path_len;
 	int	len_type;

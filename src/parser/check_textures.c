@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/02 17:51:20 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/03 18:13:34 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	check_mandatory_textures(t_map *map_data)
 	{
 		if (map_data->objects[i].path == NULL)
 			return (error_textures(6, map_data));
+		if (check_data_type(map_data->objects[i].path, "png"))
+			return (error_textures(8, map_data));
 		i++;
 	}
 	if (map_data->floor_color == -1)
