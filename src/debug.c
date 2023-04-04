@@ -38,7 +38,7 @@ void	debug_print_player(t_player *player)
 	printf(BLUE"============ PLAYER ============\n"RESET);
 	printf("player x:   %f\n", player->x);
 	printf("player y:   %f\n", player->y);
-	printf("player dir: %f\n", player->view_dir);
+	printf("player dir: %f\n", player->view_angle);
 }
 
 void	debug_print_coor(t_coor *coor)

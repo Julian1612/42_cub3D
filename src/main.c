@@ -48,7 +48,7 @@ int	test_parse(t_game *game)
 	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
 	game->player.x = 2;
 	game->player.y = 2;
-	game->player.view_dir = 0;
+	game->player.view_angle = 0;
 	game->player.weapon = NULL;
 	return (SUCCESS);
 }

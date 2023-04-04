@@ -94,7 +94,7 @@ typedef struct s_player
 {
 	double			x;
 	double			y;
-	double			view_dir;
+	double			view_angle;
 	t_weapon		*weapon;
 }	t_player;
 
@@ -180,7 +180,7 @@ void			hook(void *param);
 
 int				render_world(t_game *game);
 
-void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
+void			cast_ray(t_rayhit *hit, t_game *game, t_coor ray_dir, double ray_angle);
 
 void			init_sprite(t_game *game);
 

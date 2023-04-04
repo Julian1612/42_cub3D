@@ -76,33 +76,46 @@ static void	draw_floor(t_game *game, int wall_height, int x_img)
 	}
 }
 
-static double	fix_fisheye(double ray_dir, double view_dir, double wall_dist)
+static double	fix_fisheye(double ray_angle, double view_angle, double wall_dist)
 {
 	double	difference;
 
-	difference = view_dir - ray_dir;
+	difference = view_angle - ray_angle;
 	wall_dist *= cos(difference);
 	return (wall_dist);
+}
+
+static void set_ray_dir(t_coor *ray_dir, double x, int img_width, double view_angle)
+{
+	static const double	plane_x = 0;
+	static const double	plane_y = 0.66;
+	double				camera_x;
+
+	camera_x = 2 * x / img_width - 1;
+	ray_dir->x = sin(view_angle) + plane_x * camera_x;
+	ray_dir->y = cos(view_angle) + plane_y * camera_x;
 }
 
 // @todo fix fisheye for angles > 60
 int	render_world(t_game *game)
 {
 	t_rayhit	ray_hit;
-	double		ray_dir;
+	t_coor		ray_dir;
+	double		ray_angle;
 	double		wall_height;
 	double		fov;
 	int			x_img;
 
 	debug_print_player(&game->player);
 	fov = (double)game->img_a->width / game->img_a->height;
-	ray_dir = game->player.view_dir + (fov / 2);
+	ray_angle = game->player.view_angle + (fov / 2);
 	x_img = 0;
 	while (x_img < game->img_a->width)
 	{
-		ray_dir -= fov / game->img_a->width;
-		cast_ray(&ray_hit, game, ray_dir);
-		ray_hit.dist = fix_fisheye(ray_dir, game->player.view_dir, ray_hit.dist);
+		set_ray_dir(&ray_dir, x_img, game->img_a->width, game->player.view_angle);
+		ray_angle -= fov / game->img_a->width;
+		cast_ray(&ray_hit, game, ray_dir, ray_angle);
+		ray_hit.dist = fix_fisheye(ray_angle, game->player.view_angle, ray_hit.dist);
 		wall_height = game->img_a->height / ray_hit.dist;
 		draw_ceiling(game, wall_height, x_img);
 		draw_wall(game, wall_height, x_img, &ray_hit);

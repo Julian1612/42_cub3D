@@ -52,25 +52,25 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		move_player(player, map, sin(player->view_dir) / MOV_SPEED, cos(player->view_dir) / MOV_SPEED);
+		move_player(player, map, sin(player->view_angle) / MOV_SPEED, cos(player->view_angle) / MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		move_player(player, map, -sin(player->view_dir) / MOV_SPEED, -cos(player->view_dir) / MOV_SPEED);
+		move_player(player, map, -sin(player->view_angle) / MOV_SPEED, -cos(player->view_angle) / MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move_player(player, map, sin(player->view_dir - M_PI_2) / MOV_SPEED, cos(player->view_dir - M_PI_2) / MOV_SPEED);
+		move_player(player, map, sin(player->view_angle - M_PI_2) / MOV_SPEED, cos(player->view_angle - M_PI_2) / MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move_player(player, map, -sin(player->view_dir - M_PI_2) / MOV_SPEED, -cos(player->view_dir - M_PI_2) / MOV_SPEED);
+		move_player(player, map, -sin(player->view_angle - M_PI_2) / MOV_SPEED, -cos(player->view_angle - M_PI_2) / MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		player->view_dir += M_PI / 90 / ROT_SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)
+		player->view_angle += M_PI / 90 / ROT_SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		player->view_dir -= M_PI / 90 / ROT_SPEED;
+		player->view_angle -= M_PI / 90 / ROT_SPEED;
 	if (mlx_is_key_down(mlx, MLX_KEY_1))
-		player->view_dir = 0;
+		player->view_angle = 0;
 	if (mlx_is_key_down(mlx, MLX_KEY_2))
-		player->view_dir = M_PI / 2;
+		player->view_angle = M_PI / 2;
 	if (mlx_is_key_down(mlx, MLX_KEY_3))
-		player->view_dir = M_PI;
+		player->view_angle = M_PI;
 	if (mlx_is_key_down(mlx, MLX_KEY_4))
-		player->view_dir = M_PI * 1.5;
+		player->view_angle = M_PI * 1.5;
 }
 
 static bool	skip_frame(mlx_t *mlx, int fps)
