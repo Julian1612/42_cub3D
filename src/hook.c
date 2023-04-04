@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/04 13:24:04 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/04 19:55:36 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void	change_maps(mlx_key_data_t keydata, void *param)
 
 static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 {
+	int32_t x;
+	int32_t y;
+
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(mlx);
@@ -98,6 +101,29 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 	if (mlx_is_key_down(mlx, MLX_KEY_4))
 		player->view_dir = M_PI * 1.5;
 	mlx_key_hook(mlx, change_maps, minimap);
+	mlx_get_mouse_pos(mlx, &x, &y);
+	// if (x < 100 && x > 0)
+	// 	player->view_dir += M_PI / 90 / 0.5;
+	// else if (x < 200 && x > 100)
+	// 	player->view_dir += M_PI / 90 / 1;
+	// else if (x < 300 && x > 200)
+	// 	player->view_dir += M_PI / 90 / 2;
+	// printf("x: %d, y: %d\n", x, y);
+	float rot_speed = 0;
+	if (x > 300 && x < 500)
+		rot_speed = 0;
+	else if (x < 300 && x > 0)
+	{
+		rot_speed = (x - 0) * (2 - 0.5) / (300 - 0) + 0.5;
+		player->view_dir += M_PI / 90 / rot_speed;
+	}
+	else if (x > 500 && x < 800)
+	{
+		rot_speed = (x - 500) * (0.5 - 2) / (800 - 500) + 2;
+		player->view_dir -= M_PI / 90 / rot_speed;
+	}
+
+	printf("speed: %f\n", rot_speed);
 }
 
 static bool	skip_frame(mlx_t *mlx, int fps)
