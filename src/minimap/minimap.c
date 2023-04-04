@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/04 10:38:00 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/04 10:39:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	draw_minimap(t_game *game)
 	int	j;
 	int	k;
 	int	l;
-	int	test = 2;
+	// int	test = 2;
 
 	k = 0;
 	i = (int)(game->player.y - 2);
@@ -46,9 +46,8 @@ static void	draw_minimap(t_game *game)
 		if (j < 0)
 			j++;
 		l = 0;
-		while (j <= game->player.x + test && game->map.map[i][j] != '\0')
+		while (j <= game->player.x + 2 && game->map.map[i][j] != '\0')
 		{
-			printf("%c", game->map.map[i][j]);
 			if (i == (int) game->player.y && j == (int) game->player.x)
 				draw_square(&game->minimap, k, l, 'P');
 			else
@@ -56,12 +55,10 @@ static void	draw_minimap(t_game *game)
 			j++;
 			l++;
 		}
-	printf("\n");
 
 		i++;
 		k++;
 	}
-	printf("\n");
 }
 
 static void	draw_square(t_minimap *minimap, int i, int j, char symbol)

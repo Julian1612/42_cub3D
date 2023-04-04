@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/03 16:03:13 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/04 10:40:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define HEIGHT 800
 # define ERROR -1
 # define SUCCESS 0
-# define MINIMAP_WALL_SIZE 64
+# define MINIMAP_WALL_SIZE 30
 # define WALL '1'
 # define FPS 60
 # define OBJ_COUNT 10
