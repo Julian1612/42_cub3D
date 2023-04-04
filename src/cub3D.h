@@ -23,8 +23,8 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 400
+# define HEIGHT 400
 # define ERROR -1
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
@@ -150,12 +150,13 @@ typedef struct s_rayhit
 
 typedef struct s_sprite
 {
-	double			x;
-	double			y;
-	double			dist;
-	double			angle;
-	double			height;
-	double			width;
+	t_coor			map_pos;
+	t_coor			dir;
+	t_coor			dist;
+	t_coor			cam_pos;
+	double			img_x;
+	int				height;
+	int				width;
 	t_texture		*texture;
 }	t_sprite;
 
@@ -163,6 +164,7 @@ typedef struct s_sprite
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
+void			debug_print_coor(t_coor *coor, char *str);
 void			debug_print_player(t_player *player);
 void			debug_print_ray(t_ray *ray, t_rayhit *hit);
 void			debug_print_sprite(t_sprite *sprite);
@@ -181,9 +183,7 @@ int				initialize_mlx_data(t_game *game);
 void			hook(void *param);
 
 int				render_world(t_game *game);
-
 void			cast_ray(t_rayhit *hit, t_game *game, t_coor ray_dir);
-
-void			init_sprite(t_game *game);
+void			render_sprite(t_game *game);
 
 #endif

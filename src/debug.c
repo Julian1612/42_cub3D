@@ -31,12 +31,13 @@
 #define BOLDCYAN	"\033[1m\033[36m"
 #define BOLDWHITE	"\033[1m\033[37m"
 
-void	debug_print_coor(t_coor *coor)
+void	debug_print_coor(t_coor *coor, char *str)
 {
 	if (DEBUG == 0)
 		return ;
-	printf("x:   %f\n", coor->x);
-	printf("y:   %f\n", coor->y);
+	printf("%s", str);
+	printf("    x: %f\n", coor->x);
+	printf("    y: %f\n", coor->y);
 }
 
 void	debug_print_player(t_player *player)
@@ -44,8 +45,8 @@ void	debug_print_player(t_player *player)
 	if (DEBUG == 0)
 		return ;
 	printf(BLUE"============ PLAYER ============\n"RESET);
-	debug_print_coor(&player->pos);
-	debug_print_coor(&player->dir);
+	debug_print_coor(&player->pos, "player position: \n");
+	debug_print_coor(&player->dir, "player direction:\n");
 }
 
 void	debug_print_ray(t_ray *ray, t_rayhit *hit)
@@ -77,10 +78,11 @@ void	debug_print_sprite(t_sprite *sprite)
 	if (DEBUG == 0)
 		return ;
 	printf(BLUE"============ SPRITE ============\n"RESET);
-	printf("sprite x:   %f\n", sprite->x);
-	printf("sprite y:   %f\n", sprite->y);
-	printf("sprite.dist: %f\n", sprite->dist);
-	printf("sprite.angle: %f\n", sprite->angle);
-	printf("sprite.height: %f\n", sprite->height);
-	printf("sprite.width: %f\n", sprite->width);
+	debug_print_coor(&sprite->map_pos, "sprite position on map:\n");
+	debug_print_coor(&sprite->dir, "sprite direction vector from player:\n");
+	debug_print_coor(&sprite->dist, "sprite distance from player:\n");
+	debug_print_coor(&sprite->cam_pos, "sprite position on camera plane:\n");
+	printf("sprite x position on the screen: %f\n", sprite->img_x);
+	printf("sprite.height: %d\n", sprite->height);
+	printf("sprite.width: %d\n", sprite->width);
 }

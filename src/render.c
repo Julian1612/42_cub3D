@@ -32,6 +32,7 @@ static void	draw_ceiling(t_game *game, int wall_height, int x_img)
 	}
 }
 
+// @todo rename variables so that x and ys come last
 static void	draw_wall(t_game *game, int wall_height, int x_img, t_rayhit *hit)
 {
 	double	scale;
@@ -39,8 +40,8 @@ static void	draw_wall(t_game *game, int wall_height, int x_img, t_rayhit *hit)
 	int		y_tex_iter;
 	int		y_img;
 
-	scale = (double)(game->map.objects[hit->wall_id].tex->height - 1) / wall_height;
-	x_tex = (game->map.objects[hit->wall_id].tex->width - 1) * hit->stripe;
+	scale = (double)(game->map.objects[hit->wall_id].tex->height) / wall_height;
+	x_tex = (game->map.objects[hit->wall_id].tex->width) * hit->stripe;
 	y_tex_iter = 0;
 	y_img = game->img_a->height / 2 - wall_height / 2;
 	if (y_img < 0)
@@ -119,6 +120,6 @@ int	render_world(t_game *game)
 		draw_floor(game, wall_height, x_img);
 		x_img++;
 	}
-	// init_sprite(game);
+	render_sprite(game);
 	return (SUCCESS);
 }

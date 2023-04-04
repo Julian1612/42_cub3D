@@ -49,6 +49,7 @@ int	test_parse(t_game *game)
 	game->player.pos.x = 2;
 	game->player.pos.y = 2;
 	game->player.cplane.x = 0;
+	// @note fov = half of aspect ratio of screen
 	game->player.cplane.y = (double)WIDTH / HEIGHT / 2;
 	game->player.dir.x = -1;
 	game->player.dir.y = 0;
@@ -56,16 +57,14 @@ int	test_parse(t_game *game)
 	return (SUCCESS);
 }
 
-// @todo implement player size so that player stops at wall
 // @note fps engine correct like that?
 // @todo fix resizing
 // @note mlx_set_window_limit
-// @todo fix camera plane
-// @todo refactor raycaster to return hit coordinates instead of wall distance
 // @todo implement doors
 // @todo refactor hook functions for more readability (logic loop and render loop?)
 // @todo go through code and refactor function parameters
-// @todo fix the mlx shit
+// @todo fix the mlx compiling shit
+// @todo for the doors: the whole block moves
 
 int	main(int argc, char **argv)
 {
