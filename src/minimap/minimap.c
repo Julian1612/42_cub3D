@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/04 13:24:28 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:14:15 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	draw_minimap(t_game *game)
 	int	j;
 	int	k;
 	int	l;
-	// int	test = 2;
 
 	k = 0;
 	i = (int)(game->player.y - 2);
