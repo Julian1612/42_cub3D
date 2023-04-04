@@ -65,6 +65,7 @@ int	test_parse(t_game *game)
 // @todo go through code and refactor function parameters
 // @todo fix the mlx compiling shit
 // @todo for the doors: the whole block moves
+// @todo split up into sensible modules (render module etc.)
 
 int	main(int argc, char **argv)
 {
