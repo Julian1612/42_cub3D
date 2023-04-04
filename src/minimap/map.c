@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:44:25 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/03 15:58:36 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:41:41 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ void	render_surface(t_minimap *minimap, int i, int j, char symbol)
 	uint32_t	color;
 
 	if (symbol == '1')
-		color = convert_to_hexcode(81, 86, 82, 255);
+		color = convert_to_hexcode(44, 44, 44, 255);
 	else if (symbol == '0')
 		color = convert_to_hexcode(200, 200, 200, 150);
+	else if (symbol == ' ')
+		color = convert_to_hexcode(0, 0, 0, 0);
 	wall_size = get_wall_size_map(minimap);
 	k = i * wall_size;
 	while (k < (i * wall_size) + wall_size)
@@ -69,6 +71,32 @@ double	get_wall_size_map(t_minimap *minimap)
 			(HEIGHT * 0.75) / minimap->height));
 }
 
+// void	draw_player_map(t_game *game)
+// {
+// 	int			i;
+// 	int			j;
+// 	int			wall_size;
+// 	uint32_t	color;
+
+// 	i = 0;
+// 	wall_size = get_wall_size_map(&game->minimap);
+// 	color = convert_to_hexcode(29, 60, 13, 255);
+// 	game->minimap.player->instances[0].x = (game->player.x * wall_size)
+// 		+ (WIDTH - (game->minimap.width * wall_size)) / 2;
+// 	game->minimap.player->instances[0].y = (game->player.y * wall_size)
+// 		+ (HEIGHT - (game->minimap.height * wall_size)) / 2;
+// 	while (i < game->minimap.player->height)
+// 	{
+// 		j = 0;
+// 		while (j < game->minimap.player->width)
+// 		{
+// 			mlx_put_pixel(game->minimap.player, j, i, color);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
+
 void	draw_player_map(t_game *game)
 {
 	int			i;
@@ -78,7 +106,7 @@ void	draw_player_map(t_game *game)
 
 	i = 0;
 	wall_size = get_wall_size_map(&game->minimap);
-	color = convert_to_hexcode(255, 0, 0, 255);
+	color = convert_to_hexcode(29, 60, 13, 255);
 	game->minimap.player->instances[0].x = (game->player.x * wall_size)
 		+ (WIDTH - (game->minimap.width * wall_size)) / 2;
 	game->minimap.player->instances[0].y = (game->player.y * wall_size)
