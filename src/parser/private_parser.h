@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/03 18:13:46 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:18:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int				check_data_type(char *path, char *data_type);
 void			init_struct_null(t_map *map_data);
 unsigned int	convert_to_hexcode(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
+int				get_map_size(t_map *map_data);
 
 #endif

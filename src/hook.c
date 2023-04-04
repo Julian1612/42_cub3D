@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/03 17:53:29 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:24:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	change_maps(mlx_key_data_t keydata, void *param)
 	t_minimap	*minimap;
 
 	minimap = (t_minimap *)param;
-	printf("game->minimap.visible: %d\n", minimap->visible);
 	if (keydata.key == MLX_KEY_F && keydata.action == 0
 		&& minimap->visible == 0)
 	{
@@ -117,7 +116,6 @@ void	hook(void *param)
 	// minimap
 	// collision
 	// enemy
-	printf("game->minimap.visible: %d\n", game->minimap.visible);
 	keys(game->mlx, &game->minimap, &game->player, game->map.map);
 	if (game->minimap.visible == 0)
 		render_minimap(game);

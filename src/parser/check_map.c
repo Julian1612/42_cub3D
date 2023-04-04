@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:43:55 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 16:00:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:17:29 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	check_map(t_map *map_data)
 	if (check_last_line(map_data))
 		return (1);
 	if (check_if_map_is_closed(map_data))
+		return (1);
+	if (get_map_size(map_data))
 		return (1);
 	return (0);
 }
