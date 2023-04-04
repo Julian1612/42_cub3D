@@ -1,5 +1,5 @@
-WE textures/west.pdf
-EA ./textures/east.pdf
+WE textures/west.png
+EA ./textures/east.png
 
 F  4,        1,      126
 
