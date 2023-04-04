@@ -44,7 +44,7 @@ static bool	is_invisible(t_hexcolor color)
 
 // @note split up in 2d and 3d functions
 // @todo check for out of bounds
-void	draw_sprite(t_sprite *sprite, t_game *game)
+static void	draw_sprite(t_sprite *sprite, t_game *game, double *wall_height)
 {
 	t_start_end	row;
 	t_start_end	stripe;
@@ -61,7 +61,7 @@ void	draw_sprite(t_sprite *sprite, t_game *game)
 	stripe_iter = stripe.start;
 	while (stripe_iter++ < stripe.end)
 	{
-		if (sprite->cam_pos.y < 0 || stripe_iter < 0 || stripe_iter >= game->img_a->width)
+		if (sprite->cam_pos.y < 0 || stripe_iter < 0 || stripe_iter >= game->img_a->width || wall_height[stripe_iter] > sprite->height)
 			continue ;
 		tex_x = (stripe_iter - (-sprite->width / 2 + sprite->img_x)) * sprite->texture->tex->width / sprite->width;
 		y_tex_iter = 0;
@@ -83,7 +83,7 @@ void	draw_sprite(t_sprite *sprite, t_game *game)
 	}
 }
 
-void	init_sprite(t_sprite *sprite, t_player *player, t_game *game)
+static void	init_sprite(t_sprite *sprite, t_player *player, t_game *game)
 {
 	double	cam_matrix_inv;
 
@@ -102,11 +102,11 @@ void	init_sprite(t_sprite *sprite, t_player *player, t_game *game)
 	sprite->width = abs((int)(game->img_a->height / sprite->cam_pos.y));
 }
 
-void	render_sprite(t_game *game)
+void	render_sprite(t_game *game, double *wall_height)
 {
 	t_sprite	sprite;
 
 	init_sprite(&sprite, &game->player, game);
-	draw_sprite(&sprite, game);
+	draw_sprite(&sprite, game, wall_height);
 	debug_print_sprite(&sprite);
 }

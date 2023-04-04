@@ -184,6 +184,6 @@ void			hook(void *param);
 
 int				render_world(t_game *game);
 void			cast_ray(t_rayhit *hit, t_game *game, t_coor ray_dir);
-void			render_sprite(t_game *game);
+void			render_sprite(t_game *game, double *wall_height);
 
 #endif

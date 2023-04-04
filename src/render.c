@@ -104,7 +104,7 @@ int	render_world(t_game *game)
 {
 	t_rayhit	ray_hit;
 	t_coor		ray_dir;
-	double		wall_height;
+	double		wall_height[game->img_a->width];
 	int			x_img;
 
 	debug_print_player(&game->player);
@@ -114,12 +114,12 @@ int	render_world(t_game *game)
 	{
 		set_ray_dir(&ray_dir, x_img, game->img_a->width, &game->player);
 		cast_ray(&ray_hit, game, ray_dir);
-		wall_height = game->img_a->height / ray_hit.dist;
-		draw_ceiling(game, wall_height, x_img);
-		draw_wall(game, wall_height, x_img, &ray_hit);
-		draw_floor(game, wall_height, x_img);
+		wall_height[x_img] = game->img_a->height / ray_hit.dist;
+		draw_ceiling(game, wall_height[x_img], x_img);
+		draw_wall(game, wall_height[x_img], x_img, &ray_hit);
+		draw_floor(game, wall_height[x_img], x_img);
 		x_img++;
 	}
-	render_sprite(game);
+	render_sprite(game, wall_height);
 	return (SUCCESS);
 }
