@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/04 10:24:14 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/04 10:38:00 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,11 @@ static void	draw_square(t_minimap *minimap, int i, int j, char symbol)
 	uint32_t	color;
 
 	if (symbol == '1')
-		color = convert_to_hexcode(81, 86, 82, 255);
+		color = convert_to_hexcode(44, 44, 44, 255);
 	else if (symbol == 'P')
-		color = convert_to_hexcode(0, 200, 200, 150);
+		color = convert_to_hexcode(29, 60, 13, 255);
 	else
 		color = convert_to_hexcode(200, 200, 200, 150);
-
 	k = i * MINIMAP_WALL_SIZE;
 	while (k < (i * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
 	{
