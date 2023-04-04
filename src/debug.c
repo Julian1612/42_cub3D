@@ -31,22 +31,21 @@
 #define BOLDCYAN	"\033[1m\033[36m"
 #define BOLDWHITE	"\033[1m\033[37m"
 
+void	debug_print_coor(t_coor *coor)
+{
+	if (DEBUG == 0)
+		return ;
+	printf("x:   %f\n", coor->x);
+	printf("y:   %f\n", coor->y);
+}
+
 void	debug_print_player(t_player *player)
 {
 	if (DEBUG == 0)
 		return ;
 	printf(BLUE"============ PLAYER ============\n"RESET);
-	printf("player x:   %f\n", player->pos.x);
-	printf("player y:   %f\n", player->pos.y);
-	printf("player dir: %f\n", player->view_angle);
-}
-
-void	debug_print_coor(t_coor *coor)
-{
-	if (DEBUG == 0)
-		return ;
-	// printf("x:   %f\n", coor->x);
-	// printf("y:   %f\n", coor->y);
+	debug_print_coor(&player->pos);
+	debug_print_coor(&player->dir);
 }
 
 void	debug_print_ray(t_ray *ray, t_rayhit *hit)

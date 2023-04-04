@@ -16,8 +16,8 @@
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
 
-#define MOV_SPEED 10 // @note the higher, the slower
-#define ROT_SPEED 0.5 // @note the higher, the slower
+#define MOV_SPEED 0.05
+#define ROT_SPEED 0.03
 #define PLAYER_SIZE 0.2
 
 // @note function usable for enemies?
@@ -42,6 +42,23 @@ static void	move_player(t_player *player, char **map, double x_offset, double y_
 		player->pos.y += y_offset;
 }
 
+static void	rotate_player(t_player *player, bool left)
+{
+	double	temp;
+	double	rot_speed;
+
+	if (left)
+		rot_speed = -ROT_SPEED;
+	else
+		rot_speed = ROT_SPEED;
+	temp = player->dir.x;
+	player->dir.x = temp * cos(rot_speed) - player->dir.y * sin(rot_speed);
+	player->dir.y = temp * sin(rot_speed) + player->dir.y * cos(rot_speed);
+	temp = player->cplane.x;
+	player->cplane.x = temp * cos(rot_speed) - player->cplane.y * sin(rot_speed);
+	player->cplane.y = temp * sin(rot_speed) + player->cplane.y * cos(rot_speed);
+}
+
 static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
@@ -52,25 +69,17 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		move_player(player, map, sin(player->view_angle) / MOV_SPEED, cos(player->view_angle) / MOV_SPEED);
+		move_player(player, map, player->dir.x * MOV_SPEED, player->dir.y * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		move_player(player, map, -sin(player->view_angle) / MOV_SPEED, -cos(player->view_angle) / MOV_SPEED);
+		move_player(player, map, -player->dir.x * MOV_SPEED, -player->dir.y * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move_player(player, map, sin(player->view_angle - M_PI_2) / MOV_SPEED, cos(player->view_angle - M_PI_2) / MOV_SPEED);
+		move_player(player, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move_player(player, map, -sin(player->view_angle - M_PI_2) / MOV_SPEED, -cos(player->view_angle - M_PI_2) / MOV_SPEED);
+		move_player(player, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		player->view_angle += M_PI / 90 / ROT_SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)
+		rotate_player(player, true);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		player->view_angle -= M_PI / 90 / ROT_SPEED;
-	if (mlx_is_key_down(mlx, MLX_KEY_1))
-		player->view_angle = 0;
-	if (mlx_is_key_down(mlx, MLX_KEY_2))
-		player->view_angle = M_PI / 2;
-	if (mlx_is_key_down(mlx, MLX_KEY_3))
-		player->view_angle = M_PI;
-	if (mlx_is_key_down(mlx, MLX_KEY_4))
-		player->view_angle = M_PI * 1.5;
+		rotate_player(player, false);
 }
 
 static bool	skip_frame(mlx_t *mlx, int fps)

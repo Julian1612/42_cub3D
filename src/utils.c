@@ -12,6 +12,7 @@
 
 #include "cub3D.h" // typedefs
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include <math.h> // sin, cos
 
 t_hexcolor	convert_to_hexcode(
 	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
@@ -33,4 +34,21 @@ int	coor_to_pixel(int width, int x, int y)
 	// @note multiply to get from int32 to int8
 	pixel *= 4;
 	return (pixel);
+}
+
+// @todo move this to separate math file with other math related functions?
+double	rotate_x(double x, double y, double angle)
+{
+	double	rotated_x;
+
+	rotated_x = x * cos(angle) - y * sin(angle);
+	return (rotated_x);
+}
+
+double	rotate_y(double x, double y, double angle)
+{
+	double	rotated_y;
+
+	rotated_y = y * cos(angle) + x * sin(angle);
+	return (rotated_y);
 }

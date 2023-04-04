@@ -23,7 +23,7 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
-# define WIDTH 800
+# define WIDTH 1200
 # define HEIGHT 800
 # define ERROR -1
 # define SUCCESS 0
@@ -99,7 +99,8 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_coor			pos;
-	double			view_angle;
+	t_coor			cplane;
+	t_coor			dir;
 	t_weapon		*weapon;
 }	t_player;
 
@@ -172,6 +173,8 @@ void			errexit_mlx_errno(void);
 t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 int				coor_to_pixel(int width, int x, int y);
+double			rotate_x(double x, double y, double angle);
+double			rotate_y(double x, double y, double angle);
 
 int				initialize_mlx_data(t_game *game);
 

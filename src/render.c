@@ -76,27 +76,29 @@ static void	draw_floor(t_game *game, int wall_height, int x_img)
 	}
 }
 
-static double	fix_fisheye(double ray_angle, double view_angle, double wall_dist)
+static void set_ray_dir(t_coor *ray_dir, double x, int img_width, t_player *player)
 {
-	double	difference;
-
-	difference = view_angle - ray_angle;
-	wall_dist *= cos(difference);
-	return (wall_dist);
-}
-
-static void set_ray_dir(t_coor *ray_dir, double x, int img_width, double view_angle)
-{
-	static const double	plane_x = 0;
-	static const double	plane_y = 0.66;
 	double				camera_x;
 
-	camera_x = 2 * x / img_width - 1;
-	ray_dir->x = sin(view_angle) + plane_x * camera_x;
-	ray_dir->y = cos(view_angle) + plane_y * camera_x;
+	camera_x = 2 * (img_width - x - 1) / img_width - 1;
+	ray_dir->x = player->dir.x + player->cplane.x * camera_x;
+	ray_dir->y = player->dir.y + player->cplane.y * camera_x;
 }
 
-// @todo fix fisheye for angles > 60
+static void	scale_cplane(t_coor *cplane, int img_width, int img_height)
+{
+	double	temp;
+	double	temp2;
+	double	angle;
+
+	angle = atan2(cplane->x, cplane->y);
+	cplane->x = 0;
+	cplane->y = (double)img_width / img_height / 2;
+	cplane->x = 0 * cos(angle) - cplane->y * sin(angle);
+	cplane->y = 0 * sin(angle) + cplane->y * cos(angle);
+}
+
+// @todo fix scale plane function
 int	render_world(t_game *game)
 {
 	t_rayhit	ray_hit;
@@ -105,10 +107,11 @@ int	render_world(t_game *game)
 	int			x_img;
 
 	debug_print_player(&game->player);
+	// scale_cplane(&game->player.cplane, game->img_a->width, game->img_a->height);
 	x_img = 0;
 	while (x_img < game->img_a->width)
 	{
-		set_ray_dir(&ray_dir, x_img, game->img_a->width, game->player.view_angle);
+		set_ray_dir(&ray_dir, x_img, game->img_a->width, &game->player);
 		cast_ray(&ray_hit, game, ray_dir);
 		wall_height = game->img_a->height / ray_hit.dist;
 		draw_ceiling(game, wall_height, x_img);

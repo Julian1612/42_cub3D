@@ -115,8 +115,8 @@ void	init_sprite(t_game *game)
 	sprite.x = 5;
 	sprite.y = 5;
 	sprite.texture = &game->map.objects[SPRITE];
-	dir_x = cos(game->player.view_angle);
-	dir_y = sin(game->player.view_angle);
+	dir_x = game->player.dir.x;
+	dir_y = game->player.dir.y;
 	printf("dir_x: %f, dir_y: %f\n", dir_x, dir_y);
 	distance_x = sprite.x - game->player.pos.x;
 	distance_y = sprite.y - game->player.pos.y;
