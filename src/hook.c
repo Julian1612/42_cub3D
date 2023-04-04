@@ -22,28 +22,35 @@
 
 // @note function usable for enemies?
 // @note can this be done less computationally expensive?
-static bool	check_collision(double x, double y, char **map_arr)
+static bool	check_collision(double x, double y, t_map *map)
 {
-	if (map_arr[(int)(y + PLAYER_SIZE)][(int)(x)] == WALL)
+	double	dist_x;
+	double	dist_y;
+
+	if (map->arr[(int)(y + PLAYER_SIZE)][(int)(x)] == WALL)
 		return (true);
-	if (map_arr[(int)(y - PLAYER_SIZE)][(int)(x)] == WALL)
+	if (map->arr[(int)(y - PLAYER_SIZE)][(int)(x)] == WALL)
 		return (true);
-	if (map_arr[(int)(y)][(int)(x + PLAYER_SIZE)] == WALL)
+	if (map->arr[(int)(y)][(int)(x + PLAYER_SIZE)] == WALL)
 		return (true);
-	if (map_arr[(int)(y)][(int)(x - PLAYER_SIZE)] == WALL)
+	if (map->arr[(int)(y)][(int)(x - PLAYER_SIZE)] == WALL)
 		return (true);
-	if (map_arr[(int)(y - PLAYER_SIZE)][(int)(x - PLAYER_SIZE)] == WALL)
+	if (map->arr[(int)(y - PLAYER_SIZE)][(int)(x - PLAYER_SIZE)] == WALL)
 		return (true);
-	if (map_arr[(int)(y + PLAYER_SIZE)][(int)(x + PLAYER_SIZE)] == WALL)
+	if (map->arr[(int)(y + PLAYER_SIZE)][(int)(x + PLAYER_SIZE)] == WALL)
 		return (true);
-	if (map_arr[(int)(y - PLAYER_SIZE)][(int)(x + PLAYER_SIZE)] == WALL)
+	if (map->arr[(int)(y - PLAYER_SIZE)][(int)(x + PLAYER_SIZE)] == WALL)
 		return (true);
-	if (map_arr[(int)(y + PLAYER_SIZE)][(int)(x - PLAYER_SIZE)] == WALL)
+	if (map->arr[(int)(y + PLAYER_SIZE)][(int)(x - PLAYER_SIZE)] == WALL)
+		return (true);
+	dist_x = x - map->objects[0].pos.x;
+	dist_y = y - map->objects[0].pos.y;
+	if (dist_x * dist_x + dist_y * dist_y < 0.5 * 0.5)
 		return (true);
 	return (false);
 }
 
-static void	move_player(t_player *player, char **map, double x_offset, double y_offset)
+static void	move_player(t_player *player, t_map *map, double x_offset, double y_offset)
 {
 	if (!check_collision(player->pos.x + x_offset, player->pos.y, map))
 		player->pos.x += x_offset;
@@ -68,7 +75,7 @@ static void	rotate_player(t_player *player, bool left)
 	player->cplane.y = temp * sin(rot_speed) + player->cplane.y * cos(rot_speed);
 }
 
-static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map_arr)
+static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
@@ -78,13 +85,13 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map_ar
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		move_player(player, map_arr, player->dir.x * MOV_SPEED, player->dir.y * MOV_SPEED);
+		move_player(player, map, player->dir.x * MOV_SPEED, player->dir.y * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		move_player(player, map_arr, -player->dir.x * MOV_SPEED, -player->dir.y * MOV_SPEED);
+		move_player(player, map, -player->dir.x * MOV_SPEED, -player->dir.y * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move_player(player, map_arr, rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
+		move_player(player, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move_player(player, map_arr, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
+		move_player(player, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		rotate_player(player, true);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
@@ -109,7 +116,7 @@ void	hook(void *param)
 	// enemy
 	if (skip_frame(game->mlx, FPS) == false)
 	{
-		keys(game->mlx, &game->minimap, &game->player, game->map.arr);
+		keys(game->mlx, &game->minimap, &game->player, &game->map);
 		render_world(game);
 	}
 	// @note all images have to be resized here

@@ -40,9 +40,15 @@ int	test_parse(t_game *game)
 		{"textures/west.png", NULL},
 		{"textures/sprite.png", NULL}
 	};
+	static t_object	objects[1] =
+	{
+		{.pos = {6.5, 4.5}, .type = DECOR}
+	};
+
 
 	game->map.arr = map;
 	game->map.textures = textures;
+	game->map.objects = objects;
 	game->map.ceiling_color = convert_to_hexcode(0, 0, 0, 0);
 	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
 	game->player.pos.x = 2;

@@ -52,7 +52,8 @@ values that have to be determined:
 - they have a collision box
 - they always face the player
 - they can be half-covered by another object, such as walls
-- 
+-----sprite collision
+	- simple: just check if dist to sprite is less than size of sprite
 
 
 --------------doors--------------

@@ -83,17 +83,15 @@ static void	draw_sprite(t_sprite *sprite, t_game *game, double *wall_height)
 	}
 }
 
-static void	init_sprite(t_sprite *sprite, t_player *player, t_game *game)
+static void	init_sprite(t_sprite *sprite, t_object *object, t_player *player, t_game *game)
 {
 	double	cam_matrix_inv;
 
-	sprite->map_pos.x = 5.5;
-	sprite->map_pos.y = 4.5;
 	sprite->tex = &game->map.textures[SPRITE];
 	sprite->dir.x = player->dir.x;
 	sprite->dir.y = player->dir.y;
-	sprite->dist.x = sprite->map_pos.x - player->pos.x;
-	sprite->dist.y = sprite->map_pos.y - player->pos.y;
+	sprite->dist.x = object->pos.x - player->pos.x;
+	sprite->dist.y = object->pos.y - player->pos.y;
 	cam_matrix_inv = 1.0 / (player->cplane.x * sprite->dir.y - sprite->dir.x * player->cplane.y);
 	sprite->cam_pos.x = -cam_matrix_inv * (sprite->dir.y * sprite->dist.x - sprite->dir.x * sprite->dist.y);
 	sprite->cam_pos.y = cam_matrix_inv * (-player->cplane.y * sprite->dist.x + player->cplane.x * sprite->dist.y);
@@ -106,7 +104,7 @@ void	render_sprite(t_game *game, double *wall_height)
 {
 	t_sprite	sprite;
 
-	init_sprite(&sprite, &game->player, game);
+	init_sprite(&sprite, &game->map.objects[0], &game->player, game);
 	draw_sprite(&sprite, game, wall_height);
 	debug_print_sprite(&sprite);
 }

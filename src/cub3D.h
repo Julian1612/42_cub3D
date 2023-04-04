@@ -60,6 +60,7 @@ typedef struct s_vector
 	double	y;
 }	t_vec;
 
+// @todo switch tex for pixels
 typedef struct s_texture
 {
 	char			*path;
@@ -71,12 +72,12 @@ typedef struct s_object
 	t_vec			pos;
 	t_tex			*tex;
 	double			y_offset;
-	enum e_obj_id
+	enum e_obj_type
 	{
 		DECOR,
 		WEAPON,
 		COIN,
-	}	id;
+	}	type;
 }	t_object;
 
 // @note ammunition is not implemented
@@ -112,7 +113,7 @@ typedef struct s_map
 {
 	char		**arr;
 	t_tex		*textures;
-	t_object	*objs;
+	t_object	*objects;
 	t_enemy		*enemies;
 	t_hexcolor	ceiling_color;
 	t_hexcolor	floor_color;
@@ -162,7 +163,6 @@ typedef struct s_rayhit
 
 typedef struct s_sprite
 {
-	t_vec			map_pos;
 	t_vec			dir;
 	t_vec			dist;
 	t_vec			cam_pos;

@@ -78,7 +78,6 @@ void	debug_print_sprite(t_sprite *sprite)
 	if (DEBUG == 0)
 		return ;
 	printf(BLUE"============ SPRITE ============\n"RESET);
-	debug_print_vec(&sprite->map_pos, "sprite position on map:\n");
 	debug_print_vec(&sprite->dir, "sprite direction vector from player:\n");
 	debug_print_vec(&sprite->dist, "sprite distance from player:\n");
 	debug_print_vec(&sprite->cam_pos, "sprite position on camera plane:\n");
