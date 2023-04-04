@@ -177,24 +177,30 @@ typedef struct s_sprite
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
+// debug
 void			debug_print_vec(t_vec *vec, char *str);
 void			debug_print_player(t_player *player);
 void			debug_print_ray(t_ray *ray, t_rayhit *hit);
 void			debug_print_sprite(t_sprite *sprite);
 
+// error
 void			errexit_msg(char *msg);
 void			errexit_mlx_errno(void);
 
+// utils
 t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 int				coor_to_pixel(int width, int x, int y);
 double			rotate_x(double x, double y, double angle);
 double			rotate_y(double x, double y, double angle);
 
+// initialize
 int				initialize_mlx_data(t_game *game);
 
+// hook
 void			hook(void *param);
 
+// render
 int				render_world(t_game *game);
 void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir);
 void			render_sprite(t_game *game, double *wall_height);
