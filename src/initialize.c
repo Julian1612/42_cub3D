@@ -42,13 +42,13 @@ static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
 // @note what if a texture is missing and has to be skipped?
 static int	initialize_textures(t_game *game)
 {
-	game->map.objects[NORTH].tex = mlx_load_png(game->map.objects[NORTH].path);
-	game->map.objects[EAST].tex = mlx_load_png(game->map.objects[EAST].path);
-	game->map.objects[SOUTH].tex = mlx_load_png(game->map.objects[SOUTH].path);
-	game->map.objects[WEST].tex = mlx_load_png(game->map.objects[WEST].path);
-	game->map.objects[SPRITE].tex = mlx_load_png(game->map.objects[SPRITE].path);
-	if (!game->map.objects[NORTH].tex || !game->map.objects[EAST].tex
-		|| !game->map.objects[SOUTH].tex || !game->map.objects[WEST].tex)
+	game->map.textures[NORTH].tex = mlx_load_png(game->map.textures[NORTH].path);
+	game->map.textures[EAST].tex = mlx_load_png(game->map.textures[EAST].path);
+	game->map.textures[SOUTH].tex = mlx_load_png(game->map.textures[SOUTH].path);
+	game->map.textures[WEST].tex = mlx_load_png(game->map.textures[WEST].path);
+	game->map.textures[SPRITE].tex = mlx_load_png(game->map.textures[SPRITE].path);
+	if (!game->map.textures[NORTH].tex || !game->map.textures[EAST].tex
+		|| !game->map.textures[SOUTH].tex || !game->map.textures[WEST].tex)
 		return (ERROR);
 	// @todo sprite initialization
 	return (SUCCESS);

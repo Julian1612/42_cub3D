@@ -40,8 +40,8 @@ static void	draw_wall(t_game *game, int wall_height, int x_img, t_rayhit *hit)
 	int		y_tex_iter;
 	int		y_img;
 
-	scale = (double)(game->map.objects[hit->wall_id].tex->height) / wall_height;
-	x_tex = (game->map.objects[hit->wall_id].tex->width) * hit->stripe;
+	scale = (double)(game->map.textures[hit->tex_id].tex->height) / wall_height;
+	x_tex = (game->map.textures[hit->tex_id].tex->width) * hit->stripe;
 	y_tex_iter = 0;
 	y_img = game->img_a->height / 2 - wall_height / 2;
 	if (y_img < 0)
@@ -54,8 +54,8 @@ static void	draw_wall(t_game *game, int wall_height, int x_img, t_rayhit *hit)
 		// @todo improve this ugly shit
 		ft_memcpy(&game->img_a->pixels
 		[coor_to_pixel(game->img_a->width, x_img, y_img)],
-			&game->map.objects[hit->wall_id].tex->pixels
-		[coor_to_pixel(game->map.objects[hit->wall_id].tex->width,
+			&game->map.textures[hit->tex_id].tex->pixels
+		[coor_to_pixel(game->map.textures[hit->tex_id].tex->width,
 				x_tex, y_tex_iter * scale)],
 			4);
 		y_tex_iter++;
@@ -77,7 +77,7 @@ static void	draw_floor(t_game *game, int wall_height, int x_img)
 	}
 }
 
-static void set_ray_dir(t_coor *ray_dir, double x, int img_width, t_player *player)
+static void set_ray_dir(t_vec *ray_dir, double x, int img_width, t_player *player)
 {
 	double				camera_x;
 
@@ -86,7 +86,7 @@ static void set_ray_dir(t_coor *ray_dir, double x, int img_width, t_player *play
 	ray_dir->y = player->dir.y + player->cplane.y * camera_x;
 }
 
-static void	scale_cplane(t_coor *cplane, int img_width, int img_height)
+static void	scale_cplane(t_vec *cplane, int img_width, int img_height)
 {
 	double	temp;
 	double	temp2;
@@ -103,7 +103,7 @@ static void	scale_cplane(t_coor *cplane, int img_width, int img_height)
 int	render_world(t_game *game)
 {
 	t_rayhit	ray_hit;
-	t_coor		ray_dir;
+	t_vec		ray_dir;
 	double		wall_height[game->img_a->width];
 	int			x_img;
 

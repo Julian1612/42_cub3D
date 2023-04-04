@@ -57,25 +57,25 @@ static void	draw_sprite(t_sprite *sprite, t_game *game, double *wall_height)
 
 	set_row_start_end(&row, sprite->height, game->img_a->height, 0);
 	set_stripe_start_end(&stripe, sprite->width, game->img_a->width, sprite->img_x);
-	scale = (double)(sprite->texture->tex->height) / sprite->height;
+	scale = (double)(sprite->tex->tex->height) / sprite->height;
 	stripe_iter = stripe.start;
 	while (stripe_iter++ < stripe.end)
 	{
 		if (sprite->cam_pos.y < 0 || stripe_iter < 0 || stripe_iter >= game->img_a->width || wall_height[stripe_iter] > sprite->height)
 			continue ;
-		tex_x = (stripe_iter - (-sprite->width / 2 + sprite->img_x)) * sprite->texture->tex->width / sprite->width;
+		tex_x = (stripe_iter - (-sprite->width / 2 + sprite->img_x)) * sprite->tex->tex->width / sprite->width;
 		y_tex_iter = 0;
 		if (sprite->height > game->img_a->height)
 			y_tex_iter = (sprite->height - game->img_a->height) / 2;
 		row_iter = row.start;
 		while (row_iter++ < row.end)
 		{
-			color = sprite->texture->tex->pixels[coor_to_pixel(sprite->texture->tex->width, tex_x, y_tex_iter * scale)];
+			color = sprite->tex->tex->pixels[coor_to_pixel(sprite->tex->tex->width, tex_x, y_tex_iter * scale)];
 			if (is_invisible(color) == false)
 				ft_memcpy(&game->img_a->pixels
 					[coor_to_pixel(game->img_a->width, stripe_iter, row_iter)],
-						&sprite->texture->tex->pixels
-					[coor_to_pixel(sprite->texture->tex->width,
+						&sprite->tex->tex->pixels
+					[coor_to_pixel(sprite->tex->tex->width,
 							tex_x, y_tex_iter * scale)],
 						4); // @todo improve this ugly shit
 			y_tex_iter++;
@@ -89,7 +89,7 @@ static void	init_sprite(t_sprite *sprite, t_player *player, t_game *game)
 
 	sprite->map_pos.x = 5.5;
 	sprite->map_pos.y = 4.5;
-	sprite->texture = &game->map.objects[SPRITE];
+	sprite->tex = &game->map.textures[SPRITE];
 	sprite->dir.x = player->dir.x;
 	sprite->dir.y = player->dir.y;
 	sprite->dist.x = sprite->map_pos.x - player->pos.x;

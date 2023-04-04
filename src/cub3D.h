@@ -39,7 +39,7 @@
 /* ENUMS																	  */
 /* ************************************************************************** */
 
-enum	e_object_id
+enum e_tex_id
 {
 	NORTH,
 	EAST,
@@ -55,31 +55,53 @@ enum	e_object_id
 
 typedef uint32_t	t_hexcolor;
 
-typedef struct s_coor
+typedef struct s_vector
 {
 	double	x;
 	double	y;
-}	t_coor;
+}	t_vec;
 
 typedef struct s_texture
 {
 	char			*path;
 	mlx_texture_t	*tex;
-}	t_texture;
+}	t_tex;
+
+typedef struct s_object
+{
+	t_vec			pos;
+	t_tex			*tex;
+	double			y_offset;
+	enum e_obj_id
+	{
+		DECOR,
+		WEAPON,
+		COIN,
+	}	id;
+}	t_object;
 
 // @note ammunition is not implemented
 typedef struct s_weapon
 {
-	t_texture		*texture;
+	t_tex			*tex;
 	char			*damage;
 	char			*range;
 	char			*reload_time;
 }	t_weapon;
 
+// @note enemies are always oriented towards the player
+typedef struct s_enemy
+{
+	t_vec			pos;
+	t_tex			*tex;
+	char			health;
+	char			*speed;
+	t_weapon		weapon;
+}	t_enemy;
+
 typedef struct s_minimap
 {
-	double			x;
-	double			y;
+	t_vec			pos;
 	double			width;
 	double			height;
 	mlx_image_t		*player;
@@ -90,7 +112,9 @@ typedef struct s_minimap
 typedef struct s_map
 {
 	char		**map;
-	t_texture	*objects;
+	t_tex		*textures;
+	t_object	*objs;
+	t_enemy		*enemies;
 	t_hexcolor	ceiling_color;
 	t_hexcolor	floor_color;
 }	t_map;
@@ -98,22 +122,11 @@ typedef struct s_map
 // @note weapon is pointer because the player can change weapons
 typedef struct s_player
 {
-	t_coor			pos;
-	t_coor			cplane;
-	t_coor			dir;
+	t_vec			pos;
+	t_vec			cplane;
+	t_vec			dir;
 	t_weapon		*weapon;
 }	t_player;
-
-// @note enemies are always oriented towards the player
-typedef struct s_enemy
-{
-	double			x;
-	double			y;
-	t_texture		*texture;
-	char			health;
-	char			*speed;
-	t_weapon		weapon;
-}	t_enemy;
 
 // @note items might be added here
 typedef struct s_game
@@ -131,40 +144,40 @@ typedef struct s_game
 typedef struct s_ray
 {
 	double	angle;
-	t_coor	dir;
-	t_coor	origin;
+	t_vec	dir;
+	t_vec	origin;
 	int		map_x;
 	int		map_y;
-	t_coor	step;
-	t_coor	hypotenuse;
-	t_coor	length;
+	t_vec	step;
+	t_vec	hypotenuse;
+	t_vec	length;
 	bool	y_side;
 }				t_ray;
 
 typedef struct s_rayhit
 {
-	double				stripe;
-	double				dist;
-	enum e_object_id	wall_id;
+	double			stripe;
+	double			dist;
+	enum e_tex_id	tex_id;
 }	t_rayhit;
 
 typedef struct s_sprite
 {
-	t_coor			map_pos;
-	t_coor			dir;
-	t_coor			dist;
-	t_coor			cam_pos;
+	t_vec			map_pos;
+	t_vec			dir;
+	t_vec			dist;
+	t_vec			cam_pos;
 	double			img_x;
 	int				height;
 	int				width;
-	t_texture		*texture;
+	t_tex			*tex;
 }	t_sprite;
 
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
-void			debug_print_coor(t_coor *coor, char *str);
+void			debug_print_vec(t_vec *vec, char *str);
 void			debug_print_player(t_player *player);
 void			debug_print_ray(t_ray *ray, t_rayhit *hit);
 void			debug_print_sprite(t_sprite *sprite);
@@ -183,7 +196,7 @@ int				initialize_mlx_data(t_game *game);
 void			hook(void *param);
 
 int				render_world(t_game *game);
-void			cast_ray(t_rayhit *hit, t_game *game, t_coor ray_dir);
+void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir);
 void			render_sprite(t_game *game, double *wall_height);
 
 #endif

@@ -19,7 +19,7 @@
 
 #define UNIT 1.0f
 
-static void	init_ray(t_ray *ray, t_coor *pos, t_coor *ray_dir)
+static void	init_ray(t_ray *ray, t_vec *pos, t_vec *ray_dir)
 {
 	ray->dir = *ray_dir;
 	ray->angle = atan2(ray_dir->x, ray_dir->y);
@@ -74,21 +74,21 @@ static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map)
 		hit->dist = ray->length.x - ray->hypotenuse.x;
 }
 
-static void	set_hit_wall_id(t_rayhit *hit, bool y_side, t_coor *step)
+static void	set_hit_tex_id(t_rayhit *hit, bool y_side, t_vec *step)
 {
 	if (y_side)
 	{
 		if (step->y < 0)
-			hit->wall_id = SOUTH;
+			hit->tex_id = SOUTH;
 		else
-			hit->wall_id = NORTH;
+			hit->tex_id = NORTH;
 	}
 	else
 	{
 		if (step->x < 0)
-			hit->wall_id = WEST;
+			hit->tex_id = WEST;
 		else
-			hit->wall_id = EAST;
+			hit->tex_id = EAST;
 	}
 }
 
@@ -126,13 +126,13 @@ static void	set_hit_offset(t_rayhit *hit, bool y_side, t_ray *ray)
 		hit->stripe = get_y_offset(ray);
 }
 
-void	cast_ray(t_rayhit *hit, t_game *game, t_coor ray_dir)
+void	cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir)
 {
 	t_ray			ray;
 
 	init_ray(&ray, &game->player.pos, &ray_dir);
 	set_distance(hit, &ray, &game->map);
-	set_hit_wall_id(hit, ray.y_side, &ray.step);
+	set_hit_tex_id(hit, ray.y_side, &ray.step);
 	set_hit_offset(hit, ray.y_side, &ray);
 	debug_print_ray(&ray, hit);
 }

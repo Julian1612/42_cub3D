@@ -32,7 +32,7 @@ int	test_parse(t_game *game)
 		"1100100000111111",
 		"1111111111111111"
 	};
-	static t_texture	objects[6] =
+	static t_tex	textures[6] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
@@ -43,7 +43,7 @@ int	test_parse(t_game *game)
 	};
 
 	game->map.map = map;
-	game->map.objects = objects;
+	game->map.textures = textures;
 	game->map.ceiling_color = convert_to_hexcode(0, 0, 0, 0);
 	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
 	game->player.pos.x = 2;
