@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_position.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 17:23:42 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/04 14:59:24 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	init_player_position(t_map *map_data, t_player *player_pos)
 			if (map_data->map[i][j] == 'N' || map_data->map[i][j] == 'S'
 				|| map_data->map[i][j] == 'E' || map_data->map[i][j] == 'W')
 			{
-				player_pos->x = j;
-				player_pos->y = i;
+				player_pos->x = j + 0.5;
+				player_pos->y = i + 0.5;
 				player_pos->view_dir = get_view_direction(map_data->map[i][j]);
 				return (0);
 			}
