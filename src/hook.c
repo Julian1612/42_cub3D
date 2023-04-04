@@ -21,6 +21,7 @@
 #define PLAYER_SIZE 0.2
 
 // @note function usable for enemies?
+// @note can this be done less computationally expensive?
 static bool	check_collision(double x, double y, char **map_arr)
 {
 	if (map_arr[(int)(y + PLAYER_SIZE)][(int)(x)] == WALL)
@@ -30,6 +31,14 @@ static bool	check_collision(double x, double y, char **map_arr)
 	if (map_arr[(int)(y)][(int)(x + PLAYER_SIZE)] == WALL)
 		return (true);
 	if (map_arr[(int)(y)][(int)(x - PLAYER_SIZE)] == WALL)
+		return (true);
+	if (map_arr[(int)(y - PLAYER_SIZE)][(int)(x - PLAYER_SIZE)] == WALL)
+		return (true);
+	if (map_arr[(int)(y + PLAYER_SIZE)][(int)(x + PLAYER_SIZE)] == WALL)
+		return (true);
+	if (map_arr[(int)(y - PLAYER_SIZE)][(int)(x + PLAYER_SIZE)] == WALL)
+		return (true);
+	if (map_arr[(int)(y + PLAYER_SIZE)][(int)(x - PLAYER_SIZE)] == WALL)
 		return (true);
 	return (false);
 }
