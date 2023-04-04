@@ -36,8 +36,8 @@ void	debug_print_player(t_player *player)
 	if (DEBUG == 0)
 		return ;
 	printf(BLUE"============ PLAYER ============\n"RESET);
-	printf("player x:   %f\n", player->x);
-	printf("player y:   %f\n", player->y);
+	printf("player x:   %f\n", player->pos.x);
+	printf("player y:   %f\n", player->pos.y);
 	printf("player dir: %f\n", player->view_angle);
 }
 

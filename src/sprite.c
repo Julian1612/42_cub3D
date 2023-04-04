@@ -118,8 +118,8 @@ void	init_sprite(t_game *game)
 	dir_x = cos(game->player.view_angle);
 	dir_y = sin(game->player.view_angle);
 	printf("dir_x: %f, dir_y: %f\n", dir_x, dir_y);
-	distance_x = sprite.x - game->player.x;
-	distance_y = sprite.y - game->player.y;
+	distance_x = sprite.x - game->player.pos.x;
+	distance_y = sprite.y - game->player.pos.y;
 	printf("distance_x: %f, distance_y: %f\n", distance_x, distance_y);
 	transform_x = dir_x * distance_x + dir_y * distance_y;
 	transform_y = dir_y * distance_x - dir_x * distance_y;

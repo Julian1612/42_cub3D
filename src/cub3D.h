@@ -55,6 +55,12 @@ enum	e_object_id
 
 typedef uint32_t	t_hexcolor;
 
+typedef struct s_coor
+{
+	double	x;
+	double	y;
+}	t_coor;
+
 typedef struct s_texture
 {
 	char			*path;
@@ -92,8 +98,7 @@ typedef struct s_map
 // @note weapon is pointer because the player can change weapons
 typedef struct s_player
 {
-	double			x;
-	double			y;
+	t_coor			pos;
 	double			view_angle;
 	t_weapon		*weapon;
 }	t_player;
@@ -120,12 +125,6 @@ typedef struct s_game
 	t_player		player;
 	t_enemy			*enemies;
 }	t_game;
-
-typedef struct s_coor
-{
-	double	x;
-	double	y;
-}	t_coor;
 
 // @todo move to raycaster header
 typedef struct s_ray
@@ -180,7 +179,7 @@ void			hook(void *param);
 
 int				render_world(t_game *game);
 
-void			cast_ray(t_rayhit *hit, t_game *game, t_coor ray_dir, double ray_angle);
+void			cast_ray(t_rayhit *hit, t_game *game, t_coor ray_dir);
 
 void			init_sprite(t_game *game);
 

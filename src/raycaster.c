@@ -19,14 +19,11 @@
 
 #define UNIT 1.0f
 
-static void	init_ray(t_ray *ray, double x, double y, t_coor ray_dir, double ray_angle)
+static void	init_ray(t_ray *ray, t_coor *pos, t_coor *ray_dir)
 {
-	// ray->dir = ray_dir;
-	ray->dir.y = cos(ray_angle);
-	ray->dir.x = sin(ray_angle);
-	ray->angle = ray_angle;
-	ray->origin.x = x;
-	ray->origin.y = y;
+	ray->dir = *ray_dir;
+	ray->angle = atan2(ray_dir->x, ray_dir->y);
+	ray->origin = *pos;
 	ray->map_x = (int)ray->origin.x;
 	ray->map_y = (int)ray->origin.y;
 	// @note potential division by zero
@@ -129,11 +126,11 @@ static void	set_hit_offset(t_rayhit *hit, bool y_side, t_ray *ray)
 		hit->stripe = get_y_offset(ray);
 }
 
-void	cast_ray(t_rayhit *hit, t_game *game, t_coor ray_dir, double ray_angle)
+void	cast_ray(t_rayhit *hit, t_game *game, t_coor ray_dir)
 {
 	t_ray			ray;
 
-	init_ray(&ray, game->player.x, game->player.y, ray_dir, ray_angle);
+	init_ray(&ray, &game->player.pos, &ray_dir);
 	set_distance(hit, &ray, &game->map);
 	set_hit_wall_id(hit, ray.y_side, &ray.step);
 	set_hit_offset(hit, ray.y_side, &ray);

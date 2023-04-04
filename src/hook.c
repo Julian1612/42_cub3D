@@ -36,10 +36,10 @@ static bool	check_collision(double x, double y, char **map)
 
 static void	move_player(t_player *player, char **map, double x_offset, double y_offset)
 {
-	if (!check_collision(player->x + x_offset, player->y, map))
-		player->x += x_offset;
-	if (!check_collision(player->x, player->y + y_offset, map))
-		player->y += y_offset;
+	if (!check_collision(player->pos.x + x_offset, player->pos.y, map))
+		player->pos.x += x_offset;
+	if (!check_collision(player->pos.x, player->pos.y + y_offset, map))
+		player->pos.y += y_offset;
 }
 
 static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)

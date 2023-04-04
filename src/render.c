@@ -101,27 +101,21 @@ int	render_world(t_game *game)
 {
 	t_rayhit	ray_hit;
 	t_coor		ray_dir;
-	double		ray_angle;
 	double		wall_height;
-	double		fov;
 	int			x_img;
 
 	debug_print_player(&game->player);
-	fov = (double)game->img_a->width / game->img_a->height;
-	ray_angle = game->player.view_angle + (fov / 2);
 	x_img = 0;
 	while (x_img < game->img_a->width)
 	{
 		set_ray_dir(&ray_dir, x_img, game->img_a->width, game->player.view_angle);
-		ray_angle -= fov / game->img_a->width;
-		cast_ray(&ray_hit, game, ray_dir, ray_angle);
-		ray_hit.dist = fix_fisheye(ray_angle, game->player.view_angle, ray_hit.dist);
+		cast_ray(&ray_hit, game, ray_dir);
 		wall_height = game->img_a->height / ray_hit.dist;
 		draw_ceiling(game, wall_height, x_img);
 		draw_wall(game, wall_height, x_img, &ray_hit);
 		draw_floor(game, wall_height, x_img);
 		x_img++;
 	}
-	init_sprite(game);
+	// init_sprite(game);
 	return (SUCCESS);
 }
