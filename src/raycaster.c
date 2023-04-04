@@ -53,7 +53,7 @@ static void	init_ray(t_ray *ray, t_vec *pos, t_vec *ray_dir)
 
 static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map)
 {
-	while (map->map[ray->map_y][ray->map_x] != WALL)
+	while (map->arr[ray->map_y][ray->map_x] != WALL)
 	{
 		if (ray->length.x < ray->length.y)
 		{

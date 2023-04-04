@@ -69,7 +69,7 @@ int	initialize_mlx_data(t_game *game)
 		return (ERROR);
 	if (initialize_textures(game) == ERROR)
 		return (ERROR);
-	if (initialize_minimap(&game->minimap, game->mlx, game->map.map) == ERROR)
+	if (initialize_minimap(&game->minimap, game->mlx, game->map.arr) == ERROR)
 		return (ERROR);
 	return (SUCCESS);
 }

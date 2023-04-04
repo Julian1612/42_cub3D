@@ -32,24 +32,23 @@ int	test_parse(t_game *game)
 		"1100100000111111",
 		"1111111111111111"
 	};
-	static t_tex	textures[6] =
+	static t_tex	textures[5] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
 		{"textures/south.png", NULL},
 		{"textures/west.png", NULL},
-		{"textures/door_front.png", NULL},
 		{"textures/sprite.png", NULL}
 	};
 
-	game->map.map = map;
+	game->map.arr = map;
 	game->map.textures = textures;
 	game->map.ceiling_color = convert_to_hexcode(0, 0, 0, 0);
 	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
 	game->player.pos.x = 2;
 	game->player.pos.y = 2;
 	game->player.cplane.x = 0;
-	// @note fov = half of aspect ratio of screen
+	// @note fov = half of aspect ratio of screen (why half?)
 	game->player.cplane.y = (double)WIDTH / HEIGHT / 2;
 	game->player.dir.x = -1;
 	game->player.dir.y = 0;

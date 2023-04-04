@@ -45,7 +45,6 @@ enum e_tex_id
 	EAST,
 	SOUTH,
 	WEST,
-	DOOR,
 	SPRITE,
 };
 
@@ -111,7 +110,7 @@ typedef struct s_minimap
 
 typedef struct s_map
 {
-	char		**map;
+	char		**arr;
 	t_tex		*textures;
 	t_object	*objs;
 	t_enemy		*enemies;
