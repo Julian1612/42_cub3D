@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/04 10:55:19 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 09:20:07 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ static int	initialize_environ(t_game *game)
 	game->img_a = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
 	if (game->mlx == NULL || game->img_a == NULL)
 		return (ERROR);
+	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	return (SUCCESS);
 }
 
@@ -108,5 +109,6 @@ int	initialize_mlx_data(t_game *game)
 		return (ERROR);
 	// if (initialize_minimap(&game->minimap, game->mlx, game->map.map) == ERROR)
 	// 	return (ERROR);
+	game->player.turn_to_the_curser = false; /// wo anders initzialisieren
 	return (SUCCESS);
 }

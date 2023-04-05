@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/04 10:40:27 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 09:17:47 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_player
 	double			x;
 	double			y;
 	double			view_dir;
+	bool			turn_to_the_curser;
 	t_weapon		*weapon;
 }	t_player;
 
