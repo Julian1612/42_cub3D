@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:43:55 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/04 13:17:29 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:52:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ static int	check_first_line(t_map *map_data)
 	{
 		if (map_data->map[0][i] != '1'
 			&& map_data->map[0][i] != ' ')
-		{
-			error_get_map(1, map_data);
-			return (1);
-		}
+			return (error_get_map(1, map_data));
 		i++;
 	}
 	return (0);
@@ -62,10 +59,7 @@ static int	check_last_line(t_map *map_data)
 	{
 		if (map_data->map[map_len][i] != '1'
 			&& map_data->map[map_len][i] != ' ')
-		{
-			error_get_map(1, map_data);
-			return (1);
-		}
+			return (error_get_map(1, map_data));
 		i++;
 	}
 	return (0);

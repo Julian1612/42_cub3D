@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/02 17:32:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/05 13:54:16 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 	splitted_str = ft_split(line, ' ');
 	splitted_str_len = ft_strlen(splitted_str[1]);
 	if (splitted_str == NULL)
-	{
-		error_message(4, map_data);
-		return (1);
-	}
+		return (error_message(4, map_data));
 	if (i == 0)
 		cpy_line(&map_data->objects[NORTH].path, splitted_str[1], splitted_str_len);
 	else if (i == 1)
