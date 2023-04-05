@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/05 09:20:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:00:25 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int	initialize_environ(t_game *game)
 	game->img_a = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
 	if (game->mlx == NULL || game->img_a == NULL)
 		return (ERROR);
-	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	return (SUCCESS);
 }
 

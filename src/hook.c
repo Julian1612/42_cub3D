@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/05 09:49:25 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 09:59:59 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,21 @@ void	change_maps(mlx_key_data_t keydata, void *param)
 	}
 }
 
-static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
+void	mouse_movements(mlx_t *mlx, t_player *player)
 {
 	int32_t			x;
 	int32_t			y;
-	double			rot_speed = 0;
-	static double	offset = 0;
 
+	mlx_get_mouse_pos(mlx, &x, &y);
+	if (x < 400 && x > 2)
+		player->view_dir += M_PI / 90 / 1;
+	else if (x > 400 && x < 800)
+		player->view_dir -= M_PI / 90 / 1;
+	mlx_set_mouse_pos(mlx, 400, 400);
+}
+
+static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
+{
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(mlx);
@@ -103,50 +111,7 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 	if (mlx_is_key_down(mlx, MLX_KEY_4))
 		player->view_dir = M_PI * 1.5;
 	mlx_key_hook(mlx, change_maps, minimap);
-	mlx_get_mouse_pos(mlx, &x, &y);
-	printf("x: %d\n", x);
-	// if (x < 400 && x > 0 && player->turn_to_the_curser == false)
-	// {
-	// 	// rot_speed = (x - 0) * (4 - 0.5) / (370 - 0) + 0.5;
-	// 	// player->view_dir += M_PI / 90 / rot_speed;
-	// 	offset = 400 - x;
-	// 	player->turn_to_the_curser = true;
-	// }
-	// else if (x > 400 && x < 800 && player->turn_to_the_curser == false)
-	// {
-	// 	// rot_speed = (x - 0) * (4 - 0.5) / (370 - 0) + 0.5;
-	// 	// player->view_dir += M_PI / 90 / rot_speed;
-	// 	offset = 800 - x;
-	// 	player->turn_to_the_curser = true;
-	// }
-	// else if (x > 400 && x < 800 && flag == false)
-	// {
-	// 	// rot_speed = (x - 450) * (0.5 - 4) / (800 - 430) + 4;
-	// 	// player->view_dir -= M_PI / 90 / rot_speed;
-	// 	offset = 400 - x;
-	// 	flag = true;
-	// }
-	// if (player->turn_to_the_curser == true)
-	// {
-		printf("offset: %f\n", offset);
-		if (x < 400 && x > 2)
-		{
-			// rot_speed = (x - 0) * (4 - 0.5) / (370 - 0) + 0.5;
-			player->view_dir += M_PI / 90 / 0.5;
-			offset--;
-		}
-		else if (x > 400 && x < 800)
-		{
-			// rot_speed = (x - 450) * (0.5 - 4) / (800 - 430) + 4;
-			player->view_dir -= M_PI / 90 / 0.5;
-			// offset--;
-		}
-			mlx_set_mouse_pos(mlx, 400, y);
-			// player->turn_to_the_curser = false;
-	// }
-	// printf("flag: %d\n", flag);
-	// printf("offset: %f\n", offset);
-	// printf("speed: %f\an", rot_speed);
+	mouse_movements(mlx, player);
 }
 
 // mlx_get_mouse_pos(mlx, &x, &y);
