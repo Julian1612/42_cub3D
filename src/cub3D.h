@@ -49,6 +49,7 @@ enum e_tex_id
 	LAMP,
 	TABLE,
 	SOLDIER,
+	GUN,
 };
 
 /* ************************************************************************** */
@@ -88,9 +89,9 @@ typedef struct s_object
 typedef struct s_weapon
 {
 	t_tex			*tex;
-	char			*damage;
-	char			*range;
-	char			*reload_time;
+	char			damage;
+	char			range;
+	char			reload_time;
 }	t_weapon;
 
 // @note enemies are always oriented towards the player

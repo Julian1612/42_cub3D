@@ -35,7 +35,7 @@ int	test_parse(t_game *game)
 		"1100100000111111",
 		"1111111111111111"
 	};
-	static t_tex	textures[8] =
+	static t_tex	textures[9] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
@@ -45,6 +45,7 @@ int	test_parse(t_game *game)
 		{"textures/lamp.png", NULL},
 		{"textures/table.png", NULL},
 		{"textures/soldier.png", NULL},
+		{"textures/gun.png", NULL},
 	};
 	static t_object	objects[OBJ_COUNT] =
 	{
@@ -57,6 +58,13 @@ int	test_parse(t_game *game)
 	static t_enemy	enemies[ENEMY_COUNT] =
 	{
 		{.pos = {7.5, 4.5}, .tex = &textures[SOLDIER], .health = 100, .speed = 0.1},
+	};
+	static t_weapon	gun =
+	{
+		.tex = &textures[GUN],
+		.damage = 10,
+		.range = 10,
+		.reload_time = 1,
 	};
 
 	game->map.arr = map;
@@ -74,7 +82,7 @@ int	test_parse(t_game *game)
 	game->player.cplane.y = (double)WIDTH / HEIGHT / 2;
 	game->player.dir.x = -1;
 	game->player.dir.y = 0;
-	game->player.weapon = NULL;
+	game->player.weapon = &gun;
 	return (SUCCESS);
 }
 
@@ -89,9 +97,18 @@ int	test_parse(t_game *game)
 // @todo split up into sensible modules (render module etc.)
 // @todo rename object to sprite and sprite struct to sprite_helper or something?
 
+void	put_weapon(mlx_t *mlx, t_weapon *weapon)
+{
+	mlx_image_t	*weapon_img;
+
+	weapon_img = mlx_texture_to_image(mlx, weapon->tex->tex);
+	if (mlx_image_to_window(mlx, weapon_img, WIDTH / 2 - weapon_img->width / 2, HEIGHT - weapon_img->height) == ERROR)
+		errexit_mlx_errno();
+}
+
 int	main(int argc, char **argv)
 {
-	t_game	game;
+	t_game		game;
 
 	if (test_parse(&game))
 		return (EXIT_FAILURE);
@@ -101,6 +118,7 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
 		errexit_mlx_errno();
+	put_weapon(game.mlx, game.player.weapon);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
