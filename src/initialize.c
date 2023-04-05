@@ -39,18 +39,20 @@ static int	initialize_minimap(t_minimap *minimap, mlx_t *mlx, char **map)
 	return (SUCCESS);
 }
 
-// @note what if a texture is missing and has to be skipped?
+// @note every texture is loaded at all times
+// @note better way of getting texture count?
 static int	initialize_textures(t_game *game)
 {
-	game->map.textures[NORTH].tex = mlx_load_png(game->map.textures[NORTH].path);
-	game->map.textures[EAST].tex = mlx_load_png(game->map.textures[EAST].path);
-	game->map.textures[SOUTH].tex = mlx_load_png(game->map.textures[SOUTH].path);
-	game->map.textures[WEST].tex = mlx_load_png(game->map.textures[WEST].path);
-	game->map.textures[SPRITE].tex = mlx_load_png(game->map.textures[SPRITE].path);
-	if (!game->map.textures[NORTH].tex || !game->map.textures[EAST].tex
-		|| !game->map.textures[SOUTH].tex || !game->map.textures[WEST].tex)
-		return (ERROR);
-	// @todo sprite initialization
+	int	i;
+
+	i = 0;
+	while (i <= TABLE)
+	{
+		game->map.textures[i].tex = mlx_load_png(game->map.textures[i].path);
+		if (game->map.textures[i].tex == NULL)
+			return (ERROR);
+		i++;
+	}
 	return (SUCCESS);
 }
 

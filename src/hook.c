@@ -18,37 +18,6 @@
 
 #define MOV_SPEED 0.05
 #define ROT_SPEED 0.03
-#define PLAYER_SIZE 0.2
-
-// @note function usable for enemies?
-// @note can this be done less computationally expensive?
-static bool	check_collision(double x, double y, t_map *map)
-{
-	double	dist_x;
-	double	dist_y;
-
-	if (map->arr[(int)(y + PLAYER_SIZE)][(int)(x)] == WALL)
-		return (true);
-	if (map->arr[(int)(y - PLAYER_SIZE)][(int)(x)] == WALL)
-		return (true);
-	if (map->arr[(int)(y)][(int)(x + PLAYER_SIZE)] == WALL)
-		return (true);
-	if (map->arr[(int)(y)][(int)(x - PLAYER_SIZE)] == WALL)
-		return (true);
-	if (map->arr[(int)(y - PLAYER_SIZE)][(int)(x - PLAYER_SIZE)] == WALL)
-		return (true);
-	if (map->arr[(int)(y + PLAYER_SIZE)][(int)(x + PLAYER_SIZE)] == WALL)
-		return (true);
-	if (map->arr[(int)(y - PLAYER_SIZE)][(int)(x + PLAYER_SIZE)] == WALL)
-		return (true);
-	if (map->arr[(int)(y + PLAYER_SIZE)][(int)(x - PLAYER_SIZE)] == WALL)
-		return (true);
-	dist_x = x - map->objects[0].pos.x;
-	dist_y = y - map->objects[0].pos.y;
-	if (dist_x * dist_x + dist_y * dist_y < 0.5 * 0.5)
-		return (true);
-	return (false);
-}
 
 static void	move_player(t_player *player, t_map *map, double x_offset, double y_offset)
 {
@@ -117,7 +86,7 @@ void	hook(void *param)
 	if (skip_frame(game->mlx, FPS) == false)
 	{
 		keys(game->mlx, &game->minimap, &game->player, &game->map);
-		render_world(game);
+		render_all(game);
 	}
 	// @note all images have to be resized here
 	mlx_resize_image(game->img_a, game->mlx->width, game->mlx->height);

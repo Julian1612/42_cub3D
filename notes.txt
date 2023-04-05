@@ -84,3 +84,25 @@ values that have to be determined:
 
 
 
+
+
+- multiple sprites
+- offset sprites
+- enemy data structure
+- sorted sprites and enemies
+- enemy animation
+- enemy movement
+- enemy ai
+- weapon mechanics
+
+
+- decision: separate enemy and object data structures or one?
+	- one data structure is easier to sort
+
+	- two data structures will make enemy updating easier
+
+- decision: lists or arrays?
+	- list is easier to iterate through
+
+	- array is easier to sort
+	- array is easier to access

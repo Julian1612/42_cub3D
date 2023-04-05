@@ -100,15 +100,13 @@ static void	scale_cplane(t_vec *cplane, int img_width, int img_height)
 }
 
 // @todo fix scale plane function
-int	render_world(t_game *game)
+void	render_walls(t_game *game, double *wall_height)
 {
 	t_rayhit	ray_hit;
 	t_vec		ray_dir;
-	double		wall_height[game->img_a->width];
 	int			x_img;
 
-	debug_print_player(&game->player);
-	// scale_cplane(&game->player.cplane, game->img_a->width, game->img_a->height);
+	// scale_cplane(&game->player.cplane, game->img_a->width, game->img_a->height); // if used, better called in hook after resizing
 	x_img = 0;
 	while (x_img < game->img_a->width)
 	{
@@ -120,6 +118,13 @@ int	render_world(t_game *game)
 		draw_floor(game, wall_height[x_img], x_img);
 		x_img++;
 	}
-	render_sprite(game, wall_height);
-	return (SUCCESS);
+}
+
+void	render_all(t_game *game)
+{
+	double		wall_height[game->img_a->width];
+
+	debug_print_player(&game->player);
+	render_walls(game, wall_height);
+	render_sprites(game, game->map.objects, wall_height);
 }

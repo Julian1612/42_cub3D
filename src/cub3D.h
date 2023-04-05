@@ -45,7 +45,9 @@ enum e_tex_id
 	EAST,
 	SOUTH,
 	WEST,
-	SPRITE,
+	KNIGHT,
+	LAMP,
+	TABLE,
 };
 
 /* ************************************************************************** */
@@ -71,12 +73,13 @@ typedef struct s_object
 {
 	t_vec			pos;
 	t_tex			*tex;
-	double			y_offset;
 	enum e_obj_type
 	{
-		DECOR,
+		DECOR_NON_PERM,
+		DECOR_PERM,
 		WEAPON,
 		COIN,
+		ENEMY,
 	}	type;
 }	t_object;
 
@@ -93,7 +96,7 @@ typedef struct s_weapon
 typedef struct s_enemy
 {
 	t_vec			pos;
-	t_tex			*tex;
+	t_object		*object;
 	char			health;
 	char			*speed;
 	t_weapon		weapon;
@@ -114,7 +117,9 @@ typedef struct s_map
 	char		**arr;
 	t_tex		*textures;
 	t_object	*objects;
+	int			obj_count;
 	t_enemy		*enemies;
+	int			enemy_count;
 	t_hexcolor	ceiling_color;
 	t_hexcolor	floor_color;
 }	t_map;
@@ -199,9 +204,12 @@ int				initialize_mlx_data(t_game *game);
 // hook
 void			hook(void *param);
 
+// collision
+bool			check_collision(double x, double y, t_map *map);
+
 // render
-int				render_world(t_game *game);
+void			render_all(t_game *game);
 void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir);
-void			render_sprite(t_game *game, double *wall_height);
+void			render_sprites(t_game *game, t_object *objects, double *wall_height);
 
 #endif

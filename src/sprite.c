@@ -87,7 +87,7 @@ static void	init_sprite(t_sprite *sprite, t_object *object, t_player *player, t_
 {
 	double	cam_matrix_inv;
 
-	sprite->tex = &game->map.textures[SPRITE];
+	sprite->tex = object->tex;
 	sprite->dir.x = player->dir.x;
 	sprite->dir.y = player->dir.y;
 	sprite->dist.x = object->pos.x - player->pos.x;
@@ -100,11 +100,17 @@ static void	init_sprite(t_sprite *sprite, t_object *object, t_player *player, t_
 	sprite->width = abs((int)(game->img_a->height / sprite->cam_pos.y));
 }
 
-void	render_sprite(t_game *game, double *wall_height)
+void	render_sprites(t_game *game, t_object *objects, double *wall_height)
 {
 	t_sprite	sprite;
+	int			i;
 
-	init_sprite(&sprite, &game->map.objects[0], &game->player, game);
-	draw_sprite(&sprite, game, wall_height);
-	debug_print_sprite(&sprite);
+	i = 0;
+	while (i < game->map.obj_count)
+	{
+		init_sprite(&sprite, &objects[i], &game->player, game);
+		debug_print_sprite(&sprite);
+		draw_sprite(&sprite, game, wall_height);
+		i++;
+	}
 }
