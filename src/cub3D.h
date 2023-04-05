@@ -48,6 +48,7 @@ enum e_tex_id
 	KNIGHT,
 	LAMP,
 	TABLE,
+	SOLDIER,
 };
 
 /* ************************************************************************** */
@@ -96,9 +97,9 @@ typedef struct s_weapon
 typedef struct s_enemy
 {
 	t_vec			pos;
-	t_object		*object;
+	t_tex			*tex;
 	char			health;
-	char			*speed;
+	double			speed;
 	t_weapon		weapon;
 }	t_enemy;
 
@@ -210,6 +211,6 @@ bool			check_collision(double x, double y, t_map *map);
 // render
 void			render_all(t_game *game);
 void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir);
-void			render_sprites(t_game *game, t_object *objects, double *wall_height);
+void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height);
 
 #endif

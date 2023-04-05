@@ -83,15 +83,15 @@ static void	draw_sprite(t_sprite *sprite, t_game *game, double *wall_height)
 	}
 }
 
-static void	init_sprite(t_sprite *sprite, t_object *object, t_player *player, t_game *game)
+static void	init_sprite(t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *player, t_game *game)
 {
 	double	cam_matrix_inv;
 
-	sprite->tex = object->tex;
+	sprite->tex = tex;
 	sprite->dir.x = player->dir.x;
 	sprite->dir.y = player->dir.y;
-	sprite->dist.x = object->pos.x - player->pos.x;
-	sprite->dist.y = object->pos.y - player->pos.y;
+	sprite->dist.x = pos->x - player->pos.x;
+	sprite->dist.y = pos->y - player->pos.y;
 	cam_matrix_inv = 1.0 / (player->cplane.x * sprite->dir.y - sprite->dir.x * player->cplane.y);
 	sprite->cam_pos.x = -cam_matrix_inv * (sprite->dir.y * sprite->dist.x - sprite->dir.x * sprite->dist.y);
 	sprite->cam_pos.y = cam_matrix_inv * (-player->cplane.y * sprite->dist.x + player->cplane.x * sprite->dist.y);
@@ -100,7 +100,7 @@ static void	init_sprite(t_sprite *sprite, t_object *object, t_player *player, t_
 	sprite->width = abs((int)(game->img_a->height / sprite->cam_pos.y));
 }
 
-void	render_sprites(t_game *game, t_object *objects, double *wall_height)
+void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height)
 {
 	t_sprite	sprite;
 	int			i;
@@ -108,7 +108,15 @@ void	render_sprites(t_game *game, t_object *objects, double *wall_height)
 	i = 0;
 	while (i < game->map.obj_count)
 	{
-		init_sprite(&sprite, &objects[i], &game->player, game);
+		init_sprite(&sprite, &objects[i].pos, objects[i].tex, &game->player, game);
+		debug_print_sprite(&sprite);
+		draw_sprite(&sprite, game, wall_height);
+		i++;
+	}
+	i = 0;
+	while (i < game->map.enemy_count)
+	{
+		init_sprite(&sprite, &enemies[i].pos, enemies[i].tex, &game->player, game);
 		debug_print_sprite(&sprite);
 		draw_sprite(&sprite, game, wall_height);
 		i++;

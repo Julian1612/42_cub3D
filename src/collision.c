@@ -29,6 +29,8 @@ static bool	check_wall_collision(double x, double y, char **map)
 	return (false);
 }
 
+// @todo (problem: Permutability?) change to regular block collision (use map identifiers) after merge
+// @todo enemy collision in a good way
 static bool	check_sprite_collision(double x, double y, t_object *objects, int obj_count)
 {
 	int		i;
@@ -38,7 +40,7 @@ static bool	check_sprite_collision(double x, double y, t_object *objects, int ob
 	i = -1;
 	while (i++ < obj_count)
 	{
-		if (objects[i].type != DECOR_NON_PERM)
+		if (objects[i].type != DECOR_NON_PERM && objects[i].type != ENEMY)
 			continue ;
 		dist_x = x - objects[i].pos.x;
 		dist_y = y - objects[i].pos.y;

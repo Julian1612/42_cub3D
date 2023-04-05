@@ -126,5 +126,5 @@ void	render_all(t_game *game)
 
 	debug_print_player(&game->player);
 	render_walls(game, wall_height);
-	render_sprites(game, game->map.objects, wall_height);
+	render_sprites(game, game->map.objects, game->map.enemies, wall_height);
 }

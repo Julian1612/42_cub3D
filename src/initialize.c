@@ -46,7 +46,7 @@ static int	initialize_textures(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i <= TABLE)
+	while (i <= SOLDIER)
 	{
 		game->map.textures[i].tex = mlx_load_png(game->map.textures[i].path);
 		if (game->map.textures[i].tex == NULL)

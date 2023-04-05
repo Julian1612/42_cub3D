@@ -19,6 +19,7 @@
 #include <math.h> // M_PI
 
 #define OBJ_COUNT 5 // @note remove
+#define ENEMY_COUNT 1 // @note remove
 
 int	test_parse(t_game *game)
 {
@@ -34,7 +35,7 @@ int	test_parse(t_game *game)
 		"1100100000111111",
 		"1111111111111111"
 	};
-	static t_tex	textures[7] =
+	static t_tex	textures[8] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
@@ -43,6 +44,7 @@ int	test_parse(t_game *game)
 		{"textures/knight.png", NULL},
 		{"textures/lamp.png", NULL},
 		{"textures/table.png", NULL},
+		{"textures/soldier.png", NULL},
 	};
 	static t_object	objects[OBJ_COUNT] =
 	{
@@ -52,11 +54,17 @@ int	test_parse(t_game *game)
 		{.pos = {14.5, 1.5}, .type = DECOR_PERM, .tex = &textures[LAMP]},
 		{.pos = {5.5, 7.5}, .type = DECOR_NON_PERM, .tex = &textures[TABLE]},
 	};
+	static t_enemy	enemies[ENEMY_COUNT] =
+	{
+		{.pos = {7.5, 4.5}, .tex = &textures[SOLDIER], .health = 100, .speed = 0.1},
+	};
 
 	game->map.arr = map;
 	game->map.textures = textures;
 	game->map.objects = objects;
 	game->map.obj_count = OBJ_COUNT;
+	game->map.enemies = enemies;
+	game->map.enemy_count = ENEMY_COUNT;
 	game->map.ceiling_color = convert_to_hexcode(0, 0, 0, 0);
 	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
 	game->player.pos.x = 2;
