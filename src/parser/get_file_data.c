@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/05 16:57:28 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:22:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static int	check_line(t_map *map_data, char *line, int fd, int *error)
 		return (0);
 	else if (check_for_bonus_texture(map_data, line))
 		return (0);
-	else if (check_for_rgb(map_data, line))
+	else if (check_for_rgb(map_data, line, error))
 		return (0);
 	else if (check_for_map(map_data, line, fd))
 		return (1);

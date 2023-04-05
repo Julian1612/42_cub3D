@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/05 13:49:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:11:46 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	init_struct_null(t_map *map_data)
 	map_data->ceiling_color = -1;
 	map_data->floor_color = -1;
 	map_data->map = NULL;
+	map_data->ceiling_color = -1;
+	map_data->floor_color = -1;
 }
 
 int	get_map_size(t_map *map_data)

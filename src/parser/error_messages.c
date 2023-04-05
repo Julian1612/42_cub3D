@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/05 17:05:11 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:12:58 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int	error_message(int error_code, t_map *map_data)
 		printf("Error!\nMalloc failed\n");
 	else if (error_code == 5)
 		printf("Error!\nMultiple wall texture definitions\n");
+	else if (error_code == 6)
+		printf("Error!\nMultiple RGB definitions\n");
+	else if (error_code == 7)
+		printf("Error!\nMultiple bonus texture definitions\n");
 	printf("========================================\n");
 	free_struct(map_data);
 	return (1);

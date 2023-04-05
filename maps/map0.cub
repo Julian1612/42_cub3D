@@ -4,6 +4,7 @@ EA ./textures/east.png
 F  4,        1,      126
 
 C 0,183,183
+C 0,183,183
 
 SO                   textures/south.png
 NO textures/north.png

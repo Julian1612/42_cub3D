@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_rgb.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 17:07:56 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/05 17:21:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
 #include "../cub3D.h"
 
-static int	get_rgb_values(t_map *map_data, char *line);
+static int	get_rgb_values(t_map *map_data, char *line, int *error);
 static int	check_rgb_values(t_map *map_data, char **line_content);
-static void	init_struct(t_map *map_data, char **splitted_str, int boundary);
+static void	init_struct(t_map *map_data, char **splitted_str, int boundary, int *error);
 static int	remove_letter(char **line_content);
 
-int	check_for_rgb(t_map *map_data, char *line)
+int	check_for_rgb(t_map *map_data, char *line, int *error)
 {
 	if (ft_strnstr(line, "C", ft_strlen(line)) != NULL
 		|| ft_strnstr(line, "F", ft_strlen(line)) != NULL)
 	{
-		if (get_rgb_values(map_data, line))
+		if (get_rgb_values(map_data, line, error))
 			return (1);
 	}
 	return (0);
 }
 
-static int	get_rgb_values(t_map *map_data, char *line)
+static int	get_rgb_values(t_map *map_data, char *line, int *error)
 {
 	char	**splitted_str;
 	int		boundary;
@@ -39,14 +39,11 @@ static int	get_rgb_values(t_map *map_data, char *line)
 	if (splitted_str == NULL)
 		return (error_message(4, map_data));
 	if (ft_arrlen((void **)splitted_str) != 3)
-	{
-		ft_free_arr((void **)splitted_str);
-		return (0);
-	}
+		return (ft_free_arr((void **)splitted_str));
 	boundary = remove_letter(splitted_str);
 	if (check_rgb_values(map_data, splitted_str))
 		return (0);
-	init_struct(map_data, splitted_str, boundary);
+	init_struct(map_data, splitted_str, boundary, error);
 	ft_free_arr((void **)splitted_str);
 	return (0);
 }
@@ -64,14 +61,30 @@ static int	check_rgb_values(t_map *map_data, char **line_content)
 	return (0);
 }
 
-static void	init_struct(t_map *map_data, char **splitted_str, int boundary)
+static void	init_struct(t_map *map_data, char **splitted_str, int boundary, int *error)
 {
 	if (boundary == 1)
+	{
+		if (map_data->ceiling_color != -1)
+		{
+			error_message(6, map_data);
+			error = 1;
+			return ;
+		}
 		map_data->ceiling_color = convert_to_hexcode(ft_atoi(splitted_str[0]),
 				ft_atoi(splitted_str[1]), ft_atoi(splitted_str[2]), 255);
+	}
 	else if (boundary == 2)
+	{
+		if (map_data->floor_color != -1)
+		{
+			error_message(6, map_data);
+			error = 1;
+			return ;
+		}
 		map_data->floor_color = convert_to_hexcode(ft_atoi(splitted_str[0]),
 				ft_atoi(splitted_str[1]), ft_atoi(splitted_str[2]), 255);
+	}
 }
 
 static int	remove_letter(char **line_content)
