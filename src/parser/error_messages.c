@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/04 13:15:52 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 10:52:53 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	error_get_map(int error_code, t_map *map_data)
 		printf("Error!\nNo starting position found\n");
 	else if (error_code == 3)
 		printf("Error!\nChill bro, this map is too big\n");
+	else if (error_code == 6)
+		printf("Error!\nMultiple player definiton\n");
 	printf("========================================\n");
 	free_struct(map_data);
 	return (1);
