@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/05 13:50:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:57:28 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static int	read_map_data(t_map *map_data, int fd, int file_len);
 static int	get_file_len(char *path);
-static int	check_line(t_map *map_data, char *line, int fd);
+static int	check_line(t_map *map_data, char *line, int fd, int *error);
 
 int	get_file_data(t_map *map_data, char *cub_file_path)
 {
@@ -39,15 +39,29 @@ static int	read_map_data(t_map *map_data, int fd, int file_len)
 {
 	int		i;
 	char	*line;
+	int		error;
 
 	i = 0;
+	error = 0;
 	while (i < file_len - 1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			return (error_message(4, map_data));
-		if (check_line(map_data, line, fd))
+		if (check_line(map_data, line, fd, &error))
+		{
+			if (error == 1)
+			{
+				printf("erro\n");
+				return (1);
+			}
 			break ;
+		}
+		if (error == 1)
+		{
+			printf("erro\n");
+			return (1);
+		}
 		free(line);
 		line = NULL;
 		i++;
@@ -81,14 +95,14 @@ static int	get_file_len(char *path)
 	return (len);
 }
 
-static int	check_line(t_map *map_data, char *line, int fd)
+static int	check_line(t_map *map_data, char *line, int fd, int *error)
 {
-	if (check_for_texture(map_data, line))
+	if (check_for_texture(map_data, line, error))
 		return (0);
 	else if (check_for_bonus_texture(map_data, line))
 		return (0);
 	else if (check_for_rgb(map_data, line))
-		return (1);
+		return (0);
 	else if (check_for_map(map_data, line, fd))
 		return (1);
 	return (0);

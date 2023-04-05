@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/03 16:16:13 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:35:13 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ int	main(int argc, char **argv)
 
 	if (parser(&argc, argv, &game.map, &game.player))
 		return (EXIT_FAILURE);
-	if (initialize_mlx_data(&game) == ERROR)
-		errexit_mlx_errno();
-	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
-		errexit_mlx_errno();
-	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
-		errexit_mlx_errno();
-	if (initialize_minimap(&game) == ERROR)
-		errexit_mlx_errno();
-	if (initialize_map(&game) == ERROR)
-		errexit_mlx_errno();
-	game.minimap.visible = 0;
-	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
+	// if (initialize_mlx_data(&game) == ERROR)
+	// 	errexit_mlx_errno();
+	// if (mlx_loop_hook(game.mlx, &hook, &game) == false)
+	// 	errexit_mlx_errno();
+	// if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
+	// 	errexit_mlx_errno();
+	// if (initialize_minimap(&game) == ERROR)
+	// 	errexit_mlx_errno();
+	// if (initialize_map(&game) == ERROR)
+	// 	errexit_mlx_errno();
+	// game.minimap.visible = 0;
+	// mlx_loop(game.mlx);
+	// mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }

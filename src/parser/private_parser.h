@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/04 13:18:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:54:46 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int				check_for_map(t_map *map_data, char *line, int fd);
 int				check_for_rgb(t_map *map_data, char *line);
 
 /* check_for_textures.c */
-int				check_for_texture(t_map *map_data, char *line);
+int				check_for_texture(t_map *map_data, char *line, int *error);
 char			*cpy_line(char **des, char *src, int len);
 
 /* check_map.c */

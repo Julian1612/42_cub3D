@@ -6,16 +6,17 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/05 13:54:16 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:05:35 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
+#include <stdio.h>
 
-static int	get_texture_file_path(t_map *map_data, char *line, int i);
+static int	get_texture_file_path(t_map *map_data, char *line, int i, int *error);
 static int	get_bonus_texture_file_path(t_map *map_data, char *line, int i);
 
-int	check_for_texture(t_map *map_data, char *line)
+int	check_for_texture(t_map *map_data, char *line, int *error)
 {
 	static char	*definitions[4] = {"NO", "SO", "WE", "EA"};
 	int			i;
@@ -25,7 +26,7 @@ int	check_for_texture(t_map *map_data, char *line)
 	{
 		if (ft_strnstr(line, definitions[i], ft_strlen(line)) != NULL)
 		{
-			get_texture_file_path(map_data, line, i);
+			get_texture_file_path(map_data, line, i, error);
 			return (1);
 		}
 		i++;
@@ -33,7 +34,7 @@ int	check_for_texture(t_map *map_data, char *line)
 	return (0);
 }
 
-static int	get_texture_file_path(t_map *map_data, char *line, int i)
+static int	get_texture_file_path(t_map *map_data, char *line, int i, int *error)
 {
 	char	**splitted_str;
 	char	*texture_path;
@@ -44,13 +45,29 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i)
 	if (splitted_str == NULL)
 		return (error_message(4, map_data));
 	if (i == 0)
+	{
+		if (map_data->objects[NORTH].path != NULL)
+			return (error_message(5, map_data));
 		cpy_line(&map_data->objects[NORTH].path, splitted_str[1], splitted_str_len);
+	}
 	else if (i == 1)
+	{
+		if (map_data->objects[SOUTH].path != NULL)
+			return (error_message(5, map_data));
 		cpy_line(&map_data->objects[SOUTH].path, splitted_str[1], splitted_str_len);
+	}
 	else if (i == 2)
+	{
+		if (map_data->objects[WEST].path != NULL)
+			return (error_message(5, map_data));
 		cpy_line(&map_data->objects[WEST].path, splitted_str[1], splitted_str_len);
+	}
 	else if (i == 3)
+	{
+		if (map_data->objects[EAST].path != NULL)
+			return (error_message(5, map_data));
 		cpy_line(&map_data->objects[EAST].path, splitted_str[1], splitted_str_len);
+	}
 	ft_free_arr((void **)splitted_str);
 	return (0);
 }
