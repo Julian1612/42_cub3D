@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 10:05:31 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:50:23 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	read_map_data(t_map *map_data, int fd, int file_len)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			return (1);
+			return (error_message(4, map_data));
 		if (check_line(map_data, line, fd))
 			break ;
 		free(line);

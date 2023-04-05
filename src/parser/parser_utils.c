@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/04 13:22:40 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:49:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	get_map_size(t_map *map_data)
 			j++;
 		i++;
 	}
-	printf("Map size: %d x %d\n", i, j);
 	if (i > 297 || j > 297)
 		return (error_get_map(3, map_data));
 	return (0);
