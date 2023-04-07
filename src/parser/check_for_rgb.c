@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 16:37:46 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 20:19:44 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ static int	get_rgb_values(t_map *map_data, char *line, int *error)
 static int	check_rgb_values(t_map *map_data, char **line_content, int *error)
 {
 	if (ft_arrlen((void **)line_content) != 3)
+	{
+		*error = 1;
+		return (error_textures(5, map_data));
+	}
+	if (contains_only_spaces(line_content[0])
+		|| contains_only_spaces(line_content[1])
+		|| contains_only_spaces(line_content[2]))
 	{
 		*error = 1;
 		return (error_textures(5, map_data));
