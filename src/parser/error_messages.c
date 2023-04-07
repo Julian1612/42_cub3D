@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 15:18:13 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 16:43:02 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ int	error_message(int error_code, t_map *map_data)
 		printf("Error!\nMultiple bonus texture definitions\n");
 	else if (error_code == 8)
 		printf("Error!\nThere is no file path defined\n");
+	else if (error_code == 9)
+		printf("Error!\nFile has not data type png\n");
+	else if (error_code == 10)
+		printf("Error!\nCould't find file for wall texture\n");
 	printf("========================================\n");
 	free_struct(map_data);
 	return (1);
@@ -62,10 +66,6 @@ int	error_textures(int error_code, t_map *map_data)
 	}
 	else if (error_code == 7)
 		printf("Error!\nFile path for bonus texture is missing\n");
-	else if (error_code == 8)
-		printf("Error!\nFile has not datatype png\n");
-	else if (error_code == 9)
-		printf("Error!\nCould't find file for wall texture\n");
 	printf("========================================\n");
 	free_struct(map_data);
 	return (1);

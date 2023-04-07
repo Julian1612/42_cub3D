@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 16:16:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 16:37:46 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 static int	get_rgb_values(t_map *map_data, char *line, int *error);
 static int	check_rgb_values(t_map *map_data, char **line_content, int *error);
-static void	init_struct(t_map *map_data, char **splitted_str, int boundary, int *error);
+static void	init_struct(t_map *map_data, char **splitted_str,
+				int boundary, int *error);
 static int	remove_letter(char **line_content);
 
 int	check_for_rgb(t_map *map_data, char *line, int *error)
@@ -26,26 +27,6 @@ int	check_for_rgb(t_map *map_data, char *line, int *error)
 	{
 		if (get_rgb_values(map_data, line, error))
 			return (1);
-	}
-	return (0);
-}
-
-int	is_all_digit(char **str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (str[i] != NULL)
-	{
-		j = 0;
-		while (str[i][j] != '\0')
-		{
-			if ((str[i][j] < '0' || str[i][j] > '9') && str[i][j] != ' ' && str[i][j] != '\n')
-				return (1);
-			j++;
-		}
-		i++;
 	}
 	return (0);
 }
@@ -60,20 +41,16 @@ static int	get_rgb_values(t_map *map_data, char *line, int *error)
 	if (splitted_str == NULL)
 		return (error_message(4, map_data));
 	boundary = remove_letter(splitted_str);
-	if (ft_arrlen((void **)splitted_str) != 3)
+	if (ft_arrlen((void **)splitted_str) != 3
+		|| is_all_digit(splitted_str) == 1)
 	{
 		ft_free_arr((void **)splitted_str);
 		*error = 1;
 		return (error_textures(5, map_data));
 	}
-	if (is_all_digit(splitted_str))
-	{
-		ft_free_arr((void **)splitted_str);
-		*error = 1;
-		return (error_textures(5, map_data));
-	}
-	if (splitted_str[0][0] == '\n' || splitted_str[1][0] == '\n' || splitted_str[2][0] == '\n')
-		return(1);
+	if (splitted_str[0][0] == '\n' || splitted_str[1][0] == '\n'
+		|| splitted_str[2][0] == '\n')
+		return (1);
 	if (check_rgb_values(map_data, splitted_str, error))
 		return (1);
 	init_struct(map_data, splitted_str, boundary, error);
@@ -103,7 +80,8 @@ static int	check_rgb_values(t_map *map_data, char **line_content, int *error)
 	return (0);
 }
 
-static void	init_struct(t_map *map_data, char **splitted_str, int boundary, int *error)
+static void	init_struct(t_map *map_data, char **splitted_str,
+				int boundary, int *error)
 {
 	if (boundary == 1)
 	{

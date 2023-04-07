@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 12:55:40 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 16:41:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int				get_file_data(t_map *map_data, char *cub_file_path);
 int				init_player_position(t_map *map_data, t_player *player_pos);
 
 /* parser.c */
-int				parser(int *argc, char **argv, t_map *map_data, t_player *player_pos);
+int				parser(int *argc, char **argv, t_map *map_data,
+					t_player *player_pos);
 int				check_data_type(char *path, char *data_type);
 int				check_file(char *cub_file_path, char *data_type);
 
@@ -59,5 +60,7 @@ void			init_struct_null(t_map *map_data);
 unsigned int	convert_to_hexcode(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 int				get_map_size(t_map *map_data);
+int				is_all_digit(char **str);
+int				get_obj_nbr(int i);
 
 #endif

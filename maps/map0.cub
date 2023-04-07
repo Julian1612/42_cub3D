@@ -1,7 +1,7 @@
 WE textures/west.png
 EA ./textures/east.png
 C 7,7,7
-F  47,3,2
+F  47,6,7
 SO                textures/south.png
 NO textures/north.png
 1111111111111111

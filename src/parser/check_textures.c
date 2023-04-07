@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 13:26:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 16:58:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	check_textures_file(char *cub_file_path, char *data_type)
 	int	fd;
 
 	if (check_data_type(cub_file_path, data_type))
-		return (error_textures(8, NULL));
+		return (error_message(9, NULL));
 	fd = open(cub_file_path, O_RDONLY);
 	if (fd < 0)
-		return (error_textures(9, NULL));
+		return (error_message(10, NULL));
 	close(fd);
 	return (0);
 }
@@ -69,13 +69,14 @@ int	check_bonus_textures(t_map *map_data)
 	return (0);
 }
 
+// add the check for the other bonus textures
+// else if (character == CHAR_ENEMY && map_data->enemy.path == NULL)
+// 	return (error_textures(7, map_data));
 static int	check_char(t_map *map_data, char character)
 {
 	if (character == CHAR_DOOR && map_data->objects[DOOR].path == NULL)
 		return (error_textures(7, map_data));
 	else if (character == CHAR_BARREL && map_data->objects[BARREL].path == NULL)
 		return (error_textures(7, map_data));
-	// else if (character == CHAR_ENEMY && map_data->enemy.path == NULL)
-	// 	return (error_textures(7, map_data));
 	return (0);
 }

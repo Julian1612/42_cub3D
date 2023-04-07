@@ -6,14 +6,15 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 15:21:42 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 16:59:19 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
 #include <stdio.h>
 
-static int	get_texture_file_path(t_map *map_data, char *line, int i, int *error);
+static int	get_texture_file_path(t_map *map_data, char *line,
+				int i, int *error);
 static int	get_bonus_texture_file_path(t_map *map_data, char *line, int i);
 
 int	check_for_texture(t_map *map_data, char *line, int *error)
@@ -34,11 +35,13 @@ int	check_for_texture(t_map *map_data, char *line, int *error)
 	return (0);
 }
 
-static int	get_texture_file_path(t_map *map_data, char *line, int i, int *error)
+static int	get_texture_file_path(t_map *map_data, char *line,
+	int i, int *error)
 {
 	char	**splitted_str;
 	char	*texture_path;
 	int		splitted_str_len;
+	int		obj_nbr;
 
 	splitted_str = ft_split(line, ' ');
 	if (splitted_str == NULL || ft_arrlen((void **)splitted_str) != 2)
@@ -49,42 +52,14 @@ static int	get_texture_file_path(t_map *map_data, char *line, int i, int *error)
 	splitted_str_len = ft_strlen(splitted_str[1]);
 	if (splitted_str == NULL)
 		return (error_message(4, map_data));
-	if (i == 0)
+	obj_nbr = get_obj_nbr(i);
+	if (map_data->objects[obj_nbr].path != NULL)
 	{
-		if (map_data->objects[NORTH].path != NULL)
-		{
-			*error = 1;
-			return (error_message(5, map_data));
-		}
-		cpy_line(&map_data->objects[NORTH].path, splitted_str[1], splitted_str_len);
+		*error = 1;
+		return (error_message(5, map_data));
 	}
-	else if (i == 1)
-	{
-		if (map_data->objects[SOUTH].path != NULL)
-		{
-			*error = 1;
-			return (error_message(5, map_data));
-		}
-		cpy_line(&map_data->objects[SOUTH].path, splitted_str[1], splitted_str_len);
-	}
-	else if (i == 2)
-	{
-		if (map_data->objects[WEST].path != NULL)
-		{
-			*error = 1;
-			return (error_message(5, map_data));
-		}
-		cpy_line(&map_data->objects[WEST].path, splitted_str[1], splitted_str_len);
-	}
-	else if (i == 3)
-	{
-		if (map_data->objects[EAST].path != NULL)
-		{
-			*error = 1;
-			return (error_message(5, map_data));
-		}
-		cpy_line(&map_data->objects[EAST].path, splitted_str[1], splitted_str_len);
-	}
+	cpy_line(&map_data->objects[obj_nbr].path,
+		splitted_str[1], splitted_str_len);
 	ft_free_arr((void **)splitted_str);
 	return (0);
 }
@@ -111,7 +86,8 @@ char	*cpy_line(char **des, char *src, int len)
 
 int	check_for_bonus_texture(t_map *map_data, char *line)
 {
-	static char	definitions[NBR_B_TEXTURES] = {CHAR_DOOR, CHAR_BARREL, CHAR_ENEMY};
+	static char	definitions[NBR_B_TEXTURES]
+		= {CHAR_DOOR, CHAR_BARREL, CHAR_ENEMY};
 	int			i;
 
 	i = 0;
@@ -127,6 +103,9 @@ int	check_for_bonus_texture(t_map *map_data, char *line)
 	return (0);
 }
 
+// add the check for all bonus textures
+// else if (i == 2)
+// 	cpy_line(&map_data->enemy.path, splitted_str[1], splitted_str_len);
 static int	get_bonus_texture_file_path(t_map *map_data, char *line, int i)
 {
 	char	**splitted_str;
@@ -138,11 +117,11 @@ static int	get_bonus_texture_file_path(t_map *map_data, char *line, int i)
 	if (splitted_str == NULL)
 		return (error_message(4, map_data));
 	if (i == 0)
-		cpy_line(&map_data->objects[DOOR].path, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->objects[DOOR].path,
+			splitted_str[1], splitted_str_len);
 	else if (i == 1)
-		cpy_line(&map_data->objects[BARREL].path, splitted_str[1], splitted_str_len);
-	// else if (i == 2)
-	// 	cpy_line(&map_data->enemy.path, splitted_str[1], splitted_str_len);
+		cpy_line(&map_data->objects[BARREL].path,
+			splitted_str[1], splitted_str_len);
 	ft_free_arr((void **)splitted_str);
 	return (0);
 }
