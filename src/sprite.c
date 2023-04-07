@@ -100,11 +100,37 @@ static void	init_sprite(t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *play
 	sprite->width = abs((int)(game->img_a->height / sprite->cam_pos.y));
 }
 
+// @todo create dist array to calculate dists only once
+void	sort_sprites(t_game *game, t_object *objects, t_enemy *enemies)
+{
+	t_object	temp;
+	int			i;
+	int			dist_old;
+	int			dist_new;
+
+	i = 0;
+	while (i < game->map.obj_count)
+	{
+		dist_old = ((game->player.pos.x - objects[i].pos.x) * (game->player.pos.x - objects[i].pos.x) + (game->player.pos.y - objects[i].pos.y) * (game->player.pos.y - objects[i].pos.y));
+		dist_new = ((game->player.pos.x - objects[i + 1].pos.x) * (game->player.pos.x - objects[i + 1].pos.x) + (game->player.pos.y - objects[i + 1].pos.y) * (game->player.pos.y - objects[i + 1].pos.y));
+		if (dist_old < dist_new)
+		{
+			temp = objects[i];
+			objects[i] = objects[i + 1];
+			objects[i + 1] = temp;
+			i = 0;
+		}
+		else
+			i++;
+	}
+}
+
 void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height)
 {
 	t_sprite	sprite;
 	int			i;
-
+	
+	sort_sprites(game, objects, enemies);
 	i = 0;
 	while (i < game->map.obj_count)
 	{
