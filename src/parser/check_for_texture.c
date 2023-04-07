@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 22:11:45 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 22:22:41 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	get_texture_file_path(t_map *map_data, char *line,
 {
 	char	**splitted_str;
 	int		splitted_str_len;
-	int		obj_nbr;
 
 	splitted_str = ft_split(line, ' ');
 	if (splitted_str == NULL || ft_arrlen((void **)splitted_str) != 2)
