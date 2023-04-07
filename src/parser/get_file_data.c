@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 16:57:44 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:55:16 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ int	get_file_data(t_map *map_data, char *cub_file_path)
 	return (0);
 }
 
+void	clear_buffer(char **line)
+{
+	get_next_line(-1);
+	if (*line != NULL)
+	{
+		free(*line);
+		*line = NULL;
+	}
+}
+
 static int	read_map_data(t_map *map_data, int fd, int file_len)
 {
 	int		i;
@@ -60,12 +70,7 @@ static int	read_map_data(t_map *map_data, int fd, int file_len)
 		line = NULL;
 		i++;
 	}
-	get_next_line(-1);
-	if (line != NULL)
-	{
-		free(line);
-		line = NULL;
-	}
+	clear_buffer(&line);
 	return (0);
 }
 
