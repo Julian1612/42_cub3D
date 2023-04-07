@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/03 18:13:34 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 13:26:23 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 #include <stdio.h>
 
 static int	check_char(t_map *map_data, char character);
+
+int	check_textures_file(char *cub_file_path, char *data_type)
+{
+	int	fd;
+
+	if (check_data_type(cub_file_path, data_type))
+		return (error_textures(8, NULL));
+	fd = open(cub_file_path, O_RDONLY);
+	if (fd < 0)
+		return (error_textures(9, NULL));
+	close(fd);
+	return (0);
+}
 
 int	check_mandatory_textures(t_map *map_data)
 {
@@ -25,8 +38,8 @@ int	check_mandatory_textures(t_map *map_data)
 	{
 		if (map_data->objects[i].path == NULL)
 			return (error_textures(6, map_data));
-		if (check_data_type(map_data->objects[i].path, "png"))
-			return (error_textures(8, map_data));
+		else if (check_textures_file(map_data->objects[i].path, "png"))
+			return (1);
 		i++;
 	}
 	if (map_data->floor_color == -1)

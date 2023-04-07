@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/05 13:51:14 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:46:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <fcntl.h>
 
 static int	check_args(int *argc, char **argv);
-static int	check_file(char *cub_file_path, char *data_type);
+// static int	check_file(char *cub_file_path, char *data_type);
 int			check_data_type(char *path, char *data_type);
 static int	check_for_invalid_definitions(t_map *map_data);
 
@@ -32,6 +32,13 @@ int	parser(int *argc, char **argv, t_map *map_data, t_player *player_pos)
 		return (1);
 	if (check_mandatory_textures(map_data))
 		return (1);
+	int i = 0;
+
+	while (map_data->map[i])
+	{
+		printf("%s\n", map_data->map[i]);
+		i++;
+	}
 	if (check_map(map_data))
 		return (1);
 	if (check_bonus_textures(map_data))
@@ -52,7 +59,7 @@ static int	check_args(int *argc, char **argv)
 	return (0);
 }
 
-static int	check_file(char *cub_file_path, char *data_type)
+int	check_file(char *cub_file_path, char *data_type)
 {
 	int	fd;
 

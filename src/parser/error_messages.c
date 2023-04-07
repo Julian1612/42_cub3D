@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/05 17:12:58 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:33:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	error_textures(int error_code, t_map *map_data)
 		printf("or on the wrong position\n");
 	}
 	else if (error_code == 5)
-		printf("Error!\nRGB value out of range\n");
+		printf("Error!\nRGB definition is invalid\n");
 	else if (error_code == 6)
 	{
 		printf("Error!\nFile path for wall texture is missing\n");
@@ -62,6 +62,8 @@ int	error_textures(int error_code, t_map *map_data)
 		printf("Error!\nFile path for bonus texture is missing\n");
 	else if (error_code == 8)
 		printf("Error!\nFile has not datatype png\n");
+	else if (error_code == 9)
+		printf("Error!\nCould't find file for wall texture\n");
 	printf("========================================\n");
 	free_struct(map_data);
 	return (1);
@@ -73,7 +75,7 @@ int	error_get_map(int error_code, t_map *map_data)
 	if (error_code == 1)
 		printf("Error!\nMap is invalid\n");
 	else if (error_code == 2)
-		printf("Error!\nfile contains no map\n");
+		printf("Error!\nFile contains no map\n");
 	else if (error_code == 5)
 		printf("Error!\nInvalid character in map\n");
 	else if (error_code == 4)

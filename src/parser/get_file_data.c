@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/05 17:22:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 12:44:51 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,11 @@ static int	read_map_data(t_map *map_data, int fd, int file_len)
 		if (check_line(map_data, line, fd, &error))
 		{
 			if (error == 1)
-			{
-				printf("erro\n");
 				return (1);
-			}
 			break ;
 		}
 		if (error == 1)
-		{
-			printf("erro\n");
 			return (1);
-		}
 		free(line);
 		line = NULL;
 		i++;

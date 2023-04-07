@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/05 09:59:59 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:51:58 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	change_maps(mlx_key_data_t keydata, void *param)
 	{
 		minimap->smm_walls->instances[0].enabled = false;
 		minimap->lmm_walls->instances[0].enabled = true;
-		minimap->player->instances[0].enabled = true;
 		minimap->visible = 1;
 	}
 	else if (keydata.key == MLX_KEY_F && keydata.action == 0
@@ -63,7 +62,6 @@ void	change_maps(mlx_key_data_t keydata, void *param)
 	{
 		minimap->smm_walls->instances[0].enabled = true;
 		minimap->lmm_walls->instances[0].enabled = false;
-		minimap->player->instances[0].enabled = false;
 		minimap->visible = 0;
 	}
 }
@@ -149,11 +147,6 @@ void	hook(void *param)
 	keys(game->mlx, &game->minimap, &game->player, game->map.map);
 	if (game->minimap.visible == 0)
 		render_minimap(game);
-	else
-	{
-		draw_map(game);
-		draw_player_map(game);
-	}
 	if (skip_frame(game->mlx, FPS) == false)
 		render_world(game);
 	// @note all images have to be resized here
