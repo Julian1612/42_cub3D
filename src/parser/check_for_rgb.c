@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 13:33:26 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:50:34 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ static int	get_rgb_values(t_map *map_data, char *line, int *error)
 	splitted_str = ft_split(line, ',');
 	if (splitted_str == NULL)
 		return (error_message(4, map_data));
+	boundary = remove_letter(splitted_str);
 	if (ft_arrlen((void **)splitted_str) != 3)
 	{
 		ft_free_arr((void **)splitted_str);
 		*error = 1;
 		return (error_textures(5, map_data));
 	}
-	boundary = remove_letter(splitted_str);
+	if (splitted_str[0][0] == '\n' || splitted_str[1][0] == '\n' || splitted_str[2][0] == '\n')
+		return(1);
 	if (check_rgb_values(map_data, splitted_str, error))
 		return (1);
 	init_struct(map_data, splitted_str, boundary, error);

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/07 14:51:58 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:56:37 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,22 +112,6 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
 	mouse_movements(mlx, player);
 }
 
-// mlx_get_mouse_pos(mlx, &x, &y);
-// 	if (x < 400 && x > 0)
-// 	{
-// 		rot_speed = (x - 0) * (4 - 0.5) / (370 - 0) + 0.5;
-// 		// player->view_dir += M_PI / 90 / rot_speed;
-// 		// offset = 400 - x;
-// 	}
-// 	else if (x > 400 && x < 800)
-// 	{
-// 		rot_speed = (x - 450) * (0.5 - 4) / (800 - 430) + 4;
-// 		// player->view_dir -= M_PI / 90 / rot_speed;
-// 		// offset = 800 - x;
-// 	}
-// 	printf("offset: %f\n", offset);
-// 	printf("speed: %f\n", rot_speed);
-
 static bool	skip_frame(mlx_t *mlx, int fps)
 {
 	if (mlx->delta_time * fps > 1.1)
@@ -140,10 +124,6 @@ void	hook(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	// mouse handling
-	// minimap
-	// collision
-	// enemy
 	keys(game->mlx, &game->minimap, &game->player, game->map.map);
 	if (game->minimap.visible == 0)
 		render_minimap(game);

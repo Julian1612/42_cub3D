@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 14:46:50 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:04:08 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ int	parser(int *argc, char **argv, t_map *map_data, t_player *player_pos)
 		return (1);
 	if (check_mandatory_textures(map_data))
 		return (1);
-	int i = 0;
-
-	while (map_data->map[i])
-	{
-		printf("%s\n", map_data->map[i]);
-		i++;
-	}
 	if (check_map(map_data))
 		return (1);
 	if (check_bonus_textures(map_data))
