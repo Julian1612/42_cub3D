@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 20:18:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 22:06:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,6 @@ int	is_all_digit(char **str)
 		}
 		i++;
 	}
-	return (0);
-}
-
-int	get_obj_nbr(int i)
-{
-	if (i == 0)
-		return (NORTH);
-	else if (i == 1)
-		return (SOUTH);
-	else if (i == 2)
-		return (WEST);
-	else if (i == 3)
-		return (EAST);
 	return (0);
 }
 

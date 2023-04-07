@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 11:14:06 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/08 12:09:08 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 20:49:37 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	number_length_hexadecimal(unsigned long long number)
 	int	index;
 
 	index = 0;
-	if (number == 0 || number < 0)
+	if (number <= 0)
 		index++;
 	while (number != 0)
 	{

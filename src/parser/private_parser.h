@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 20:19:28 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 22:10:44 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define CHAR_ENEMY 'E'
 
 /* check_for_bonus_textures.c */
-int				check_for_bonus_texture(t_map *map_data, char *line);
+int				check_for_bonus_texture(t_map *map_data, char *line, int *error);
 
 /* check_for_map.c */
 int				check_for_map(t_map *map_data, char *line, int fd);
@@ -57,7 +57,7 @@ int				check_file(char *cub_file_path, char *data_type);
 
 /* utils.c */
 void			init_struct_null(t_map *map_data);
-unsigned int	convert_to_hexcode(unsigned char r, unsigned char g,
+int				convert_to_hexcode(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 int				is_all_digit(char **str);
 int				get_obj_nbr(int i);

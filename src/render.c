@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 20:29:58 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/07 21:35:02 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	draw_ceiling(t_game *game, int wall_height, int x_img)
 
 	ceil_height = game->img_a->height / 2 - wall_height / 2;
 	y_img = 0;
-	while (y_img < game->img_a->height && y_img < ceil_height)
+	while ((const uint32_t)y_img < game->img_a->height && y_img < ceil_height)
 	{
 		mlx_put_pixel(game->img_a, x_img, y_img, game->map.ceiling_color);
 		y_img++;

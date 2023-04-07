@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:43:55 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 20:14:12 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 21:33:16 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ static int	check_line(t_map *map_data, int i, int j)
 			else if (map_data->map[i][j + 1] == '\0'
 				|| map_data->map[i][j + 1] == ' ')
 				return (error_get_map(1, map_data));
-			else if ((ft_strlen(map_data->map[i + 1]) >= j
+			else if (((int) ft_strlen(map_data->map[i + 1]) >= j
 					&& map_data->map[i + 1][j] == ' ')
-				|| (ft_strlen(map_data->map[i - 1]) >= j
+				|| ((int) ft_strlen(map_data->map[i - 1]) >= j
 					&& map_data->map[i - 1][j] == ' '))
 				return (error_get_map(1, map_data));
-			else if (ft_strlen(map_data->map[i + 1]) <= j
-				|| ft_strlen(map_data->map[i - 1]) <= j)
+			else if ((int) ft_strlen(map_data->map[i + 1]) <= j
+				|| (int) ft_strlen(map_data->map[i - 1]) <= j)
 				return (error_get_map(1, map_data));
 		}
 		j++;

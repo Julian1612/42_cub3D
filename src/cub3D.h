@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 18:56:41 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 21:30:15 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ enum	e_obj_id
 /* TYPEDEFS																	  */
 /* ************************************************************************** */
 
-typedef uint32_t	t_hexcolor;
+typedef int32_t	t_hexcolor;
 
 typedef struct s_texture
 {
