@@ -109,7 +109,7 @@ void	sort_sprites(t_game *game, t_object *objects, t_enemy *enemies)
 	int			dist_new;
 
 	i = 0;
-	while (i < game->map.obj_count)
+	while (i < game->map.obj_count - 1)
 	{
 		dist_old = ((game->player.pos.x - objects[i].pos.x) * (game->player.pos.x - objects[i].pos.x) + (game->player.pos.y - objects[i].pos.y) * (game->player.pos.y - objects[i].pos.y));
 		dist_new = ((game->player.pos.x - objects[i + 1].pos.x) * (game->player.pos.x - objects[i + 1].pos.x) + (game->player.pos.y - objects[i + 1].pos.y) * (game->player.pos.y - objects[i + 1].pos.y));

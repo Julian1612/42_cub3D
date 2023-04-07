@@ -144,7 +144,6 @@ typedef struct s_game
 	t_map			map;
 	t_minimap		minimap;
 	t_player		player;
-	t_enemy			*enemies;
 }	t_game;
 
 // @todo move to raycaster header

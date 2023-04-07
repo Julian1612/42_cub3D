@@ -17,14 +17,15 @@
 #include <stdbool.h> // bool
 
 #define MOV_SPEED 0.05
+#define ENEMY_SPEED 0.005
 #define ROT_SPEED 0.03
 
-static void	move_player(t_player *player, t_map *map, double x_offset, double y_offset)
+static void	move(t_vec *pos, t_map *map, double x_offset, double y_offset)
 {
-	if (!check_collision(player->pos.x + x_offset, player->pos.y, map))
-		player->pos.x += x_offset;
-	if (!check_collision(player->pos.x, player->pos.y + y_offset, map))
-		player->pos.y += y_offset;
+	if (!check_collision(pos->x + x_offset, pos->y, map))
+		pos->x += x_offset;
+	if (!check_collision(pos->x, pos->y + y_offset, map))
+		pos->y += y_offset;
 }
 
 static void	rotate_player(t_player *player, bool left)
@@ -54,17 +55,34 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map)
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		move_player(player, map, player->dir.x * MOV_SPEED, player->dir.y * MOV_SPEED);
+		move(&player->pos, map, player->dir.x * MOV_SPEED, player->dir.y * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		move_player(player, map, -player->dir.x * MOV_SPEED, -player->dir.y * MOV_SPEED);
+		move(&player->pos, map, -player->dir.x * MOV_SPEED, -player->dir.y * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move_player(player, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
+		move(&player->pos, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move_player(player, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
+		move(&player->pos, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		rotate_player(player, true);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		rotate_player(player, false);
+}
+
+void	enemies(t_enemy *enemies, t_map *map, t_player *player)
+{
+	t_vec	dir;
+	double	angle;
+	int		i;
+
+	angle = atan2(player->pos.y - enemies[0].pos.y, player->pos.x - enemies[0].pos.x);
+	dir.x = cos(angle);
+	dir.y = sin(angle);
+	i = 0;
+	while (i < map->enemy_count)
+	{
+		move(&enemies[i].pos, map, dir.x * ENEMY_SPEED, dir.y * ENEMY_SPEED);
+		i++;
+	}
 }
 
 static bool	skip_frame(mlx_t *mlx, int fps)
@@ -86,6 +104,7 @@ void	hook(void *param)
 	if (skip_frame(game->mlx, FPS) == false)
 	{
 		keys(game->mlx, &game->minimap, &game->player, &game->map);
+		enemies(game->map.enemies, &game->map, &game->player);
 		render_all(game);
 	}
 	// @note all images have to be resized here
