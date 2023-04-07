@@ -6,14 +6,13 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/07 14:50:10 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:01:07 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
 #include "../libraries/libft/src/libft/libft.h" // ft_strlen
-#include "minimap.h"
 #include <stdlib.h> // NULL
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
@@ -53,24 +52,24 @@ int	initialize_minimap(t_game *game)
 	return (SUCCESS);
 }
 
-int	initialize_map(t_game *game)
-{
-	double	wall_size;
-	int		height_square;
-	int		width_square;
+// int	initialize_map(t_game *game)
+// {
+// 	double	wall_size;
+// 	int		height_square;
+// 	int		width_square;
 
-	get_map_measures(game);
-	wall_size = get_wall_size_map(&game->minimap);
-	height_square = (WIDTH - (game->minimap.width * wall_size)) / 2;
-	width_square = (HEIGHT - (game->minimap.height * wall_size)) / 2;
-	game->minimap.lmm_walls = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if (game->minimap.lmm_walls == NULL)
-		return (EXIT_FAILURE);
-	if (mlx_image_to_window(game->mlx, game->minimap.lmm_walls, height_square, width_square) == -1)
-		return (EXIT_FAILURE);
-	// game->minimap.visible = 0;
-	return (SUCCESS);
-}
+// 	get_map_measures(game);
+// 	wall_size = get_wall_size_map(&game->minimap);
+// 	height_square = (WIDTH - (game->minimap.width * wall_size)) / 2;
+// 	width_square = (HEIGHT - (game->minimap.height * wall_size)) / 2;
+// 	game->minimap.lmm_walls = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+// 	if (game->minimap.lmm_walls == NULL)
+// 		return (EXIT_FAILURE);
+// 	if (mlx_image_to_window(game->mlx, game->minimap.lmm_walls, height_square, width_square) == -1)
+// 		return (EXIT_FAILURE);
+// 	// game->minimap.visible = 0;
+// 	return (SUCCESS);
+// }
 
 // @note what if a texture is missing and has to be skipped?
 static int	initialize_textures(t_game *game)

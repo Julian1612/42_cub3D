@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.h                                          :+:      :+:    :+:   */
+/*   mouse_movements.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/21 18:42:33 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/03 15:16:50 by jschneid         ###   ########.fr       */
+/*   Created: 2023/04/07 18:46:50 by jschneid          #+#    #+#             */
+/*   Updated: 2023/04/07 18:52:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIMAP_H
-# define MINIMAP_H
-# include "cub3D.h"
+#include "cub3D.h" // m_t, t_player
+#include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
+#include <math.h> // M_PI
 
-void	draw_player(t_game *game);
-int		render_minimap(t_game *game);
-void	get_map_measures(t_game *game);
-void	draw_player_map(t_game *game);
-int		draw_map(t_game *game);
-double	get_wall_size_map(t_minimap *minimap);
+void	mouse_movements(mlx_t *mlx, t_player *player)
+{
+	int32_t			x;
+	int32_t			y;
 
-#endif
+	mlx_get_mouse_pos(mlx, &x, &y);
+	if (x < 400 && x > 2)
+		player->view_dir += M_PI / 90 / 1;
+	else if (x > 400 && x < 800)
+		player->view_dir -= M_PI / 90 / 1;
+	mlx_set_mouse_pos(mlx, 400, 400);
+}

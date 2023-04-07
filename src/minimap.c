@@ -6,11 +6,11 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 16:23:28 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:45:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "private_minimap.h"
+#include "cub3D.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -107,4 +107,25 @@ void	get_map_measures(t_game *game)
 	game->map.height = i;
 	game->minimap.width = game->map.width;
 	game->minimap.height = game->map.height;
+}
+
+void	change_maps(mlx_key_data_t keydata, void *param)
+{
+	t_minimap	*minimap;
+
+	minimap = (t_minimap *)param;
+	if (keydata.key == MLX_KEY_F && keydata.action == 0
+		&& minimap->visible == 0)
+	{
+		minimap->smm_walls->instances[0].enabled = false;
+		minimap->lmm_walls->instances[0].enabled = true;
+		minimap->visible = 1;
+	}
+	else if (keydata.key == MLX_KEY_F && keydata.action == 0
+		&& minimap->visible == 1)
+	{
+		minimap->smm_walls->instances[0].enabled = true;
+		minimap->lmm_walls->instances[0].enabled = false;
+		minimap->visible = 0;
+	}
 }

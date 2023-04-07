@@ -6,13 +6,12 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 14:08:09 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:52:12 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
 #include "parser.h" // parser
-#include "minimap.h"
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
 #include <stdlib.h> // malloc
 #include <stdio.h> // printf
@@ -37,8 +36,6 @@ int	main(int argc, char **argv)
 	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
 		errexit_mlx_errno();
 	if (initialize_minimap(&game) == ERROR)
-		errexit_mlx_errno();
-	if (initialize_map(&game) == ERROR)
 		errexit_mlx_errno();
 	game.minimap.visible = 0;
 	mlx_loop(game.mlx);

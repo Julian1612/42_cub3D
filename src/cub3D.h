@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/05 09:17:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:47:39 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,15 @@ int				render_world(t_game *game);
 void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
 
 // initzialize.c
-int	initialize_minimap(t_game *game);
-int	initialize_map(t_game *game);
+int				initialize_minimap(t_game *game);
+int				initialize_map(t_game *game);
+
+// minimap.c
+int				render_minimap(t_game *game);
+void			get_map_measures(t_game *game);
+void			change_maps(mlx_key_data_t keydata, void *param);
+
+// mouse_movement.c
+void			mouse_movements(mlx_t *mlx, t_player *player);
 
 #endif
