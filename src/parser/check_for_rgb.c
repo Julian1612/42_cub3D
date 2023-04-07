@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 15:50:34 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 16:16:07 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,26 @@ int	check_for_rgb(t_map *map_data, char *line, int *error)
 	return (0);
 }
 
+int	is_all_digit(char **str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str[i] != NULL)
+	{
+		j = 0;
+		while (str[i][j] != '\0')
+		{
+			if ((str[i][j] < '0' || str[i][j] > '9') && str[i][j] != ' ' && str[i][j] != '\n')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 static int	get_rgb_values(t_map *map_data, char *line, int *error)
 {
 	char	**splitted_str;
@@ -41,6 +61,12 @@ static int	get_rgb_values(t_map *map_data, char *line, int *error)
 		return (error_message(4, map_data));
 	boundary = remove_letter(splitted_str);
 	if (ft_arrlen((void **)splitted_str) != 3)
+	{
+		ft_free_arr((void **)splitted_str);
+		*error = 1;
+		return (error_textures(5, map_data));
+	}
+	if (is_all_digit(splitted_str))
 	{
 		ft_free_arr((void **)splitted_str);
 		*error = 1;
