@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 18:45:27 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:15:54 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,23 +109,22 @@ void	get_map_measures(t_game *game)
 	game->minimap.height = game->map.height;
 }
 
+// lmm aus dem struct entfernen
 void	change_maps(mlx_key_data_t keydata, void *param)
 {
 	t_minimap	*minimap;
 
 	minimap = (t_minimap *)param;
 	if (keydata.key == MLX_KEY_F && keydata.action == 0
-		&& minimap->visible == 0)
-	{
-		minimap->smm_walls->instances[0].enabled = false;
-		minimap->lmm_walls->instances[0].enabled = true;
-		minimap->visible = 1;
-	}
-	else if (keydata.key == MLX_KEY_F && keydata.action == 0
 		&& minimap->visible == 1)
 	{
-		minimap->smm_walls->instances[0].enabled = true;
-		minimap->lmm_walls->instances[0].enabled = false;
+		minimap->smm_walls->instances[0].enabled = false;
 		minimap->visible = 0;
+	}
+	else if (keydata.key == MLX_KEY_F && keydata.action == 0
+		&& minimap->visible == 0)
+	{
+		minimap->smm_walls->instances[0].enabled = true;
+		minimap->visible = 1;
 	}
 }

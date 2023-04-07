@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 15:04:08 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:56:31 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <fcntl.h>
 
 static int	check_args(int *argc, char **argv);
-// static int	check_file(char *cub_file_path, char *data_type);
 int			check_data_type(char *path, char *data_type);
 static int	check_for_invalid_definitions(t_map *map_data);
 

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/07 18:01:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:14:31 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	initialize_minimap(t_game *game)
 		return (ERROR);
 	if (mlx_image_to_window(game->mlx, game->minimap.smm_walls, 0, 0) == -1)
 		return (ERROR);
+	game->minimap.visible = 0;
 	return (SUCCESS);
 }
 

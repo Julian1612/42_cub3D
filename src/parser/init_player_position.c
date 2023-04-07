@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 17:48:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:06:34 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	search_for_player(t_player *player_pos, int i,
 		if (line[j] == 'N' || line[j] == 'S'
 			|| line[j] == 'E' || line[j] == 'W')
 		{
-			player_pos->x = j;
-			player_pos->y = i;
+			player_pos->x = j + 0.5;
+			player_pos->y = i + 0.5;
 			player_pos->view_dir = get_view_direction(line[j]);
 			(*def_count)++;
 		}

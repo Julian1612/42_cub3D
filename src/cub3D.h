@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 18:47:39 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:56:41 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ typedef struct s_rayhit
 {
 	double				stripe;
 	double				dist;
-	enum e_obj_id	wall_id;
+	enum e_obj_id		wall_id;
 }	t_rayhit;
 
 /* ************************************************************************** */

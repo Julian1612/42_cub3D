@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/07 18:54:28 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:14:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	hook(void *param)
 
 	game = (t_game *)param;
 	keys(game->mlx, &game->minimap, &game->player, game->map.map);
-	if (game->minimap.visible == 0)
+	if (game->minimap.visible == 1)
 		render_minimap(game);
 	if (skip_frame(game->mlx, FPS) == false)
 		render_world(game);
