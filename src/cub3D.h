@@ -27,8 +27,8 @@
 #  define DEBUG 0
 # endif
 
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 600
+# define HEIGHT 400
 # define ERROR -1
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64

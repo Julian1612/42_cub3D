@@ -28,7 +28,7 @@ static void	shoot(t_player *player, t_map *map, t_game *game)
 	{
 		player->weapon->curr_frame++;
 		if (player->weapon->curr_frame > GUN6)
-			player->weapon->curr_frame = GUN1;
+			player->weapon->curr_frame = GUN3;
 	}
 	cast_ray(&hit, game, player->dir, MODE_ENEMY);
 	if (hit.enemy_index != -1)

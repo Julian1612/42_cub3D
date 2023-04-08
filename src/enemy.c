@@ -59,6 +59,8 @@ static void	attack(t_player *player, t_enemy *enemy)
 
 static void	die(t_enemy *enemy, t_map *map, int enemy_index)
 {
+	if (enemy->curr_frame < ZOMBIE_DEAD1)
+		enemy->curr_frame = ZOMBIE_DEAD1;
 	if (is_next_frame(&enemy->last_frame_time) == true)
 	{
 		enemy->curr_frame++;
