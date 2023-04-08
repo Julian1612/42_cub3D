@@ -59,7 +59,7 @@ int	test_parse(t_game *game)
 	};
 	static t_enemy	enemies[ENEMY_COUNT] =
 	{
-		{.pos = {7.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1},
+		{.pos = {7.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
 	};
 	static t_weapon	gun =
 	{
@@ -84,6 +84,7 @@ int	test_parse(t_game *game)
 	game->player.cplane.y = (double)WIDTH / HEIGHT / 2;
 	game->player.dir.x = -1;
 	game->player.dir.y = 0;
+	game->player.health = 100;
 	game->player.weapon = &gun;
 	return (SUCCESS);
 }

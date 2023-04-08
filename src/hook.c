@@ -17,14 +17,13 @@
 #include <stdbool.h> // bool
 
 #define MOV_SPEED 0.05
-#define ENEMY_SPEED 0.005
 #define ROT_SPEED 0.03
 
-static void	move(t_vec *pos, t_map *map, double x_offset, double y_offset)
+static void	move_player(t_vec *pos, t_map *map, double x_offset, double y_offset)
 {
-	if (!check_collision(pos->x + x_offset, pos->y, map))
+	if (!check_collision(pos->x + x_offset, pos->y, map, -1))
 		pos->x += x_offset;
-	if (!check_collision(pos->x, pos->y + y_offset, map))
+	if (!check_collision(pos->x, pos->y + y_offset, map, -1))
 		pos->y += y_offset;
 }
 
@@ -55,51 +54,17 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map)
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		move(&player->pos, map, player->dir.x * MOV_SPEED, player->dir.y * MOV_SPEED);
+		move_player(&player->pos, map, player->dir.x * MOV_SPEED, player->dir.y * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		move(&player->pos, map, -player->dir.x * MOV_SPEED, -player->dir.y * MOV_SPEED);
+		move_player(&player->pos, map, -player->dir.x * MOV_SPEED, -player->dir.y * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move(&player->pos, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
+		move_player(&player->pos, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move(&player->pos, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
+		move_player(&player->pos, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
 		rotate_player(player, true);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		rotate_player(player, false);
-}
-
-int	get_frame(void)
-{
-	static int	delta_time = 0;
-
-	if (delta_time == 0)
-		delta_time = mlx_get_time();
-	if (mlx_get_time() - delta_time > 1)
-	{
-		delta_time = mlx_get_time();
-		return (2);
-	}
-	if (mlx_get_time() - delta_time > 0.5)
-		return (1);
-	return (0);
-}
-
-void	enemies(t_enemy *enemies, t_map *map, t_player *player)
-{
-	t_vec	dir;
-	double	angle;
-	int		i;
-
-	i = 0;
-	while (i < map->enemy_count)
-	{
-		angle = atan2(player->pos.y - enemies[i].pos.y, player->pos.x - enemies[i].pos.x);
-		dir.x = cos(angle);
-		dir.y = sin(angle);
-		move(&enemies[i].pos, map, dir.x * ENEMY_SPEED, dir.y * ENEMY_SPEED);
-		enemies[i].tex = &map->textures[ZOMBIE_RUN1 + get_frame()];
-		i++;
-	}
 }
 
 void	hook(void *param)
@@ -119,4 +84,6 @@ void	hook(void *param)
 	}
 	// @note all images have to be resized here
 	mlx_resize_image(game->img_a, game->mlx->width, game->mlx->height);
+	if (game->player.health <= 0)
+		errexit_msg("You died. Exiting program.");
 }

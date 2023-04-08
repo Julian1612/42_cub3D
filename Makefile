@@ -19,7 +19,7 @@ CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 				src/player_position:
 
-SRC			=	collision.c sprite.c raycaster.c debug.c render.c initialize.c errexit.c hook.c utils.c frame.c main.c
+SRC			=	collision.c sprite.c raycaster.c debug.c render.c initialize.c errexit.c hook.c utils.c time.c enemy.c main.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a

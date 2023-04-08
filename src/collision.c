@@ -40,7 +40,7 @@ static bool	check_sprite_collision(double x, double y, t_object *objects, int ob
 	i = -1;
 	while (i++ < obj_count)
 	{
-		if (objects[i].type != DECOR_NON_PERM && objects[i].type != ENEMY)
+		if (objects[i].type != DECOR_NON_PERM)
 			continue ;
 		dist_x = x - objects[i].pos.x;
 		dist_y = y - objects[i].pos.y;
@@ -50,13 +50,34 @@ static bool	check_sprite_collision(double x, double y, t_object *objects, int ob
 	return (false);
 }
 
+static bool	check_enemy_collision(double x, double y, t_enemy *enemies, int enemy_count, int enemy_num)
+{
+	int		i;
+	double	dist_x;
+	double	dist_y;
+
+	i = -1;
+	while (i++ < enemy_count)
+	{
+		if (i == enemy_num)
+			continue ;
+		dist_x = x - enemies[i].pos.x;
+		dist_y = y - enemies[i].pos.y;
+		if (dist_x * dist_x + dist_y * dist_y < SPRITE_SIZE_SQ)
+			return (true);
+	}
+	return (false);
+}
+
 // @note function usable for enemies?
 // @note can this be done less computationally expensive?
-bool	check_collision(double x, double y, t_map *map)
+bool	check_collision(double x, double y, t_map *map, int enemy_num)
 {
 	if (check_wall_collision(x, y, map->arr))
 		return (true);
 	if (check_sprite_collision(x, y, map->objects, map->obj_count))
+		return (true);
+	if (check_enemy_collision(x, y, map->enemies, map->enemy_count, enemy_num))
 		return (true);
 	return (false);
 }

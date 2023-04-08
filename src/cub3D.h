@@ -104,7 +104,7 @@ typedef struct s_enemy
 	t_tex			*tex;
 	char			health;
 	double			speed;
-	t_weapon		weapon;
+	int				damage;
 }	t_enemy;
 
 typedef struct s_minimap
@@ -135,6 +135,7 @@ typedef struct s_player
 	t_vec			pos;
 	t_vec			cplane;
 	t_vec			dir;
+	int				health;
 	t_weapon		*weapon;
 }	t_player;
 
@@ -209,7 +210,7 @@ int				initialize_mlx_data(t_game *game);
 void			hook(void *param);
 
 // collision
-bool			check_collision(double x, double y, t_map *map);
+bool			check_collision(double x, double y, t_map *map, int enemy_num);
 
 // render
 void			render_all(t_game *game);
@@ -218,5 +219,10 @@ void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double 
 
 // frame
 bool			skip_frame(mlx_t *mlx, int fps);
+int				get_frame(void);
+bool			is_cooldown(void);
+
+// enemy
+void			enemies(t_enemy *enemies, t_map *map, t_player *player);
 
 #endif
