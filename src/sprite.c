@@ -37,7 +37,7 @@ static void	set_stripe_start_end(t_start_end *stripe, int sprite_width, int img_
 
 static bool	is_invisible(t_hexcolor color)
 {
-	if (color == 0x000000FF)
+	if (color == 0x00000000)
 		return (true);
 	return (false);
 }

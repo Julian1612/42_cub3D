@@ -48,8 +48,11 @@ enum e_tex_id
 	KNIGHT,
 	LAMP,
 	TABLE,
-	SOLDIER,
 	GUN,
+	ZOMBIE_RUN1,
+	ZOMBIE_RUN2,
+	ZOMBIE_RUN3,
+	ZOMBIE_RUN4,
 };
 
 /* ************************************************************************** */
@@ -95,6 +98,7 @@ typedef struct s_weapon
 }	t_weapon;
 
 // @note enemies are always oriented towards the player
+// @todo speed is not used
 typedef struct s_enemy
 {
 	t_vec			pos;
@@ -212,5 +216,8 @@ bool			check_collision(double x, double y, t_map *map);
 void			render_all(t_game *game);
 void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir);
 void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height);
+
+// frame
+bool			skip_frame(mlx_t *mlx, int fps);
 
 #endif

@@ -68,28 +68,43 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map)
 		rotate_player(player, false);
 }
 
+int	get_frame(void)
+{
+	static int	delta_time = 0;
+
+	if (delta_time == 0)
+		delta_time = mlx_get_time();
+	if (mlx_get_time() - delta_time > 1)
+	{
+		delta_time = mlx_get_time();
+		return (0);
+	}
+	if (mlx_get_time() - delta_time > 0.7)
+		return (3);
+	if (mlx_get_time() - delta_time > 0.4)
+		return (2);
+	if (mlx_get_time() - delta_time > 0.1)
+		return (1);
+	return (0);
+}
+
 void	enemies(t_enemy *enemies, t_map *map, t_player *player)
 {
 	t_vec	dir;
 	double	angle;
 	int		i;
 
-	angle = atan2(player->pos.y - enemies[0].pos.y, player->pos.x - enemies[0].pos.x);
-	dir.x = cos(angle);
-	dir.y = sin(angle);
 	i = 0;
 	while (i < map->enemy_count)
 	{
+		angle = atan2(player->pos.y - enemies[i].pos.y, player->pos.x - enemies[i].pos.x);
+		dir.x = cos(angle);
+		dir.y = sin(angle);
 		move(&enemies[i].pos, map, dir.x * ENEMY_SPEED, dir.y * ENEMY_SPEED);
+		enemies[i].tex = &map->textures[ZOMBIE_RUN1 + get_frame()];
+		printf("%d\n", get_frame());
 		i++;
 	}
-}
-
-static bool	skip_frame(mlx_t *mlx, int fps)
-{
-	if (mlx->delta_time * fps > 1.1)
-		return (true);
-	return (false);
 }
 
 void	hook(void *param)

@@ -18,7 +18,7 @@
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
 
-#define OBJ_COUNT 5 // @note remove
+#define OBJ_COUNT 0 // @note remove
 #define ENEMY_COUNT 1 // @note remove
 
 int	test_parse(t_game *game)
@@ -29,13 +29,13 @@ int	test_parse(t_game *game)
 		"1000100000000001",
 		"1000100000000001",
 		"1000100000000011",
-		"100000000/0000111",
+		"1000000000000111",
 		"1000100000001111",
 		"1000100000011111",
 		"1100100000111111",
 		"1111111111111111"
 	};
-	static t_tex	textures[9] =
+	static t_tex	textures[12] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
@@ -44,20 +44,23 @@ int	test_parse(t_game *game)
 		{"textures/knight.png", NULL},
 		{"textures/lamp.png", NULL},
 		{"textures/table.png", NULL},
-		{"textures/soldier.png", NULL},
 		{"textures/gun.png", NULL},
+		{"textures/zombie/zombie_run1.png", NULL},
+		{"textures/zombie/zombie_run2.png", NULL},
+		{"textures/zombie/zombie_run3.png", NULL},
+		{"textures/zombie/zombie_run4.png", NULL},
 	};
 	static t_object	objects[OBJ_COUNT] =
 	{
-		{.pos = {6.5, 4.5}, .type = DECOR_NON_PERM, .tex = &textures[KNIGHT]},
-		{.pos = {9.5, 4.5}, .type = DECOR_NON_PERM, .tex = &textures[KNIGHT]},
-		{.pos = {12.5, 4.5}, .type = DECOR_PERM, .tex = &textures[LAMP]},
-		{.pos = {14.5, 1.5}, .type = DECOR_PERM, .tex = &textures[LAMP]},
-		{.pos = {5.5, 7.5}, .type = DECOR_NON_PERM, .tex = &textures[TABLE]},
+		// {.pos = {6.5, 4.5}, .type = DECOR_NON_PERM, .tex = &textures[KNIGHT]},
+		// {.pos = {9.5, 4.5}, .type = DECOR_NON_PERM, .tex = &textures[KNIGHT]},
+		// {.pos = {12.5, 4.5}, .type = DECOR_PERM, .tex = &textures[LAMP]},
+		// {.pos = {14.5, 1.5}, .type = DECOR_PERM, .tex = &textures[LAMP]},
+		// {.pos = {5.5, 7.5}, .type = DECOR_NON_PERM, .tex = &textures[TABLE]},
 	};
 	static t_enemy	enemies[ENEMY_COUNT] =
 	{
-		{.pos = {7.5, 4.5}, .tex = &textures[SOLDIER], .health = 100, .speed = 0.1},
+		{.pos = {7.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1},
 	};
 	static t_weapon	gun =
 	{
