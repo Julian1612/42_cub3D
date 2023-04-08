@@ -6,16 +6,16 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:06 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 14:41:41 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 21:16:12 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
 #include <stdio.h>
 
-static int	init_map(t_map *map_data, char *line, int fd);
+static int	init_map(t_map *map_data, char *line, int fd, int *error);
 
-int	check_for_map(t_map *map_data, char *line, int fd)
+int	check_for_map(t_map *map_data, char *line, int fd, int *error)
 {
 	int	i;
 
@@ -24,13 +24,13 @@ int	check_for_map(t_map *map_data, char *line, int fd)
 		i++;
 	if (line[i] == '1')
 	{
-		init_map(map_data, line, fd);
+		init_map(map_data, line, fd, error);
 		return (1);
 	}
 	return (0);
 }
 
-static int	init_map(t_map *map_data, char *line, int fd)
+static int	init_map(t_map *map_data, char *line, int fd, int *error)
 {
 	char	*map_str;
 
@@ -42,12 +42,19 @@ static int	init_map(t_map *map_data, char *line, int fd)
 		line = get_next_line(fd);
 		if (line != NULL)
 			map_str = ft_strjoin_cub3d(map_str, line);
-		if (line != NULL && line[0] == '\n')
+		if (line == NULL)
 			break ;
+		if (ft_strlen(line) > 0 && line[0] == '\n')
+		{
+			*error = 1;
+			error_get_map(1, map_data);
+			break ;
+		}
 		free(line);
 	}
 	get_next_line(-1);
-	map_data->map = ft_split(map_str, '\n');
+	if (*error == 0)
+		map_data->map = ft_split(map_str, '\n');
 	free(map_str);
 	free(line);
 	return (0);

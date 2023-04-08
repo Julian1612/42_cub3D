@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 10:43:55 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 21:33:16 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 17:45:55 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static int	check_if_map_is_closed(t_map *map_data)
 	while (map_data->map[i + 1] != NULL)
 	{
 		j = 0;
+		if (ft_strlen(map_data->map[i]) > 1 && map_data->map[i][0] == '\n')
+			return (error_get_map(1, map_data));
 		while (map_data->map[i][j] == ' ')
 			j++;
 		if (map_data->map[i][j] == '0')

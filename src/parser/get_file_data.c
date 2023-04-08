@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/08 10:10:40 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 18:03:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static int	check_line(t_map *map_data, char *line, int fd, int *error)
 		return (0);
 	else if (check_for_rgb(map_data, line, error))
 		return (0);
-	else if (check_for_map(map_data, line, fd))
+	else if (check_for_map(map_data, line, fd, error))
 		return (1);
 	return (0);
 }

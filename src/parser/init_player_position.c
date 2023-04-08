@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 19:06:34 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 21:18:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 static double	get_view_direction(char direction);
-static void		search_for_player(t_player *player_pos, int i,
+static int		search_for_player(t_player *player_pos, int i,
 					char *line, int *def_count);
 
 int	init_player_position(t_map *map_data, t_player *player_pos)
@@ -50,14 +50,16 @@ static double	get_view_direction(char direction)
 	return (0);
 }
 
-void	search_for_player(t_player *player_pos, int i,
+static int	search_for_player(t_player *player_pos, int i,
 			char *line, int *def_count)
 {
 	int	j;
+	int	line_len;
 
 	j = 0;
 	while (line[j])
 	{
+		line_len = ft_strlen(line);
 		if (line[j] == 'N' || line[j] == 'S'
 			|| line[j] == 'E' || line[j] == 'W')
 		{
