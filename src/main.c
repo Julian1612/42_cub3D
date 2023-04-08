@@ -126,6 +126,7 @@ int	test_parse(t_game *game)
 // @todo for the doors: the whole block moves
 // @todo split up into sensible modules (render module etc.)
 // @todo rename object to sprite and sprite struct to sprite_helper or something?
+// @todo make struct out of frame variables
 
 int	main(int argc, char **argv)
 {

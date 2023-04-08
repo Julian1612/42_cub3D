@@ -53,12 +53,12 @@ static void	init_ray(t_ray *ray, t_vec *pos, t_vec *ray_dir)
 
 static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map, bool mode)
 {
-	hit->enemy_index = -1;
+	hit->enemy_index = -1;	
 	while (map->arr[ray->map_y][ray->map_x] != WALL)
 	{
-		if (mode == MODE_ENEMY && check_enemy_collision(ray->map_x, ray->map_y, map, -1) != -1)
+		if (mode == MODE_ENEMY && check_enemy_collision(ray->map_x + 0.5, ray->map_y + 0.5, map, -1) != -1)
 		{
-			hit->enemy_index = check_enemy_collision(ray->map_x, ray->map_y, map, -1);
+			hit->enemy_index = check_enemy_collision(ray->map_x + 0.5, ray->map_y + 0.5, map, -1);
 			break ;
 		}
 		if (ray->length.x < ray->length.y)

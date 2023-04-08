@@ -5,7 +5,7 @@
 #include <stdbool.h> // bool
 #include <stdio.h> // @note remove
 
-#define ENEMY_SPEED 0.01
+#define ENEMY_SPEED 0.02
 
 static void	move(t_enemy *enemy, t_map *map, double x_offset, double y_offset, int enemy_index)
 {
