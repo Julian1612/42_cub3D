@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 22:10:44 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:55:07 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # define CHAR_ENEMY 'E'
 
 /* check_for_bonus_textures.c */
-int				check_for_bonus_texture(t_map *map_data, char *line, int *error);
+int				check_for_bonus_texture(t_map *map_data, char *line,
+					int *error);
 
 /* check_for_map.c */
 int				check_for_map(t_map *map_data, char *line, int fd);

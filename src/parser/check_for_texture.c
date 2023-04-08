@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/08 11:11:55 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:56:31 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,12 @@ static int	get_texture_file_path(t_map *map_data, char *line,
 		*error = 1;
 		return (error_message(8, map_data));
 	}
-	// if (splitted_str == NULL)
-	// {
-	// 	ft_free_arr((void **)splitted_str);
-	// 	return (error_message(4, map_data));
-	// }
 	if (map_data->objects[i].path != NULL)
 	{
 		ft_free_arr((void **)splitted_str);
 		*error = 1;
 		return (error_message(5, map_data));
 	}
-	// error check fur cpy_line
 	cpy_line(&map_data->objects[i].path,
 		splitted_str[1], ft_strlen(splitted_str[1]));
 	ft_free_arr((void **)splitted_str);
@@ -75,7 +69,7 @@ char	*cpy_line(char **des, char *src, int len)
 	if (*des == NULL)
 	{
 		error_message(4, NULL);
-			return (NULL);
+		return (NULL);
 	}
 	while (i < len - 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/08 13:14:25 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:56:00 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,10 @@ int	check_textures_file(t_map *map_data, char *cub_file_path, char *data_type)
 	int	fd;
 
 	if (check_data_type(cub_file_path, data_type))
-	{
 		return (error_message(9, map_data));
-	}
 	fd = open(cub_file_path, O_RDONLY);
 	if (fd < 0)
-	{
-		////////// heir muss richtig gefreed werden
 		return (error_message(10, map_data));
-	}
 	close(fd);
 	return (0);
 }
@@ -43,7 +38,8 @@ int	check_mandatory_textures(t_map *map_data)
 	{
 		if (map_data->objects[i].path == NULL)
 			return (error_textures(6, map_data));
-		else if (check_textures_file(map_data, map_data->objects[i].path, "png"))
+		else if (check_textures_file(map_data,
+				map_data->objects[i].path, "png"))
 			return (1);
 		i++;
 	}

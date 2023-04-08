@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/08 14:34:33 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:59:29 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,14 @@ static int	check_rgb_values(t_map *map_data, char **line_content, int *error)
 	{
 		*error = 1;
 		printf("3\n");
-		ft_free_arr((void **)line_content);// HEIR LINE KONTENT FREEN !!!
+		ft_free_arr((void **)line_content);
 		return (error_textures(5, map_data));
 	}
 	if (ft_atoi(line_content[0]) > 255 || ft_atoi(line_content[1]) > 255
 		|| ft_atoi(line_content[2]) > 255)
 	{
 		*error = 1;
-		printf("4\n");
-		ft_free_arr((void **)line_content);
+		// ft_free_arr((void **)line_content);
 		return (error_textures(5, map_data));
 	}
 	if (ft_atoi(line_content[0]) < 0 || ft_atoi(line_content[1]) < 0
@@ -95,7 +94,7 @@ static int	check_rgb_values(t_map *map_data, char **line_content, int *error)
 	{
 		*error = 1;
 		printf("5\n");
-		ft_free_arr((void **)line_content);
+		// ft_free_arr((void **)line_content);
 		return (error_textures(5, map_data));
 	}
 	return (0);
