@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/08 22:23:57 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 00:42:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ int				check_file(char *cub_file_path, char *data_type);
 
 /* utils.c */
 void			init_struct_null(t_map *map_data);
-int				convert_to_hexcode(unsigned char r, unsigned char g,
-					unsigned char b, unsigned char a);
 int				is_all_digit(char **str);
-int				get_obj_nbr(int i);
 bool			contains_only_spaces(const char *str);
+int				check_for_new_line(char **splitted_str, int *error);
+
 #endif

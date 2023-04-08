@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 22:06:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 00:40:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,16 @@ bool	contains_only_spaces(const char *str)
 		i++;
 	}
 	return (true);
+}
+
+int	check_for_new_line(char **splitted_str, int *error)
+{
+	if (splitted_str[0][0] == '\n' || splitted_str[1][0] == '\n'
+	|| splitted_str[2][0] == '\n')
+	{
+		ft_free_arr((void **)splitted_str);
+		*error = 1;
+		return (1);
+	}
+	return (0);
 }

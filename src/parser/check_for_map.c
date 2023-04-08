@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:06 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 00:32:57 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 00:33:44 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	check_for_map(t_map *map_data, char *line, int fd, int *error)
 	}
 	return (0);
 }
-
 
 static int	init_map(t_map *map_data, char *line, int fd, int *error)
 {

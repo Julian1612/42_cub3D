@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 00:10:23 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 01:22:29 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ void	clear_buffer(char **line)
 	}
 }
 
+int	clear_mem(char **line)
+{
+	free(*line);
+	*line = NULL;
+	clear_buffer(line);
+	return (1);
+}
+
 static int	read_map_data(t_map *map_data, int fd, int file_len)
 {
 	int		i;
@@ -61,21 +69,11 @@ static int	read_map_data(t_map *map_data, int fd, int file_len)
 		if (check_line(map_data, line, fd, &error))
 		{
 			if (error == 1)
-			{
-				free(line);
-				line = NULL;
-				clear_buffer(&line);
-				return (1);
-			}
+				return (clear_mem(&line));
 			break ;
 		}
 		if (error == 1)
-		{
-			free(line);
-			line = NULL;
-			clear_buffer(&line);
-			return (1);
-		}
+			return (clear_mem(&line));
 		free(line);
 		line = NULL;
 		i++;
