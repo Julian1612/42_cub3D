@@ -50,23 +50,24 @@ static bool	check_sprite_collision(double x, double y, t_object *objects, int ob
 	return (false);
 }
 
-static bool	check_enemy_collision(double x, double y, t_enemy *enemies, int enemy_count, int enemy_num)
+// @note returns index of enemy if collision, -1 if no collision
+int	check_enemy_collision(double x, double y, t_map *map, int enemy_num)
 {
 	int		i;
 	double	dist_x;
 	double	dist_y;
 
 	i = -1;
-	while (i++ < enemy_count)
+	while (i++ < map->enemy_count)
 	{
-		if (i == enemy_num)
+		if (i == enemy_num || map->enemies[i].health <= 0)
 			continue ;
-		dist_x = x - enemies[i].pos.x;
-		dist_y = y - enemies[i].pos.y;
+		dist_x = x - map->enemies[i].pos.x;
+		dist_y = y - map->enemies[i].pos.y;
 		if (dist_x * dist_x + dist_y * dist_y < SPRITE_SIZE_SQ)
-			return (true);
+			return (i);
 	}
-	return (false);
+	return (-1);
 }
 
 // @note function usable for enemies?
@@ -77,7 +78,7 @@ bool	check_collision(double x, double y, t_map *map, int enemy_num)
 		return (true);
 	if (check_sprite_collision(x, y, map->objects, map->obj_count))
 		return (true);
-	if (check_enemy_collision(x, y, map->enemies, map->enemy_count, enemy_num))
+	if (check_enemy_collision(x, y, map, enemy_num) != -1)
 		return (true);
 	return (false);
 }

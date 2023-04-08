@@ -19,6 +19,18 @@
 #define MOV_SPEED 0.05
 #define ROT_SPEED 0.03
 
+static void	shoot(t_player *player, t_map *map, t_game *game)
+{
+	t_rayhit	hit;
+
+	cast_ray(&hit, game, player->dir, MODE_ENEMY);
+	if (hit.enemy_index != -1)
+	{
+		if (map->enemies[hit.enemy_index].health > 0)
+			map->enemies[hit.enemy_index].health -= 1;
+	}
+}
+
 static void	move_player(t_vec *pos, t_map *map, double x_offset, double y_offset)
 {
 	if (!check_collision(pos->x + x_offset, pos->y, map, -1))
@@ -44,7 +56,7 @@ static void	rotate_player(t_player *player, bool left)
 	player->cplane.y = temp * sin(rot_speed) + player->cplane.y * cos(rot_speed);
 }
 
-static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map)
+static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t_game *game)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
@@ -65,6 +77,8 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map)
 		rotate_player(player, true);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		rotate_player(player, false);
+	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
+		shoot(player, map, game);
 }
 
 void	hook(void *param)
@@ -78,7 +92,7 @@ void	hook(void *param)
 	// enemy
 	if (skip_frame(game->mlx, FPS) == false)
 	{
-		keys(game->mlx, &game->minimap, &game->player, &game->map);
+		keys(game->mlx, &game->minimap, &game->player, &game->map, game);
 		enemies(game->map.enemies, &game->map, &game->player);
 		render_all(game);
 	}

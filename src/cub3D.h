@@ -23,6 +23,10 @@
 /* DEFINES																	  */
 /* ************************************************************************** */
 
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+
 # define WIDTH 400
 # define HEIGHT 400
 # define ERROR -1
@@ -30,10 +34,8 @@
 # define MM_BLOCK_SIZE 64
 # define WALL '1'
 # define FPS 60
-
-# ifndef DEBUG
-#  define DEBUG 0
-# endif
+# define MODE_WALL 0
+# define MODE_ENEMY 1
 
 /* ************************************************************************** */
 /* ENUMS																	  */
@@ -179,6 +181,7 @@ typedef struct s_rayhit
 {
 	double			stripe;
 	double			dist;
+	int				enemy_index;
 	enum e_tex_id	tex_id;
 }	t_rayhit;
 
@@ -222,10 +225,11 @@ void			hook(void *param);
 
 // collision
 bool			check_collision(double x, double y, t_map *map, int enemy_num);
+int				check_enemy_collision(double x, double y, t_map *map, int enemy_num);
 
 // render
 void			render_all(t_game *game);
-void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir);
+void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, bool mode);
 void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height);
 
 // frame

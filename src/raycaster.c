@@ -51,10 +51,16 @@ static void	init_ray(t_ray *ray, t_vec *pos, t_vec *ray_dir)
 	}
 }
 
-static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map)
+static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map, bool mode)
 {
+	hit->enemy_index = -1;
 	while (map->arr[ray->map_y][ray->map_x] != WALL)
 	{
+		if (mode == MODE_ENEMY && check_enemy_collision(ray->map_x, ray->map_y, map, -1) != -1)
+		{
+			hit->enemy_index = check_enemy_collision(ray->map_x, ray->map_y, map, -1);
+			break ;
+		}
 		if (ray->length.x < ray->length.y)
 		{
 			ray->map_x += ray->step.x;
@@ -126,12 +132,12 @@ static void	set_hit_offset(t_rayhit *hit, bool y_side, t_ray *ray)
 		hit->stripe = get_y_offset(ray);
 }
 
-void	cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir)
+void	cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, bool mode)
 {
 	t_ray			ray;
 
 	init_ray(&ray, &game->player.pos, &ray_dir);
-	set_distance(hit, &ray, &game->map);
+	set_distance(hit, &ray, &game->map, mode);
 	set_hit_tex_id(hit, ray.y_side, &ray.step);
 	set_hit_offset(hit, ray.y_side, &ray);
 	debug_print_ray(&ray, hit);

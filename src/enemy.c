@@ -58,9 +58,11 @@ void	enemies(t_enemy *enemies, t_map *map, t_player *player)
 	double	angle;
 	int		i;
 
-	i = 0;
-	while (i < map->enemy_count)
+	i = -1;
+	while (i++ < map->enemy_count)
 	{
+		if (enemies[i].health <= 0)
+			continue ;
 		angle = atan2(player->pos.y - enemies[i].pos.y, player->pos.x - enemies[i].pos.x);
 		dir.x = cos(angle);
 		dir.y = sin(angle);
@@ -68,6 +70,5 @@ void	enemies(t_enemy *enemies, t_map *map, t_player *player)
 			attack(player, &enemies[i]);
 		else
 			move(&enemies[i], map, dir.x * ENEMY_SPEED, dir.y * ENEMY_SPEED, i);
-		i++;
 	}
 }

@@ -19,7 +19,7 @@
 #include <math.h> // M_PI
 
 #define OBJ_COUNT 0 // @note remove
-#define ENEMY_COUNT 1 // @note remove
+#define ENEMY_COUNT 4 // @note remove
 
 int	test_parse(t_game *game)
 {
@@ -71,6 +71,9 @@ int	test_parse(t_game *game)
 	static t_enemy	enemies[ENEMY_COUNT] =
 	{
 		{.pos = {7.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
+		{.pos = {13.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
+		{.pos = {11.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
+		{.pos = {8.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
 	};
 	static t_weapon	gun =
 	{

@@ -111,7 +111,7 @@ void	render_walls(t_game *game, double *wall_height)
 	while (x_img < game->img_world->width)
 	{
 		set_ray_dir(&ray_dir, x_img, game->img_world->width, &game->player);
-		cast_ray(&ray_hit, game, ray_dir);
+		cast_ray(&ray_hit, game, ray_dir, MODE_WALL);
 		wall_height[x_img] = game->img_world->height / ray_hit.dist;
 		draw_ceiling(game, wall_height[x_img], x_img);
 		draw_wall(game, wall_height[x_img], x_img, &ray_hit);

@@ -103,21 +103,21 @@ static void	init_sprite(t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *play
 // @todo create dist array to calculate dists only once
 void	sort_sprites(t_game *game, t_object *objects, t_enemy *enemies)
 {
-	t_object	temp;
+	t_enemy		temp;
 	int			i;
 	int			dist_old;
 	int			dist_new;
 
 	i = 0;
-	while (i < game->map.obj_count - 1)
+	while (i < game->map.enemy_count - 1)
 	{
-		dist_old = ((game->player.pos.x - objects[i].pos.x) * (game->player.pos.x - objects[i].pos.x) + (game->player.pos.y - objects[i].pos.y) * (game->player.pos.y - objects[i].pos.y));
-		dist_new = ((game->player.pos.x - objects[i + 1].pos.x) * (game->player.pos.x - objects[i + 1].pos.x) + (game->player.pos.y - objects[i + 1].pos.y) * (game->player.pos.y - objects[i + 1].pos.y));
+		dist_old = ((game->player.pos.x - enemies[i].pos.x) * (game->player.pos.x - enemies[i].pos.x) + (game->player.pos.y - enemies[i].pos.y) * (game->player.pos.y - enemies[i].pos.y));
+		dist_new = ((game->player.pos.x - enemies[i + 1].pos.x) * (game->player.pos.x - enemies[i + 1].pos.x) + (game->player.pos.y - enemies[i + 1].pos.y) * (game->player.pos.y - enemies[i + 1].pos.y));
 		if (dist_old < dist_new)
 		{
-			temp = objects[i];
-			objects[i] = objects[i + 1];
-			objects[i + 1] = temp;
+			temp = enemies[i];
+			enemies[i] = enemies[i + 1];
+			enemies[i + 1] = temp;
 			i = 0;
 		}
 		else
@@ -139,12 +139,13 @@ void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *w
 		draw_sprite(&sprite, game, wall_height);
 		i++;
 	}
-	i = 0;
-	while (i < game->map.enemy_count)
+	i = -1;
+	while (i++ < game->map.enemy_count)
 	{
+		if (game->map.enemies[i].health <= 0)
+			continue ;
 		init_sprite(&sprite, &enemies[i].pos, enemies[i].tex, &game->player, game);
 		debug_print_sprite(&sprite);
 		draw_sprite(&sprite, game, wall_height);
-		i++;
 	}
 }
