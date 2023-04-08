@@ -1,6 +1,6 @@
-F  4,9,7
-C 09,7,9
-WE textures/west.png
+F  4,4,4
+C 4,4,4
+WE ./textures/east.png
 EA ./textures/east.png
 SO                textures/south.png
 NO textures/north.png

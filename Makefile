@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/07 22:42:18 by jschneid         ###   ########.fr        #
+#    Updated: 2023/04/08 09:49:39 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,13 @@ SRC			=	main.c \
 				parser.c check_for_map.c check_for_rgb.c parser_utils.c \
 				check_textures.c check_for_texture.c error_messages.c \
 				get_file_data.c check_map.c init_player_position.c \
-				debug.c errexit.c hook.c initialize.c raycaster.c render.c utils.c \
-				minimap.c mouse_movements.c
+				utils.c \
+				# debug.c errexit.c hook.c initialize.c raycaster.c render.c utils.c \
+				# minimap.c mouse_movements.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
-LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+LIBS		= $(LIBFT)/libft.a
+# -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
 OBJS		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
 OBJ_DIR		= ./obj/
 

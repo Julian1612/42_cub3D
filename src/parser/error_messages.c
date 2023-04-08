@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 16:43:02 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 10:57:26 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,25 @@ int	error_get_map(int error_code, t_map *map_data)
 
 static void	free_struct(t_map *map_data)
 {
+	int	i;
+
 	if (map_data == NULL)
 		return ;
+	i = 0;
+	while (i < 10)
+	{
+		if (map_data->objects[i].path != NULL)
+			free(map_data->objects[i].path);
+		i++;
+	}
+	i = 0;
 	if (map_data->map != NULL)
-		ft_free_arr((void **)map_data->map);
+	{
+		while (map_data->map[i] != NULL)
+		{
+			free(map_data->map[i]);
+			i++;
+		}
+		free(map_data->map);
+	}
 }

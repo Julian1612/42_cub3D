@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 20:56:51 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 14:34:33 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,15 @@ static int	get_rgb_values(t_map *map_data, char *line, int *error)
 	}
 	if (splitted_str[0][0] == '\n' || splitted_str[1][0] == '\n'
 		|| splitted_str[2][0] == '\n')
+	{
+		ft_free_arr((void **)splitted_str);
 		return (1);
+	}
 	if (check_rgb_values(map_data, splitted_str, error))
+	{
+		ft_free_arr((void **)splitted_str);
 		return (1);
+	}
 	init_struct(map_data, splitted_str, boundary, error);
 	ft_free_arr((void **)splitted_str);
 	return (0);
@@ -63,6 +69,8 @@ static int	check_rgb_values(t_map *map_data, char **line_content, int *error)
 	if (ft_arrlen((void **)line_content) != 3)
 	{
 		*error = 1;
+		printf("2\n");
+		ft_free_arr((void **)line_content);
 		return (error_textures(5, map_data));
 	}
 	if (contains_only_spaces(line_content[0])
@@ -70,18 +78,24 @@ static int	check_rgb_values(t_map *map_data, char **line_content, int *error)
 		|| contains_only_spaces(line_content[2]))
 	{
 		*error = 1;
+		printf("3\n");
+		ft_free_arr((void **)line_content);// HEIR LINE KONTENT FREEN !!!
 		return (error_textures(5, map_data));
 	}
 	if (ft_atoi(line_content[0]) > 255 || ft_atoi(line_content[1]) > 255
 		|| ft_atoi(line_content[2]) > 255)
 	{
 		*error = 1;
+		printf("4\n");
+		ft_free_arr((void **)line_content);
 		return (error_textures(5, map_data));
 	}
 	if (ft_atoi(line_content[0]) < 0 || ft_atoi(line_content[1]) < 0
 		|| ft_atoi(line_content[2]) < 0)
 	{
 		*error = 1;
+		printf("5\n");
+		ft_free_arr((void **)line_content);
 		return (error_textures(5, map_data));
 	}
 	return (0);

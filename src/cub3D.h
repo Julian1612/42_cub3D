@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 21:30:15 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 09:59:47 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ typedef struct s_minimap
 	double			width;
 	double			height;
 	int				visible;
-	mlx_image_t		*lmm_walls;
-	mlx_image_t		*smm_walls;
+	mlx_image_t		*minimap_walls;
 	mlx_image_t		*player;
 	mlx_image_t		*walls;
 	mlx_image_t		*view_dir;
