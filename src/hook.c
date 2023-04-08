@@ -83,7 +83,7 @@ void	hook(void *param)
 		render_all(game);
 	}
 	// @note all images have to be resized here
-	mlx_resize_image(game->img_a, game->mlx->width, game->mlx->height);
+	mlx_resize_image(game->img_world, game->mlx->width, game->mlx->height);
 	if (game->player.health <= 0)
 		errexit_msg("You died. Exiting program.");
 }

@@ -3,6 +3,7 @@
 #include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
+#include <stdio.h> // @note remove
 
 #define ENEMY_SPEED 0.01
 
@@ -41,11 +42,13 @@ static void	attack(t_player *player, t_enemy *enemy)
 	{
 		cooldown = mlx_get_time();
 		player->health -= enemy->damage;
+		printf("player health: %d\n", player->health);
 	}
 	else if (mlx_get_time() - cooldown > 1)
 	{
 		cooldown = mlx_get_time();
 		player->health -= enemy->damage;
+		printf("player health: %d\n", player->health);
 	}
 }
 

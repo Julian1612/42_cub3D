@@ -59,8 +59,9 @@ static int	initialize_textures(t_game *game)
 static int	initialize_environ(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
-	game->img_a = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
-	if (game->mlx == NULL || game->img_a == NULL)
+	game->img_world = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
+	game->img_hud = mlx_new_image(game->mlx, game->mlx->width, 192);
+	if (game->mlx == NULL || game->img_world == NULL || game->img_hud == NULL)
 		return (ERROR);
 	return (SUCCESS);
 }

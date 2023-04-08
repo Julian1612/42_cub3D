@@ -48,7 +48,12 @@ enum e_tex_id
 	KNIGHT,
 	LAMP,
 	TABLE,
-	GUN,
+	GUN1,
+	GUN2,
+	GUN3,
+	GUN4,
+	GUN5,
+	GUN6,
 	ZOMBIE_RUN1,
 	ZOMBIE_RUN2,
 	ZOMBIE_RUN3,
@@ -149,8 +154,8 @@ typedef struct s_player
 typedef struct s_game
 {
 	mlx_t			*mlx;
-	mlx_image_t		*img_a;
-	mlx_image_t		*img_b;
+	mlx_image_t		*img_world;
+	mlx_image_t		*img_hud;
 	t_map			map;
 	t_minimap		minimap;
 	t_player		player;

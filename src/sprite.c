@@ -55,25 +55,25 @@ static void	draw_sprite(t_sprite *sprite, t_game *game, double *wall_height)
 	int			stripe_iter;
 	t_hexcolor	color;
 
-	set_row_start_end(&row, sprite->height, game->img_a->height, 0);
-	set_stripe_start_end(&stripe, sprite->width, game->img_a->width, sprite->img_x);
+	set_row_start_end(&row, sprite->height, game->img_world->height, 0);
+	set_stripe_start_end(&stripe, sprite->width, game->img_world->width, sprite->img_x);
 	scale = (double)(sprite->tex->tex->height) / sprite->height;
 	stripe_iter = stripe.start;
 	while (stripe_iter++ < stripe.end)
 	{
-		if (sprite->cam_pos.y < 0 || stripe_iter < 0 || stripe_iter >= game->img_a->width || wall_height[stripe_iter] > sprite->height)
+		if (sprite->cam_pos.y < 0 || stripe_iter < 0 || stripe_iter >= game->img_world->width || wall_height[stripe_iter] > sprite->height)
 			continue ;
 		tex_x = (stripe_iter - (-sprite->width / 2 + sprite->img_x)) * sprite->tex->tex->width / sprite->width;
 		y_tex_iter = 0;
-		if (sprite->height > game->img_a->height)
-			y_tex_iter = (sprite->height - game->img_a->height) / 2;
+		if (sprite->height > game->img_world->height)
+			y_tex_iter = (sprite->height - game->img_world->height) / 2;
 		row_iter = row.start;
 		while (row_iter++ < row.end)
 		{
 			color = sprite->tex->tex->pixels[coor_to_pixel(sprite->tex->tex->width, tex_x, y_tex_iter * scale)];
 			if (is_invisible(color) == false)
-				ft_memcpy(&game->img_a->pixels
-					[coor_to_pixel(game->img_a->width, stripe_iter, row_iter)],
+				ft_memcpy(&game->img_world->pixels
+					[coor_to_pixel(game->img_world->width, stripe_iter, row_iter)],
 						&sprite->tex->tex->pixels
 					[coor_to_pixel(sprite->tex->tex->width,
 							tex_x, y_tex_iter * scale)],
@@ -95,9 +95,9 @@ static void	init_sprite(t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *play
 	cam_matrix_inv = 1.0 / (player->cplane.x * sprite->dir.y - sprite->dir.x * player->cplane.y);
 	sprite->cam_pos.x = -cam_matrix_inv * (sprite->dir.y * sprite->dist.x - sprite->dir.x * sprite->dist.y);
 	sprite->cam_pos.y = cam_matrix_inv * (-player->cplane.y * sprite->dist.x + player->cplane.x * sprite->dist.y);
-	sprite->img_x = (game->img_a->width / 2) * (1 + sprite->cam_pos.x / sprite->cam_pos.y);
-	sprite->height = abs((int)(game->img_a->height / sprite->cam_pos.y));
-	sprite->width = abs((int)(game->img_a->height / sprite->cam_pos.y));
+	sprite->img_x = (game->img_world->width / 2) * (1 + sprite->cam_pos.x / sprite->cam_pos.y);
+	sprite->height = abs((int)(game->img_world->height / sprite->cam_pos.y));
+	sprite->width = abs((int)(game->img_world->height / sprite->cam_pos.y));
 }
 
 // @todo create dist array to calculate dists only once

@@ -35,7 +35,7 @@ int	test_parse(t_game *game)
 		"1100100000111111",
 		"1111111111111111"
 	};
-	static t_tex	textures[17] =
+	static t_tex	textures[22] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
@@ -44,7 +44,12 @@ int	test_parse(t_game *game)
 		{"textures/knight.png", NULL},
 		{"textures/lamp.png", NULL},
 		{"textures/table.png", NULL},
-		{"textures/gun.png", NULL},
+		{"textures/gun/gun1.png", NULL},
+		{"textures/gun/gun2.png", NULL},
+		{"textures/gun/gun3.png", NULL},
+		{"textures/gun/gun4.png", NULL},
+		{"textures/gun/gun5.png", NULL},
+		{"textures/gun/gun6.png", NULL},
 		{"textures/zombie/zombie_run1.png", NULL},
 		{"textures/zombie/zombie_run2.png", NULL},
 		{"textures/zombie/zombie_run3.png", NULL},
@@ -69,7 +74,7 @@ int	test_parse(t_game *game)
 	};
 	static t_weapon	gun =
 	{
-		.tex = &textures[GUN],
+		.tex = &textures[GUN1],
 		.damage = 10,
 		.range = 10,
 		.reload_time = 1,
@@ -106,15 +111,6 @@ int	test_parse(t_game *game)
 // @todo split up into sensible modules (render module etc.)
 // @todo rename object to sprite and sprite struct to sprite_helper or something?
 
-void	put_weapon(mlx_t *mlx, t_weapon *weapon)
-{
-	mlx_image_t	*weapon_img;
-
-	weapon_img = mlx_texture_to_image(mlx, weapon->tex->tex);
-	if (mlx_image_to_window(mlx, weapon_img, WIDTH / 2 - weapon_img->width / 2, HEIGHT - weapon_img->height) == ERROR)
-		errexit_mlx_errno();
-}
-
 int	main(int argc, char **argv)
 {
 	t_game		game;
@@ -125,9 +121,10 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
 		errexit_mlx_errno();
-	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
+	if (mlx_image_to_window(game.mlx, game.img_world, 0, 0) == ERROR)
 		errexit_mlx_errno();
-	put_weapon(game.mlx, game.player.weapon);
+	if (mlx_image_to_window(game.mlx, game.img_hud, 0, game.img_world->height - 192) == ERROR)
+		errexit_mlx_errno();
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);

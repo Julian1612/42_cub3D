@@ -23,11 +23,11 @@ static void	draw_ceiling(t_game *game, int wall_height, int x_img)
 	int	ceil_height;
 	int	y_img;
 
-	ceil_height = game->img_a->height / 2 - wall_height / 2;
+	ceil_height = game->img_world->height / 2 - wall_height / 2;
 	y_img = 0;
-	while (y_img < game->img_a->height && y_img < ceil_height)
+	while (y_img < game->img_world->height && y_img < ceil_height)
 	{
-		mlx_put_pixel(game->img_a, x_img, y_img, game->map.ceiling_color);
+		mlx_put_pixel(game->img_world, x_img, y_img, game->map.ceiling_color);
 		y_img++;
 	}
 }
@@ -43,17 +43,17 @@ static void	draw_wall(t_game *game, int wall_height, int x_img, t_rayhit *hit)
 	scale = (double)(game->map.textures[hit->tex_id].tex->height) / wall_height;
 	x_tex = (game->map.textures[hit->tex_id].tex->width) * hit->stripe;
 	y_tex_iter = 0;
-	y_img = game->img_a->height / 2 - wall_height / 2;
+	y_img = game->img_world->height / 2 - wall_height / 2;
 	if (y_img < 0)
 	{
 		y_tex_iter = y_img * -1;
 		y_img = 0;
 	}
-	while (y_img < game->img_a->height && y_img < game->img_a->height / 2 + wall_height / 2)
+	while (y_img < game->img_world->height && y_img < game->img_world->height / 2 + wall_height / 2)
 	{
 		// @todo improve this ugly shit
-		ft_memcpy(&game->img_a->pixels
-		[coor_to_pixel(game->img_a->width, x_img, y_img)],
+		ft_memcpy(&game->img_world->pixels
+		[coor_to_pixel(game->img_world->width, x_img, y_img)],
 			&game->map.textures[hit->tex_id].tex->pixels
 		[coor_to_pixel(game->map.textures[hit->tex_id].tex->width,
 				x_tex, y_tex_iter * scale)],
@@ -68,11 +68,11 @@ static void	draw_floor(t_game *game, int wall_height, int x_img)
 	int	floor_start;
 	int	y_img;
 
-	floor_start = game->img_a->height / 2 + wall_height / 2;
+	floor_start = game->img_world->height / 2 + wall_height / 2;
 	y_img = floor_start;
-	while (y_img < game->img_a->height && y_img < game->img_a->height)
+	while (y_img < game->img_world->height && y_img < game->img_world->height)
 	{
-		mlx_put_pixel(game->img_a, x_img, y_img, game->map.floor_color);
+		mlx_put_pixel(game->img_world, x_img, y_img, game->map.floor_color);
 		y_img++;
 	}
 }
@@ -108,11 +108,11 @@ void	render_walls(t_game *game, double *wall_height)
 
 	// scale_cplane(&game->player.cplane, game->img_a->width, game->img_a->height); // if used, better called in hook after resizing
 	x_img = 0;
-	while (x_img < game->img_a->width)
+	while (x_img < game->img_world->width)
 	{
-		set_ray_dir(&ray_dir, x_img, game->img_a->width, &game->player);
+		set_ray_dir(&ray_dir, x_img, game->img_world->width, &game->player);
 		cast_ray(&ray_hit, game, ray_dir);
-		wall_height[x_img] = game->img_a->height / ray_hit.dist;
+		wall_height[x_img] = game->img_world->height / ray_hit.dist;
 		draw_ceiling(game, wall_height[x_img], x_img);
 		draw_wall(game, wall_height[x_img], x_img, &ray_hit);
 		draw_floor(game, wall_height[x_img], x_img);
@@ -120,16 +120,42 @@ void	render_walls(t_game *game, double *wall_height)
 	}
 }
 
-// static void	render_weapon(mlx_t *mlx, t_weapon *weapon)
-// {
-// }
+static void	render_weapon(mlx_image_t *img, t_weapon *weapon)
+{
+	int	x_img;
+	int	y_img;
+	int	x_tex;
+	int	y_tex;
+
+	if (weapon == NULL)
+		return ;
+	x_img = img->width / 2 - weapon->tex->tex->width / 2;
+	x_tex = 0;
+	while (x_tex < weapon->tex->tex->width)
+	{
+		y_img = 0;
+		y_tex = 0;
+		while (y_tex < weapon->tex->tex->height)
+		{
+			ft_memcpy(&img->pixels
+			[coor_to_pixel(img->width, x_img, y_img)],
+				&weapon->tex->tex->pixels
+			[coor_to_pixel(weapon->tex->tex->width, x_tex, y_tex)],
+			4);
+			y_img++;
+			y_tex++;
+		}
+		x_img++;
+		x_tex++;
+	}
+}
 
 void	render_all(t_game *game)
 {
-	double		wall_height[game->img_a->width];
+	double		wall_height[game->img_world->width];
 
 	debug_print_player(&game->player);
 	render_walls(game, wall_height);
 	render_sprites(game, game->map.objects, game->map.enemies, wall_height);
-	// render_weapon(game->mlx, game->player.weapon);
+	render_weapon(game->img_hud, game->player.weapon);
 }
