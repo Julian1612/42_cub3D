@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/08 18:03:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 22:57:19 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,11 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	if (parser(&argc, argv, &game.map, &game.player))
+	if (parser(&argc, argv, &game))
 	{
 		return (EXIT_FAILURE);
 		free_parser(&game.map);
 	}
-	free_parser(&game.map);
 	// if (initialize_mlx_data(&game) == ERROR)
 	// 	errexit_mlx_errno();
 	// if (mlx_loop_hook(game.mlx, &hook, &game) == false)
@@ -66,5 +65,6 @@ int	main(int argc, char **argv)
 	// game.minimap.visible = 0;
 	// mlx_loop(game.mlx);
 	// mlx_terminate(game.mlx);
+	free_parser(&game.map);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 19:15:54 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 22:36:25 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	draw_minimap(t_game *game);
 
 int	render_minimap(t_game *game)
 {
-	mlx_delete_image(game->mlx, game->minimap.smm_walls);
-	game->minimap.smm_walls = mlx_new_image(game->mlx, MINIMAP_WALL_SIZE * 5,
+	mlx_delete_image(game->mlx, game->minimap.minimap_walls);
+	game->minimap.minimap_walls = mlx_new_image(game->mlx, MINIMAP_WALL_SIZE * 5,
 			MINIMAP_WALL_SIZE * 5);
-	if (game->minimap.smm_walls == NULL)
+	if (game->minimap.minimap_walls == NULL)
 		mlx_close_window(game->mlx);
 	draw_minimap(game);
-	if (mlx_image_to_window(game->mlx, game->minimap.smm_walls, 0, 0) == -1)
+	if (mlx_image_to_window(game->mlx, game->minimap.minimap_walls, 0, 0) == -1)
 		mlx_close_window(game->mlx);
 	return (0);
 }
@@ -79,7 +79,7 @@ static void	draw_square(t_minimap *minimap, int i, int j, char symbol)
 		l = j * MINIMAP_WALL_SIZE;
 		while (l < (j * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
 		{
-			mlx_put_pixel(minimap->smm_walls, l, k, color);
+			mlx_put_pixel(minimap->minimap_walls, l, k, color);
 			l++;
 		}
 		k++;
@@ -118,13 +118,13 @@ void	change_maps(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_F && keydata.action == 0
 		&& minimap->visible == 1)
 	{
-		minimap->smm_walls->instances[0].enabled = false;
+		minimap->minimap_walls->instances[0].enabled = false;
 		minimap->visible = 0;
 	}
 	else if (keydata.key == MLX_KEY_F && keydata.action == 0
 		&& minimap->visible == 0)
 	{
-		minimap->smm_walls->instances[0].enabled = true;
+		minimap->minimap_walls->instances[0].enabled = true;
 		minimap->visible = 1;
 	}
 }

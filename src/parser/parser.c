@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 18:56:31 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 22:24:44 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ static int	check_args(int *argc, char **argv);
 int			check_data_type(char *path, char *data_type);
 static int	check_for_invalid_definitions(t_map *map_data);
 
-int	parser(int *argc, char **argv, t_map *map_data, t_player *player_pos)
+int	parser(int *argc, char **argv, t_game *game)
 {
-	init_struct_null(map_data);
+	init_struct_null(&game->map);
 	if (check_args(argc, argv))
 		return (1);
 	if (check_file(argv[1], "cub"))
 		return (1);
-	if (get_file_data(map_data, argv[1]))
+	if (get_file_data(&game->map, argv[1]))
 		return (1);
-	if (check_mandatory_textures(map_data))
+	if (check_mandatory_textures(&game->map))
 		return (1);
-	if (check_map(map_data))
+	if (check_map(&game->map))
 		return (1);
-	if (check_bonus_textures(map_data))
+	if (check_bonus_textures(&game->map))
 		return (1);
-	if (check_for_invalid_definitions(map_data))
+	if (check_for_invalid_definitions(&game->map))
 		return (1);
-	if (init_player_position(map_data, player_pos))
+	if (init_player_position(game))
 		return (1);
 	return (0);
 }

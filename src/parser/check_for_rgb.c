@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/08 17:06:56 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 23:27:28 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	get_rgb_values(t_map *map_data, char *line, int *error)
 		*error = 1;
 		return (error_textures(5, map_data));
 	}
-	if (splitted_str[0][0] == '\n' || splitted_str[1][0] == '\n'
+	else if (splitted_str[0][0] == '\n' || splitted_str[1][0] == '\n'
 		|| splitted_str[2][0] == '\n')
 	{
 		ft_free_arr((void **)splitted_str);

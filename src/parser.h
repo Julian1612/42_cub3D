@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:19:57 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/20 17:10:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/08 22:24:05 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "cub3D.h" // t_map, t_player
 
 // parser
-int	parser(int *argc, char **argv, t_map *map_data, t_player *player_pos);
+int	parser(int *argc, char **argv, t_game *game);
 
 #endif

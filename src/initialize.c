@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/07 20:21:55 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/08 22:35:10 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 int	initialize_minimap(t_game *game)
 {
 	get_map_measures(game);
-	game->minimap.smm_walls = mlx_new_image(game->mlx,
+	game->minimap.minimap_walls = mlx_new_image(game->mlx,
 			MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);
-	if (game->minimap.smm_walls == NULL)
+	if (game->minimap.minimap_walls == NULL)
 		return (ERROR);
-	if (mlx_image_to_window(game->mlx, game->minimap.smm_walls, 0, 0) == -1)
+	if (mlx_image_to_window(game->mlx, game->minimap.minimap_walls, 0, 0) == -1)
 		return (ERROR);
 	game->minimap.visible = 0;
 	return (SUCCESS);
