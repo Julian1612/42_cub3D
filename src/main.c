@@ -35,7 +35,7 @@ int	test_parse(t_game *game)
 		"1100100000111111",
 		"1111111111111111"
 	};
-	static t_tex	textures[12] =
+	static t_tex	textures[17] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
@@ -48,6 +48,12 @@ int	test_parse(t_game *game)
 		{"textures/zombie/zombie_run1.png", NULL},
 		{"textures/zombie/zombie_run2.png", NULL},
 		{"textures/zombie/zombie_run3.png", NULL},
+		{"textures/zombie/zombie_left1.png", NULL},
+		{"textures/zombie/zombie_left2.png", NULL},
+		{"textures/zombie/zombie_left3.png", NULL},
+		{"textures/zombie/zombie_right1.png", NULL},
+		{"textures/zombie/zombie_right2.png", NULL},
+		{"textures/zombie/zombie_right3.png", NULL},
 	};
 	static t_object	objects[OBJ_COUNT] =
 	{

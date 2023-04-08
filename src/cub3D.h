@@ -52,6 +52,12 @@ enum e_tex_id
 	ZOMBIE_RUN1,
 	ZOMBIE_RUN2,
 	ZOMBIE_RUN3,
+	ZOMBIE_LEFT1,
+	ZOMBIE_LEFT2,
+	ZOMBIE_LEFT3,
+	ZOMBIE_RIGHT1,
+	ZOMBIE_RIGHT2,
+	ZOMBIE_RIGHT3,
 };
 
 /* ************************************************************************** */
