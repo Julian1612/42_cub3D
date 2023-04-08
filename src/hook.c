@@ -77,13 +77,9 @@ int	get_frame(void)
 	if (mlx_get_time() - delta_time > 1)
 	{
 		delta_time = mlx_get_time();
-		return (0);
-	}
-	if (mlx_get_time() - delta_time > 0.7)
-		return (3);
-	if (mlx_get_time() - delta_time > 0.4)
 		return (2);
-	if (mlx_get_time() - delta_time > 0.1)
+	}
+	if (mlx_get_time() - delta_time > 0.5)
 		return (1);
 	return (0);
 }
@@ -102,7 +98,6 @@ void	enemies(t_enemy *enemies, t_map *map, t_player *player)
 		dir.y = sin(angle);
 		move(&enemies[i].pos, map, dir.x * ENEMY_SPEED, dir.y * ENEMY_SPEED);
 		enemies[i].tex = &map->textures[ZOMBIE_RUN1 + get_frame()];
-		printf("%d\n", get_frame());
 		i++;
 	}
 }

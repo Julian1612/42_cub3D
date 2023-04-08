@@ -48,7 +48,6 @@ int	test_parse(t_game *game)
 		{"textures/zombie/zombie_run1.png", NULL},
 		{"textures/zombie/zombie_run2.png", NULL},
 		{"textures/zombie/zombie_run3.png", NULL},
-		{"textures/zombie/zombie_run4.png", NULL},
 	};
 	static t_object	objects[OBJ_COUNT] =
 	{
