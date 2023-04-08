@@ -7,14 +7,14 @@
 
 #define ENEMY_SPEED 0.01
 
-static void	move(t_enemy *enemy, t_map *map, double x_offset, double y_offset, int enemy_num)
+static void	move(t_enemy *enemy, t_map *map, double x_offset, double y_offset, int enemy_index)
 {
 	bool	coll_x;
 	bool	coll_y;
 	int		state;
 
-	coll_x = check_collision(enemy->pos.x + x_offset, enemy->pos.y, map, enemy_num);
-	coll_y = check_collision(enemy->pos.x, enemy->pos.y + y_offset, map, enemy_num);
+	coll_x = check_collision(enemy->pos.x + x_offset, enemy->pos.y, map, enemy_index);
+	coll_y = check_collision(enemy->pos.x, enemy->pos.y + y_offset, map, enemy_index);
 	state = ZOMBIE_RUN1;
 	if (coll_x == false && coll_y == false)
 	{
@@ -31,7 +31,7 @@ static void	move(t_enemy *enemy, t_map *map, double x_offset, double y_offset, i
 		state = ZOMBIE_RIGHT1;
 		enemy->pos.y += y_offset * 2;
 	}
-	enemy->tex = &map->textures[state + get_frame()];
+	enemy->tex = &map->textures[state + get_frame() % 3];
 }
 
 static void	attack(t_player *player, t_enemy *enemy)
@@ -52,6 +52,16 @@ static void	attack(t_player *player, t_enemy *enemy)
 	}
 }
 
+static void	die(t_enemy *enemy, t_map *map, int enemy_index)
+{
+	int	frame;
+
+	frame = get_frame();
+	enemy->tex = &map->textures[ZOMBIE_DEAD1 + frame % 8];
+	if (frame == 7)
+		enemy->alive = false;
+}
+
 void	enemies(t_enemy *enemies, t_map *map, t_player *player)
 {
 	t_vec	dir;
@@ -61,8 +71,13 @@ void	enemies(t_enemy *enemies, t_map *map, t_player *player)
 	i = -1;
 	while (i++ < map->enemy_count)
 	{
-		if (enemies[i].health <= 0)
+		if (enemies[i].alive == false)
 			continue ;
+		if (enemies[i].health <= 0)
+		{
+			die(&enemies[i], map, i);
+			continue ;
+		}
 		angle = atan2(player->pos.y - enemies[i].pos.y, player->pos.x - enemies[i].pos.x);
 		dir.x = cos(angle);
 		dir.y = sin(angle);

@@ -35,7 +35,7 @@ int	test_parse(t_game *game)
 		"1100100000111111",
 		"1111111111111111"
 	};
-	static t_tex	textures[22] =
+	static t_tex	textures[30] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
@@ -59,6 +59,14 @@ int	test_parse(t_game *game)
 		{"textures/zombie/zombie_right1.png", NULL},
 		{"textures/zombie/zombie_right2.png", NULL},
 		{"textures/zombie/zombie_right3.png", NULL},
+		{"textures/zombie/zombie_dead1.png", NULL},
+		{"textures/zombie/zombie_dead2.png", NULL},
+		{"textures/zombie/zombie_dead3.png", NULL},
+		{"textures/zombie/zombie_dead4.png", NULL},
+		{"textures/zombie/zombie_dead5.png", NULL},
+		{"textures/zombie/zombie_dead6.png", NULL},
+		{"textures/zombie/zombie_dead7.png", NULL},
+		{"textures/zombie/zombie_dead8.png", NULL},
 	};
 	static t_object	objects[OBJ_COUNT] =
 	{
@@ -70,10 +78,10 @@ int	test_parse(t_game *game)
 	};
 	static t_enemy	enemies[ENEMY_COUNT] =
 	{
-		{.pos = {7.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
-		{.pos = {13.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
-		{.pos = {11.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
-		{.pos = {8.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {7.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {13.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {11.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {8.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
 	};
 	static t_weapon	gun =
 	{

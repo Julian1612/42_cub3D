@@ -60,7 +60,7 @@ int	check_enemy_collision(double x, double y, t_map *map, int enemy_num)
 	i = -1;
 	while (i++ < map->enemy_count)
 	{
-		if (i == enemy_num || map->enemies[i].health <= 0)
+		if (i == enemy_num || map->enemies[i].alive == false)
 			continue ;
 		dist_x = x - map->enemies[i].pos.x;
 		dist_y = y - map->enemies[i].pos.y;

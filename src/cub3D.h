@@ -65,6 +65,14 @@ enum e_tex_id
 	ZOMBIE_RIGHT1,
 	ZOMBIE_RIGHT2,
 	ZOMBIE_RIGHT3,
+	ZOMBIE_DEAD1,
+	ZOMBIE_DEAD2,
+	ZOMBIE_DEAD3,
+	ZOMBIE_DEAD4,
+	ZOMBIE_DEAD5,
+	ZOMBIE_DEAD6,
+	ZOMBIE_DEAD7,
+	ZOMBIE_DEAD8,
 };
 
 /* ************************************************************************** */
@@ -113,6 +121,7 @@ typedef struct s_weapon
 // @todo speed is not used
 typedef struct s_enemy
 {
+	bool			alive;
 	t_vec			pos;
 	t_tex			*tex;
 	char			health;

@@ -46,7 +46,7 @@ static int	initialize_textures(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i <= ZOMBIE_RIGHT3)
+	while (i <= ZOMBIE_DEAD8)
 	{
 		game->map.textures[i].tex = mlx_load_png(game->map.textures[i].path);
 		if (game->map.textures[i].tex == NULL)

@@ -142,7 +142,7 @@ void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *w
 	i = -1;
 	while (i++ < game->map.enemy_count)
 	{
-		if (game->map.enemies[i].health <= 0)
+		if (game->map.enemies[i].alive == false)
 			continue ;
 		init_sprite(&sprite, &enemies[i].pos, enemies[i].tex, &game->player, game);
 		debug_print_sprite(&sprite);
