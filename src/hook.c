@@ -21,8 +21,15 @@
 
 static void	shoot(t_player *player, t_map *map, t_game *game)
 {
+
 	t_rayhit	hit;
 
+	if (is_next_frame(&player->weapon->last_frame_time) == true)
+	{
+		player->weapon->curr_frame++;
+		if (player->weapon->curr_frame > GUN6)
+			player->weapon->curr_frame = GUN1;
+	}
 	cast_ray(&hit, game, player->dir, MODE_ENEMY);
 	if (hit.enemy_index != -1)
 	{
@@ -79,6 +86,8 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t
 		rotate_player(player, false);
 	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
 		shoot(player, map, game);
+	else
+		player->weapon->curr_frame = GUN1;
 }
 
 void	hook(void *param)
@@ -98,6 +107,7 @@ void	hook(void *param)
 	}
 	// @note all images have to be resized here
 	mlx_resize_image(game->img_world, game->mlx->width, game->mlx->height);
+	mlx_resize_image(game->img_hud, game->mlx->width, game->mlx->height);
 	if (game->player.health <= 0)
 		errexit_msg("You died. Exiting program.");
 }

@@ -144,7 +144,7 @@ void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *w
 	{
 		if (game->map.enemies[i].alive == false)
 			continue ;
-		init_sprite(&sprite, &enemies[i].pos, enemies[i].tex, &game->player, game);
+		init_sprite(&sprite, &enemies[i].pos, &game->map.textures[enemies[i].curr_frame], &game->player, game);
 		debug_print_sprite(&sprite);
 		draw_sprite(&sprite, game, wall_height);
 	}

@@ -31,7 +31,12 @@ static void	move(t_enemy *enemy, t_map *map, double x_offset, double y_offset, i
 		state = ZOMBIE_RIGHT1;
 		enemy->pos.y += y_offset * 2;
 	}
-	enemy->tex = &map->textures[state + get_frame() % 3];
+	if (is_next_frame(&enemy->last_frame_time) == true)
+	{
+		enemy->curr_frame++;
+		if (enemy->curr_frame > state + 2)
+			enemy->curr_frame = state;
+	}
 }
 
 static void	attack(t_player *player, t_enemy *enemy)
@@ -54,12 +59,15 @@ static void	attack(t_player *player, t_enemy *enemy)
 
 static void	die(t_enemy *enemy, t_map *map, int enemy_index)
 {
-	int	frame;
-
-	frame = get_frame();
-	enemy->tex = &map->textures[ZOMBIE_DEAD1 + frame % 8];
-	if (frame == 7)
-		enemy->alive = false;
+	if (is_next_frame(&enemy->last_frame_time) == true)
+	{
+		enemy->curr_frame++;
+		if (enemy->curr_frame > ZOMBIE_DEAD8)
+		{
+			enemy->alive = false;
+			enemy->curr_frame = ZOMBIE_DEAD1;
+		}
+	}
 }
 
 void	enemies(t_enemy *enemies, t_map *map, t_player *player)

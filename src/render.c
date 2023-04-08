@@ -120,27 +120,26 @@ void	render_walls(t_game *game, double *wall_height)
 	}
 }
 
-static void	render_weapon(mlx_image_t *img, t_weapon *weapon)
+static void	render_weapon(mlx_image_t *img, t_tex *weapon_tex)
 {
 	int	x_img;
 	int	y_img;
 	int	x_tex;
 	int	y_tex;
+	int	scale;
 
-	if (weapon == NULL)
-		return ;
-	x_img = img->width / 2 - weapon->tex->tex->width / 2;
+	x_img = img->width / 2 - weapon_tex->tex->width / 2;
 	x_tex = 0;
-	while (x_tex < weapon->tex->tex->width)
+	while (x_tex < weapon_tex->tex->width)
 	{
-		y_img = 0;
+		y_img = img->height - weapon_tex->tex->height;
 		y_tex = 0;
-		while (y_tex < weapon->tex->tex->height)
+		while (y_tex < weapon_tex->tex->height)
 		{
 			ft_memcpy(&img->pixels
 			[coor_to_pixel(img->width, x_img, y_img)],
-				&weapon->tex->tex->pixels
-			[coor_to_pixel(weapon->tex->tex->width, x_tex, y_tex)],
+				&weapon_tex->tex->pixels
+			[coor_to_pixel(weapon_tex->tex->width, x_tex, y_tex)],
 			4);
 			y_img++;
 			y_tex++;
@@ -157,5 +156,6 @@ void	render_all(t_game *game)
 	debug_print_player(&game->player);
 	render_walls(game, wall_height);
 	render_sprites(game, game->map.objects, game->map.enemies, wall_height);
-	render_weapon(game->img_hud, game->player.weapon);
+	if (game->player.weapon != NULL)
+		render_weapon(game->img_hud, &game->map.textures[game->player.weapon->curr_frame]);
 }

@@ -19,7 +19,7 @@
 #include <math.h> // M_PI
 
 #define OBJ_COUNT 0 // @note remove
-#define ENEMY_COUNT 4 // @note remove
+#define ENEMY_COUNT 8 // @note remove
 
 int	test_parse(t_game *game)
 {
@@ -78,17 +78,22 @@ int	test_parse(t_game *game)
 	};
 	static t_enemy	enemies[ENEMY_COUNT] =
 	{
-		{.alive = true, .pos = {7.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {13.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {11.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {8.5, 4.5}, .tex = &textures[ZOMBIE_RUN1], .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {7.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {13.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {11.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {8.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {10.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {13.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {13.5, 8.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {5.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 	};
 	static t_weapon	gun =
 	{
-		.tex = &textures[GUN1],
 		.damage = 10,
 		.range = 10,
 		.reload_time = 1,
+		.last_frame_time = 0,
+		.curr_frame = GUN1,
 	};
 
 	game->map.arr = map;
@@ -134,7 +139,7 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	if (mlx_image_to_window(game.mlx, game.img_world, 0, 0) == ERROR)
 		errexit_mlx_errno();
-	if (mlx_image_to_window(game.mlx, game.img_hud, 0, game.img_world->height - 192) == ERROR)
+	if (mlx_image_to_window(game.mlx, game.img_hud, 0, 0) == ERROR)
 		errexit_mlx_errno();
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);

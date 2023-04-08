@@ -27,8 +27,8 @@
 #  define DEBUG 0
 # endif
 
-# define WIDTH 400
-# define HEIGHT 400
+# define WIDTH 1200
+# define HEIGHT 800
 # define ERROR -1
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
@@ -111,10 +111,11 @@ typedef struct s_object
 // @note ammunition is not implemented
 typedef struct s_weapon
 {
-	t_tex			*tex;
 	char			damage;
 	char			range;
 	char			reload_time;
+	double			last_frame_time;
+	int				curr_frame;
 }	t_weapon;
 
 // @note enemies are always oriented towards the player
@@ -123,10 +124,11 @@ typedef struct s_enemy
 {
 	bool			alive;
 	t_vec			pos;
-	t_tex			*tex;
 	char			health;
 	double			speed;
 	int				damage;
+	double			last_frame_time;
+	int				curr_frame;
 }	t_enemy;
 
 typedef struct s_minimap
@@ -243,7 +245,7 @@ void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double 
 
 // frame
 bool			skip_frame(mlx_t *mlx, int fps);
-int				get_frame(void);
+bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);
 
 // enemy
