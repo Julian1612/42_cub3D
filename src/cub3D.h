@@ -33,6 +33,7 @@
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
 # define WALL '1'
+# define DOOR 'D'
 # define FPS 60
 # define MODE_WALL 0
 # define MODE_ENEMY 1
@@ -50,6 +51,8 @@ enum e_tex_id
 	KNIGHT,
 	LAMP,
 	TABLE,
+	DOOR_FRONT,
+	DOOR_SIDE,
 	GUN1,
 	GUN2,
 	GUN3,
@@ -93,6 +96,12 @@ typedef struct s_texture
 	char			*path;
 	mlx_texture_t	*tex;
 }	t_tex;
+
+typedef struct s_door
+{
+	bool			open;
+	t_vec			pos;
+}	t_door;
 
 typedef struct s_object
 {
@@ -145,6 +154,7 @@ typedef struct s_map
 {
 	char		**arr;
 	t_tex		*textures;
+	t_door		*doors;
 	t_object	*objects;
 	int			obj_count;
 	t_enemy		*enemies;

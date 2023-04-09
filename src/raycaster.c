@@ -51,10 +51,19 @@ static void	init_ray(t_ray *ray, t_vec *pos, t_vec *ray_dir)
 	}
 }
 
+static bool	is_hit(t_ray *ray, t_map *map)
+{
+	if (map->arr[ray->map_y][ray->map_x] == WALL)
+		return (true);
+	if (map->arr[ray->map_y][ray->map_x] == DOOR)
+		return (true);
+	return (false);
+}
+
 static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map, bool mode)
 {
 	hit->enemy_index = -1;	
-	while (map->arr[ray->map_y][ray->map_x] != WALL)
+	while (is_hit(ray, map) == false)
 	{
 		if (mode == MODE_ENEMY && check_enemy_collision(ray->map_x + 0.5, ray->map_y + 0.5, map, -1) != -1)
 		{

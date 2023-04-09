@@ -26,16 +26,16 @@ int	test_parse(t_game *game)
 	static char			*map[17] =
 	{
 		"111111111111111",
-		"1000000000000001",
-		"1000000000000001",
-		"1000000000000011",
-		"1000000000000111",
-		"1000000000001111",
-		"1000000000011111",
-		"1100000000111111",
+		"1001000000000001",
+		"1001000000000001",
+		"1001000000000011",
+		"100D000000000111",
+		"1001000000001111",
+		"1001000000011111",
+		"1101000000111111",
 		"1111111111111111"
 	};
-	static t_tex	textures[30] =
+	static t_tex	textures[32] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
@@ -44,6 +44,8 @@ int	test_parse(t_game *game)
 		{"textures/knight.png", NULL},
 		{"textures/lamp.png", NULL},
 		{"textures/table.png", NULL},
+		{"textures/door/door_front.png", NULL},
+		{"textures/door/door_side.png", NULL},
 		{"textures/gun/gun1.png", NULL},
 		{"textures/gun/gun2.png", NULL},
 		{"textures/gun/gun3.png", NULL},
@@ -68,6 +70,10 @@ int	test_parse(t_game *game)
 		{"textures/zombie/zombie_dead7.png", NULL},
 		{"textures/zombie/zombie_dead8.png", NULL},
 	};
+	static t_door	doors[1] =
+	{
+		{.pos = {3.5, 4.5}, .open = false},
+	};
 	static t_object	objects[OBJ_COUNT] =
 	{
 		// {.pos = {6.5, 4.5}, .type = DECOR_NON_PERM, .tex = &textures[KNIGHT]},
@@ -79,12 +85,12 @@ int	test_parse(t_game *game)
 	static t_enemy	enemies[ENEMY_COUNT] =
 	{
 		{.alive = true, .pos = {7.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {13.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {11.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {10.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {8.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {10.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {13.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {13.5, 8.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {9.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {9.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {5.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {8.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 	};
