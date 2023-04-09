@@ -19,20 +19,20 @@
 #include <math.h> // M_PI
 
 #define OBJ_COUNT 0 // @note remove
-#define ENEMY_COUNT 8 // @note remove
+#define ENEMY_COUNT 9 // @note remove
 
 int	test_parse(t_game *game)
 {
 	static char			*map[17] =
 	{
 		"1111111111111111",
-		"1000100000000001",
-		"1000100000000001",
-		"1000100000000011",
+		"1000000000000001",
+		"1000000000000001",
+		"1000000000000011",
 		"1000000000000111",
-		"1000100000001111",
-		"1000100000011111",
-		"1100100000111111",
+		"1000000000001111",
+		"1000000000011111",
+		"1100000000111111",
 		"1111111111111111"
 	};
 	static t_tex	textures[30] =
@@ -86,6 +86,7 @@ int	test_parse(t_game *game)
 		{.alive = true, .pos = {13.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {13.5, 8.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {5.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {8.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 	};
 	static t_weapon	gun =
 	{
