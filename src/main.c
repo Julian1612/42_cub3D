@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 11:24:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:48:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,27 @@ int	free_parser(t_map *map_data)
 	return (EXIT_SUCCESS);
 }
 
+// n
+
 // we need to free the struct form the parser at the end of main
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
 	if (parser(&argc, argv, &game))
-	{
 		return (EXIT_FAILURE);
-	}
-	// if (initialize_mlx_data(&game) == ERROR)
+	if (initialize_mlx_data(&game) == ERROR)
+		errexit_mlx_errno();
+	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
+		errexit_mlx_errno();
+	if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
+		errexit_mlx_errno();
+	if (initialize_minimap(&game) == ERROR)
+		errexit_mlx_errno();
+	// if (initialize_start_screen(game.mlx, game.start_screen) == ERROR)
 	// 	errexit_mlx_errno();
-	// if (mlx_loop_hook(game.mlx, &hook, &game) == false)
-	// 	errexit_mlx_errno();
-	// if (mlx_image_to_window(game.mlx, game.img_a, 0, 0) == ERROR)
-	// 	errexit_mlx_errno();
-	// if (initialize_minimap(&game) == ERROR)
-	// 	errexit_mlx_errno();
-	// play_music();
-	// game.minimap.visible = 0;
-	// mlx_loop(game.mlx);
-	// mlx_terminate(game.mlx);
+	mlx_loop(game.mlx);
+	mlx_terminate(game.mlx);
 	free_parser(&game.map);
 	return (EXIT_SUCCESS);
 }

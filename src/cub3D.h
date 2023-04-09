@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/08 09:59:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 12:55:07 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,16 @@ typedef struct s_enemy
 	t_weapon		weapon;
 }	t_enemy;
 
+typedef struct s_start_screen
+{
+	t_texture		*start_button;
+	t_texture		*background;
+	t_texture		*solidar;
+	mlx_image_t		*img_start_button;
+	mlx_image_t		*img_background;
+	mlx_image_t		*img_solidar;
+}	t_start_screen;
+
 // @note items might be added here
 typedef struct s_game
 {
@@ -130,6 +140,7 @@ typedef struct s_game
 	t_minimap		minimap;
 	t_player		player;
 	t_enemy			*enemies;
+	t_start_screen	*start_screen;
 }	t_game;
 
 typedef struct s_coor
@@ -192,5 +203,4 @@ void			change_maps(mlx_key_data_t keydata, void *param);
 
 // mouse_movement.c
 void			mouse_movements(mlx_t *mlx, t_player *player);
-
 #endif

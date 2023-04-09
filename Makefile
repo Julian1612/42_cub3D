@@ -6,7 +6,7 @@
 #    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/09 11:30:29 by jschneid         ###   ########.fr        #
+#    Updated: 2023/04/09 12:21:28 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +23,12 @@ SRC			=	main.c \
 				parser.c check_for_map.c check_for_rgb.c parser_utils_0.c \
 				check_textures.c check_for_texture.c error_messages.c \
 				get_file_data.c check_map.c init_player_position.c \
-				utils.c parser_utils_1.c \
-				# debug.c errexit.c hook.c initialize.c raycaster.c render.c utils.c \
-				# minimap.c mouse_movements.c
+				parser_utils_1.c \
+				debug.c errexit.c hook.c initialize.c raycaster.c render.c utils.c \
+				mouse_movements.c minimap.c \
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
-LIBS		= $(LIBFT)/libft.a
-# -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
 OBJS		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
 OBJ_DIR		= ./obj/
 

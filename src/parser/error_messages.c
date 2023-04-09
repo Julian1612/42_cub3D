@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 11:12:37 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 13:49:08 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int	error_textures(int error_code, t_map *map_data)
 	}
 	else if (error_code == 7)
 		printf("Error!\nFile path for bonus texture is missing\n");
-	else if (error_code == 1)
-		printf("Error!\nInvalid Definition in .cub file\n");
 	printf("========================================\n");
 	free_struct(map_data);
 	return (1);
