@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/09 18:49:31 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:22:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map, t
 	if (mlx_is_key_down(mlx, MLX_KEY_4))
 		player->view_dir = M_PI * 1.5;
 	mlx_key_hook(mlx, change_maps, minimap);
-	// mouse_movements(mlx, player);
+	mouse_movements(mlx, player);
 }
 
 static bool	skip_frame(mlx_t *mlx, int fps)

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 18:48:12 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 22:13:02 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:34:18 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	initialize_start_screen(t_game *game)
 {
 	if (init_background(game) == ERROR)
 		exit (EXIT_FAILURE);
-	if (init_png_textures(game) == ERROR)
+	if (init_png_textures(&game->start_screen) == ERROR)
 		exit (EXIT_FAILURE);
 	game->start_screen.img_start_button = mlx_texture_to_image(game->mlx,
 			game->start_screen.start_button);
