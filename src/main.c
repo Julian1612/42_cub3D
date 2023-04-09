@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 10:22:38 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 11:24:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ int	main(int argc, char **argv)
 	// game.minimap.visible = 0;
 	// mlx_loop(game.mlx);
 	// mlx_terminate(game.mlx);
-
+	free_parser(&game.map);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 01:22:29 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 11:27:33 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,6 @@ int	get_file_data(t_map *map_data, char *cub_file_path)
 		return (1);
 	close(fd);
 	return (0);
-}
-
-void	clear_buffer(char **line)
-{
-	get_next_line(-1);
-	if (*line != NULL)
-	{
-		free(*line);
-		*line = NULL;
-	}
-}
-
-int	clear_mem(char **line)
-{
-	free(*line);
-	*line = NULL;
-	clear_buffer(line);
-	return (1);
 }
 
 static int	read_map_data(t_map *map_data, int fd, int file_len)
@@ -102,6 +84,26 @@ static int	get_file_len(char *path)
 	return (len);
 }
 
+int	check_for_invalid_definition(t_map *map_data, char *line, int *error)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != '\0' && line[i] != ' ')
+	{
+		if (line[i] != 'S' && line[i] != 'W'
+			&& line[i] != 'E' && line[i] != 'N'
+			&& line[i] != 'F' && line[i] != 'C'
+			&& line[i] != ' ' && line[i] != '\n')
+		{
+			*error = 1;
+			return (error_textures_2(1, map_data));
+		}
+		i++;
+	}
+	return (0);
+}
+
 static int	check_line(t_map *map_data, char *line, int fd, int *error)
 {
 	if (check_for_texture(map_data, line, error))
@@ -112,5 +114,7 @@ static int	check_line(t_map *map_data, char *line, int fd, int *error)
 		return (0);
 	else if (check_for_map(map_data, line, fd, error))
 		return (1);
+	else if (check_for_invalid_definition(map_data, line, error))
+		return (0);
 	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   parser_util0.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 10:22:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 11:29:04 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,14 @@ int	check_for_new_line(char **splitted_str, int *error)
 		return (1);
 	}
 	return (0);
+}
+
+void	clear_buffer(char **line)
+{
+	get_next_line(-1);
+	if (*line != NULL)
+	{
+		free(*line);
+		*line = NULL;
+	}
 }

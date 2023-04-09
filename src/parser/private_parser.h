@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 00:42:27 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 11:32:05 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int				check_bonus_textures(t_map *map_data);
 
 /* error_messages.c */
 int				error_message(int error_code, t_map *map_data);
+int				error_textures_2(int error_code, t_map *map_data);
 int				error_textures(int error_code, t_map *map_data);
 int				error_get_map(int error_code, t_map *map_data);
 
@@ -55,10 +56,14 @@ int				parser(int *argc, char **argv, t_game *game);
 int				check_data_type(char *path, char *data_type);
 int				check_file(char *cub_file_path, char *data_type);
 
-/* utils.c */
+/* parser_utils_0.c */
 void			init_struct_null(t_map *map_data);
 int				is_all_digit(char **str);
 bool			contains_only_spaces(const char *str);
 int				check_for_new_line(char **splitted_str, int *error);
+void			clear_buffer(char **line);
+
+/* parser_utils_1.c */
+int				clear_mem(char **line);
 
 #endif
