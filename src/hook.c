@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/09 12:21:56 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 18:49:31 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	move_player(t_player *player, char **map, double x_offset, double y_
 		player->y += y_offset;
 }
 
-static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map)
+static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map, t_game *game)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
@@ -89,10 +89,14 @@ void	hook(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	keys(game->mlx, &game->minimap, &game->player, game->map.map);
-	if (game->minimap.visible == 1)
-		render_minimap(game);
-	if (skip_frame(game->mlx, FPS) == false)
-		render_world(game);
-	mlx_resize_image(game->img_a, game->mlx->width, game->mlx->height);
+	draw_start_screen(game->mlx, &game->start_screen);
+	if (game->start_screen.active == false)
+	{
+		keys(game->mlx, &game->minimap, &game->player, game->map.map, game);
+		if (game->minimap.visible == 1)
+			render_minimap(game);
+		if (skip_frame(game->mlx, FPS) == false)
+			render_world(game);
+		mlx_resize_image(game->img_a, game->mlx->width, game->mlx->height);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/08 22:36:25 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:06:41 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	draw_minimap(t_game *game);
 int	render_minimap(t_game *game)
 {
 	mlx_delete_image(game->mlx, game->minimap.minimap_walls);
-	game->minimap.minimap_walls = mlx_new_image(game->mlx, MINIMAP_WALL_SIZE * 5,
-			MINIMAP_WALL_SIZE * 5);
+	game->minimap.minimap_walls = mlx_new_image(game->mlx,
+			MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);
 	if (game->minimap.minimap_walls == NULL)
 		mlx_close_window(game->mlx);
 	draw_minimap(game);

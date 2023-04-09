@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/09 12:44:11 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 15:27:28 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 int	initialize_minimap(t_game *game)
 {
-	get_map_measures(game);
+	get_map_measures(game); // kann weg oder ?
 	game->minimap.minimap_walls = mlx_new_image(game->mlx,
 			MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);
 	if (game->minimap.minimap_walls == NULL)
@@ -33,17 +33,6 @@ int	initialize_minimap(t_game *game)
 	game->minimap.visible = 0;
 	return (SUCCESS);
 }
-
-// int	initialize_start_screen(mlx_t *mlx, t_start_screen *start_screen)
-// {
-// 	start_screen->background = mlx_new_image(mlx,
-// 			WIDTH, HEIGHT);
-// 	if (start_screen->background == NULL)
-// 		return (ERROR);
-// 	if (mlx_image_to_window(mlx, start_screen->background, 0, 0) == -1)
-// 		return (ERROR);
-// 	return (SUCCESS);
-// }
 
 // @note what if a texture is missing and has to be skipped?
 static int	initialize_textures(t_game *game)
@@ -65,7 +54,6 @@ static int	initialize_environ(t_game *game)
 	game->img_a = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
 	if (game->mlx == NULL || game->img_a == NULL)
 		return (ERROR);
-	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	return (SUCCESS);
 }
 

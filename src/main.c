@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 13:48:04 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/09 19:12:55 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	free_parser(t_map *map_data)
 	return (EXIT_SUCCESS);
 }
 
-// n
-
 // we need to free the struct form the parser at the end of main
 int	main(int argc, char **argv)
 {
@@ -60,8 +58,10 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	if (initialize_minimap(&game) == ERROR)
 		errexit_mlx_errno();
-	// if (initialize_start_screen(game.mlx, game.start_screen) == ERROR)
-	// 	errexit_mlx_errno();
+	if (initialize_start_screen(&game) == ERROR)
+		errexit_mlx_errno();
+	draw_background(&game.start_screen);
+	mlx_loop(game.mlx);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	free_parser(&game.map);
