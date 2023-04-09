@@ -29,11 +29,13 @@
 
 # define WIDTH 600
 # define HEIGHT 400
+# define NOT_SET -1
 # define ERROR -1
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
 # define WALL '1'
 # define DOOR 'D'
+# define ENEMY 'E'
 # define FPS 60
 # define MODE_WALL 0
 # define MODE_ENEMY 1
@@ -113,7 +115,6 @@ typedef struct s_object
 		DECOR_PERM,
 		WEAPON,
 		COIN,
-		ENEMY,
 	}	type;
 }	t_object;
 
@@ -124,7 +125,7 @@ typedef struct s_weapon
 	char			range;
 	char			reload_time;
 	double			last_frame_time;
-	int				curr_frame;
+	enum e_tex_id	curr_frame;
 }	t_weapon;
 
 // @note enemies are always oriented towards the player
@@ -137,7 +138,7 @@ typedef struct s_enemy
 	double			speed;
 	int				damage;
 	double			last_frame_time;
-	int				curr_frame;
+	enum e_tex_id	curr_frame;
 }	t_enemy;
 
 typedef struct s_minimap
@@ -204,6 +205,7 @@ typedef struct s_rayhit
 	double			dist;
 	int				enemy_index;
 	enum e_tex_id	tex_id;
+	int				hit;
 }	t_rayhit;
 
 typedef struct s_sprite
