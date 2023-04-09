@@ -1,9 +1,9 @@
-F  3,43,45
+F  3,43,4
 C 3,3,11
+NO textures/north.png
 WE ./textures/east.png
 EA ./textures/east.png
 SO                textures/south.png
-NO textures/north.png
 
  11111111111111111111
  100010000000001
