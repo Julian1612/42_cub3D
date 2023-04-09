@@ -103,6 +103,7 @@ typedef struct s_texture
 typedef struct s_door
 {
 	bool			open;
+	double			last_action;
 	int				x;
 	int				y;
 }	t_door;

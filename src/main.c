@@ -20,7 +20,7 @@
 #include <string.h> // @note remove, memcpy
 
 #define OBJ_COUNT 0 // @note remove
-#define ENEMY_COUNT 9 // @note remove
+#define ENEMY_COUNT 4 // @note remove
 #define DOOR_COUNT 1 // @note remove
 
 char			map[17][35] =
@@ -91,7 +91,7 @@ int	test_parse(t_game *game)
 	};
 	static t_door	doors[DOOR_COUNT] =
 	{
-		{.x = 3, .y = 4, .open = false},
+		{.x = 3, .y = 4, .open = false, .last_action = 0},
 	};
 	static t_object	objects[OBJ_COUNT] =
 	{
@@ -103,11 +103,11 @@ int	test_parse(t_game *game)
 	};
 	static t_enemy	enemies[ENEMY_COUNT] =
 	{
-		{.alive = true, .pos = {7.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {11.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {10.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {8.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {10.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		// {.alive = true, .pos = {7.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		// {.alive = true, .pos = {11.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		// {.alive = true, .pos = {10.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		// {.alive = true, .pos = {8.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		// {.alive = true, .pos = {10.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {9.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {9.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {5.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},

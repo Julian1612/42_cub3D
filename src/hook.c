@@ -19,25 +19,27 @@
 #define MOV_SPEED 0.05
 #define ROT_SPEED 0.03
 
-static void	switch_door_state(t_map *map, int x, int y)
+static void	switch_door_state(t_map *map, double x, double y)
 {
 	int	i;
 
 	i = 0;
 	while (i < map->door_count)
 	{
-		if (ft_abs(map->doors[i].x - x) < 2 && ft_abs(map->doors[i].y - y) < 2)
+		printf("dist x: %f, dist y: %f\n", fabs(map->doors[i].x - x), fabs(map->doors[i].y - y));
+		if (fabs(map->doors[i].x - x) >= 1 && fabs(map->doors[i].y - y) >= 1
+			&& fabs(map->doors[i].x - x) <= 2 && fabs(map->doors[i].y - y) <= 2
+			&& mlx_get_time() - map->doors[i].last_action > 0.5)
 		{
+			map->doors[i].last_action = mlx_get_time();
 			if (map->doors[i].open == true)
 			{
 				map->doors[i].open = false;
-				printf("door x: %d, y: %d\n", map->doors[i].x, map->doors[i].y);
 				map->arr[map->doors[i].y][map->doors[i].x] = DOOR;
 			}
 			else
 			{
 				map->doors[i].open = true;
-				printf("door x: %d, y: %d\n", map->doors[i].x, map->doors[i].y);
 				map->arr[map->doors[i].y][map->doors[i].x] = FLOOR;
 			}
 		}
