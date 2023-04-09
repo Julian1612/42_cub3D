@@ -51,19 +51,21 @@ static void	init_ray(t_ray *ray, t_vec *pos, t_vec *ray_dir)
 	}
 }
 
-static bool	is_hit(t_ray *ray, t_map *map)
+static bool	is_hit(t_rayhit *hit, t_ray *ray, t_map *map)
 {
 	if (map->arr[ray->map_y][ray->map_x] == WALL)
 		return (true);
 	if (map->arr[ray->map_y][ray->map_x] == DOOR)
+	{
+		hit->tex_id = DOOR_FRONT;
 		return (true);
+	}
 	return (false);
 }
 
 static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map, bool mode)
 {
-	hit->enemy_index = -1;	
-	while (is_hit(ray, map) == false)
+	while (is_hit(hit, ray, map) == false)
 	{
 		if (mode == MODE_ENEMY && check_enemy_collision(ray->map_x + 0.5, ray->map_y + 0.5, map, -1) != -1)
 		{
@@ -91,6 +93,8 @@ static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map, bool mode)
 
 static void	set_hit_tex_id(t_rayhit *hit, bool y_side, t_vec *step)
 {
+	if (hit->tex_id == DOOR_FRONT)
+		return ;
 	if (y_side)
 	{
 		if (step->y < 0)
@@ -141,11 +145,18 @@ static void	set_hit_offset(t_rayhit *hit, bool y_side, t_ray *ray)
 		hit->stripe = get_y_offset(ray);
 }
 
+static void	init_hit(t_rayhit *hit)
+{
+	hit->tex_id = 0;
+	hit->enemy_index = -1;
+}
+
 void	cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, bool mode)
 {
 	t_ray			ray;
 
 	init_ray(&ray, &game->player.pos, &ray_dir);
+	init_hit(hit);
 	set_distance(hit, &ray, &game->map, mode);
 	set_hit_tex_id(hit, ray.y_side, &ray.step);
 	set_hit_offset(hit, ray.y_side, &ray);
