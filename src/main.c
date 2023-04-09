@@ -17,24 +17,43 @@
 #include <unistd.h> // @note remove, sleep
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
+#include <string.h> // @note remove, memcpy
 
 #define OBJ_COUNT 0 // @note remove
 #define ENEMY_COUNT 9 // @note remove
+#define DOOR_COUNT 1 // @note remove
+
+char			map[17][35] =
+{
+	"1111111111111111111111111111111",
+	"1001000000000000000000000000001",
+	"1001000000000000000000000000001",
+	"1001000000000000000000000000011",
+	"100D000000000000000000000000111",
+	"1001000000000000000000000001111",
+	"1001000000000000000000000011111",
+	"1101000000000000000000000111111",
+	"1111111111111111111111111111111",
+};
+
+char	**cpy_map(char map[17][35])
+{
+	char	**new_map;
+	int		i;
+
+	i = 0;
+	new_map = (char **)malloc(sizeof(char *) * 17);
+	while (i < 17)
+	{
+		new_map[i] = (char *)malloc(sizeof(char) * 35);
+		memcpy(new_map[i], map[i], 35);
+		i++;
+	}
+	return (new_map);
+}
 
 int	test_parse(t_game *game)
 {
-	static char			*map[17] =
-	{
-		"1111111111111111111111111111111",
-		"1001000000000000000000000000001",
-		"1001000000000000000000000000001",
-		"1001000000000000000000000000011",
-		"100D000000000000000000000000111",
-		"1001000000000000000000000001111",
-		"1001000000000000000000000011111",
-		"1101000000000000000000000111111",
-		"1111111111111111111111111111111",
-	};
 	static t_tex	textures[32] =
 	{
 		{"textures/north.png", NULL},
@@ -70,9 +89,9 @@ int	test_parse(t_game *game)
 		{"textures/zombie/zombie_dead7.png", NULL},
 		{"textures/zombie/zombie_dead8.png", NULL},
 	};
-	static t_door	doors[1] =
+	static t_door	doors[DOOR_COUNT] =
 	{
-		{.pos = {3.5, 4.5}, .open = false},
+		{.x = 3, .y = 4, .open = false},
 	};
 	static t_object	objects[OBJ_COUNT] =
 	{
@@ -102,9 +121,11 @@ int	test_parse(t_game *game)
 		.last_frame_time = 0,
 		.curr_frame = GUN1,
 	};
-
-	game->map.arr = map;
+	
+	game->map.arr = cpy_map(map);
 	game->map.textures = textures;
+	game->map.doors = doors;
+	game->map.door_count = DOOR_COUNT;
 	game->map.objects = objects;
 	game->map.obj_count = OBJ_COUNT;
 	game->map.enemies = enemies;

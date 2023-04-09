@@ -33,6 +33,7 @@
 # define ERROR -1
 # define SUCCESS 0
 # define MM_BLOCK_SIZE 64
+# define FLOOR '0'
 # define WALL '1'
 # define DOOR 'D'
 # define ENEMY 'E'
@@ -102,7 +103,8 @@ typedef struct s_texture
 typedef struct s_door
 {
 	bool			open;
-	t_vec			pos;
+	int				x;
+	int				y;
 }	t_door;
 
 typedef struct s_object
@@ -156,6 +158,7 @@ typedef struct s_map
 	char		**arr;
 	t_tex		*textures;
 	t_door		*doors;
+	int			door_count;
 	t_object	*objects;
 	int			obj_count;
 	t_enemy		*enemies;
@@ -239,6 +242,7 @@ t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
 int				coor_to_pixel(int width, int x, int y);
 double			rotate_x(double x, double y, double angle);
 double			rotate_y(double x, double y, double angle);
+int				ft_abs(int n);
 
 // initialize
 int				initialize_mlx_data(t_game *game);

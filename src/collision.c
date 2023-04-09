@@ -8,23 +8,30 @@
 #define PLAYER_SIZE 0.2
 #define SPRITE_SIZE_SQ 0.25
 
+static bool	is_non_permeable(char c)
+{
+	if (c == WALL || c == DOOR)
+		return (true);
+	return (false);
+}
+
 static bool	check_wall_collision(double x, double y, char **map)
 {
-	if (map[(int)(y + PLAYER_SIZE)][(int)(x)] == WALL)
+	if (is_non_permeable(map[(int)(y + PLAYER_SIZE)][(int)(x)]) == true)
 		return (true);
-	if (map[(int)(y - PLAYER_SIZE)][(int)(x)] == WALL)
+	if (is_non_permeable(map[(int)(y - PLAYER_SIZE)][(int)(x)]) == true)
 		return (true);
-	if (map[(int)(y)][(int)(x + PLAYER_SIZE)] == WALL)
+	if (is_non_permeable(map[(int)(y)][(int)(x + PLAYER_SIZE)]) == true)
 		return (true);
-	if (map[(int)(y)][(int)(x - PLAYER_SIZE)] == WALL)
+	if (is_non_permeable(map[(int)(y)][(int)(x - PLAYER_SIZE)]) == true)
 		return (true);
-	if (map[(int)(y - PLAYER_SIZE)][(int)(x - PLAYER_SIZE)] == WALL)
+	if (is_non_permeable(map[(int)(y + PLAYER_SIZE)][(int)(x + PLAYER_SIZE)]) == true)
 		return (true);
-	if (map[(int)(y + PLAYER_SIZE)][(int)(x + PLAYER_SIZE)] == WALL)
+	if (is_non_permeable(map[(int)(y - PLAYER_SIZE)][(int)(x - PLAYER_SIZE)]) == true)
 		return (true);
-	if (map[(int)(y - PLAYER_SIZE)][(int)(x + PLAYER_SIZE)] == WALL)
+	if (is_non_permeable(map[(int)(y - PLAYER_SIZE)][(int)(x + PLAYER_SIZE)]) == true)
 		return (true);
-	if (map[(int)(y + PLAYER_SIZE)][(int)(x - PLAYER_SIZE)] == WALL)
+	if (is_non_permeable(map[(int)(y + PLAYER_SIZE)][(int)(x - PLAYER_SIZE)]) == true)
 		return (true);
 	return (false);
 }

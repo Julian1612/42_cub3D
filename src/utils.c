@@ -52,3 +52,10 @@ double	rotate_y(double x, double y, double angle)
 	rotated_y = y * cos(angle) + x * sin(angle);
 	return (rotated_y);
 }
+
+int	ft_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}

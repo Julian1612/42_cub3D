@@ -3,7 +3,6 @@
 #include "../libraries/libft/src/libft/libft.h" // ft_memcpy
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin, tan
-#include <stdlib.h> // @note for abs, remove
 #include <unistd.h> // @note for write, remove
 #include <stdbool.h> // bool
 
@@ -96,8 +95,8 @@ static void	init_sprite(t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *play
 	sprite->cam_pos.x = -cam_matrix_inv * (sprite->dir.y * sprite->dist.x - sprite->dir.x * sprite->dist.y);
 	sprite->cam_pos.y = cam_matrix_inv * (-player->cplane.y * sprite->dist.x + player->cplane.x * sprite->dist.y);
 	sprite->img_x = (game->img_world->width / 2) * (1 + sprite->cam_pos.x / sprite->cam_pos.y);
-	sprite->height = abs((int)(game->img_world->height / sprite->cam_pos.y));
-	sprite->width = abs((int)(game->img_world->height / sprite->cam_pos.y));
+	sprite->height = ft_abs((int)(game->img_world->height / sprite->cam_pos.y));
+	sprite->width = ft_abs((int)(game->img_world->height / sprite->cam_pos.y));
 }
 
 // @todo create dist array to calculate dists only once

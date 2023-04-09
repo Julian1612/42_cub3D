@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3D.h" // cub3D structs
-#include "../libraries/libft/src/libft/libft.h" // ft_putstr_fd
 #include <math.h> // cos, sin, tan
 #include <stdio.h> // @note remove
 #include <stdbool.h> // bool
@@ -164,6 +163,7 @@ void	cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, bool mode)
 
 	init_ray(&ray, &game->player.pos, &ray_dir);
 	init_hit(hit);
+	set_hit_type(hit, &ray, &game->map, mode);
 	while (hit->hit == NOT_SET)
 	{
 		extend_ray(&ray);

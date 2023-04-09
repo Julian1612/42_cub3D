@@ -19,6 +19,32 @@
 #define MOV_SPEED 0.05
 #define ROT_SPEED 0.03
 
+static void	switch_door_state(t_map *map, int x, int y)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->door_count)
+	{
+		if (ft_abs(map->doors[i].x - x) < 2 && ft_abs(map->doors[i].y - y) < 2)
+		{
+			if (map->doors[i].open == true)
+			{
+				map->doors[i].open = false;
+				printf("door x: %d, y: %d\n", map->doors[i].x, map->doors[i].y);
+				map->arr[map->doors[i].y][map->doors[i].x] = DOOR;
+			}
+			else
+			{
+				map->doors[i].open = true;
+				printf("door x: %d, y: %d\n", map->doors[i].x, map->doors[i].y);
+				map->arr[map->doors[i].y][map->doors[i].x] = FLOOR;
+			}
+		}
+		i++;
+	}
+}
+
 static void	shoot(t_player *player, t_map *map, t_game *game)
 {
 
@@ -88,6 +114,8 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t
 		shoot(player, map, game);
 	else
 		player->weapon->curr_frame = GUN1;
+	if (mlx_is_key_down(mlx, MLX_KEY_E))
+		switch_door_state(map, player->pos.x, player->pos.y);
 }
 
 void	hook(void *param)
