@@ -76,11 +76,15 @@
 		"utility": "cpp",
 		"vector": "cpp",
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"stdbool.h": "c"
 =======
 		"stdlib.h": "c",
 		"safe": "c"
 >>>>>>> main
+=======
+		"stdbool.h": "c"
+>>>>>>> render_world
 	},
 	"C_Cpp.dimInactiveRegions": false
 }

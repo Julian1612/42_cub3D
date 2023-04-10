@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/10 11:24:34 by jschneid         ###   ########.fr        #
+#    Updated: 2023/04/10 17:34:12 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ CFLAGS		=   -g
 # -Wall -Wextra -Werror
 LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
-GARBAGE		=	./libraries/garbage_collector
 CC			=	cc
 VPATH		=	src: src/parser: src/start_screen: \
 
@@ -43,7 +42,7 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: libft $(NAME)
+all: libft $(NAME) 
 
 obj:
 	@mkdir -p $(OBJ_DIR)
@@ -58,16 +57,13 @@ obj/%.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 $(NAME): obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -Wno-gnu-include-next -I./LeakSanitizer/include -o cub3D
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 n: obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS)
-#  -Wno-gnu-include-next -I./LeakSanitizer/include -L./LeakSanitizer -llsan -lc++-o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
 	@rm -rf obj
-	@$(MAKE) -C $(LIBFT) clean
-	@$(MAKE) -C $(LIBMLX) clean
 
 fclean: clean
 	@rm -f $(NAME)

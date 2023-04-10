@@ -46,5 +46,71 @@ values that have to be determined:
 - if player hits wall on x axis, stop movement on x axis
 - if player hits wall on y axis, stop movement on y axis
 
-- how to check on which axis collision was?
-	- 
+
+--------------sprites--------------
+- they don't have to be on the edge of a block
+- they have a collision box
+- they always face the player
+- they can be half-covered by another object, such as walls
+-----sprite collision
+	- simple: just check if dist to sprite is less than size of sprite
+
+
+--------------doors--------------
+- doors only open if view dir is directly pointing at the front texture
+- doors only open if player is less than a block away
+- door opens/closes when space bar is pressed
+- door closes after some time but only if player is not inside the block
+- door lets player pass only after being fully open
+
+- the front is not facing the player - is it a sprite?
+	- it is probably a special case of a sprite
+
+- how to interact with them?
+	- if 
+		- central ray hits sprite
+		- space is pressed
+		- distance to door < 1
+	- then switch state
+	- if x amount of time has passed, switch state
+
+- how to make them movable?
+	- the front of the door is a sprite
+	- the sprite is moved if the state of the door is switched
+
+- how to show different textures on the side
+	- the side of the door texture will be set in the set_hit_wall_id function
+
+
+
+
+
+
+- multiple sprites
+- offset sprites
+- enemy data structure
+- sorted sprites and enemies
+- enemy animation
+- enemy movement
+- enemy ai
+- weapon mechanics
+
+
+- decision: separate enemy and object data structures or one?
+	- one data structure is easier to sort
+
+	- two data structures will make enemy updating easier
+
+- decision: lists or arrays?
+	- list is easier to iterate through
+
+	- array is easier to sort
+	- array is easier to access
+
+
+==============TODO==============
+- zombies
+- doors
+- animations
+- weapon mechanics
+- hud

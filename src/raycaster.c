@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/10 14:41:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/02 17:05:38 by lorbke           ###   ########.fr       */
+/*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
+/*   Updated: 2023/04/10 17:44:44 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // cub3D structs
-#include "../libraries/libft/src/libft/libft.h" // ft_putstr_fd
 #include <math.h> // cos, sin, tan
 #include <stdio.h> // @note remove
 #include <stdbool.h> // bool
@@ -19,13 +18,11 @@
 
 #define UNIT 1.0f
 
-static void	init_ray(t_ray *ray, double x, double y, double ray_dir)
+static void	init_ray(t_ray *ray, t_vec *pos, t_vec *ray_dir)
 {
-	ray->angle = ray_dir;
-	ray->dir.x = sin(ray_dir);
-	ray->dir.y = cos(ray_dir);
-	ray->origin.x = x;
-	ray->origin.y = y;
+	ray->dir = *ray_dir;
+	ray->angle = atan2(ray_dir->x, ray_dir->y);
+	ray->origin = *pos;
 	ray->map_x = (int)ray->origin.x;
 	ray->map_y = (int)ray->origin.y;
 	// @note potential division by zero
@@ -53,45 +50,64 @@ static void	init_ray(t_ray *ray, double x, double y, double ray_dir)
 	}
 }
 
-static void	set_distance(t_rayhit *hit, t_ray *ray, t_map *map)
+static void	set_hit_type(t_rayhit *hit, t_ray *ray, t_map *map, char target)
 {
-	while (map->map[ray->map_y][ray->map_x] != WALL)
+	int	enemy_index;
+
+	if (map->arr[ray->map_y][ray->map_x] == WALL)
+		hit->hit = WALL;
+	else if (map->arr[ray->map_y][ray->map_x] == DOOR_CLOSED)
+		hit->hit = DOOR_CLOSED;
+	else if (target == DOOR_OPEN && map->arr[ray->map_y][ray->map_x] == DOOR_OPEN)
+		hit->hit = DOOR_OPEN;
+	else if (target == ENEMY)
 	{
-		if (ray->length.x < ray->length.y)
+		enemy_index = check_enemy_collision(ray->map_x + 0.5, ray->map_y + 0.5, map, NOT_SET);
+		if (enemy_index != NOT_SET)
 		{
-			ray->map_x += ray->step.x;
-			ray->length.x += ray->hypotenuse.x;
-			ray->y_side = false;
-		}
-		else
-		{
-			ray->map_y += ray->step.y;
-			ray->length.y += ray->hypotenuse.y;
-			ray->y_side = true;
+			hit->hit = ENEMY;
+			hit->enemy_index = enemy_index;
 		}
 	}
-	if (ray->y_side)
-		hit->dist = ray->length.y - ray->hypotenuse.y;
-	else
-		hit->dist = ray->length.x - ray->hypotenuse.x;
 }
 
-static void	set_hit_wall_id(t_rayhit *hit, bool y_side, t_coor *step)
+static void	extend_ray(t_ray *ray)
 {
-	if (y_side)
+	if (ray->length.x < ray->length.y)
 	{
-		if (step->y < 0)
-			hit->wall_id = SOUTH;
-		else
-			hit->wall_id = NORTH;
+		ray->map_x += ray->step.x;
+		ray->length.x += ray->hypotenuse.x;
+		ray->y_side = false;
 	}
 	else
 	{
-		if (step->x < 0)
-			hit->wall_id = WEST;
-		else
-			hit->wall_id = EAST;
+		ray->map_y += ray->step.y;
+		ray->length.y += ray->hypotenuse.y;
+		ray->y_side = true;
 	}
+}
+
+static void	set_hit_tex_id(t_rayhit *hit, bool y_side, t_vec *step)
+{
+	if (hit->hit == WALL)
+	{
+		if (y_side)
+		{
+			if (step->y < 0)
+				hit->tex_id = SOUTH;
+			else
+				hit->tex_id = NORTH;
+		}
+		else
+		{
+			if (step->x < 0)
+				hit->tex_id = WEST;
+			else
+				hit->tex_id = EAST;
+		}
+	}
+	else if (hit->hit == DOOR_CLOSED)
+		hit->tex_id = DOOR_FRONT;
 }
 
 static double	get_y_offset(t_ray *ray)
@@ -128,13 +144,35 @@ static void	set_hit_offset(t_rayhit *hit, bool y_side, t_ray *ray)
 		hit->stripe = get_y_offset(ray);
 }
 
-void	cast_ray(t_rayhit *hit, t_game *game, double ray_dir)
+static void	init_hit(t_rayhit *hit)
 {
-	t_ray			ray;
+	hit->tex_id = 0;
+	hit->enemy_index = NOT_SET;
+	hit->hit = NOT_SET;
+}
 
-	init_ray(&ray, game->player.x, game->player.y, ray_dir);
-	set_distance(hit, &ray, &game->map);
-	set_hit_wall_id(hit, ray.y_side, &ray.step);
+static void	set_distance(t_rayhit *hit, t_ray *ray, bool y_side)
+{
+	if (y_side)
+		hit->dist = ray->length.y - ray->hypotenuse.y;
+	else
+		hit->dist = ray->length.x - ray->hypotenuse.x;
+}
+
+void	cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, char target)
+{
+	t_ray	ray;
+
+	init_ray(&ray, &game->player.pos, &ray_dir);
+	init_hit(hit);
+	set_hit_type(hit, &ray, &game->map, target);
+	while (hit->hit == NOT_SET)
+	{
+		extend_ray(&ray);
+		set_hit_type(hit, &ray, &game->map, target);
+	}
+	set_distance(hit, &ray, ray.y_side);
+	set_hit_tex_id(hit, ray.y_side, &ray.step);
 	set_hit_offset(hit, ray.y_side, &ray);
 	debug_print_ray(&ray, hit);
 }

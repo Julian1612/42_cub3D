@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/09 22:32:48 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:43:10 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,29 @@ int	initialize_minimap(t_game *game)
 	return (SUCCESS);
 }
 
-// @note what if a texture is missing and has to be skipped?
+// @note every texture is loaded at all times
+// @note better way of getting texture count?
 static int	initialize_textures(t_game *game)
 {
-	game->map.objects[NORTH].tex = mlx_load_png(game->map.objects[NORTH].path);
-	game->map.objects[EAST].tex = mlx_load_png(game->map.objects[EAST].path);
-	game->map.objects[SOUTH].tex = mlx_load_png(game->map.objects[SOUTH].path);
-	game->map.objects[WEST].tex = mlx_load_png(game->map.objects[WEST].path);
-	if (!game->map.objects[NORTH].tex || !game->map.objects[EAST].tex
-		|| !game->map.objects[SOUTH].tex || !game->map.objects[WEST].tex)
-		return (ERROR);
-	// @todo sprite initialization
+	int	i;
+
+	i = 0;
+	while (i <= ZOMBIE_DEAD8)
+	{
+		game->map.textures[i].tex = mlx_load_png(game->map.textures[i].path);
+		if (game->map.textures[i].tex == NULL)
+			return (ERROR);
+		i++;
+	}
 	return (SUCCESS);
 }
 
 static int	initialize_environ(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
-	game->img_a = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
-	if (game->mlx == NULL || game->img_a == NULL)
+	game->img_world = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
+	game->img_hud = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
+	if (game->mlx == NULL || game->img_world == NULL || game->img_hud == NULL)
 		return (ERROR);
 	return (SUCCESS);
 }
@@ -66,5 +70,7 @@ int	initialize_mlx_data(t_game *game)
 	// if (initialize_minimap(&game->minimap, game->mlx, game->map.map) == ERROR)
 	// 	return (ERROR);
 	game->player.turn_to_the_curser = false; /// wo anders initzialisieren
+	if (initialize_minimap(&game->minimap, game->mlx, game->map.arr) == ERROR)
+		return (ERROR);
 	return (SUCCESS);
 }

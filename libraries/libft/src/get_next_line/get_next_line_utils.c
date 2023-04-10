@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 09:37:49 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/19 15:24:54 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:38:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 char	*gnl_strchr(char const *s, int c)
 {
@@ -58,7 +57,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*gnl_substr(char *s, unsigned int start, size_t len)
+char	*gnl_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	size_t	new_len;

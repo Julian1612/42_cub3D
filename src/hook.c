@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/09 22:22:27 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:42:47 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,85 @@
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
 
-#define MOV_SPEED 10 // @note the higher, the slower
-#define ROT_SPEED 0.5 // @note the higher, the slower
-#define PLAYER_SIZE 0.2 // @todo size of player, switch to actual player size
+#define MOV_SPEED 0.05
+#define ROT_SPEED 0.03
+#define DOOR_COOLDOWN 0.2
+#define PLAYER_REACH 2.0
 
-// @todo drifting collision
-// @note collision problem: if speed is too high, player can move through walls
-// @note function usable for enemies?
-static bool	check_collision(double x, double y, char **map)
+static void	switch_door_state(t_game *game, t_player *player)
 {
-	if (map[(int)(y + PLAYER_SIZE)][(int)(x)] == WALL)
-		return (true);
-	if (map[(int)(y - PLAYER_SIZE)][(int)(x)] == WALL)
-		return (true);
-	if (map[(int)(y)][(int)(x + PLAYER_SIZE)] == WALL)
-		return (true);
-	if (map[(int)(y)][(int)(x - PLAYER_SIZE)] == WALL)
-		return (true);
-	return (false);
+	t_rayhit	hit;
+	char		target;
+	int			i;
+
+	i = 0;
+	while (i < game->map.door_count)
+	{
+		if (mlx_get_time() - game->map.doors[i].last_action > DOOR_COOLDOWN)
+		{
+			if (game->map.doors[i].open == false)
+				target = DOOR_CLOSED;
+			else
+				target = DOOR_OPEN;
+			cast_ray(&hit, game, player->dir, target);
+			if (hit.hit == target && hit.dist <= PLAYER_REACH && hit.dist > 0.5)
+			{
+				if (game->map.doors[i].open == false)
+					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_OPEN;
+				else
+					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_CLOSED;
+				game->map.doors[i].open = switch_bool(game->map.doors[i].open);
+			}
+			game->map.doors[i].last_action = mlx_get_time();
+		}
+		i++;
+	}
 }
 
-static void	move_player(t_player *player, char **map, double x_offset, double y_offset)
+static void	shoot(t_player *player, t_map *map, t_game *game)
 {
-	if (!check_collision(player->x + x_offset, player->y, map))
-		player->x += x_offset;
-	if (!check_collision(player->x, player->y + y_offset, map))
-		player->y += y_offset;
+	t_rayhit	hit;
+
+	if (is_next_frame(&player->weapon->last_frame_time) == true)
+	{
+		player->weapon->curr_frame++;
+		if (player->weapon->curr_frame > GUN6)
+			player->weapon->curr_frame = GUN3;
+	}
+	cast_ray(&hit, game, player->dir, ENEMY);
+	if (hit.enemy_index != -1)
+	{
+		if (map->enemies[hit.enemy_index].health > 0)
+			map->enemies[hit.enemy_index].health -= 1;
+	}
 }
 
-static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map, t_game *game)
+static void	move_player(t_vec *pos, t_map *map, double x_offset, double y_offset)
+{
+	if (!check_collision(pos->x + x_offset, pos->y, map, -1))
+		pos->x += x_offset;
+	if (!check_collision(pos->x, pos->y + y_offset, map, -1))
+		pos->y += y_offset;
+}
+
+static void	rotate_player(t_player *player, bool left)
+{
+	double	temp;
+	double	rot_speed;
+
+	if (left)
+		rot_speed = -ROT_SPEED;
+	else
+		rot_speed = ROT_SPEED;
+	temp = player->dir.x;
+	player->dir.x = temp * cos(rot_speed) - player->dir.y * sin(rot_speed);
+	player->dir.y = temp * sin(rot_speed) + player->dir.y * cos(rot_speed);
+	temp = player->cplane.x;
+	player->cplane.x = temp * cos(rot_speed) - player->cplane.y * sin(rot_speed);
+	player->cplane.y = temp * sin(rot_speed) + player->cplane.y * cos(rot_speed);
+}
+
+static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t_game *game)
 {
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
@@ -54,34 +104,23 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, char **map, t
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		move_player(player, map, sin(player->view_dir) / MOV_SPEED, cos(player->view_dir) / MOV_SPEED);
+		move_player(&player->pos, map, player->dir.x * MOV_SPEED, player->dir.y * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		move_player(player, map, -sin(player->view_dir) / MOV_SPEED, -cos(player->view_dir) / MOV_SPEED);
+		move_player(&player->pos, map, -player->dir.x * MOV_SPEED, -player->dir.y * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move_player(player, map, sin(player->view_dir - M_PI_2) / MOV_SPEED, cos(player->view_dir - M_PI_2) / MOV_SPEED);
+		move_player(&player->pos, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move_player(player, map, -sin(player->view_dir - M_PI_2) / MOV_SPEED, -cos(player->view_dir - M_PI_2) / MOV_SPEED);
+		move_player(&player->pos, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		player->view_dir += M_PI / 90 / ROT_SPEED; // @note radian rotated by 5 degrees (1pi = 180 degrees)
+		rotate_player(player, true);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		player->view_dir -= M_PI / 90 / ROT_SPEED;
-	if (mlx_is_key_down(mlx, MLX_KEY_1))
-		player->view_dir = 0;
-	if (mlx_is_key_down(mlx, MLX_KEY_2))
-		player->view_dir = M_PI / 2;
-	if (mlx_is_key_down(mlx, MLX_KEY_3))
-		player->view_dir = M_PI;
-	if (mlx_is_key_down(mlx, MLX_KEY_4))
-		player->view_dir = M_PI * 1.5;
-	mlx_key_hook(mlx, change_maps, minimap);
-	mouse_movements(mlx, player);
-}
-
-static bool	skip_frame(mlx_t *mlx, int fps)
-{
-	if (mlx->delta_time * fps > 1.1)
-		return (true);
-	return (false);
+		rotate_player(player, false);
+	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
+		shoot(player, map, game);
+	else
+		player->weapon->curr_frame = GUN1;
+	if (mlx_is_key_down(mlx, MLX_KEY_E))
+		switch_door_state(game, player);
 }
 
 void	hook(void *param)
@@ -89,14 +128,14 @@ void	hook(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	draw_start_screen(game->mlx, &game->start_screen);
-	if (game->start_screen.active == false)
+	if (skip_frame(game->mlx, FPS) == false)
 	{
-		keys(game->mlx, &game->minimap, &game->player, game->map.map, game);
-		if (game->minimap.visible == 1)
-			render_minimap(game);
-		if (skip_frame(game->mlx, FPS) == false)
-			render_world(game);
-		mlx_resize_image(game->img_a, game->mlx->width, game->mlx->height);
+		keys(game->mlx, &game->minimap, &game->player, &game->map, game);
+		enemies(game->map.enemies, &game->map, &game->player);
+		render_all(game);
 	}
+	mlx_resize_image(game->img_world, game->mlx->width, game->mlx->height);
+	mlx_resize_image(game->img_hud, game->mlx->width, game->mlx->height);
+	if (game->player.health <= 0)
+		errexit_msg("You died. Exiting program.");
 }

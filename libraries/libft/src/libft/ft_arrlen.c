@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:00:49 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/07 15:22:16 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:34:24 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int	ft_arrlen(void **arr)
+int	ft_arrlen(char **arr)
 {
 	int	i;
 
+	if (!arr)
+		return (-1);
 	i = 0;
-	while (arr[i] != NULL)
+	while (arr[i])
 		i++;
 	return (i);
 }
