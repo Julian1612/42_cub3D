@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/10 14:48:08 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 16:08:21 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,32 @@
 
 #define MOV_SPEED 0.05
 #define ROT_SPEED 0.03
+#define DOOR_COOLDOWN 0.2
+#define PLAYER_REACH 2.0
 
 static void	switch_door_state(t_game *game, t_player *player)
 {
 	t_rayhit	hit;
+	char		target;
 	int			i;
 
 	i = 0;
 	while (i < game->map.door_count)
 	{
-		if (mlx_get_time() - game->map.doors[i].last_action > 0.5)
+		if (mlx_get_time() - game->map.doors[i].last_action > DOOR_COOLDOWN)
 		{
 			if (game->map.doors[i].open == false)
-			{
-				cast_ray(&hit, game, player->dir, DOOR_CLOSED);
-				if (hit.hit == DOOR_CLOSED && hit.dist <= 1.5 && hit.dist > 0.5)
-				{
-					game->map.doors[i].open = true;
-					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_OPEN;
-				}
-			}
+				target = DOOR_CLOSED;
 			else
+				target = DOOR_OPEN;
+			cast_ray(&hit, game, player->dir, target);
+			if (hit.hit == target && hit.dist <= PLAYER_REACH && hit.dist > 0.5)
 			{
-				cast_ray(&hit, game, player->dir, DOOR_OPEN);
-				if (hit.hit == DOOR_OPEN && hit.dist <= 1.5 && hit.dist > 0.5)
-				{
-					game->map.doors[i].open = false;
+				if (game->map.doors[i].open == false)
+					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_OPEN;
+				else
 					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_CLOSED;
-				}
+				game->map.doors[i].open = switch_bool(game->map.doors[i].open);
 			}
 			game->map.doors[i].last_action = mlx_get_time();
 		}

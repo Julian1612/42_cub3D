@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 14:27:35 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 16:11:15 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 #  define DEBUG 0
 # endif
 
-# define WIDTH 600
-# define HEIGHT 400
+# define WIDTH 1200
+# define HEIGHT 800
 # define NOT_SET -1
 # define ERROR -1
 # define SUCCESS 0
@@ -111,13 +111,13 @@ typedef struct s_object
 {
 	t_vec			pos;
 	t_tex			*tex;
-	enum e_obj_type
+	enum	e_obj_type
 	{
 		DECOR_NON_PERM,
 		DECOR_PERM,
 		WEAPON,
 		COIN,
-	}	type;
+	}				type;
 }	t_object;
 
 // @note ammunition is not implemented
@@ -243,6 +243,7 @@ int				coor_to_pixel(int width, int x, int y);
 double			rotate_x(double x, double y, double angle);
 double			rotate_y(double x, double y, double angle);
 int				ft_abs(int n);
+bool			switch_bool(bool b);
 
 // initialize
 int				initialize_mlx_data(t_game *game);

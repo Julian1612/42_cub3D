@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 15:47:59 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 15:44:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,11 @@ int	ft_abs(int n)
 	if (n < 0)
 		return (-n);
 	return (n);
+}
+
+bool	switch_bool(bool b)
+{
+	if (b == true)
+		return (false);
+	return (true);
 }
