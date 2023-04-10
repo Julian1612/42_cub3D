@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 16:52:14 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 19:12:50 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,11 +147,9 @@ int	test_parse(t_game *game)
 // @note fps engine correct like that?
 // @todo fix resizing
 // @note mlx_set_window_limit
-// @todo implement doors
 // @todo refactor hook functions for more readability (logic loop and render loop?)
 // @todo go through code and refactor function parameters
 // @todo fix the mlx compiling shit
-// @todo for the doors: the whole block moves
 // @todo split up into sensible modules (render module etc.)
 // @todo rename object to sprite and sprite struct to sprite_helper or something?
 // @todo make struct out of frame variables

@@ -128,7 +128,7 @@ void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *w
 {
 	t_sprite	sprite;
 	int			i;
-	
+
 	sort_sprites(game, objects, enemies);
 	i = 0;
 	while (i < game->map.obj_count)
