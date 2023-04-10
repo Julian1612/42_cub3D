@@ -1,12 +1,13 @@
-F  3,234,4
-C 3,3,11
+F  255,255,255
+C 255,255,255
 
 
 
 
-NO textures/north.png
+
 WE ./textures/east.png
 EA ./textures/east.png
+NO textures/north.png
 SO                textures/south.png
 
 

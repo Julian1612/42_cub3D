@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 15:47:59 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 13:12:36 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // typedefs
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include <stdio.h> // printf
 
 t_hexcolor	convert_to_hexcode(
 	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
 	unsigned int	rgba;
-
 	rgba = r;
 	rgba = (rgba << 8) + g;
 	rgba = (rgba << 8) + b;

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 10:22:11 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:01:19 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void	init_struct(t_map *map_data, char **splitted_str,
 			return ;
 		}
 		map_data->ceiling_color = convert_to_hexcode(ft_atoi(splitted_str[0]),
-				ft_atoi(splitted_str[1]), ft_atoi(splitted_str[2]), 255);
+				ft_atoi(splitted_str[1]), ft_atoi(splitted_str[2]), 254);
 	}
 	else if (boundary == 2)
 	{
@@ -103,7 +103,7 @@ static void	init_struct(t_map *map_data, char **splitted_str,
 			return ;
 		}
 		map_data->floor_color = convert_to_hexcode(ft_atoi(splitted_str[0]),
-				ft_atoi(splitted_str[1]), ft_atoi(splitted_str[2]), 255);
+				ft_atoi(splitted_str[1]), ft_atoi(splitted_str[2]), 254);
 	}
 }
 
