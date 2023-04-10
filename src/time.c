@@ -26,7 +26,7 @@ bool	is_next_frame(double *last_frame_time)
 	return (false);
 }
 
-double	get_fps_mult(mlx_t *mlx, int fps)
+double	get_fps_mult(double delta_time, int fps)
 {
-	return (mlx->delta_time * fps);
+	return (delta_time * fps);
 }

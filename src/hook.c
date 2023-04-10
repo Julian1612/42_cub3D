@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/10 21:43:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 21:55:34 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	hook(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	game->fps_mult = get_fps_mult(game->mlx, FPS);
+	game->fps_mult = get_fps_mult(game->mlx->delta_time, FPS);
 	keys(game->mlx, &game->minimap, &game->player, &game->map, game);
 	enemies(game->map.enemies, &game->map, &game->player);
 	render_all(game);
