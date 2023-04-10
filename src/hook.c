@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/10 14:45:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 14:48:08 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	switch_door_state(t_game *game, t_player *player)
 			if (game->map.doors[i].open == false)
 			{
 				cast_ray(&hit, game, player->dir, DOOR_CLOSED);
-				if (hit.hit == DOOR_CLOSED && hit.dist <= 1.5)
+				if (hit.hit == DOOR_CLOSED && hit.dist <= 1.5 && hit.dist > 0.5)
 				{
 					game->map.doors[i].open = true;
 					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_OPEN;
@@ -41,7 +41,7 @@ static void	switch_door_state(t_game *game, t_player *player)
 			else
 			{
 				cast_ray(&hit, game, player->dir, DOOR_OPEN);
-				if (hit.hit == DOOR_OPEN && hit.dist <= 1.5)
+				if (hit.hit == DOOR_OPEN && hit.dist <= 1.5 && hit.dist > 0.5)
 				{
 					game->map.doors[i].open = false;
 					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_CLOSED;
