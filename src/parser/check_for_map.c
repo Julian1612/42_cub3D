@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:06 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 00:33:44 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:26:03 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
-#include <stdio.h>
+#include "libraries/libft/src/get_next_line/get_next_line.h" // get_next_line
+#include "libraries/libft/src/libft/libft.h" // ft_strlen, ft_strdup, ft_strjoin_cub3d, ft_split
 
 static int	init_map(t_map *map_data, char *line, int fd, int *error);
 static int	init_map_str(t_map *map_data, char *line, char **map_str);
@@ -49,12 +50,12 @@ static int	init_map(t_map *map_data, char *line, int fd, int *error)
 			break ;
 		}
 		if (line != NULL)
-			map_str = ft_strjoin_cub3d(map_str, line);
+			map_str = ft_strjoin_free_s1(map_str, line);
 		free(line);
 	}
 	get_next_line(-1);
 	if (*error == 0)
-		map_data->map = ft_split(map_str, '\n');
+		map_data->arr = ft_split(map_str, '\n');
 	free(map_str);
 	free(line);
 	return (0);

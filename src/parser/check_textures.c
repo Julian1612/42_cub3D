@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 10:08:08 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:35:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 #include "private_parser.h"
-#include <stdio.h>
+#include <fcntl.h> // open
+#include <unistd.h> // close
 
 static int	check_char(t_map *map_data, char character);
 
@@ -36,10 +37,10 @@ int	check_mandatory_textures(t_map *map_data)
 	i = 0;
 	while (i < 4)
 	{
-		if (map_data->objects[i].path == NULL)
+		if (map_data->objects[i].tex->path == NULL)
 			return (error_textures(6, map_data));
 		else if (check_textures_file(map_data,
-				map_data->objects[i].path, "png"))
+				map_data->objects[i].tex->path, "png"))
 			return (1);
 		i++;
 	}
@@ -56,12 +57,12 @@ int	check_bonus_textures(t_map *map_data)
 	int			j;
 
 	i = 0;
-	while (map_data->map[i] == NULL)
+	while (map_data->arr[i] == NULL)
 	{
 		j = 0;
-		while (map_data->map[i][j])
+		while (map_data->arr[i][j])
 		{
-			if (check_char(map_data, map_data->map[i][j]))
+			if (check_char(map_data, map_data->arr[i][j]))
 				return (1);
 			j++;
 		}
@@ -75,9 +76,7 @@ int	check_bonus_textures(t_map *map_data)
 // 	return (error_textures(7, map_data));
 static int	check_char(t_map *map_data, char character)
 {
-	if (character == CHAR_DOOR && map_data->objects[DOOR].path == NULL)
-		return (error_textures(7, map_data));
-	else if (character == CHAR_BARREL && map_data->objects[BARREL].path == NULL)
-		return (error_textures(7, map_data));
+	// if (character == CHAR_DOOR && map_data->objects[DOOR_].path == NULL)
+	// 	return (error_textures(7, map_data));
 	return (0);
 }

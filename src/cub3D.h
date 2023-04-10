@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 17:41:35 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:20:13 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,8 @@ typedef struct s_map
 	int			enemy_count;
 	t_hexcolor	ceiling_color;
 	t_hexcolor	floor_color;
-
+	int			width;
+	int			height;
 }	t_map;
 
 // @note weapon is pointer because the player can change weapons
@@ -184,17 +185,6 @@ typedef struct s_player
 	bool			turn_to_the_curser;
 	t_weapon		*weapon;
 }	t_player;
-
-// @note enemies are always oriented towards the player
-typedef struct s_enemy
-{
-	double			x;
-	double			y;
-	t_texture		*texture;
-	char			health;
-	char			*speed;
-	t_weapon		weapon;
-}	t_enemy;
 
 typedef struct s_start_screen
 {
@@ -229,12 +219,6 @@ typedef struct s_coor
 	double	y;
 }	t_coor;
 
-<<<<<<<<< Temporary merge branch 1
-// @note move this?
-// @todo remove map_x and map_y
-typedef struct s_ray
-{
-=========
 // @todo move to raycaster header
 typedef struct s_ray
 {
@@ -296,6 +280,7 @@ bool			switch_bool(bool b);
 int				initialize_mlx_data(t_game *game);
 
 // hook
+void			rotate_player(t_player *player, bool left);
 void			hook(void *param);
 
 // collision
@@ -306,8 +291,6 @@ int				check_enemy_collision(double x, double y, t_map *map, int enemy_num);
 void			render_all(t_game *game);
 void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, char target);
 void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height);
-
-void			cast_ray(t_rayhit *hit, t_game *game, double ray_dir);
 
 // initzialize.c
 int				initialize_minimap(t_game *game);
@@ -330,5 +313,10 @@ void			draw_start_screen(mlx_t *mlx, t_start_screen *start_screen);
 
 // enemy
 void			enemies(t_enemy *enemies, t_map *map, t_player *player);
+
+// frame
+bool			skip_frame(mlx_t *mlx, int fps);
+bool			is_next_frame(double *delta_time);
+bool			is_cooldown(void);
 
 #endif

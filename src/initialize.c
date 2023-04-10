@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/10 17:43:10 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:14:08 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,6 @@ int	initialize_mlx_data(t_game *game)
 		return (ERROR);
 	if (initialize_textures(game) == ERROR)
 		return (ERROR);
-	// if (initialize_minimap(&game->minimap, game->mlx, game->map.map) == ERROR)
-	// 	return (ERROR);
 	game->player.turn_to_the_curser = false; /// wo anders initzialisieren
-	if (initialize_minimap(&game->minimap, game->mlx, game->map.arr) == ERROR)
-		return (ERROR);
 	return (SUCCESS);
 }

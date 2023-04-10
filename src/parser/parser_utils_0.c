@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 12:20:41 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:43:26 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libraries/libft/src/libft/libft.h" // ft_* functions
+#include "libraries/libft/src/get_next_line/get_next_line.h" // get_next_line
 #include "private_parser.h"
 #include "string.h" // NULL
-#include <stdio.h>
 
 void	init_struct_null(t_map *map_data)
 {
@@ -21,12 +22,12 @@ void	init_struct_null(t_map *map_data)
 	i = 0;
 	while (i < OBJ_COUNT)
 	{
-		map_data->objects[i].path = NULL;
+		map_data->objects[i].tex->path = NULL;
 		i++;
 	}
 	map_data->ceiling_color = -1;
 	map_data->floor_color = -1;
-	map_data->map = NULL;
+	map_data->arr = NULL;
 	map_data->ceiling_color = -1;
 	map_data->floor_color = -1;
 }

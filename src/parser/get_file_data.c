@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 11:27:33 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:37:21 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
+#include "libraries/libft/src/get_next_line/get_next_line.h"
+#include <fcntl.h> // open
+#include <unistd.h> // close
 #include <stdlib.h>
 #include <stdio.h>
 

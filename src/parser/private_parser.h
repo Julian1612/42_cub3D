@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   private_parser.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 11:32:05 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:25:55 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void			clear_buffer(char **line);
 
 /* parser_utils_1.c */
 int				clear_mem(char **line);
+char			*ft_strjoin_free_s1(char const *s1, char const *s2);
 
 #endif

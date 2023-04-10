@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 22:06:41 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:18:45 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ static void	draw_minimap(t_game *game)
 	int	l;
 
 	k = 0;
-	i = (int)(game->player.y - 2);
-	while (i <= game->player.y + 2 && game->map.map[i] != NULL)
+	i = (int)(game->player.pos.y - 2);
+	while (i <= game->player.pos.y + 2 && game->map.arr[i] != NULL)
 	{
-		j = (int) game->player.x - 2;
+		j = (int) game->player.pos.x - 2;
 		if (j < 0)
 			j++;
 		l = 0;
-		while (j <= game->player.x + 2 && game->map.map[i][j] != '\0')
+		while (j <= game->player.pos.x + 2 && game->map.arr[i][j] != '\0')
 		{
-			if (i == (int) game->player.y && j == (int) game->player.x)
+			if (i == (int) game->player.pos.y && j == (int) game->player.pos.x)
 				draw_square(&game->minimap, k, l, 'P');
 			else
-				draw_square(&game->minimap, k, l, game->map.map[i][j]);
+				draw_square(&game->minimap, k, l, game->map.arr[i][j]);
 			j++;
 			l++;
 		}
@@ -92,10 +92,10 @@ void	get_map_measures(t_game *game)
 	int	j;
 
 	i = 0;
-	while (game->map.map[i] != NULL)
+	while (game->map.arr[i] != NULL)
 	{
 		j = 0;
-		while (game->map.map[i][j] != '\0')
+		while (game->map.arr[i][j] != '\0')
 		{
 			if (j > game->map.width)
 				game->map.width = j;

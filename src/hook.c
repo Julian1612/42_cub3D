@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:51:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/10 17:42:47 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:19:59 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	move_player(t_vec *pos, t_map *map, double x_offset, double y_offset
 		pos->y += y_offset;
 }
 
-static void	rotate_player(t_player *player, bool left)
+void	rotate_player(t_player *player, bool left)
 {
 	double	temp;
 	double	rot_speed;

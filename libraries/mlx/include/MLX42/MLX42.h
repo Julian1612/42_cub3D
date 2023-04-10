@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 00:33:01 by W2Wizard          #+#    #+#             */
-/*   Updated: 2023/04/10 17:34:47 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:12:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,8 @@ typedef void (*mlx_resizefunc)(int32_t width, int32_t height, void* param);
  * @param[in] param Additional parameter to pass on to the function.
  */
 typedef void (*mlx_closefunc)(void* param);
+
+typedef void mlx_win_cursor_t;
 
 //= Error Functions =//
 

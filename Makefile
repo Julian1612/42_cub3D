@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/10 17:34:12 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/10 18:46:44 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,9 @@ LIBFT		=	./libraries/libft
 CC			=	cc
 VPATH		=	src: src/parser: src/start_screen: \
 
-SRC			=	debug.c errexit.c hook.c initialize.c main.c \
-				minimap.c mouse_movements.c raycaster.c \
-				render.c utils.c check_for_map.c check_for_rgb.c \
-				check_for_texture.c check_map.c check_textures.c \
-				error_messages.c get_file_data.c init_player_position.c \
-				parser_utils_0.c parser_utils_1.c parser.c \
-				start_screen.c init_start_screen.c \
+SRC			=	collision.c debug.c enemy.c errexit.c hook.c initialize.c main.c minimap.c mouse_movements.c raycaster.c render.c sprite.c time.c utils.c \
+				check_for_map.c check_for_rgb.c check_for_texture.c check_map.c check_textures.c error_messages.c get_file_data.c init_player_position.c parser.c parser_utils_0.c parser_utils_1.c \
+				init_start_screen.c start_screen.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a

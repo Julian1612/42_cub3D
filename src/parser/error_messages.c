@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 13:49:08 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:36:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
-#include <stdio.h>
+#include <stdlib.h> // free
+#include <stdio.h> // printf
 
 static void	free_struct(t_map *map_data);
 
@@ -114,18 +115,18 @@ static void	free_struct(t_map *map_data)
 	i = 0;
 	while (i < 10)
 	{
-		if (map_data->objects[i].path != NULL)
-			free(map_data->objects[i].path);
+		if (map_data->objects[i].tex->path != NULL)
+			free(map_data->objects[i].tex->path);
 		i++;
 	}
 	i = 0;
-	if (map_data->map != NULL)
+	if (map_data->arr != NULL)
 	{
-		while (map_data->map[i] != NULL)
+		while (map_data->arr[i] != NULL)
 		{
-			free(map_data->map[i]);
+			free(map_data->arr[i]);
 			i++;
 		}
-		free(map_data->map);
+		free(map_data->arr);
 	}
 }

@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 10:06:45 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:44:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
-#include <stdio.h>
+#include "libraries/libft/src/libft/libft.h" // ft_* functions
+#include <unistd.h> // close
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -83,16 +84,16 @@ static int	check_for_invalid_definitions(t_map *map_data)
 	int			j;
 
 	i = 0;
-	while (map_data->map[i] != NULL)
+	while (map_data->arr[i] != NULL)
 	{
 		j = 0;
-		while (map_data->map[i][j] != '\0')
+		while (map_data->arr[i][j] != '\0')
 		{
-			if (map_data->map[i][j] != '0' && map_data->map[i][j] != '1'
-				&& map_data->map[i][j] != 'N' && map_data->map[i][j] != 'S'
-				&& map_data->map[i][j] != 'W' && map_data->map[i][j] != 'E'
-				&& map_data->map[i][j] != 'D' && map_data->map[i][j] != 'B'
-				&& map_data->map[i][j] != 'E' && map_data->map[i][j] != ' ')
+			if (map_data->arr[i][j] != '0' && map_data->arr[i][j] != '1'
+				&& map_data->arr[i][j] != 'N' && map_data->arr[i][j] != 'S'
+				&& map_data->arr[i][j] != 'W' && map_data->arr[i][j] != 'E'
+				&& map_data->arr[i][j] != 'D' && map_data->arr[i][j] != 'B'
+				&& map_data->arr[i][j] != 'E' && map_data->arr[i][j] != ' ')
 				return (error_get_map(5, map_data));
 			j++;
 		}

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:41:34 by jschneid          #+#    #+#             */
-/*   Updated: 2023/02/02 15:43:20 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:28:55 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_free_arr(char **arr)
+int	ft_free_arr(void **arr)
 {
 	int	i;
 

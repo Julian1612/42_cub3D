@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 17:27:10 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:31:44 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libraries/libft/src/libft/libft.h" // ft_* functions
 #include "private_parser.h"
 #include <stdio.h>
 
@@ -48,13 +49,13 @@ static int	get_texture_file_path(t_map *map_data, char *line,
 		*error = 1;
 		return (error_message(8, map_data));
 	}
-	if (map_data->objects[i].path != NULL)
+	if (map_data->objects[i].tex->path != NULL)
 	{
 		ft_free_arr((void **)splitted_str);
 		*error = 1;
 		return (error_message(5, map_data));
 	}
-	cpy_line(&map_data->objects[i].path,
+	cpy_line(&map_data->objects[i].tex->path,
 		splitted_str[1], ft_strlen(splitted_str[1]));
 	ft_free_arr((void **)splitted_str);
 	return (0);
@@ -114,12 +115,12 @@ static int	get_bonus_texture_file_path(t_map *map_data, char *line,
 	splitted_str_len = ft_strlen(splitted_str[1]);
 	if (splitted_str == NULL)
 		return (error_message(4, map_data));
-	if (map_data->objects[i].path != NULL)
+	if (map_data->objects[i].tex->path != NULL)
 	{
 		*error = 1;
 		return (error_message(5, map_data));
 	}
-	cpy_line(&map_data->objects[i].path,
+	cpy_line(&map_data->objects[i].tex->path,
 		splitted_str[1], splitted_str_len);
 	ft_free_arr((void **)splitted_str);
 	return (0);

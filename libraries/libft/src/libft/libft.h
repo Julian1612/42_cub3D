@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:07:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/03/09 19:29:33 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:28:52 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 // MY FUNCTIONS
-int				ft_free_arr(char **arr);
-int				ft_arrlen(char **array);
+int				ft_free_arr(void **arr);
+int				ft_arrlen(void **array);
 // LIBFT FUNCTIONS
 int				ft_atoi(const char *nptr);
 void			ft_bzero(void *s, size_t n);

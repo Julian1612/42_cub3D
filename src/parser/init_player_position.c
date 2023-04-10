@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_position.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/08 22:24:35 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:41:53 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
+#include "libraries/libft/src/libft/libft.h" // ft_* functions
+#include "../cub3D.h" // t_vec
 #include <math.h>
 #include <stdio.h>
 
-static double	get_view_direction(char direction);
+static t_vec	get_view_direction(char direction);
 static int		search_for_player(t_game *game, int i,
 					char *line, int *def_count);
 
@@ -25,9 +27,9 @@ int	init_player_position(t_game *game)
 
 	i = 0;
 	def_count = 0;
-	while (game->map.map[i])
+	while (game->map.arr[i])
 	{
-		if (search_for_player(game, i, game->map.map[i], &def_count))
+		if (search_for_player(game, i, game->map.arr[i], &def_count))
 			return (1);
 		i++;
 	}
@@ -38,17 +40,32 @@ int	init_player_position(t_game *game)
 	return (error_get_map(4, &game->map));
 }
 
-static double	get_view_direction(char direction)
+// @todo check if correct
+static t_vec	get_view_direction(char direction)
 {
+	t_vec	dir;
+
 	if (direction == 'N')
-		return (M_PI);
+	{
+		dir.x = 0;
+		dir.y = -1;
+	}
 	else if (direction == 'S')
-		return (0);
+	{
+		dir.x = 0;
+		dir.y = 1;
+	}
 	else if (direction == 'E')
-		return (M_PI * 3 / 2);
+	{
+		dir.x = 1;
+		dir.y = 0;
+	}
 	else if (direction == 'W')
-		return (M_PI / 2);
-	return (0);
+	{
+		dir.x = -1;
+		dir.y = 0;
+	}
+	return (dir);
 }
 
 static int	search_for_player(t_game *game, int i,
@@ -68,9 +85,9 @@ static int	search_for_player(t_game *game, int i,
 				|| (j < line_len && line[j + 1] == ' ')
 				|| (j > 0 && line[j - 1] == ' '))
 				return (error_get_map(8, &game->map));
-			game->player.x = j + 0.5;
-			game->player.y = i + 0.5;
-			game->player.view_dir = get_view_direction(line[j]);
+			game->player.pos.x = j + 0.5;
+			game->player.pos.y = i + 0.5;
+			game->player.dir = get_view_direction(line[j]);
 			(*def_count)++;
 		}
 		j++;

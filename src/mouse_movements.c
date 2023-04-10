@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_movements.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 18:46:50 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 22:24:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:20:44 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	mouse_movements(mlx_t *mlx, t_player *player)
 
 	mlx_get_mouse_pos(mlx, &x, &y);
 	if (x < 400 && x > 2)
-		player->view_dir += M_PI / 90 / 1;
+		rotate_player(player, false);
 	else if (x > 400 && x < 800)
-		player->view_dir -= M_PI / 90 / 1;
+		rotate_player(player, true);
 	mlx_set_mouse_pos(mlx, 400, 400);
 }

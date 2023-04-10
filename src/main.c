@@ -6,11 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 17:44:00 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:47:30 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
+#include "parser.h" // parser
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
 #include <stdlib.h> // malloc
 #include <stdio.h> // @note remove, printf
@@ -24,23 +25,23 @@ void	play_music(void)
 	system("afplay ./sound_track/preussengloria.mp3 &");
 }
 
-int	free_parser(t_map *map_data)
+int	free_data(t_map *map_data)
 {
 	int	i;
 
 	i = 0;
-	while (i < 10)
+	while (i < map_data->obj_count)
 	{
-		free(map_data->objects[i].path);
+		free(map_data->objects[i].tex->path);
 		i++;
 	}
 	i = 0;
-	while (map_data->map[i] != NULL)
+	while (map_data->arr[i] != NULL)
 	{
-		free(map_data->map[i]);
+		free(map_data->arr[i]);
 		i++;
 	}
-	free(map_data->map);
+	free(map_data->arr);
 	return (EXIT_SUCCESS);
 }
 
@@ -67,6 +68,6 @@ int	main(int argc, char **argv)
 	mlx_loop(game.mlx);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
-	free_parser(&game.map);
+	free_data(&game.map);
 	return (EXIT_SUCCESS);
 }

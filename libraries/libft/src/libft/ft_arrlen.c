@@ -6,13 +6,13 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:00:49 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 17:34:24 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:28:04 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_arrlen(char **arr)
+int	ft_arrlen(void **arr)
 {
 	int	i;
 

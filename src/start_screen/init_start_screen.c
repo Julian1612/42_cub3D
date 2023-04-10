@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_start_screen.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:18:35 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 11:32:17 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:45:08 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_start_screen.h"
+#include <stdlib.h> // exit
 
 static int	init_background(t_game *game);
 static int	init_png_textures(t_start_screen *start_screen);
