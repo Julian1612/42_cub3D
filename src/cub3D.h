@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 19:08:43 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:01:58 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_start_screen
 	mlx_image_t		*img_soldier_up;
 	mlx_image_t		*img_soldier_down;
 	mlx_texture_t	*start_button;
+	mlx_texture_t	*exit_button;
 	mlx_texture_t	*soldier_down;
 	mlx_texture_t	*soldier_up;
 }	t_start_screen;

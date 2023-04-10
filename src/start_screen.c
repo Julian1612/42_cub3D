@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 18:48:12 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/09 22:34:18 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:10:29 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ int	init_png_textures(t_start_screen *start_screen)
 		("./textures/start_button.png");
 	start_screen->soldier_down = mlx_load_png
 		("./textures/soldier_down.png");
+	start_screen->soldier_up = mlx_load_png
+		("./textures/soldier_up.png");
 	if (start_screen->start_button == NULL
-		|| start_screen->soldier_down == NULL)
-		return (ERROR);
+		|| start_screen->soldier_down == NULL
+		|| start_screen->soldier_up == NULL)		return (ERROR);
 	return (SUCCESS);
 }
 
@@ -47,17 +49,27 @@ int	initialize_start_screen(t_game *game)
 			game->start_screen.start_button);
 	game->start_screen.img_soldier_down = mlx_texture_to_image(game->mlx,
 			game->start_screen.soldier_down);
+	game->start_screen.img_soldier_up = mlx_texture_to_image(game->mlx,
+			game->start_screen.soldier_up);
+	/////////////////////////////////////////////////////////////////////
+	if (mlx_texture_to_image(game->mlx,
+			game->start_screen.start_button) == NULL)
+		exit(EXIT_FAILURE);
 	if (mlx_texture_to_image(game->mlx,
 			game->start_screen.soldier_down) == NULL)
 		exit(EXIT_FAILURE);
 	if (mlx_texture_to_image(game->mlx,
-			game->start_screen.start_button) == NULL)
+			game->start_screen.soldier_up) == NULL)
+		exit(EXIT_FAILURE);
+	/////////////////////////////////////////////////////////////////////
+	if (mlx_image_to_window(game->mlx, game->start_screen.img_soldier_down,
+			(WIDTH / 2) - 140, 95) < 0)
+		exit(EXIT_FAILURE);
+	if (mlx_image_to_window(game->mlx, game->start_screen.img_soldier_up,
+			(WIDTH / 2) - 140, 70) < 0)
 		exit(EXIT_FAILURE);
 	if (mlx_image_to_window(game->mlx, game->start_screen.img_start_button,
 			(WIDTH / 2) - 140, HEIGHT / 2) < 0)
-		exit(EXIT_FAILURE);
-	if (mlx_image_to_window(game->mlx, game->start_screen.img_soldier_down,
-			(WIDTH / 2) - 140, 70) < 0)
 		exit(EXIT_FAILURE);
 	return (SUCCESS);
 }
@@ -92,8 +104,9 @@ void	draw_start_screen(mlx_t *mlx, t_start_screen *start_screen)
 		&& mlx_is_mouse_down(mlx, MLX_MOUSE_BUTTON_LEFT))
 	{
 		mlx_delete_image(mlx, start_screen->background);
-		mlx_delete_image(mlx, start_screen->img_soldier_down);
 		mlx_delete_image(mlx, start_screen->img_start_button);
+		mlx_delete_image(mlx, start_screen->img_soldier_down);
+		mlx_delete_image(mlx, start_screen->img_soldier_up);
 		start_screen->active = false;
 		mlx_set_cursor_mode(mlx, MLX_MOUSE_DISABLED);
 	}
