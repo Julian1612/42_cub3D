@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/10 16:08:21 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 21:43:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
 
-#define MOV_SPEED 0.05
-#define ROT_SPEED 0.03
+#define MOV_SPEED 0.1
+#define ROT_SPEED 0.05
 #define DOOR_COOLDOWN 0.2
 #define PLAYER_REACH 2.0
 
@@ -77,15 +77,12 @@ static void	move_player(t_vec *pos, t_map *map, double x_offset, double y_offset
 		pos->y += y_offset;
 }
 
-static void	rotate_player(t_player *player, bool left)
+static void	rotate_player(t_player *player, double rot_speed, bool left)
 {
 	double	temp;
-	double	rot_speed;
 
 	if (left)
-		rot_speed = -ROT_SPEED;
-	else
-		rot_speed = ROT_SPEED;
+		rot_speed = -rot_speed;
 	temp = player->dir.x;
 	player->dir.x = temp * cos(rot_speed) - player->dir.y * sin(rot_speed);
 	player->dir.y = temp * sin(rot_speed) + player->dir.y * cos(rot_speed);
@@ -96,6 +93,11 @@ static void	rotate_player(t_player *player, bool left)
 
 static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t_game *game)
 {
+	double	mov_speed;
+	double	rot_speed;
+
+	mov_speed = MOV_SPEED * game->fps_mult;
+	rot_speed = ROT_SPEED * game->fps_mult;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(mlx);
@@ -104,17 +106,17 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		move_player(&player->pos, map, player->dir.x * MOV_SPEED, player->dir.y * MOV_SPEED);
+		move_player(&player->pos, map, player->dir.x * mov_speed, player->dir.y * mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		move_player(&player->pos, map, -player->dir.x * MOV_SPEED, -player->dir.y * MOV_SPEED);
+		move_player(&player->pos, map, -player->dir.x * mov_speed, -player->dir.y * mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move_player(&player->pos, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
+		move_player(&player->pos, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * mov_speed, rotate_y(player->dir.x, player->dir.y, M_PI_2) * mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move_player(&player->pos, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * MOV_SPEED);
+		move_player(&player->pos, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * mov_speed, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		rotate_player(player, true);
+		rotate_player(player, rot_speed, true);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		rotate_player(player, false);
+		rotate_player(player, rot_speed, false);
 	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
 		shoot(player, map, game);
 	else
@@ -128,12 +130,10 @@ void	hook(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	if (skip_frame(game->mlx, FPS) == false)
-	{
-		keys(game->mlx, &game->minimap, &game->player, &game->map, game);
-		enemies(game->map.enemies, &game->map, &game->player);
-		render_all(game);
-	}
+	game->fps_mult = get_fps_mult(game->mlx, FPS);
+	keys(game->mlx, &game->minimap, &game->player, &game->map, game);
+	enemies(game->map.enemies, &game->map, &game->player);
+	render_all(game);
 	mlx_resize_image(game->img_world, game->mlx->width, game->mlx->height);
 	mlx_resize_image(game->img_hud, game->mlx->width, game->mlx->height);
 	if (game->player.health <= 0)

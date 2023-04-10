@@ -26,9 +26,7 @@ bool	is_next_frame(double *last_frame_time)
 	return (false);
 }
 
-bool	skip_frame(mlx_t *mlx, int fps)
+double	get_fps_mult(mlx_t *mlx, int fps)
 {
-	if (mlx->delta_time * fps > 1.1)
-		return (true);
-	return (false);
+	return (mlx->delta_time * fps);
 }

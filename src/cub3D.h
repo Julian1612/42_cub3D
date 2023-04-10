@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 16:51:47 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 19:51:37 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ typedef struct s_game
 	t_map			map;
 	t_minimap		minimap;
 	t_player		player;
+	double			fps_mult;
 }	t_game;
 
 // @todo move to raycaster header
@@ -261,7 +262,7 @@ void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, char target);
 void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height);
 
 // frame
-bool			skip_frame(mlx_t *mlx, int fps);
+double			get_fps_mult(mlx_t *mlx, int fps);
 bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);
 
