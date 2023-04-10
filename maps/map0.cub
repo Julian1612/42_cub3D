@@ -8,7 +8,7 @@ C 255,255,255
 WE ./textures/east.png
 EA ./textures/east.png
 NO textures/north.png
-SO 	textures/north.png
+SO  textures/north.png
 
 
 
