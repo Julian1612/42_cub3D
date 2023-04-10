@@ -5,7 +5,7 @@
 #include <stdbool.h> // bool
 #include <stdio.h> // @note remove
 
-#define ENEMY_SPEED 0.02
+#define ENEMY_SPEED 0.04
 
 static void	move(t_enemy *enemy, t_map *map, double x_offset, double y_offset, int enemy_index)
 {
@@ -72,12 +72,14 @@ static void	die(t_enemy *enemy, t_map *map, int enemy_index)
 	}
 }
 
-void	enemies(t_enemy *enemies, t_map *map, t_player *player)
+void	enemies(t_enemy *enemies, t_map *map, t_player *player, double fps_mult)
 {
 	t_vec	dir;
 	double	angle;
 	int		i;
+	double	enemy_speed;
 
+	enemy_speed = ENEMY_SPEED * fps_mult;
 	i = -1;
 	while (i++ < map->enemy_count)
 	{
@@ -94,6 +96,6 @@ void	enemies(t_enemy *enemies, t_map *map, t_player *player)
 		if (fabs(enemies[i].pos.x - player->pos.x) < 0.5 && fabs(enemies[i].pos.y - player->pos.y) < 0.5)
 			attack(player, &enemies[i]);
 		else
-			move(&enemies[i], map, dir.x * ENEMY_SPEED, dir.y * ENEMY_SPEED, i);
+			move(&enemies[i], map, dir.x * enemy_speed, dir.y * enemy_speed, i);
 	}
 }

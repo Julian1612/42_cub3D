@@ -8,7 +8,7 @@ bool	is_cooldown(void)
 
 	if (cooldown == 0)
 		cooldown = mlx_get_time();
-	if (mlx_get_time() - cooldown > 0.5)
+	if (mlx_get_time() - cooldown > 0.2)
 	{
 		cooldown = mlx_get_time();
 		return (false);

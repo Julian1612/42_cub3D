@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 21:55:16 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 22:32:56 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ typedef struct s_enemy
 	t_vec			pos;
 	char			health;
 	double			speed;
-	int				damage;
+	char			damage;
 	double			last_frame_time;
 	enum e_tex_id	curr_frame;
 }	t_enemy;
@@ -186,7 +186,6 @@ typedef struct s_game
 	t_map			map;
 	t_minimap		minimap;
 	t_player		player;
-	double			fps_mult;
 }	t_game;
 
 // @todo move to raycaster header
@@ -267,6 +266,6 @@ bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);
 
 // enemy
-void			enemies(t_enemy *enemies, t_map *map, t_player *player);
+void			enemies(t_enemy *enemies, t_map *map, t_player *player, double fps_mult);
 
 #endif

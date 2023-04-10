@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 19:40:32 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 23:01:08 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**cpy_map(char map[17][35])
 
 int	test_parse(t_game *game)
 {
-	static t_tex	textures[32] =
+	static t_tex	textures[ZOMBIE_DEAD8 + 1] =
 	{
 		{"textures/north.png", NULL},
 		{"textures/east.png", NULL},
@@ -108,10 +108,10 @@ int	test_parse(t_game *game)
 		// {.alive = true, .pos = {10.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		// {.alive = true, .pos = {8.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		// {.alive = true, .pos = {10.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {9.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {9.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {5.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		{.alive = true, .pos = {8.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {9.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 20},
+		{.alive = true, .pos = {9.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 20},
+		{.alive = true, .pos = {5.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 20},
+		{.alive = true, .pos = {8.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 20},
 	};
 	static t_weapon	gun =
 	{
@@ -144,7 +144,6 @@ int	test_parse(t_game *game)
 	return (SUCCESS);
 }
 
-// @note fps engine correct like that?
 // @todo fix resizing
 // @note mlx_set_window_limit
 // @todo refactor hook functions for more readability (logic loop and render loop?)
@@ -155,6 +154,8 @@ int	test_parse(t_game *game)
 // @todo make struct out of frame variables
 // @todo scale gun textures to 64x64
 // @todo remove cooldown function
+// @todo make re not working correctly
+// @todo add cooldown for enemy
 
 int	main(int argc, char **argv)
 {

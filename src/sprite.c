@@ -56,7 +56,7 @@ static void	draw_sprite(t_sprite *sprite, t_game *game, double *wall_height)
 
 	set_row_start_end(&row, sprite->height, game->img_world->height, 0);
 	set_stripe_start_end(&stripe, sprite->width, game->img_world->width, sprite->img_x);
-	scale = (double)(sprite->tex->tex->height) / sprite->height;
+	scale = (double)sprite->tex->tex->height / sprite->height;
 	stripe_iter = stripe.start;
 	while (stripe_iter++ < stripe.end)
 	{

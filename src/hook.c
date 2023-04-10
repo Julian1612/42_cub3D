@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/10 21:55:34 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 22:12:20 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	shoot(t_player *player, t_map *map, t_game *game)
 	if (hit.enemy_index != -1)
 	{
 		if (map->enemies[hit.enemy_index].health > 0)
-			map->enemies[hit.enemy_index].health -= 1;
+			map->enemies[hit.enemy_index].health -= player->weapon->damage;
 	}
 }
 
@@ -91,13 +91,13 @@ static void	rotate_player(t_player *player, double rot_speed, bool left)
 	player->cplane.y = temp * sin(rot_speed) + player->cplane.y * cos(rot_speed);
 }
 
-static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t_game *game)
+static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t_game *game, double fps_mult)
 {
 	double	mov_speed;
 	double	rot_speed;
 
-	mov_speed = MOV_SPEED * game->fps_mult;
-	rot_speed = ROT_SPEED * game->fps_mult;
+	mov_speed = MOV_SPEED * fps_mult;
+	rot_speed = ROT_SPEED * fps_mult;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(mlx);
@@ -128,11 +128,12 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t
 void	hook(void *param)
 {
 	t_game	*game;
+	double	fps_mult;
 
 	game = (t_game *)param;
-	game->fps_mult = get_fps_mult(game->mlx->delta_time, FPS);
-	keys(game->mlx, &game->minimap, &game->player, &game->map, game);
-	enemies(game->map.enemies, &game->map, &game->player);
+	fps_mult = get_fps_mult(game->mlx->delta_time, FPS);
+	keys(game->mlx, &game->minimap, &game->player, &game->map, game, fps_mult);
+	enemies(game->map.enemies, &game->map, &game->player, fps_mult);
 	render_all(game);
 	mlx_resize_image(game->img_world, game->mlx->width, game->mlx->height);
 	mlx_resize_image(game->img_hud, game->mlx->width, game->mlx->height);

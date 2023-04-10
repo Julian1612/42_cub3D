@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/03/30 18:18:01 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 22:56:54 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h> // NULL
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
+#include <stdio.h> // @note remove, printf
 
 #define PLAYER_SIZE 2
 #define DIRECTION 2
