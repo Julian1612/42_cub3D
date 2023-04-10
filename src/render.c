@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/10 14:29:33 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 16:40:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,25 +122,28 @@ void	render_walls(t_game *game, double *wall_height)
 
 static void	render_weapon(mlx_image_t *img, t_tex *weapon_tex)
 {
-	int	x_img;
-	int	y_img;
-	int	x_tex;
-	int	y_tex;
-	int	scale;
+	int		x_img;
+	int		y_img;
+	int		x_tex;
+	int		y_tex;
+	double	scale_y;
+	double	scale_x;
 
-	x_img = img->width / 2 - weapon_tex->tex->width / 2;
+	scale_y = (double)weapon_tex->tex->height / img->height * 3;
+	scale_x = (double)weapon_tex->tex->width / img->width * 3;
+	x_img = img->width / 2 - weapon_tex->tex->width / scale_x / 2;
 	x_tex = 0;
-	while (x_tex < weapon_tex->tex->width)
+	while (x_tex < weapon_tex->tex->width / scale_x)
 	{
-		y_img = img->height - weapon_tex->tex->height;
+		y_img = img->height - weapon_tex->tex->height / scale_y;
 		y_tex = 0;
-		while (y_tex < weapon_tex->tex->height)
+		while (y_tex < weapon_tex->tex->height / scale_y)
 		{
 			ft_memcpy(&img->pixels
 			[coor_to_pixel(img->width, x_img, y_img)],
 				&weapon_tex->tex->pixels
-			[coor_to_pixel(weapon_tex->tex->width, x_tex, y_tex)],
-			4);
+			[coor_to_pixel(weapon_tex->tex->width, x_tex * scale_x, y_tex * scale_y)],
+				4);
 			y_img++;
 			y_tex++;
 		}
@@ -151,7 +154,7 @@ static void	render_weapon(mlx_image_t *img, t_tex *weapon_tex)
 
 void	render_all(t_game *game)
 {
-	double		wall_height[game->img_world->width];
+	double	wall_height[game->img_world->width];
 
 	debug_print_player(&game->player);
 	render_walls(game, wall_height);
