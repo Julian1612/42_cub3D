@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/03 15:49:52 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 14:27:35 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@
 # define MM_BLOCK_SIZE 64
 # define FLOOR '0'
 # define WALL '1'
-# define DOOR 'D'
+# define DOOR_CLOSED 'D'
+# define DOOR_OPEN 'd'
 # define ENEMY 'E'
 # define FPS 60
-# define MODE_WALL 0
-# define MODE_ENEMY 1
 
 /* ************************************************************************** */
 /* ENUMS																	  */
@@ -257,7 +256,7 @@ int				check_enemy_collision(double x, double y, t_map *map, int enemy_num);
 
 // render
 void			render_all(t_game *game);
-void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, bool mode);
+void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, char target);
 void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height);
 
 // frame

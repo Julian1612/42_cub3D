@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/03 14:29:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 14:45:38 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,35 @@
 #define MOV_SPEED 0.05
 #define ROT_SPEED 0.03
 
-static void	switch_door_state(t_map *map, double x, double y)
+static void	switch_door_state(t_game *game, t_player *player)
 {
-	int	i;
+	t_rayhit	hit;
+	int			i;
 
 	i = 0;
-	while (i < map->door_count)
+	while (i < game->map.door_count)
 	{
-		printf("dist x: %f, dist y: %f\n", fabs(map->doors[i].x - x), fabs(map->doors[i].y - y));
-		if (fabs(map->doors[i].x - x) >= 1 && fabs(map->doors[i].y - y) >= 1
-			&& fabs(map->doors[i].x - x) <= 2 && fabs(map->doors[i].y - y) <= 2
-			&& mlx_get_time() - map->doors[i].last_action > 0.5)
+		if (mlx_get_time() - game->map.doors[i].last_action > 0.5)
 		{
-			map->doors[i].last_action = mlx_get_time();
-			if (map->doors[i].open == true)
+			if (game->map.doors[i].open == false)
 			{
-				map->doors[i].open = false;
-				map->arr[map->doors[i].y][map->doors[i].x] = DOOR;
+				cast_ray(&hit, game, player->dir, DOOR_CLOSED);
+				if (hit.hit == DOOR_CLOSED && hit.dist <= 1.5)
+				{
+					game->map.doors[i].open = true;
+					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_OPEN;
+				}
 			}
 			else
 			{
-				map->doors[i].open = true;
-				map->arr[map->doors[i].y][map->doors[i].x] = FLOOR;
+				cast_ray(&hit, game, player->dir, DOOR_OPEN);
+				if (hit.hit == DOOR_OPEN && hit.dist <= 1.5)
+				{
+					game->map.doors[i].open = false;
+					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_CLOSED;
+				}
 			}
+			game->map.doors[i].last_action = mlx_get_time();
 		}
 		i++;
 	}
@@ -49,7 +55,6 @@ static void	switch_door_state(t_map *map, double x, double y)
 
 static void	shoot(t_player *player, t_map *map, t_game *game)
 {
-
 	t_rayhit	hit;
 
 	if (is_next_frame(&player->weapon->last_frame_time) == true)
@@ -58,7 +63,7 @@ static void	shoot(t_player *player, t_map *map, t_game *game)
 		if (player->weapon->curr_frame > GUN6)
 			player->weapon->curr_frame = GUN3;
 	}
-	cast_ray(&hit, game, player->dir, MODE_ENEMY);
+	cast_ray(&hit, game, player->dir, ENEMY);
 	if (hit.enemy_index != -1)
 	{
 		if (map->enemies[hit.enemy_index].health > 0)
@@ -117,7 +122,7 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t
 	else
 		player->weapon->curr_frame = GUN1;
 	if (mlx_is_key_down(mlx, MLX_KEY_E))
-		switch_door_state(map, player->pos.x, player->pos.y);
+		switch_door_state(game, player);
 }
 
 void	hook(void *param)
@@ -125,17 +130,12 @@ void	hook(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	// mouse handling
-	// minimap
-	// collision
-	// enemy
 	if (skip_frame(game->mlx, FPS) == false)
 	{
 		keys(game->mlx, &game->minimap, &game->player, &game->map, game);
 		enemies(game->map.enemies, &game->map, &game->player);
 		render_all(game);
 	}
-	// @note all images have to be resized here
 	mlx_resize_image(game->img_world, game->mlx->width, game->mlx->height);
 	mlx_resize_image(game->img_hud, game->mlx->width, game->mlx->height);
 	if (game->player.health <= 0)

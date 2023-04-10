@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/01 18:36:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/10 14:28:42 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,17 @@ static void	init_ray(t_ray *ray, t_vec *pos, t_vec *ray_dir)
 	}
 }
 
-static void	set_hit_type(t_rayhit *hit, t_ray *ray, t_map *map, bool mode)
+static void	set_hit_type(t_rayhit *hit, t_ray *ray, t_map *map, char target)
 {
 	int	enemy_index;
 
 	if (map->arr[ray->map_y][ray->map_x] == WALL)
 		hit->hit = WALL;
-	else if (map->arr[ray->map_y][ray->map_x] == DOOR)
-		hit->hit = DOOR;
-	else if (mode == MODE_ENEMY)
+	else if (map->arr[ray->map_y][ray->map_x] == DOOR_CLOSED)
+		hit->hit = DOOR_CLOSED;
+	else if (target == DOOR_OPEN && map->arr[ray->map_y][ray->map_x] == DOOR_OPEN)
+		hit->hit = DOOR_OPEN;
+	else if (target == ENEMY)
 	{
 		enemy_index = check_enemy_collision(ray->map_x + 0.5, ray->map_y + 0.5, map, NOT_SET);
 		if (enemy_index != NOT_SET)
@@ -104,7 +106,7 @@ static void	set_hit_tex_id(t_rayhit *hit, bool y_side, t_vec *step)
 				hit->tex_id = EAST;
 		}
 	}
-	else if (hit->hit == DOOR)
+	else if (hit->hit == DOOR_CLOSED)
 		hit->tex_id = DOOR_FRONT;
 }
 
@@ -157,17 +159,17 @@ static void	set_distance(t_rayhit *hit, t_ray *ray, bool y_side)
 		hit->dist = ray->length.x - ray->hypotenuse.x;
 }
 
-void	cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, bool mode)
+void	cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, char target)
 {
 	t_ray	ray;
 
 	init_ray(&ray, &game->player.pos, &ray_dir);
 	init_hit(hit);
-	set_hit_type(hit, &ray, &game->map, mode);
+	set_hit_type(hit, &ray, &game->map, target);
 	while (hit->hit == NOT_SET)
 	{
 		extend_ray(&ray);
-		set_hit_type(hit, &ray, &game->map, mode);
+		set_hit_type(hit, &ray, &game->map, target);
 	}
 	set_distance(hit, &ray, ray.y_side);
 	set_hit_tex_id(hit, ray.y_side, &ray.step);

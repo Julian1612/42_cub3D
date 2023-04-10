@@ -10,7 +10,7 @@
 
 static bool	is_non_permeable(char c)
 {
-	if (c == WALL || c == DOOR)
+	if (c == WALL || c == DOOR_CLOSED)
 		return (true);
 	return (false);
 }
