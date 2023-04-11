@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 23:51:36 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 01:27:11 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,8 +261,8 @@ int				initialize_mlx_data(t_game *game);
 void			hook(void *param);
 
 // collision
-bool			check_collision(double x, double y, t_map *map, int enemy_num);
-int				check_enemy_collision(double x, double y, t_map *map, int enemy_num);
+bool			collision_is_true(double x, double y, t_map *map, int enemy_num);
+int				collision_is_enemy(double x, double y, t_map *map, int enemy_num);
 
 // render
 void			render_all(t_game *game);

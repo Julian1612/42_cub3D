@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/11 15:11:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 01:27:11 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ static void	shoot(t_player *player, t_map *map, t_game *game)
 
 static void	move_player(t_vec *pos, t_map *map, double x_offset, double y_offset)
 {
-	if (!check_collision(pos->x + x_offset, pos->y, map, -1))
+	if (!collision_is_true(pos->x + x_offset, pos->y, map, -1))
 		pos->x += x_offset;
-	if (!check_collision(pos->x, pos->y + y_offset, map, -1))
+	if (!collision_is_true(pos->x, pos->y + y_offset, map, -1))
 		pos->y += y_offset;
 }
 

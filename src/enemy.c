@@ -13,8 +13,8 @@ static void	move(t_enemy *enemy, t_map *map, double x_offset, double y_offset, i
 	bool	coll_y;
 	int		state;
 
-	coll_x = check_collision(enemy->pos.x + x_offset, enemy->pos.y, map, enemy_index);
-	coll_y = check_collision(enemy->pos.x, enemy->pos.y + y_offset, map, enemy_index);
+	coll_x = collision_is_true(enemy->pos.x + x_offset, enemy->pos.y, map, enemy_index);
+	coll_y = collision_is_true(enemy->pos.x, enemy->pos.y + y_offset, map, enemy_index);
 	state = ZOMBIE_RUN1;
 	if (coll_x == false && coll_y == false)
 	{

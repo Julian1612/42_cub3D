@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/02 18:47:43 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/12 01:40:31 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft
 CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
-				src/player_position:
+				src/player_position: src/render
 
 SRC			=	collision.c sprite.c raycaster.c debug.c render.c initialize.c errexit.c hook.c utils.c time.c enemy.c main.c
 

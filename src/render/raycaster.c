@@ -6,11 +6,11 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/11 20:26:36 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 01:40:50 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h" // cub3D structs
+#include "../cub3D.h" // cub3D structs
 #include <math.h> // cos, sin, tan
 #include <stdio.h> // @note remove
 #include <stdbool.h> // bool
@@ -62,7 +62,7 @@ static void	set_hit_type(t_rayhit *hit, t_ray *ray, t_map *map, char target)
 		hit->hit = DOOR_OPEN;
 	else if (target == ENEMY)
 	{
-		enemy_index = check_enemy_collision(ray->map_x + 0.5, ray->map_y + 0.5, map, NOT_SET);
+		enemy_index = collision_is_enemy(ray->map_x + 0.5, ray->map_y + 0.5, map, NOT_SET);
 		if (enemy_index != NOT_SET)
 		{
 			hit->hit = ENEMY;
