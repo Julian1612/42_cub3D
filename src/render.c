@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/11 20:32:13 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:42:37 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,31 +125,27 @@ void	render_walls(t_game *game, int *wall_height)
 
 static void	render_weapon(mlx_image_t *img, t_tex *weapon_tex)
 {
-	int		x_img;
-	int		y_img;
-	int		x_tex;
-	int		y_tex;
-	double	scale_y;
+	t_coor	img_coor;
+	t_coor	tex_coor;
+	int		temp;
+	double	ratio;
 
-	scale_y = (double)weapon_tex->tex->height / img->height * 3;
-	x_img = img->width / 2 - weapon_tex->tex->width / 2;
-	x_tex = 0;
-	while (x_tex < weapon_tex->tex->width)
+	ratio = (double)weapon_tex->tex->height / img->height * 3;
+	img_coor.x = img->width / 2 - weapon_tex->tex->width / 2;
+	tex_coor.x = 0;
+	while (tex_coor.x < weapon_tex->tex->width)
 	{
-		y_img = img->height - weapon_tex->tex->height / scale_y;
-		y_tex = 0;
-		while (y_tex < weapon_tex->tex->height / scale_y)
+		img_coor.y = img->height - weapon_tex->tex->height / ratio;
+		temp = 0;
+		while (temp < weapon_tex->tex->height / ratio)
 		{
-			ft_memcpy(&img->pixels
-			[coor_to_pixel(img->width, x_img, y_img)],
-				&weapon_tex->tex->pixels
-			[coor_to_pixel(weapon_tex->tex->width, x_tex, y_tex * scale_y)],
-				4);
-			y_img++;
-			y_tex++;
+			tex_coor.y = temp * ratio;
+			tex_pixel_to_img(img, weapon_tex->tex, tex_coor, img_coor);
+			img_coor.y++;
+			temp++;
 		}
-		x_img++;
-		x_tex++;
+		img_coor.x++;
+		tex_coor.x++;
 	}
 }
 
