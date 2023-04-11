@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 22:32:56 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:26:36 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ enum e_tex_id
 /* ************************************************************************** */
 
 typedef uint32_t	t_hexcolor;
+typedef uint8_t		t_subpxl;
+
+typedef struct s_coor
+{
+	int	x;
+	int	y;
+}	t_coor;
 
 typedef struct s_vector
 {
@@ -204,7 +211,7 @@ typedef struct s_ray
 
 typedef struct s_rayhit
 {
-	double			stripe;
+	double			x_offset;
 	double			dist;
 	int				enemy_index;
 	enum e_tex_id	tex_id;
@@ -258,7 +265,7 @@ int				check_enemy_collision(double x, double y, t_map *map, int enemy_num);
 // render
 void			render_all(t_game *game);
 void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, char target);
-void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height);
+void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, int *wall_height);
 
 // frame
 double			get_fps_mult(double delta_time, int fps);

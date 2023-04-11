@@ -43,7 +43,7 @@ static bool	is_invisible(t_hexcolor color)
 
 // @note split up in 2d and 3d functions
 // @todo check for out of bounds
-static void	draw_sprite(t_sprite *sprite, t_game *game, double *wall_height)
+static void	draw_sprite(t_sprite *sprite, t_game *game, int *wall_height)
 {
 	t_start_end	row;
 	t_start_end	stripe;
@@ -124,7 +124,7 @@ void	sort_sprites(t_game *game, t_object *objects, t_enemy *enemies)
 	}
 }
 
-void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height)
+void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, int *wall_height)
 {
 	t_sprite	sprite;
 	int			i;

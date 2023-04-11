@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/10 14:28:42 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:26:36 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,9 @@ static double	get_x_offset(t_ray *ray)
 static void	set_hit_offset(t_rayhit *hit, bool y_side, t_ray *ray)
 {
 	if (y_side)
-		hit->stripe = get_x_offset(ray);
+		hit->x_offset = get_x_offset(ray);
 	else
-		hit->stripe = get_y_offset(ray);
+		hit->x_offset = get_y_offset(ray);
 }
 
 static void	init_hit(t_rayhit *hit)

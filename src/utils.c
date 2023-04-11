@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/10 15:44:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 18:10:06 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_hexcolor	convert_to_hexcode(
 	return (rgba);
 }
 
+// @todo switch to t_coor
 int	coor_to_pixel(int width, int x, int y)
 {
 	int	pixel;

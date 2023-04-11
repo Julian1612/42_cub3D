@@ -109,8 +109,24 @@ values that have to be determined:
 
 
 ==============TODO==============
-- zombies
-- doors
-- animations
-- weapon mechanics
 - hud
+
+
+
+------------- refactor draw functions
+- draw stripe
+	- variables
+		- coordinates on the img
+			- x
+			- y
+		- coordinates on the texture
+			- x
+			- y
+		- ratio of texture height to object height on image
+		- end of stripe
+	- conversion of coordinates to position in pixel array
+		- texture width
+		- coordinates
+		- ratio
+
+- overwrite_pixel
