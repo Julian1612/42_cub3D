@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 00:36:26 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 01:08:25 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ typedef struct s_start_end
 	int	start;
 	int	end;
 }	t_start_end;
+
+typedef struct s_draw_sprite
+{
+	t_start_end	row;
+	t_start_end	column;
+	t_coor		tex_coor;
+	int			temp;
+	t_coor		img_coor;
+	double		ratio;
+	t_hexcolor	color;
+}	t_draw_sprite;
 
 static void	set_row_start_end(t_start_end *row, int sprite_height, int img_height, int offset)
 {
@@ -52,39 +63,51 @@ static bool	is_invisible(t_hexcolor color)
 	return (false);
 }
 
+static void	draw_sprite_column(t_sprite *sprite,
+	t_draw_sprite *hlpr, t_game *game)
+{
+	hlpr->img_coor.y = hlpr->row.start;
+	while (hlpr->img_coor.y++ < hlpr->row.end)
+	{
+		hlpr->tex_coor.y = hlpr->temp * hlpr->ratio;
+		hlpr->color = sprite->tex->tex->pixels[coor_to_pixel(
+				sprite->tex->tex->width, hlpr->tex_coor.x, hlpr->tex_coor.y)];
+		if (is_invisible(hlpr->color) == false)
+			tex_pixel_to_img(game->img_world, sprite->tex->tex,
+				&hlpr->tex_coor, &hlpr->img_coor);
+		hlpr->temp++;
+	}
+}
+
+static void	draw_sprite_init(t_draw_sprite *hlpr,
+	t_sprite *sprite, t_game *game)
+{
+	set_row_start_end(&hlpr->row, sprite->height, game->img_world->height, 0);
+	set_stripe_start_end(&hlpr->column, sprite->width,
+		game->img_world->width, sprite->img_x);
+	hlpr->ratio = (double)sprite->tex->tex->height / sprite->height;
+}
+
 // @note split up in 2d and 3d functions
 // @todo check for out of bounds
 static void	draw_sprite(t_sprite *sprite, t_game *game, int *wall_height)
 {
-	t_start_end	row;
-	t_start_end	stripe;
-	double		ratio;
-	t_coor		tex_coor;
-	int			temp;
-	t_coor		img_coor;
-	t_hexcolor	color;
+	t_draw_sprite	hlpr;
 
-	set_row_start_end(&row, sprite->height, game->img_world->height, 0);
-	set_stripe_start_end(&stripe, sprite->width, game->img_world->width, sprite->img_x);
-	ratio = (double)sprite->tex->tex->height / sprite->height;
-	img_coor.x = stripe.start;
-	while (img_coor.x++ < stripe.end)
+	draw_sprite_init(&hlpr, sprite, game);
+	hlpr.img_coor.x = hlpr.column.start;
+	while (hlpr.img_coor.x++ < hlpr.column.end)
 	{
-		if (sprite->cam_pos.y < 0 || img_coor.x < 0 || img_coor.x >= game->img_world->width || wall_height[img_coor.x] > sprite->height)
+		if (sprite->cam_pos.y < 0 || hlpr.img_coor.x < 0
+			|| hlpr.img_coor.x >= game->img_world->width
+			|| wall_height[hlpr.img_coor.x] > sprite->height)
 			continue ;
-		tex_coor.x = (img_coor.x - (-sprite->width / 2 + sprite->img_x)) * sprite->tex->tex->width / sprite->width;
-		temp = 0;
+		hlpr.tex_coor.x = (hlpr.img_coor.x - (-sprite->width / 2
+					+ sprite->img_x)) * sprite->tex->tex->width / sprite->width;
+		hlpr.temp = 0;
 		if (sprite->height > game->img_world->height)
-			temp = (sprite->height - game->img_world->height) / 2;
-		img_coor.y = row.start;
-		while (img_coor.y++ < row.end)
-		{
-			tex_coor.y = temp * ratio;
-			color = sprite->tex->tex->pixels[coor_to_pixel(sprite->tex->tex->width, tex_coor.x, tex_coor.y)];
-			if (is_invisible(color) == false)
-				tex_pixel_to_img(game->img_world, sprite->tex->tex, &tex_coor, &img_coor);
-			temp++;
-		}
+			hlpr.temp = (sprite->height - game->img_world->height) / 2;
+		draw_sprite_column(sprite, &hlpr, game);
 	}
 }
 
