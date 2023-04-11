@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 01:11:21 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 01:16:56 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static bool	is_invisible(t_hexcolor color)
 }
 
 static void	draw_sprite_column(t_sprite *sprite,
-	t_draw_sprite *hlpr, t_game *game)
+	t_draw_sprite *hlpr, mlx_image_t *img)
 {
 	hlpr->img_coor.y = hlpr->row.start;
 	while (hlpr->img_coor.y++ < hlpr->row.end)
@@ -73,26 +73,26 @@ static void	draw_sprite_column(t_sprite *sprite,
 		hlpr->color = sprite->tex->tex->pixels[coor_to_pixel(
 				sprite->tex->tex->width, hlpr->tex_coor.x, hlpr->tex_coor.y)];
 		if (is_invisible(hlpr->color) == false)
-			tex_pixel_to_img(game->img_world, sprite->tex->tex,
+			tex_pixel_to_img(img, sprite->tex->tex,
 				&hlpr->tex_coor, &hlpr->img_coor);
 		hlpr->temp++;
 	}
 }
 
 static void	draw_sprite_init(t_draw_sprite *hlpr,
-	t_sprite *sprite, t_game *game)
+	t_sprite *sprite, mlx_image_t *img)
 {
-	set_row_start_end(&hlpr->row, sprite->height, game->img_world->height, 0);
+	set_row_start_end(&hlpr->row, sprite->height, img->height, 0);
 	set_stripe_start_end(&hlpr->column, sprite->width,
-		game->img_world->width, sprite->img_x);
+		img->width, sprite->img_x);
 	hlpr->ratio = (double)sprite->tex->tex->height / sprite->height;
 }
 
 static bool	draw_sprite_is_visible(
-	t_sprite *sprite, t_draw_sprite *hlpr, t_game *game, int *wall_height)
+	t_sprite *sprite, t_draw_sprite *hlpr, mlx_image_t *img, int *wall_height)
 {
 	if (sprite->cam_pos.y < 0 || hlpr->img_coor.x < 0
-		|| hlpr->img_coor.x >= game->img_world->width
+		|| hlpr->img_coor.x >= img->width
 		|| wall_height[hlpr->img_coor.x] > sprite->height)
 		return (false);
 	return (true);
@@ -100,22 +100,22 @@ static bool	draw_sprite_is_visible(
 
 // @note split up in 2d and 3d functions
 // @todo check for out of bounds
-static void	draw_sprite(t_sprite *sprite, t_game *game, int *wall_height)
+static void	draw_sprite(t_sprite *sprite, mlx_image_t *img, int *wall_height)
 {
 	t_draw_sprite	hlpr;
 
-	draw_sprite_init(&hlpr, sprite, game);
+	draw_sprite_init(&hlpr, sprite, img);
 	hlpr.img_coor.x = hlpr.column.start;
 	while (hlpr.img_coor.x++ < hlpr.column.end)
 	{
-		if (draw_sprite_is_visible(sprite, &hlpr, game, wall_height) == false)
+		if (draw_sprite_is_visible(sprite, &hlpr, img, wall_height) == false)
 			continue ;
 		hlpr.tex_coor.x = (hlpr.img_coor.x - (-sprite->width / 2
 					+ sprite->img_x)) * sprite->tex->tex->width / sprite->width;
 		hlpr.temp = 0;
-		if (sprite->height > game->img_world->height)
-			hlpr.temp = (sprite->height - game->img_world->height) / 2;
-		draw_sprite_column(sprite, &hlpr, game);
+		if (sprite->height > img->height)
+			hlpr.temp = (sprite->height - img->height) / 2;
+		draw_sprite_column(sprite, &hlpr, img);
 	}
 }
 
@@ -148,7 +148,7 @@ double get_distance(t_vec *a, t_vec *b)
 }
 
 // @todo create dist array to calculate dists only once
-void	sort_sprites(t_game *game, t_object *objects, t_enemy *enemies)
+void	sort_sprites(t_vec *pos, t_object *objects, t_enemy *enemies, int enemy_count)
 {
 	t_enemy		temp;
 	int			i;
@@ -156,10 +156,10 @@ void	sort_sprites(t_game *game, t_object *objects, t_enemy *enemies)
 	double		dist_new;
 
 	i = 0;
-	while (i < game->map.enemy_count - 1)
+	while (i < enemy_count - 1)
 	{
-		dist_old = get_distance(&game->player.pos, &enemies[i].pos);
-		dist_new = get_distance(&game->player.pos, &enemies[i + 1].pos);
+		dist_old = get_distance(pos, &enemies[i].pos);
+		dist_new = get_distance(pos, &enemies[i + 1].pos);
 		if (dist_old < dist_new)
 		{
 			temp = enemies[i];
@@ -178,14 +178,14 @@ void	render_sprites(
 	t_sprite	sprite;
 	int			i;
 
-	sort_sprites(game, objects, enemies);
+	sort_sprites(&game->player.pos, objects, enemies, game->map.enemy_count);
 	i = 0;
 	while (i < game->map.obj_count)
 	{
 		init_sprite(&sprite, &objects[i].pos,
 			objects[i].tex, &game->player, game);
 		debug_print_sprite(&sprite);
-		draw_sprite(&sprite, game, wall_height);
+		draw_sprite(&sprite, game->img_world, wall_height);
 		i++;
 	}
 	i = -1;
@@ -196,6 +196,6 @@ void	render_sprites(
 		init_sprite(&sprite, &enemies[i].pos,
 			&game->map.textures[enemies[i].curr_frame], &game->player, game);
 		debug_print_sprite(&sprite);
-		draw_sprite(&sprite, game, wall_height);
+		draw_sprite(&sprite, game->img_world, wall_height);
 	}
 }
