@@ -99,19 +99,24 @@ static void	init_sprite(t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *play
 	sprite->width = ft_abs((int)(game->img_world->height / sprite->cam_pos.y));
 }
 
+double get_distance(t_vec *a, t_vec *b)
+{
+	return ((a->x - b->x) * (a->x - b->x) + (a->y - b->y) * (a->y - b->y));
+}
+
 // @todo create dist array to calculate dists only once
 void	sort_sprites(t_game *game, t_object *objects, t_enemy *enemies)
 {
 	t_enemy		temp;
 	int			i;
-	int			dist_old;
-	int			dist_new;
+	double		dist_old;
+	double		dist_new;
 
 	i = 0;
 	while (i < game->map.enemy_count - 1)
 	{
-		dist_old = ((game->player.pos.x - enemies[i].pos.x) * (game->player.pos.x - enemies[i].pos.x) + (game->player.pos.y - enemies[i].pos.y) * (game->player.pos.y - enemies[i].pos.y));
-		dist_new = ((game->player.pos.x - enemies[i + 1].pos.x) * (game->player.pos.x - enemies[i + 1].pos.x) + (game->player.pos.y - enemies[i + 1].pos.y) * (game->player.pos.y - enemies[i + 1].pos.y));
+		dist_old = get_distance(&game->player.pos, &enemies[i].pos);
+		dist_new = get_distance(&game->player.pos, &enemies[i + 1].pos);
 		if (dist_old < dist_new)
 		{
 			temp = enemies[i];
