@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/10 16:40:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:11:30 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,6 @@ static void set_ray_dir(t_vec *ray_dir, double x, int img_width, t_player *playe
 	ray_dir->y = player->dir.y + player->cplane.y * camera_x;
 }
 
-static void	scale_cplane(t_vec *cplane, int img_width, int img_height)
-{
-	double	temp;
-	double	temp2;
-	double	angle;
-
-	angle = atan2(cplane->x, cplane->y);
-	cplane->x = 0;
-	cplane->y = (double)img_width / img_height / 2;
-	cplane->x = 0 * cos(angle) - cplane->y * sin(angle);
-	cplane->y = 0 * sin(angle) + cplane->y * cos(angle);
-}
-
 // @todo fix scale plane function
 void	render_walls(t_game *game, double *wall_height)
 {
@@ -106,7 +93,6 @@ void	render_walls(t_game *game, double *wall_height)
 	t_vec		ray_dir;
 	int			x_img;
 
-	// scale_cplane(&game->player.cplane, game->img_a->width, game->img_a->height); // if used, better called in hook after resizing
 	x_img = 0;
 	while (x_img < game->img_world->width)
 	{
@@ -156,7 +142,6 @@ void	render_all(t_game *game)
 {
 	double	wall_height[game->img_world->width];
 
-	debug_print_player(&game->player);
 	render_walls(game, wall_height);
 	render_sprites(game, game->map.objects, game->map.enemies, wall_height);
 	if (game->player.weapon != NULL)
