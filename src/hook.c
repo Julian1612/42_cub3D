@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/10 22:12:20 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:35:21 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,36 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t
 		switch_door_state(game, player);
 }
 
+void	resize_camera(t_player *player, int width, int height)
+{
+	double	temp;
+
+	temp = (double)width / height / 2;
+	player->cplane.x = 0;
+	player->cplane.y = temp;
+	player->dir.x = -1;
+	player->dir.y = 0;
+}
+
+void	resize(t_game *game)
+{
+	static int	last_width = WIDTH;
+	static int	last_height = HEIGHT;
+
+	if (last_width == game->mlx->width && last_height == game->mlx->height)
+		return ;
+	if ((double)game->mlx->width / game->mlx->height < 0.5 || (double)game->mlx->width / game->mlx->height > 2)
+	{
+		errexit_msg("Window height to width ratio cannot be smaller than 1 or greater than 2.");
+		return ;
+	}
+	last_width = game->mlx->width;
+	last_height = game->mlx->height;
+	mlx_resize_image(game->img_world, game->mlx->width, game->mlx->height);
+	mlx_resize_image(game->img_hud, game->mlx->width, game->mlx->height);
+	resize_camera(&game->player, game->mlx->width, game->mlx->height);
+}
+
 void	hook(void *param)
 {
 	t_game	*game;
@@ -135,8 +165,7 @@ void	hook(void *param)
 	keys(game->mlx, &game->minimap, &game->player, &game->map, game, fps_mult);
 	enemies(game->map.enemies, &game->map, &game->player, fps_mult);
 	render_all(game);
-	mlx_resize_image(game->img_world, game->mlx->width, game->mlx->height);
-	mlx_resize_image(game->img_hud, game->mlx->width, game->mlx->height);
+	resize(game);
 	if (game->player.health <= 0)
 		errexit_msg("You died. Exiting program.");
 }

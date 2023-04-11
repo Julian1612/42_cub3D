@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 23:01:08 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:37:39 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <string.h> // @note remove, memcpy
 
 #define OBJ_COUNT 0 // @note remove
-#define ENEMY_COUNT 4 // @note remove
+#define ENEMY_COUNT 9 // @note remove
 #define DOOR_COUNT 1 // @note remove
 
 char			map[17][35] =
@@ -103,11 +103,11 @@ int	test_parse(t_game *game)
 	};
 	static t_enemy	enemies[ENEMY_COUNT] =
 	{
-		// {.alive = true, .pos = {7.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		// {.alive = true, .pos = {11.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		// {.alive = true, .pos = {10.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		// {.alive = true, .pos = {8.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
-		// {.alive = true, .pos = {10.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {7.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {11.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {10.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {8.5, 4.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
+		{.alive = true, .pos = {10.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 10},
 		{.alive = true, .pos = {9.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 20},
 		{.alive = true, .pos = {9.5, 6.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 20},
 		{.alive = true, .pos = {5.5, 7.5}, .last_frame_time = 0, .curr_frame = ZOMBIE_RUN1, .health = 100, .speed = 0.1, .damage = 20},
@@ -144,7 +144,7 @@ int	test_parse(t_game *game)
 	return (SUCCESS);
 }
 
-// @todo fix resizing
+// @todo resizing segfault when shooting because of weapon texture
 // @note mlx_set_window_limit
 // @todo refactor hook functions for more readability (logic loop and render loop?)
 // @todo go through code and refactor function parameters
