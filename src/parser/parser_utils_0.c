@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:43:26 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:37:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libraries/libft/src/libft/libft.h" // ft_* functions
-#include "libraries/libft/src/get_next_line/get_next_line.h" // get_next_line
+#include "../../libraries/libft/src/libft/libft.h" // ft_* functions
+#include "../../libraries/libft/src/get_next_line/get_next_line.h"
 #include "private_parser.h"
 #include "string.h" // NULL
 
@@ -20,16 +20,19 @@ void	init_struct_null(t_map *map_data)
 	int	i;
 
 	i = 0;
-	while (i < OBJ_COUNT)
+	while (i < 4)
 	{
-		map_data->objects[i].tex->path = NULL;
+		map_data->textures[i] = malloc(sizeof(t_tex));
+		map_data->textures[i]->path = NULL;
 		i++;
 	}
 	map_data->ceiling_color = -1;
 	map_data->floor_color = -1;
-	map_data->arr = NULL;
 	map_data->ceiling_color = -1;
 	map_data->floor_color = -1;
+	map_data->arr = NULL;
+	map_data->enemies = NULL;
+	map_data->doors = NULL;
 }
 
 int	is_all_digit(char **str)

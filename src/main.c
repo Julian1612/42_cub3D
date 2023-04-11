@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:47:30 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 16:25:57 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,54 @@ int	main(int argc, char **argv)
 
 	if (parser(&argc, argv, &game))
 		return (EXIT_FAILURE);
-	if (initialize_mlx_data(&game) == ERROR)
-		errexit_mlx_errno();
-	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
-		errexit_mlx_errno();
-	if (mlx_image_to_window(game.mlx, game.img_world, 0, 0) == ERROR)
-		errexit_mlx_errno();
-	if (mlx_image_to_window(game.mlx, game.img_hud, 0, 0) == ERROR)
-		errexit_mlx_errno();
-	if (initialize_minimap(&game) == ERROR)
-		errexit_mlx_errno();
-	if (initialize_start_screen(&game) == ERROR)
-		errexit_mlx_errno();
-	draw_background(&game.start_screen);
-	mlx_loop(game.mlx);
-	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
+	// if (initialize_mlx_data(&game) == ERROR)
+	// 	errexit_mlx_errno();
+	// if (mlx_loop_hook(game.mlx, &hook, &game) == false)
+	// 	errexit_mlx_errno();
+	// if (mlx_image_to_window(game.mlx, game.img_world, 0, 0) == ERROR)
+	// 	errexit_mlx_errno();
+	// if (mlx_image_to_window(game.mlx, game.img_hud, 0, 0) == ERROR)
+	// 	errexit_mlx_errno();
+	// if (initialize_minimap(&game) == ERROR)
+	// 	errexit_mlx_errno();
+	// if (initialize_start_screen(&game) == ERROR)
+	// 	errexit_mlx_errno();
+	// draw_background(&game.start_screen);
+	// mlx_loop(game.mlx);
+	// mlx_loop(game.mlx);
+	// mlx_terminate(game.mlx);
+	int i = 0;
+	while (i < 4)
+	{
+		printf("%s\n", game.map.textures[i]->path);
+		i++;
+	}
+	i = 0;
+	while (i < game.map.enemy_count)
+	{
+		printf("--------------------------------------------\n");
+		printf("game.map.enemies[i].alive = %d\n", game.map.enemies[i].alive);
+		printf("game.map.enemies[i].pos.x = %f\n", game.map.enemies[i].pos.x);
+		printf("game.map.enemies[i].pos.y = %f\n", game.map.enemies[i].pos.y);
+		printf("game.map.enemies[i].health = %d\n", game.map.enemies[i].health);
+		printf("game.map.enemies[i].last_frame_time = %f\n", game.map.enemies[i].last_frame_time);
+		printf("game.map.enemies[i].curr_frame = %d\n", game.map.enemies[i].curr_frame);
+		printf("game.map.enemies[i].speed = %f\n", game.map.enemies[i].speed);
+		printf("game.map.enemies[i].damage = %d\n", game.map.enemies[i].damage);
+		printf("--------------------------------------------\n");
+		i++;
+	}
+	i = 0;
+	while (i < game.map.door_count)
+	{
+		printf("--------------------------------------------\n");
+		printf("game->map.doors[count_doors].x = %d\n", game.map.doors[i].x);
+		printf("game->map.doors[count_doors].y = %d\n", game.map.doors[i].y);
+		printf("game->map.doors[count_doors].open = %d\n", game.map.doors[i].open);
+		printf("game->map.doors[count_doors].last_action = %f\n", game.map.doors[i].last_action);
+		i++;
+	}
+
 	free_data(&game.map);
 	return (EXIT_SUCCESS);
 }

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 11:28:41 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:43:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:37:58 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
-#include "libraries/libft/src/libft/libft.h" // ft_* functions
+#include "../../libraries/libft/src/libft/libft.h" // ft_* functions
 #include "string.h" // NULL
 #include <stdlib.h> // malloc, free
 
@@ -50,4 +50,3 @@ char	*ft_strjoin_free_s1(char const *s1, char const *s2)
 	free((char *)s1);
 	return (str);
 }
-

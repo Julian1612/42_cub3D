@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:06 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:26:03 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:37:09 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
-#include "libraries/libft/src/get_next_line/get_next_line.h" // get_next_line
-#include "libraries/libft/src/libft/libft.h" // ft_strlen, ft_strdup, ft_strjoin_cub3d, ft_split
+#include "../../libraries/libft/src/get_next_line/get_next_line.h"
+#include "../../libraries/libft/src/libft/libft.h"
 
 static int	init_map(t_map *map_data, char *line, int fd, int *error);
 static int	init_map_str(t_map *map_data, char *line, char **map_str);

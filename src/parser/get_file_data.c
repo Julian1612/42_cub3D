@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_file_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:37:21 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:37:38 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
-#include "libraries/libft/src/get_next_line/get_next_line.h"
+#include "../../libraries/libft/src/get_next_line/get_next_line.h"
 #include <fcntl.h> // open
 #include <unistd.h> // close
 #include <stdlib.h>
@@ -110,8 +110,6 @@ int	check_for_invalid_definition(t_map *map_data, char *line, int *error)
 static int	check_line(t_map *map_data, char *line, int fd, int *error)
 {
 	if (check_for_texture(map_data, line, error))
-		return (0);
-	else if (check_for_bonus_texture(map_data, line, error))
 		return (0);
 	else if (check_for_rgb(map_data, line, error))
 		return (0);

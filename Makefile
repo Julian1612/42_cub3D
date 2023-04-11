@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
+#    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/10 18:46:44 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/11 13:40:20 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ VPATH		=	src: src/parser: src/start_screen: \
 
 SRC			=	collision.c debug.c enemy.c errexit.c hook.c initialize.c main.c minimap.c mouse_movements.c raycaster.c render.c sprite.c time.c utils.c \
 				check_for_map.c check_for_rgb.c check_for_texture.c check_map.c check_textures.c error_messages.c get_file_data.c init_player_position.c parser.c parser_utils_0.c parser_utils_1.c \
+				init_sprite_position.c \
 				init_start_screen.c start_screen.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
@@ -38,7 +39,7 @@ CYAN		= \033[36;1m
 WHITE		= \033[37;1m
 RESET		= \033[0m
 
-all: libft $(NAME) 
+all: libft $(NAME)
 
 obj:
 	@mkdir -p $(OBJ_DIR)

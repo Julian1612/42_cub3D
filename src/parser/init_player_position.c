@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_position.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:41:53 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 13:11:35 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
-#include "libraries/libft/src/libft/libft.h" // ft_* functions
+#include "../../libraries/libft/src/libft/libft.h" // ft_* functions
 #include "../cub3D.h" // t_vec
 #include <math.h>
 #include <stdio.h>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/10 17:45:07 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 13:24:22 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	draw_wall(t_game *game, int wall_height, int x_img, t_rayhit *hit)
 	int		y_tex_iter;
 	int		y_img;
 
-	scale = (double)(game->map.textures[hit->tex_id].tex->height) / wall_height;
-	x_tex = (game->map.textures[hit->tex_id].tex->width) * hit->stripe;
+	scale = (double)(game->map.textures[hit->tex_id]->tex->height) / wall_height;
+	x_tex = (game->map.textures[hit->tex_id]->tex->width) * hit->stripe;
 	y_tex_iter = 0;
 	y_img = game->img_world->height / 2 - wall_height / 2;
 	if (y_img < 0)
@@ -54,8 +54,8 @@ static void	draw_wall(t_game *game, int wall_height, int x_img, t_rayhit *hit)
 		// @todo improve this ugly shit
 		ft_memcpy(&game->img_world->pixels
 		[coor_to_pixel(game->img_world->width, x_img, y_img)],
-			&game->map.textures[hit->tex_id].tex->pixels
-		[coor_to_pixel(game->map.textures[hit->tex_id].tex->width,
+			&game->map.textures[hit->tex_id]->tex->pixels
+		[coor_to_pixel(game->map.textures[hit->tex_id]->tex->width,
 				x_tex, y_tex_iter * scale)],
 			4);
 		y_tex_iter++;
@@ -160,5 +160,5 @@ void	render_all(t_game *game)
 	render_walls(game, wall_height);
 	render_sprites(game, game->map.objects, game->map.enemies, wall_height);
 	if (game->player.weapon != NULL)
-		render_weapon(game->img_hud, &game->map.textures[game->player.weapon->curr_frame]);
+		render_weapon(game->img_hud, game->map.textures[game->player.weapon->curr_frame]);
 }

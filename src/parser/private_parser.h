@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   private_parser.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:25:55 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 13:44:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int				get_file_data(t_map *map_data, char *cub_file_path);
 
 /* init_player_position.c */
 int				init_player_position(t_game *game);
+
+/* init_struct.c */
+int				init_sprite_position(t_game *game);
 
 /* parser.c */
 int				parser(int *argc, char **argv, t_game *game);

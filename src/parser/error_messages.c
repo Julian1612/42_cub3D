@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:36:17 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 13:24:49 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,10 @@ static void	free_struct(t_map *map_data)
 	if (map_data == NULL)
 		return ;
 	i = 0;
-	while (i < 10)
+	while (i < 4)
 	{
-		if (map_data->objects[i].tex->path != NULL)
-			free(map_data->objects[i].tex->path);
+		if (map_data->textures[i]->path != NULL)
+			free(map_data->textures[i]->path);
 		i++;
 	}
 	i = 0;

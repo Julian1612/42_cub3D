@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:20:13 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 13:25:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define FLOOR '0'
 # define WALL '1'
 # define FPS 60
-# define OBJ_COUNT 10
+# define OBJ_COUNT 4
 # define DOOR_CLOSED 'D'
 # define DOOR_OPEN 'd'
 # define ENEMY 'E'
@@ -160,7 +160,7 @@ typedef struct s_minimap
 typedef struct s_map
 {
 	char		**arr;
-	t_tex		*textures;
+	t_tex		*textures[4]; // muss noch erhöht werden auf texturen von gegnern und türen
 	t_door		*doors;
 	int			door_count;
 	t_object	*objects;

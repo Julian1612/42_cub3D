@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/10 18:14:08 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 13:23:30 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int	initialize_textures(t_game *game)
 	i = 0;
 	while (i <= ZOMBIE_DEAD8)
 	{
-		game->map.textures[i].tex = mlx_load_png(game->map.textures[i].path);
-		if (game->map.textures[i].tex == NULL)
+		game->map.textures[i]->tex = mlx_load_png(game->map.textures[i]->path);
+		if (game->map.textures[i]->tex == NULL)
 			return (ERROR);
 		i++;
 	}

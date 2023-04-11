@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_rgb.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:27:56 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:37:14 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
 #include "../cub3D.h"
-#include "libraries/libft/src/libft/libft.h" // ft_strlen, ft_strnstr, ft_split, ft_arrlen, ft_free_arr
+#include "../../libraries/libft/src/libft/libft.h"
 #include <stdio.h>
 
 static int	get_rgb_values(t_map *map_data, char *line, int *error);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:35:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:37:26 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int	check_mandatory_textures(t_map *map_data)
 	i = 0;
 	while (i < 4)
 	{
-		if (map_data->objects[i].tex->path == NULL)
+		if (map_data->textures[i]->path == NULL)
 			return (error_textures(6, map_data));
 		else if (check_textures_file(map_data,
-				map_data->objects[i].tex->path, "png"))
+				map_data->textures[i]->path, "png"))
 			return (1);
 		i++;
 	}
@@ -51,32 +51,32 @@ int	check_mandatory_textures(t_map *map_data)
 	return (0);
 }
 
-int	check_bonus_textures(t_map *map_data)
-{
-	int			i;
-	int			j;
+// int	check_bonus_textures(t_map *map_data)
+// {
+// 	int			i;
+// 	int			j;
 
-	i = 0;
-	while (map_data->arr[i] == NULL)
-	{
-		j = 0;
-		while (map_data->arr[i][j])
-		{
-			if (check_char(map_data, map_data->arr[i][j]))
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (map_data->arr[i] == NULL)
+// 	{
+// 		j = 0;
+// 		while (map_data->arr[i][j])
+// 		{
+// 			if (check_char(map_data, map_data->arr[i][j]))
+// 				return (1);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
-// add the check for the other bonus textures
-// else if (character == CHAR_ENEMY && map_data->enemy.path == NULL)
-// 	return (error_textures(7, map_data));
-static int	check_char(t_map *map_data, char character)
-{
-	// if (character == CHAR_DOOR && map_data->objects[DOOR_].path == NULL)
-	// 	return (error_textures(7, map_data));
-	return (0);
-}
+// // add the check for the other bonus textures
+// // else if (character == CHAR_ENEMY && map_data->enemy.path == NULL)
+// // 	return (error_textures(7, map_data));
+// static int	check_char(t_map *map_data, char character)
+// {
+// 	// if (character == CHAR_DOOR && map_data->objects[DOOR_].path == NULL)
+// 	// 	return (error_textures(7, map_data));
+// 	return (0);
+// }
