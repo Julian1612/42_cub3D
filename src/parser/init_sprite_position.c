@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:12:10 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 16:24:55 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:49:13 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 static int		search_for_sprites(t_game *game, int i,
 					char *line);
 static int		get_sprites_count(t_map *map_data);
+static void		init_enemy(t_map *map_data, int i, int j, int count_enemies);
+static void		init_door(t_map *map_data, int i, int j, int count_doors);
 
 // checken dass richtig gefreed wird !!!!!!!!!!
 int	init_sprite_position(t_game *game)
@@ -27,8 +29,6 @@ int	init_sprite_position(t_game *game)
 
 	i = 0;
 	get_sprites_count(&game->map);
-	printf("enemy_count: %d\n", game->map.enemy_count);
-	printf("door_count: %d\n", game->map.door_count);
 	game->map.enemies = malloc(sizeof(t_enemy) * game->map.enemy_count);
 	if (game->map.enemies == NULL)
 		return (error_message(4, &game->map));
@@ -82,27 +82,36 @@ static int	search_for_sprites(t_game *game, int i,
 	while (line[j] != '\0')
 	{
 		line_len = ft_strlen(line);
-		if (line[j] == 'F')
-		{
-			game->map.enemies[count_enemies].alive = true;
-			game->map.enemies[count_enemies].pos.x = j + 0.5;
-			game->map.enemies[count_enemies].pos.y = i + 0.5;
-			game->map.enemies[count_enemies].health = 100;
-			game->map.enemies[count_enemies].last_frame_time = 0;
-			game->map.enemies[count_enemies].curr_frame = ZOMBIE_RUN1;
-			game->map.enemies[count_enemies].speed = 0.1;
-			game->map.enemies[count_enemies].damage = 10;
-			count_enemies++;
-		}
-		else if (line[j] == 'D')
-		{
-			game->map.doors[count_doors].x = j + 0.5;
-			game->map.doors[count_doors].y = i + 0.5;
-			game->map.doors[count_doors].open = false;
-			game->map.doors[count_doors].last_action = 0;
-			count_doors++;
-		}
+		if ((line[j] == 'F' || line[j] == 'D')
+			&& ((j == 0 || j == line_len -1)
+				|| (j < line_len && line[j + 1] == ' ')
+				|| (j > 0 && line[j - 1] == ' ')))
+			return (error_get_map(8, &game->map));
+		if (line[j] == 'F' && count_enemies < game->map.enemy_count)
+			init_enemy(&game->map, i, j, count_enemies++);
+		else if (line[j] == 'D' && count_doors < game->map.door_count)
+			init_door(&game->map, i, j, count_doors++);
 		j++;
 	}
 	return (0);
+}
+
+static void	init_enemy(t_map *map_data, int i, int j, int count_enemies)
+{
+	map_data->enemies[count_enemies].alive = true;
+	map_data->enemies[count_enemies].pos.x = j + 0.5;
+	map_data->enemies[count_enemies].pos.y = i + 0.5;
+	map_data->enemies[count_enemies].health = 100;
+	map_data->enemies[count_enemies].last_frame_time = 0;
+	map_data->enemies[count_enemies].curr_frame = ZOMBIE_RUN1;
+	map_data->enemies[count_enemies].speed = 0.1;
+	map_data->enemies[count_enemies].damage = 10;
+}
+
+static void	init_door(t_map *map_data, int i, int j, int count_doors)
+{
+	map_data->doors[count_doors].x = j + 0.5;
+	map_data->doors[count_doors].y = i + 0.5;
+	map_data->doors[count_doors].open = false;
+	map_data->doors[count_doors].last_action = 0;
 }

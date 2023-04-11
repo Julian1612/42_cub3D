@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 16:25:57 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:31:31 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	i = 0;
+	printf("--------------------------------------------\n");
+	printf("--------------------------------------------\n");
+	printf("game.map.enemy_count = %d\n", game.map.enemy_count);
+	printf("--------------------------------------------\n");
+	printf("--------------------------------------------\n");
 	while (i < game.map.enemy_count)
 	{
 		printf("--------------------------------------------\n");
@@ -86,10 +91,14 @@ int	main(int argc, char **argv)
 		printf("game.map.enemies[i].curr_frame = %d\n", game.map.enemies[i].curr_frame);
 		printf("game.map.enemies[i].speed = %f\n", game.map.enemies[i].speed);
 		printf("game.map.enemies[i].damage = %d\n", game.map.enemies[i].damage);
-		printf("--------------------------------------------\n");
 		i++;
 	}
 	i = 0;
+	printf("--------------------------------------------\n");
+	printf("--------------------------------------------\n");
+	printf("game.map.door_count = %d\n", game.map.door_count);
+	printf("--------------------------------------------\n");
+	printf("--------------------------------------------\n");
 	while (i < game.map.door_count)
 	{
 		printf("--------------------------------------------\n");
