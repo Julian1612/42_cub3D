@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/11 14:35:21 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:40:07 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,8 @@ void	resize(t_game *game)
 
 	if (last_width == game->mlx->width && last_height == game->mlx->height)
 		return ;
-	if ((double)game->mlx->width / game->mlx->height < 0.5 || (double)game->mlx->width / game->mlx->height > 2)
+	if ((double)game->mlx->width / game->mlx->height < 1
+		|| (double)game->mlx->width / game->mlx->height > 2)
 	{
 		errexit_msg("Window height to width ratio cannot be smaller than 1 or greater than 2.");
 		return ;

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 14:37:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:38:44 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ int	test_parse(t_game *game)
 }
 
 // @todo resizing segfault when shooting because of weapon texture
-// @note mlx_set_window_limit
 // @todo refactor hook functions for more readability (logic loop and render loop?)
 // @todo go through code and refactor function parameters
 // @todo fix the mlx compiling shit
