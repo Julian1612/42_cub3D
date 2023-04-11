@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 13:24:49 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:13:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,10 @@ int	error_get_map(int error_code, t_map *map_data)
 		printf("Error!\nInvalid new line\n");
 	else if (error_code == 8)
 		printf("Error!\nPlayer is out of bounds\n");
+	else if (error_code == 9)
+		printf("Error!\nFoe is out of bounds\n");
+	else if (error_code == 10)
+		printf("Error!\nDoor is out of bounds\n");
 	printf("========================================\n");
 	free_struct(map_data);
 	return (1);

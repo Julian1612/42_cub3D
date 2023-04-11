@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/10 17:45:19 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 01:28:06 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_hexcolor	convert_to_hexcode(
 	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
 	unsigned int	rgba;
+
 	rgba = r;
 	rgba = (rgba << 8) + g;
 	rgba = (rgba << 8) + b;
