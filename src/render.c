@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/11 20:42:37 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 22:33:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ static void	draw_floor(
 	}
 }
 
-static void set_ray_dir(t_vec *ray_dir, double x, int img_width, t_player *player)
+static void	set_ray_dir(
+	t_vec *ray_dir, double x, int img_width, t_player *player)
 {
 	double	camera_x;
 
@@ -97,7 +98,6 @@ static void set_ray_dir(t_vec *ray_dir, double x, int img_width, t_player *playe
 	ray_dir->y = player->dir.y + player->cplane.y * camera_x;
 }
 
-// @todo fix scale plane function
 void	render_walls(t_game *game, int *wall_height)
 {
 	t_rayhit	ray_hit;
