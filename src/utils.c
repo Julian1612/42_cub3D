@@ -6,12 +6,13 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/11 18:10:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 23:51:12 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // typedefs
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include "../libraries/libft/src/libft/libft.h" // ft_memcpy
 #include <math.h> // sin, cos
 
 t_hexcolor	convert_to_hexcode(
@@ -24,6 +25,17 @@ t_hexcolor	convert_to_hexcode(
 	rgba = (rgba << 8) + b;
 	rgba = (rgba << 8) + a;
 	return (rgba);
+}
+
+void	tex_pixel_to_img(
+	mlx_image_t *img, mlx_texture_t *tex, t_coor *tex_coor, t_coor *img_coor)
+{
+	uint8_t	*src;
+	uint8_t	*dst;
+
+	src = &tex->pixels[coor_to_pixel(tex->width, tex_coor->x, tex_coor->y)];
+	dst = &img->pixels[coor_to_pixel(img->width, img_coor->x, img_coor->y)];
+	ft_memcpy(dst, src, 4);
 }
 
 // @todo switch to t_coor

@@ -6,28 +6,16 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/11 22:33:48 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 23:55:39 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // cub3D structs
 #include <stdio.h> // @note remove
-#include "../libraries/libft/src/libft/libft.h" // ft_memcpy
 #include <math.h> // PI
 #include <string.h> // @note memmove, remove
 #include <stdlib.h> // @note exit, remove
 #include <unistd.h> // @note remove
-
-static void	tex_pixel_to_img(
-	mlx_image_t *img, mlx_texture_t *tex, t_coor tex_coor, t_coor img_coor)
-{
-	uint8_t	*src;
-	uint8_t	*dst;
-
-	src = &tex->pixels[coor_to_pixel(tex->width, tex_coor.x, tex_coor.y)];
-	dst = &img->pixels[coor_to_pixel(img->width, img_coor.x, img_coor.y)];
-	ft_memcpy(dst, src, 4);
-}
 
 static void	draw_wall(mlx_image_t *img,
 	mlx_texture_t *tex, double tex_offset, t_coor *fcknorm)
@@ -52,7 +40,7 @@ static void	draw_wall(mlx_image_t *img,
 	while (img_coor.y < img->height && img_coor.y < img_y_wall_end)
 	{
 		tex_coor.y = temp * ratio;
-		tex_pixel_to_img(img, tex, tex_coor, img_coor);
+		tex_pixel_to_img(img, tex, &tex_coor, &img_coor);
 		temp++;
 		img_coor.y++;
 	}
@@ -140,7 +128,7 @@ static void	render_weapon(mlx_image_t *img, t_tex *weapon_tex)
 		while (temp < weapon_tex->tex->height / ratio)
 		{
 			tex_coor.y = temp * ratio;
-			tex_pixel_to_img(img, weapon_tex->tex, tex_coor, img_coor);
+			tex_pixel_to_img(img, weapon_tex->tex, &tex_coor, &img_coor);
 			img_coor.y++;
 			temp++;
 		}

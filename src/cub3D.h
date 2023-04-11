@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 20:26:36 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/11 23:51:36 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,8 @@ void			errexit_mlx_errno(void);
 t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 int				coor_to_pixel(int width, int x, int y);
+void			tex_pixel_to_img(mlx_image_t *img, mlx_texture_t *tex,
+					t_coor *tex_coor, t_coor *img_coor);
 double			rotate_x(double x, double y, double angle);
 double			rotate_y(double x, double y, double angle);
 int				ft_abs(int n);

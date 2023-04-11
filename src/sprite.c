@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
+/*   Updated: 2023/04/12 00:36:26 by lorbke           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3D.h" // cub3D structs
 #include "../libraries/libft/src/libft/libft.h" // ft_memcpy
@@ -47,42 +58,38 @@ static void	draw_sprite(t_sprite *sprite, t_game *game, int *wall_height)
 {
 	t_start_end	row;
 	t_start_end	stripe;
-	double		scale;
-	int			y_tex_iter;
-	int			tex_x;
-	int			row_iter;
-	int			stripe_iter;
+	double		ratio;
+	t_coor		tex_coor;
+	int			temp;
+	t_coor		img_coor;
 	t_hexcolor	color;
 
 	set_row_start_end(&row, sprite->height, game->img_world->height, 0);
 	set_stripe_start_end(&stripe, sprite->width, game->img_world->width, sprite->img_x);
-	scale = (double)sprite->tex->tex->height / sprite->height;
-	stripe_iter = stripe.start;
-	while (stripe_iter++ < stripe.end)
+	ratio = (double)sprite->tex->tex->height / sprite->height;
+	img_coor.x = stripe.start;
+	while (img_coor.x++ < stripe.end)
 	{
-		if (sprite->cam_pos.y < 0 || stripe_iter < 0 || stripe_iter >= game->img_world->width || wall_height[stripe_iter] > sprite->height)
+		if (sprite->cam_pos.y < 0 || img_coor.x < 0 || img_coor.x >= game->img_world->width || wall_height[img_coor.x] > sprite->height)
 			continue ;
-		tex_x = (stripe_iter - (-sprite->width / 2 + sprite->img_x)) * sprite->tex->tex->width / sprite->width;
-		y_tex_iter = 0;
+		tex_coor.x = (img_coor.x - (-sprite->width / 2 + sprite->img_x)) * sprite->tex->tex->width / sprite->width;
+		temp = 0;
 		if (sprite->height > game->img_world->height)
-			y_tex_iter = (sprite->height - game->img_world->height) / 2;
-		row_iter = row.start;
-		while (row_iter++ < row.end)
+			temp = (sprite->height - game->img_world->height) / 2;
+		img_coor.y = row.start;
+		while (img_coor.y++ < row.end)
 		{
-			color = sprite->tex->tex->pixels[coor_to_pixel(sprite->tex->tex->width, tex_x, y_tex_iter * scale)];
+			tex_coor.y = temp * ratio;
+			color = sprite->tex->tex->pixels[coor_to_pixel(sprite->tex->tex->width, tex_coor.x, tex_coor.y)];
 			if (is_invisible(color) == false)
-				ft_memcpy(&game->img_world->pixels
-					[coor_to_pixel(game->img_world->width, stripe_iter, row_iter)],
-						&sprite->tex->tex->pixels
-					[coor_to_pixel(sprite->tex->tex->width,
-							tex_x, y_tex_iter * scale)],
-						4); // @todo improve this ugly shit
-			y_tex_iter++;
+				tex_pixel_to_img(game->img_world, sprite->tex->tex, &tex_coor, &img_coor);
+			temp++;
 		}
 	}
 }
 
-static void	init_sprite(t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *player, t_game *game)
+static void	init_sprite(
+	t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *player, t_game *game)
 {
 	double	cam_matrix_inv;
 
@@ -91,10 +98,15 @@ static void	init_sprite(t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *play
 	sprite->dir.y = player->dir.y;
 	sprite->dist.x = pos->x - player->pos.x;
 	sprite->dist.y = pos->y - player->pos.y;
-	cam_matrix_inv = 1.0 / (player->cplane.x * sprite->dir.y - sprite->dir.x * player->cplane.y);
-	sprite->cam_pos.x = -cam_matrix_inv * (sprite->dir.y * sprite->dist.x - sprite->dir.x * sprite->dist.y);
-	sprite->cam_pos.y = cam_matrix_inv * (-player->cplane.y * sprite->dist.x + player->cplane.x * sprite->dist.y);
-	sprite->img_x = (game->img_world->width / 2) * (1 + sprite->cam_pos.x / sprite->cam_pos.y);
+	cam_matrix_inv = 1.0
+		/ (player->cplane.x * sprite->dir.y - sprite->dir.x * player->cplane.y);
+	sprite->cam_pos.x = -cam_matrix_inv
+		* (sprite->dir.y * sprite->dist.x - sprite->dir.x * sprite->dist.y);
+	sprite->cam_pos.y = cam_matrix_inv
+		* (-player->cplane.y * sprite->dist.x
+			+ player->cplane.x * sprite->dist.y);
+	sprite->img_x = (game->img_world->width / 2)
+		* (1 + sprite->cam_pos.x / sprite->cam_pos.y);
 	sprite->height = ft_abs((int)(game->img_world->height / sprite->cam_pos.y));
 	sprite->width = ft_abs((int)(game->img_world->height / sprite->cam_pos.y));
 }
@@ -129,7 +141,8 @@ void	sort_sprites(t_game *game, t_object *objects, t_enemy *enemies)
 	}
 }
 
-void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, int *wall_height)
+void	render_sprites(
+	t_game *game, t_object *objects, t_enemy *enemies, int *wall_height)
 {
 	t_sprite	sprite;
 	int			i;
@@ -138,7 +151,8 @@ void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, int *wall
 	i = 0;
 	while (i < game->map.obj_count)
 	{
-		init_sprite(&sprite, &objects[i].pos, objects[i].tex, &game->player, game);
+		init_sprite(&sprite, &objects[i].pos,
+			objects[i].tex, &game->player, game);
 		debug_print_sprite(&sprite);
 		draw_sprite(&sprite, game, wall_height);
 		i++;
@@ -148,7 +162,8 @@ void	render_sprites(t_game *game, t_object *objects, t_enemy *enemies, int *wall
 	{
 		if (game->map.enemies[i].alive == false)
 			continue ;
-		init_sprite(&sprite, &enemies[i].pos, &game->map.textures[enemies[i].curr_frame], &game->player, game);
+		init_sprite(&sprite, &enemies[i].pos,
+			&game->map.textures[enemies[i].curr_frame], &game->player, game);
 		debug_print_sprite(&sprite);
 		draw_sprite(&sprite, game, wall_height);
 	}
