@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 01:08:25 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 01:11:21 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,16 @@ static void	draw_sprite_init(t_draw_sprite *hlpr,
 	hlpr->ratio = (double)sprite->tex->tex->height / sprite->height;
 }
 
+static bool	draw_sprite_is_visible(
+	t_sprite *sprite, t_draw_sprite *hlpr, t_game *game, int *wall_height)
+{
+	if (sprite->cam_pos.y < 0 || hlpr->img_coor.x < 0
+		|| hlpr->img_coor.x >= game->img_world->width
+		|| wall_height[hlpr->img_coor.x] > sprite->height)
+		return (false);
+	return (true);
+}
+
 // @note split up in 2d and 3d functions
 // @todo check for out of bounds
 static void	draw_sprite(t_sprite *sprite, t_game *game, int *wall_height)
@@ -98,9 +108,7 @@ static void	draw_sprite(t_sprite *sprite, t_game *game, int *wall_height)
 	hlpr.img_coor.x = hlpr.column.start;
 	while (hlpr.img_coor.x++ < hlpr.column.end)
 	{
-		if (sprite->cam_pos.y < 0 || hlpr.img_coor.x < 0
-			|| hlpr.img_coor.x >= game->img_world->width
-			|| wall_height[hlpr.img_coor.x] > sprite->height)
+		if (draw_sprite_is_visible(sprite, &hlpr, game, wall_height) == false)
 			continue ;
 		hlpr.tex_coor.x = (hlpr.img_coor.x - (-sprite->width / 2
 					+ sprite->img_x)) * sprite->tex->tex->width / sprite->width;
