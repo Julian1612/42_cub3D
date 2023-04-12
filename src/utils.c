@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/11 23:51:12 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:18:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,6 @@ t_hexcolor	convert_to_hexcode(
 	rgba = (rgba << 8) + b;
 	rgba = (rgba << 8) + a;
 	return (rgba);
-}
-
-void	tex_pixel_to_img(
-	mlx_image_t *img, mlx_texture_t *tex, t_coor *tex_coor, t_coor *img_coor)
-{
-	uint8_t	*src;
-	uint8_t	*dst;
-
-	src = &tex->pixels[coor_to_pixel(tex->width, tex_coor->x, tex_coor->y)];
-	dst = &img->pixels[coor_to_pixel(img->width, img_coor->x, img_coor->y)];
-	ft_memcpy(dst, src, 4);
 }
 
 // @todo switch to t_coor
@@ -78,4 +67,9 @@ bool	switch_bool(bool b)
 	if (b == true)
 		return (false);
 	return (true);
+}
+
+double get_dist_of_vecs(t_vec *a, t_vec *b)
+{
+	return ((a->x - b->x) * (a->x - b->x) + (a->y - b->y) * (a->y - b->y));
 }

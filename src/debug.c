@@ -6,11 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 13:27:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:12:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // cub3D structs
+#include "render/private_render.h" // t_sprite
 #include "raycast/private_raycast.h" // t_ray
 #include "raycast.h" // t_rayhit
 #include <stdio.h> // printf

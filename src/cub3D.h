@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 14:04:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:19:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,6 @@ enum e_tex_id
 
 typedef uint32_t	t_hexcolor;
 typedef uint8_t		t_subpxl;
-
-typedef struct s_coor
-{
-	int	x;
-	int	y;
-}	t_coor;
 
 typedef struct s_vector
 {
@@ -195,17 +189,6 @@ typedef struct s_game
 	t_player		player;
 }	t_game;
 
-typedef struct s_sprite
-{
-	t_vec			dir;
-	t_vec			dist;
-	t_vec			cam_pos;
-	double			img_x;
-	int				height;
-	int				width;
-	t_tex			*tex;
-}	t_sprite;
-
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
@@ -218,12 +201,11 @@ void			errexit_mlx_errno(void);
 t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 int				coor_to_pixel(int width, int x, int y);
-void			tex_pixel_to_img(mlx_image_t *img, mlx_texture_t *tex,
-					t_coor *tex_coor, t_coor *img_coor);
 double			rotate_x(double x, double y, double angle);
 double			rotate_y(double x, double y, double angle);
 int				ft_abs(int n);
 bool			switch_bool(bool b);
+double 			get_dist_of_vecs(t_vec *a, t_vec *b);
 
 // initialize
 int				initialize_mlx_data(t_game *game);
@@ -234,10 +216,6 @@ void			hook(void *param);
 // collision
 bool			collision_is_true(double x, double y, t_map *map, int enemy_num);
 int				collision_is_enemy(double x, double y, t_map *map, int enemy_num);
-
-// render
-void			render_all(t_game *game);
-void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, int *wall_height);
 
 // frame
 double			get_fps_mult(double delta_time, int fps);

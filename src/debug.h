@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:00:17 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 14:05:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:13:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /* ************************************************************************** */
 
 # include "cub3D.h" // cub3d typedefs
+# include "render/private_render.h" // t_sprite
 # include "raycast/private_raycast.h" // raycast typedefs
 # include "raycast.h" // raycast typedefs
 
