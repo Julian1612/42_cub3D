@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 17:13:50 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 02:17:54 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,39 @@ int	error_get_map(int error_code, t_map *map_data)
 	return (1);
 }
 
+
+void	free_doors(t_map *map_data)
+{
+	int	i;
+
+	i = 0;
+	if (map_data->doors != NULL)
+	{
+		while (i < map_data->door_count)
+		{
+			free(&map_data->doors[i]);
+			i++;
+		}
+		free(map_data->doors);
+	}
+}
+
+void	free_enemies(t_map *map_data)
+{
+	int	i;
+
+	i = 0;
+	if (map_data->enemies != NULL)
+	{
+		while (i < map_data->enemy_count)
+		{
+			free(&map_data->enemies[i]);
+			i++;
+		}
+		free(map_data->enemies);
+	}
+}
+
 static void	free_struct(t_map *map_data)
 {
 	int	i;
@@ -117,6 +150,7 @@ static void	free_struct(t_map *map_data)
 	if (map_data == NULL)
 		return ;
 	i = 0;
+	// die 4 austauchen durch define
 	while (i < 4)
 	{
 		if (map_data->textures[i]->path != NULL)
@@ -133,4 +167,7 @@ static void	free_struct(t_map *map_data)
 		}
 		free(map_data->arr);
 	}
+	free_doors(map_data);
+	free_enemies(map_data);
 }
+
