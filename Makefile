@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/12 01:40:31 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/12 02:17:58 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,10 @@ LIBMLX		=	./libraries/MLX
 LIBFT		=	./libraries/libft
 CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
-				src/player_position: src/render
+				src/player_position: src/render src/raycast
 
-SRC			=	collision.c sprite.c raycaster.c debug.c render.c initialize.c errexit.c hook.c utils.c time.c enemy.c main.c
+SRC			=	collision.c sprite.c raycast.c debug.c render.c initialize.c \
+				errexit.c hook.c utils.c time.c enemy.c main.c
 
 HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
 LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
