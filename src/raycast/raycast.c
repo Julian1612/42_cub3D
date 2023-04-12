@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 14:02:20 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 21:40:47 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	raycast_cast_ray(
 	ray_set_distance(hit, &ray, ray.y_side);
 	rayhit_set_tex_id(hit, ray.y_side, &ray.step);
 	rayhit_set_offset(hit, ray.y_side, &ray);
-	debug_print_ray(&ray, hit);
+	// debug_print_ray(&ray, hit);
 }

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:06:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:06:53 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 21:32:10 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	loop(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	loop_logic(game);
-	loop_graphic(game);
+	if (game->start_screen.active == true)
+		startscreen_wait_for_click(game->mlx, &game->start_screen);
+	else
+	{
+		loop_logic(game);
+		loop_graphic(game);
+	}
 }

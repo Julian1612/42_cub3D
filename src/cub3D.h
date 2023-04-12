@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 20:54:37 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 21:38:42 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,7 @@ bool			is_cooldown(void);
 // start_screen
 int				initialize_start_screen(t_game *game);
 void			draw_background(t_start_screen *start_screen);
+void			startscreen_wait_for_click(mlx_t *mlx,
+					t_start_screen *start_screen);
 
 #endif

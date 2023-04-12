@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:21:07 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:06:27 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 21:35:49 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ cannot be smaller than 1 or greater than 2."
 
 static void	resize_camera(t_player *player, int width, int height)
 {
-	double	temp;
-
-	temp = (double)width / height / 2;
 	player->cplane.x = 0;
-	player->cplane.y = temp;
+	player->cplane.y = (double)width / height / 2;
 	player->dir.x = -1;
 	player->dir.y = 0;
 }

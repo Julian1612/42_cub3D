@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 18:48:12 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 19:29:52 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 21:28:30 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_background(t_start_screen *start_screen)
 	}
 }
 
-void	draw_start_screen(mlx_t *mlx, t_start_screen *start_screen)
+void	startscreen_wait_for_click(mlx_t *mlx, t_start_screen *start_screen)
 {
 	int32_t	x;
 	int32_t	y;
