@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 13:25:32 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:17:49 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 /* INCLUDES																	  */
 /* ************************************************************************** */
 
+# include "types.h"
+# include "player.h"
 # include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
 
 /* ************************************************************************** */
@@ -46,60 +48,17 @@
 /* ENUMS																	  */
 /* ************************************************************************** */
 
-enum e_tex_id
+enum	e_obj_type
 {
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST,
-	KNIGHT,
-	LAMP,
-	TABLE,
-	DOOR_FRONT,
-	DOOR_SIDE,
-	GUN1,
-	GUN2,
-	GUN3,
-	GUN4,
-	GUN5,
-	GUN6,
-	ZOMBIE_RUN1,
-	ZOMBIE_RUN2,
-	ZOMBIE_RUN3,
-	ZOMBIE_LEFT1,
-	ZOMBIE_LEFT2,
-	ZOMBIE_LEFT3,
-	ZOMBIE_RIGHT1,
-	ZOMBIE_RIGHT2,
-	ZOMBIE_RIGHT3,
-	ZOMBIE_DEAD1,
-	ZOMBIE_DEAD2,
-	ZOMBIE_DEAD3,
-	ZOMBIE_DEAD4,
-	ZOMBIE_DEAD5,
-	ZOMBIE_DEAD6,
-	ZOMBIE_DEAD7,
-	ZOMBIE_DEAD8,
+	DECOR_NON_PERM,
+	DECOR_PERM,
+	WEAPON,
+	COIN,
 };
 
 /* ************************************************************************** */
 /* TYPEDEFS																	  */
 /* ************************************************************************** */
-
-typedef int32_t	t_hexcolor;
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-}	t_vec;
-
-// @todo switch tex for pixels
-typedef struct s_texture
-{
-	char			*path;
-	mlx_texture_t	*tex;
-}	t_tex;
 
 typedef struct s_door
 {
@@ -113,37 +72,8 @@ typedef struct s_object
 {
 	t_vec			pos;
 	t_tex			*tex;
-	enum	e_obj_type
-	{
-		DECOR_NON_PERM,
-		DECOR_PERM,
-		WEAPON,
-		COIN,
-	}				type;
+	enum e_obj_type	type;
 }	t_object;
-
-// @note ammunition is not implemented
-typedef struct s_weapon
-{
-	char			damage;
-	char			range;
-	char			reload_time;
-	double			last_frame_time;
-	enum e_tex_id	curr_frame;
-}	t_weapon;
-
-// @note enemies are always oriented towards the player
-// @todo speed is not used
-typedef struct s_enemy
-{
-	bool			alive;
-	t_vec			pos;
-	char			health;
-	double			speed;
-	int				damage;
-	double			last_frame_time;
-	enum e_tex_id	curr_frame;
-}	t_enemy;
 
 typedef struct s_minimap
 {
@@ -156,6 +86,8 @@ typedef struct s_minimap
 	mlx_image_t		*walls;
 	mlx_image_t		*view_dir;
 }	t_minimap;
+
+typedef struct s_enemy	t_enemy;
 
 typedef struct s_map
 {
@@ -213,109 +145,32 @@ typedef struct s_game
 	t_start_screen	start_screen;
 }	t_game;
 
-typedef struct s_coor
-{
-	double	x;
-	double	y;
-}	t_coor;
-
-// @todo move to raycaster header
-typedef struct s_ray
-{
-	double	angle;
-	t_vec	dir;
-	t_vec	origin;
-	int		map_x;
-	int		map_y;
-	t_vec	step;
-	t_vec	hypotenuse;
-	t_vec	length;
-	bool	y_side;
-}				t_ray;
-
-typedef struct s_rayhit
-{
-	double			stripe;
-	double			dist;
-	int				enemy_index;
-	enum e_tex_id	tex_id;
-	int				hit;
-}	t_rayhit;
-
-typedef struct s_sprite
-{
-	t_vec			dir;
-	t_vec			dist;
-	t_vec			cam_pos;
-	double			img_x;
-	int				height;
-	int				width;
-	t_tex			*tex;
-}	t_sprite;
-
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
-
-// debug
-void			debug_print_vec(t_vec *vec, char *str);
-void			debug_print_player(t_player *player);
-void			debug_print_ray(t_ray *ray, t_rayhit *hit);
-void			debug_print_sprite(t_sprite *sprite);
 
 // error
 void			errexit_msg(char *msg);
 void			errexit_mlx_errno(void);
 
-// utils
-t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
-					unsigned char b, unsigned char a);
+// math
 int				coor_to_pixel(int width, int x, int y);
 double			rotate_x(double x, double y, double angle);
 double			rotate_y(double x, double y, double angle);
 int				ft_abs(int n);
-bool			switch_bool(bool b);
+double			get_dist_of_vecs(t_vec *a, t_vec *b);
 
 // initialize
 int				initialize_mlx_data(t_game *game);
 
-// hook
-void			rotate_player(t_player *player, bool left);
-void			hook(void *param);
-
 // collision
-bool			check_collision(double x, double y, t_map *map, int enemy_num);
-int				check_enemy_collision(double x, double y, t_map *map, int enemy_num);
+bool			collision_is_true(double x, double y,
+					t_map *map, int enemy_num);
+int				collision_is_enemy(double x, double y,
+					t_map *map, int enemy_num);
 
-// render
-void			render_all(t_game *game);
-void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, char target);
-void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, double *wall_height);
-
-// initzialize.c
-int				initialize_minimap(t_game *game);
-int				initialize_map(t_game *game);
-
-// minimap.c
-int				render_minimap(t_game *game);
-void			get_map_measures(t_game *game);
-void			change_maps(mlx_key_data_t keydata, void *param);
-
-// mouse_movement.c
-void			mouse_movements(mlx_t *mlx, t_player *player);
-
-// start_screen.c
-int				initialize_start_screen(t_game *game);
-void			draw_background(t_start_screen *start_screen);
-void			draw_start_screen(mlx_t *mlx, t_start_screen *start_screen);
-
-// main.c
-
-// enemy
-void			enemies(t_enemy *enemies, t_map *map, t_player *player);
-
-// frame
-bool			skip_frame(mlx_t *mlx, int fps);
+// time
+double			get_fps_mult(double delta_time, int fps);
 bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);
 

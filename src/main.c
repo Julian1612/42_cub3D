@@ -6,12 +6,13 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 19:12:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:19:22 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
-#include "parser.h" // parser
+#include "enemy.h" // t_enemy
+#include "loop.h" // loop
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
 #include <stdlib.h> // malloc
 #include <stdio.h> // @note remove, printf
@@ -45,7 +46,17 @@ int	free_data(t_map *map_data)
 	return (EXIT_SUCCESS);
 }
 
-// we need to free the struct form the parser at the end of main
+// @todo resizing segfault when shooting because of weapon texture
+// @todo fix the mlx compiling shit
+// @todo scale gun textures to 64x64
+// @todo compile with wall werror wextra
+// @todo make re not working correctly
+// @todo add health bar
+// @todo add sounds
+// @todo make weapon pickupable
+// @todo add exit
+// @todo add game over and win screen
+
 int	main(int argc, char **argv)
 {
 	t_game		game;
@@ -56,7 +67,7 @@ int	main(int argc, char **argv)
 	}
 	if (initialize_mlx_data(&game) == ERROR)
 		errexit_mlx_errno();
-	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
+	if (mlx_loop_hook(game.mlx, &loop, &game) == false)
 		errexit_mlx_errno();
 	if (mlx_image_to_window(game.mlx, game.img_world, 0, 0) == ERROR)
 		errexit_mlx_errno();

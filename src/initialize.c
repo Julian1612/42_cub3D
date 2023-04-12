@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/11 13:23:30 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:18:44 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
-#include "../libraries/libft/src/libft/libft.h" // ft_strlen
+#include "../libraries/libft/src/libft/libft.h" // ft_strlen, ft_memset
 #include <stdlib.h> // NULL
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
@@ -34,8 +34,6 @@ int	initialize_minimap(t_game *game)
 	return (SUCCESS);
 }
 
-// @note every texture is loaded at all times
-// @note better way of getting texture count?
 static int	initialize_textures(t_game *game)
 {
 	int	i;
@@ -54,8 +52,10 @@ static int	initialize_textures(t_game *game)
 static int	initialize_environ(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
-	game->img_world = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
-	game->img_hud = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
+	game->img_world = mlx_new_image(game->mlx,
+			game->mlx->width, game->mlx->height);
+	game->img_hud = mlx_new_image(game->mlx,
+			game->mlx->width, game->mlx->height);
 	if (game->mlx == NULL || game->img_world == NULL || game->img_hud == NULL)
 		return (ERROR);
 	return (SUCCESS);

@@ -3,41 +3,46 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/12 14:36:39 by jschneid         ###   ########.fr        #
+#    Updated: 2023/04/12 19:15:33 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=   -g
-# -Wall -Wextra -Werror
+CFLAGS		=	-g
+# -Wall -Wextra -Werror 
 LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 CC			=	cc
-VPATH		=	src: src/parser: src/start_screen: \
+VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
+				src/player_position: src/render src/raycast src/render src/loop
 
-SRC			=	collision.c debug.c enemy.c errexit.c hook.c initialize.c main.c minimap.c mouse_movements.c raycaster.c render.c sprite.c time.c utils.c \
-				check_for_map.c check_for_rgb.c check_for_texture.c check_map.c check_textures.c error_messages.c get_file_data.c init_player_position.c parser.c parser_utils_0.c parser_utils_1.c \
-				init_sprite_position.c \
-				init_start_screen.c start_screen.c
+SRC			=	raycast.c raycast_ray.c raycast_rayhit.c \
+				render.c render_wall.c render_hud.c render_enemy.c \
+				render_enemy_sprite.c render_enemy_utils.c \
+				loop.c loop_logic.c loop_logic_door.c loop_graphic.c \
+				collision.c debug.c initialize.c \
+				errexit.c math.c time.c enemy.c player.c main.c
 
-HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
-LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
-OBJS		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
-OBJ_DIR		= ./obj/
+INC			=	-I./src -I$(LIBMLX)/include/MLX42 -I$(LIBFT)/src/libft
+HEADERS		=	cub3D.h raycast.h render.h raycast/private_raycast.h \
+				render/private_render.h
+LIBS		=	-lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+OBJS		=	$(addprefix $(OBJ_DIR),$(SRC:.c=.o))
+OBJ_DIR		=	./obj/
 
-BOLD		= \033[1m
-BLACK		= \033[30;1m
-RED			= \033[31;1m
-GREEN		= \033[32;1m
-YELLOW		= \033[33;1m
-BLUE		= \033[34;1m
-MAGENTA		= \033[35;1m
-CYAN		= \033[36;1m
-WHITE		= \033[37;1m
-RESET		= \033[0m
+BOLD		=	\033[1m
+BLACK		=	\033[30;1m
+RED			=	\033[31;1m
+GREEN		=	\033[32;1m
+YELLOW		=	\033[33;1m
+BLUE		=	\033[34;1m
+MAGENTA		=	\033[35;1m
+CYAN		=	\033[36;1m
+WHITE		=	\033[37;1m
+RESET		=	\033[0m
 
 all: libft $(NAME)
 
@@ -47,17 +52,12 @@ obj:
 libft:
 	@$(MAKE) -C $(LIBFT)
 
-# garbage_collector:
-# 	@$(MAKE) -C $(GARBAGE)
-
-obj/%.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
-
 $(NAME): obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(INC) $(LIBS) $(OBJS) -o $(NAME)
 
-n: obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+obj/%.o: %.c $(HEADERS)
+	@$(CC) $(CFLAGS) -o $@ -c $< 
+	@printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 clean:
 	@rm -rf obj
