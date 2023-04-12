@@ -6,11 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 01:40:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 14:05:30 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h" // cub3D structs
+#include "../raycast.h" // t_rayhit
 #include <stdio.h> // @note remove
 #include <math.h> // PI
 #include <string.h> // @note memmove, remove
@@ -97,7 +98,7 @@ void	render_walls(t_game *game, int *wall_height)
 	while (img_x < game->img_world->width)
 	{
 		set_ray_dir(&ray_dir, img_x, game->img_world->width, &game->player);
-		cast_ray(&ray_hit, game, ray_dir, WALL);
+		raycast_cast_ray(&ray_hit, game, ray_dir, WALL);
 		wall_height[img_x] = game->img_world->height / ray_hit.dist;
 		draw_ceiling(game->img_world, wall_height[img_x],
 			img_x, game->map.ceiling_color);

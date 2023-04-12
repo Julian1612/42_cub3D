@@ -6,23 +6,25 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/12 02:17:58 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/12 13:54:33 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
 CFLAGS		=   -g
 # -Wall -Wextra -Werror 
-LIBMLX		=	./libraries/MLX
+LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 CC			=	cc
 VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 				src/player_position: src/render src/raycast
 
-SRC			=	collision.c sprite.c raycast.c debug.c render.c initialize.c \
+SRC			=	raycast.c raycast_ray.c raycast_rayhit.c \
+				collision.c sprite.c debug.c render.c initialize.c \
 				errexit.c hook.c utils.c time.c enemy.c main.c
 
-HEADERS		= -I ./include -I $(LIBMLX)/include/MLX42 -I $(LIBFT)
+INC			= -I./src -I$(LIBMLX)/include/MLX42 -I$(LIBFT)/src/libft
+HEADERS		= cub3D.h raycast.h raycast/private_raycast.h
 LIBS		= -lglfw -L$(shell brew --prefix glfw)/lib $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
 OBJS		= $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
 OBJ_DIR		= ./obj/
@@ -46,14 +48,12 @@ obj:
 libft:
 	@$(MAKE) -C $(LIBFT)
 
-obj/%.o: %.c cub3D.h
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
-
 $(NAME): obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(INC) $(LIBS) $(OBJS) -o $(NAME)
 
-n: obj $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+obj/%.o: %.c $(HEADERS)
+	@$(CC) $(CFLAGS) -o $@ -c $< 
+	@printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 clean:
 	@rm -rf obj

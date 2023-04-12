@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 20:12:11 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 13:43:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ int	test_parse(t_game *game)
 // @todo rename object to sprite and sprite struct to sprite_helper or something?
 // @todo make struct out of frame variables
 // @todo scale gun textures to 64x64
+// @todo compile with wall werror wextra
 // @todo remove cooldown function
 // @todo make re not working correctly
 // @todo add cooldown for enemy

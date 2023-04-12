@@ -6,11 +6,13 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/12 01:27:11 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 14:05:59 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game
+#include "raycast.h" // t_rayhit
+#include "debug.h" // debug_print_player
 #include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin
@@ -36,7 +38,7 @@ static void	switch_door_state(t_game *game, t_player *player)
 				target = DOOR_CLOSED;
 			else
 				target = DOOR_OPEN;
-			cast_ray(&hit, game, player->dir, target);
+			raycast_cast_ray(&hit, game, player->dir, target);
 			if (hit.hit == target && hit.dist <= PLAYER_REACH && hit.dist > 0.5)
 			{
 				if (game->map.doors[i].open == false)
@@ -61,7 +63,7 @@ static void	shoot(t_player *player, t_map *map, t_game *game)
 		if (player->weapon->curr_frame > GUN6)
 			player->weapon->curr_frame = GUN3;
 	}
-	cast_ray(&hit, game, player->dir, ENEMY);
+	raycast_cast_ray(&hit, game, player->dir, ENEMY);
 	if (hit.enemy_index != -1)
 	{
 		if (map->enemies[hit.enemy_index].health > 0)

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 01:27:11 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 14:04:09 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,29 +195,6 @@ typedef struct s_game
 	t_player		player;
 }	t_game;
 
-// @todo move to raycaster header
-typedef struct s_ray
-{
-	double	angle;
-	t_vec	dir;
-	t_vec	origin;
-	int		map_x;
-	int		map_y;
-	t_vec	step;
-	t_vec	hypotenuse;
-	t_vec	length;
-	bool	y_side;
-}				t_ray;
-
-typedef struct s_rayhit
-{
-	double			x_offset;
-	double			dist;
-	int				enemy_index;
-	enum e_tex_id	tex_id;
-	int				hit;
-}	t_rayhit;
-
 typedef struct s_sprite
 {
 	t_vec			dir;
@@ -232,12 +209,6 @@ typedef struct s_sprite
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
-
-// debug
-void			debug_print_vec(t_vec *vec, char *str);
-void			debug_print_player(t_player *player);
-void			debug_print_ray(t_ray *ray, t_rayhit *hit);
-void			debug_print_sprite(t_sprite *sprite);
 
 // error
 void			errexit_msg(char *msg);
@@ -266,7 +237,6 @@ int				collision_is_enemy(double x, double y, t_map *map, int enemy_num);
 
 // render
 void			render_all(t_game *game);
-void			cast_ray(t_rayhit *hit, t_game *game, t_vec ray_dir, char target);
 void			render_sprites(t_game *game, t_object *objects, t_enemy *enemies, int *wall_height);
 
 // frame

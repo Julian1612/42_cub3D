@@ -6,11 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 01:40:59 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 14:04:42 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h" // cub3D structs
+#include "../debug.h" // debug_print_sprite
 #include "../../libraries/libft/src/libft/libft.h" // ft_memcpy
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin, tan
