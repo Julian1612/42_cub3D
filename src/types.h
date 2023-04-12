@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:55:32 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 16:04:25 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 18:50:01 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,16 @@ enum e_tex_id
 typedef uint32_t	t_hexcolor;
 typedef uint8_t		t_subpxl;
 
+typedef struct s_texture
+{
+	char			*path;
+	mlx_texture_t	*tex;
+}	t_tex;
+
 typedef struct s_vector
 {
 	double	x;
 	double	y;
 }	t_vec;
-
-typedef struct s_weapon
-{
-	char			damage;
-	char			range;
-	char			reload_time;
-	double			last_frame_time;
-	enum e_tex_id	curr_frame;
-}	t_weapon;
 
 #endif

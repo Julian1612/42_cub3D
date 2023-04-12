@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:00:17 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 15:13:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 18:52:44 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ void			debug_print_ray(t_ray *ray, t_rayhit *hit);
 void			debug_print_sprite(t_sprite *sprite);
 
 #endif
-

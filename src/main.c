@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 18:11:24 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:03:34 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,8 @@ int	test_parse(t_game *game)
 	game->map.obj_count = OBJ_COUNT;
 	game->map.enemies = enemies;
 	game->map.enemy_count = ENEMY_COUNT;
-	game->map.ceiling_color = convert_to_hexcode(0, 0, 0, 0);
-	game->map.floor_color = convert_to_hexcode(0, 0, 0, 150);
+	game->map.ceiling_color = 0x00000000;
+	game->map.floor_color = 0x00FFFFFF;
 	game->player.pos.x = 2;
 	game->player.pos.y = 2;
 	game->player.cplane.x = 0;

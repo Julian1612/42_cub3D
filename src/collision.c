@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 15:46:10 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:00:25 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static bool	is_wall(double x, double y, char **map)
 	return (false);
 }
 
-// @todo (problem: Permutability?) change to regular block collision (use map identifiers) after merge
-// @todo enemy collision in a good way
+// @todo (problem: Permutability?) change to regular 
+// block collision (use map identifiers) after merge
 static bool	is_sprite(double x, double y, t_object *objects, int obj_count)
 {
 	int		i;
@@ -73,7 +73,7 @@ static bool	is_sprite(double x, double y, t_object *objects, int obj_count)
 	return (false);
 }
 
-// @note returns index of enemy if collision, -1 if no collision
+// returns the index of the enemy that is in the way, NOT_SET if none
 int	collision_is_enemy(double x, double y, t_map *map, int enemy_num)
 {
 	int		i;
@@ -93,8 +93,6 @@ int	collision_is_enemy(double x, double y, t_map *map, int enemy_num)
 	return (NOT_SET);
 }
 
-// @note function usable for enemies?
-// @note can this be done less computationally expensive?
 bool	collision_is_true(double x, double y, t_map *map, int enemy_num)
 {
 	if (is_wall(x, y, map->arr))

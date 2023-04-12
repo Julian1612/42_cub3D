@@ -6,12 +6,15 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:21:07 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 16:43:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:06:27 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../render.h" // render_all
-#include "../cub3D.h"
+#include "../cub3D.h" // t_game
+
+#define ERR_WIN "Window height to width ratio \
+cannot be smaller than 1 or greater than 2."
 
 static void	resize_camera(t_player *player, int width, int height)
 {
@@ -34,7 +37,7 @@ static void	resize(t_game *game)
 	if ((double)game->mlx->width / game->mlx->height < 1
 		|| (double)game->mlx->width / game->mlx->height > 2)
 	{
-		errexit_msg("Window height to width ratio cannot be smaller than 1 or greater than 2.");
+		errexit_msg(ERR_WIN);
 		return ;
 	}
 	last_width = game->mlx->width;

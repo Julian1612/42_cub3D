@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 15:07:19 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 18:58:50 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,29 @@
 #include <math.h> // cos, sin, tan
 #include <unistd.h> // @note for write, remove
 #include <stdbool.h> // bool
+
+t_hexcolor	convert_to_hexcode(
+	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+{
+	unsigned int	rgba;
+
+	rgba = r;
+	rgba = (rgba << 8) + g;
+	rgba = (rgba << 8) + b;
+	rgba = (rgba << 8) + a;
+	return (rgba);
+}
+
+void	tex_pixel_to_img(
+	mlx_image_t *img, mlx_texture_t *tex, t_coor *tex_coor, t_coor *img_coor)
+{
+	uint8_t	*src;
+	uint8_t	*dst;
+
+	src = &tex->pixels[coor_to_pixel(tex->width, tex_coor->x, tex_coor->y)];
+	dst = &img->pixels[coor_to_pixel(img->width, img_coor->x, img_coor->y)];
+	ft_memcpy(dst, src, 4);
+}
 
 void	sprite_init(
 	t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *player, t_game *game)

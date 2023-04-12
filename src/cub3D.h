@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 18:30:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:03:00 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,20 @@
 # define FPS 60
 
 /* ************************************************************************** */
-/* TYPEDEFS																	  */
+/* ENUMS																	  */
 /* ************************************************************************** */
 
-// @todo switch tex for pixels
-typedef struct s_texture
+enum	e_obj_type
 {
-	char			*path;
-	mlx_texture_t	*tex;
-}	t_tex;
+	DECOR_NON_PERM,
+	DECOR_PERM,
+	WEAPON,
+	COIN,
+};
+
+/* ************************************************************************** */
+/* TYPEDEFS																	  */
+/* ************************************************************************** */
 
 typedef struct s_door
 {
@@ -65,13 +70,7 @@ typedef struct s_object
 {
 	t_vec			pos;
 	t_tex			*tex;
-	enum	e_obj_type
-	{
-		DECOR_NON_PERM,
-		DECOR_PERM,
-		WEAPON,
-		COIN,
-	}				type;
+	enum e_obj_type	type;
 }	t_object;
 
 typedef struct s_minimap
@@ -84,7 +83,7 @@ typedef struct s_minimap
 	mlx_image_t		*view_dir;
 }	t_minimap;
 
-typedef struct s_enemy t_enemy;
+typedef struct s_enemy	t_enemy;
 
 typedef struct s_map
 {
@@ -118,9 +117,7 @@ typedef struct s_game
 void			errexit_msg(char *msg);
 void			errexit_mlx_errno(void);
 
-// utils
-t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
-					unsigned char b, unsigned char a);
+// math
 int				coor_to_pixel(int width, int x, int y);
 double			rotate_x(double x, double y, double angle);
 double			rotate_y(double x, double y, double angle);
@@ -131,10 +128,12 @@ double			get_dist_of_vecs(t_vec *a, t_vec *b);
 int				initialize_mlx_data(t_game *game);
 
 // collision
-bool			collision_is_true(double x, double y, t_map *map, int enemy_num);
-int				collision_is_enemy(double x, double y, t_map *map, int enemy_num);
+bool			collision_is_true(double x, double y,
+					t_map *map, int enemy_num);
+int				collision_is_enemy(double x, double y,
+					t_map *map, int enemy_num);
 
-// frame
+// time
 double			get_fps_mult(double delta_time, int fps);
 bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);

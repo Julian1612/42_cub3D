@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 13:09:28 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 13:52:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:05:03 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ void	rayhit_set_type(t_rayhit *hit, t_ray *ray, t_map *map, char target)
 		hit->hit = WALL;
 	else if (map->arr[ray->map_y][ray->map_x] == DOOR_CLOSED)
 		hit->hit = DOOR_CLOSED;
-	else if (target == DOOR_OPEN && map->arr[ray->map_y][ray->map_x] == DOOR_OPEN)
+	else if (target == DOOR_OPEN && map->arr[ray->map_y][ray->map_x]
+		== DOOR_OPEN)
 		hit->hit = DOOR_OPEN;
 	else if (target == ENEMY)
 	{
-		enemy_index = collision_is_enemy(ray->map_x + 0.5, ray->map_y + 0.5, map, NOT_SET);
+		enemy_index = collision_is_enemy(ray->map_x + 0.5,
+				ray->map_y + 0.5, map, NOT_SET);
 		if (enemy_index != NOT_SET)
 		{
 			hit->hit = ENEMY;

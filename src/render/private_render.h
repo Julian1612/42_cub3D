@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:26:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 15:24:55 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:02:47 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 /* INCLUDES																	  */
 /* ************************************************************************** */
 
+# include "../types.h" // t_hexcolor
 # include "../cub3D.h" // cub3d typedefs
 
 /* ************************************************************************** */
@@ -62,30 +63,32 @@ typedef struct s_sprite
 /* ************************************************************************** */
 
 // render_hud
-void	hud_render(t_game *game);
+void		hud_render(t_game *game);
 
 // render_wall
-void	walls_render(t_game *game, int *wall_height);
+void		walls_render(t_game *game, int *wall_height);
 
 // render_enemy
-void	enemies_render(t_game *game, t_object *objects,
-			t_enemy *enemies, int *wall_height);
+void		enemies_render(t_game *game, t_object *objects,
+				t_enemy *enemies, int *wall_height);
 
 // render_enemy_utils
-void	tex_pixel_to_img(mlx_image_t *img, mlx_texture_t *tex,
-			t_coor *tex_coor, t_coor *img_coor);
-bool	is_transparent(t_hexcolor color);
-void	draw_column(t_sprite *sprite,
-			t_spritehelper *hlpr, mlx_image_t *img);
-bool	is_visible(t_sprite *sprite, t_spritehelper *hlpr,
-			mlx_image_t *img, int *wall_height);
-void	row_set_start_end(t_start_end *row, int sprite_height,
-			int img_height, int offset);
-void	column_set_start_end(t_start_end *stripe, int sprite_width,
-			int img_width, int img_x);
+void		tex_pixel_to_img(mlx_image_t *img, mlx_texture_t *tex,
+				t_coor *tex_coor, t_coor *img_coor);
+bool		is_transparent(t_hexcolor color);
+void		draw_column(t_sprite *sprite,
+				t_spritehelper *hlpr, mlx_image_t *img);
+bool		is_visible(t_sprite *sprite, t_spritehelper *hlpr,
+				mlx_image_t *img, int *wall_height);
+void		row_set_start_end(t_start_end *row, int sprite_height,
+				int img_height, int offset);
+void		column_set_start_end(t_start_end *stripe, int sprite_width,
+				int img_width, int img_x);
 
 // render_enemy_sprite
-void	sprite_init(t_sprite *sprite, t_vec *pos, t_tex *tex,
-			t_player *player, t_game *game);
+t_hexcolor	convert_to_hexcode(unsigned char r, unsigned char g,
+				unsigned char b, unsigned char a);
+void		sprite_init(t_sprite *sprite, t_vec *pos, t_tex *tex,
+				t_player *player, t_game *game);
 
 #endif

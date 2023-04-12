@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 18:27:20 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:07:07 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,12 @@
 #include "../libraries/libft/src/libft/libft.h" // ft_memcpy
 #include <math.h> // sin, cos
 
-t_hexcolor	convert_to_hexcode(
-	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
-{
-	unsigned int	rgba;
-
-	rgba = r;
-	rgba = (rgba << 8) + g;
-	rgba = (rgba << 8) + b;
-	rgba = (rgba << 8) + a;
-	return (rgba);
-}
-
 // @todo switch to t_coor
 int	coor_to_pixel(int width, int x, int y)
 {
 	int	pixel;
 
 	pixel = y * width + x;
-	// @note multiply to get from int32 to int8
 	pixel *= 4;
 	return (pixel);
 }
@@ -62,7 +49,7 @@ int	ft_abs(int n)
 	return (n);
 }
 
-double get_dist_of_vecs(t_vec *a, t_vec *b)
+double	get_dist_of_vecs(t_vec *a, t_vec *b)
 {
 	return ((a->x - b->x) * (a->x - b->x) + (a->y - b->y) * (a->y - b->y));
 }

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemy.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/12 18:55:13 by lorbke            #+#    #+#             */
+/*   Updated: 2023/04/12 19:07:34 by lorbke           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3D.h" // t_game
 #include "enemy.h" // t_enemy
@@ -12,8 +23,10 @@ void	enemy_move(t_enemy *enemy, t_map *map, double x_offset, double y_offset, in
 	bool	coll_y;
 	int		state;
 
-	coll_x = collision_is_true(enemy->pos.x + x_offset, enemy->pos.y, map, enemy_index);
-	coll_y = collision_is_true(enemy->pos.x, enemy->pos.y + y_offset, map, enemy_index);
+	coll_x = collision_is_true(enemy->pos.x + x_offset,
+			enemy->pos.y, map, enemy_index);
+	coll_y = collision_is_true(enemy->pos.x,
+			enemy->pos.y + y_offset, map, enemy_index);
 	state = ZOMBIE_RUN1;
 	if (coll_x == false && coll_y == false)
 	{

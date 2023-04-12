@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:49:01 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 16:15:45 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 18:49:37 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,17 @@
 /* TYPEDEFS																	  */
 /* ************************************************************************** */
 
+// avoid circular dependency
 typedef struct s_game	t_game;
+
+typedef struct s_weapon
+{
+	char			damage;
+	char			range;
+	char			reload_time;
+	double			last_frame_time;
+	enum e_tex_id	curr_frame;
+}	t_weapon;
 
 typedef struct s_player
 {
