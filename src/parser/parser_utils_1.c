@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 11:28:41 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 19:35:25 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 20:20:39 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include "../../libraries/libft/src/libft/libft.h" // ft_* functions
 #include "string.h" // NULL
 #include <stdlib.h> // malloc, free
+
+void	remove_last_char(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	str[i - 1] = '\0';
+}
 
 int	clear_mem(char **line)
 {

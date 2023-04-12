@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:18:45 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 21:05:33 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
-#include <stdio.h>
+#include "../cub3D.h" // t_game
+#include <string.h> // NULL
 #include <math.h>
 
 static void	draw_square(t_minimap *minimap, int i, int j, char symbol);
 static void	draw_minimap(t_game *game);
 
-int	render_minimap(t_game *game)
+int	minimap_render(t_game *game)
 {
+	if (game->minimap.visible == false)
+		return (0);
 	mlx_delete_image(game->mlx, game->minimap.minimap_walls);
 	game->minimap.minimap_walls = mlx_new_image(game->mlx,
 			MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);

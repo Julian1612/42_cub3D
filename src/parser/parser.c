@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 19:35:30 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:00:39 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	parser(int *argc, char **argv, t_game *game)
 	if (get_file_data(&game->map, argv[1]))
 		return (1);
 	if (check_mandatory_textures(&game->map))
+		return (1);
+	if (check_bonus_textures(&game->map))
 		return (1);
 	if (check_map(&game->map))
 		return (1);

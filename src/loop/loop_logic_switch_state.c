@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_logic_door.c                                  :+:      :+:    :+:   */
+/*   loop_logic_switch_state.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:27:04 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 18:31:37 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 21:02:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static enum e_tex_id	switch_state(enum e_tex_id state)
 		return (DOOR_CLOSED);
 }
 
-void	switch_door_state(t_game *game, t_player *player)
+void	switch_state_door(t_game *game, t_player *player)
 {
 	t_rayhit	hit;
 	char		target;
@@ -60,4 +60,11 @@ void	switch_door_state(t_game *game, t_player *player)
 		}
 		i++;
 	}
+}
+
+void	switch_state_minimap(t_game *game, t_player *player)
+{
+	game->minimap.minimap_walls->instances[0].enabled
+		= switch_bool(game->minimap.minimap_walls->instances[0].enabled);
+	game->minimap.visible = switch_bool(game->minimap.visible);
 }

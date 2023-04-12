@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:00:25 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 20:55:54 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static bool	is_sprite(double x, double y, t_object *objects, int obj_count)
 	double	dist_x;
 	double	dist_y;
 
+	if (obj_count == 0)
+		return (false);
 	i = -1;
 	while (i++ < obj_count)
 	{
@@ -80,6 +82,8 @@ int	collision_is_enemy(double x, double y, t_map *map, int enemy_num)
 	double	dist_x;
 	double	dist_y;
 
+	if (map->enemy_count == 0)
+		return (NOT_SET);
 	i = NOT_SET;
 	while (i++ < map->enemy_count)
 	{

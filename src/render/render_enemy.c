@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:38:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:24:40 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 20:34:16 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static void	sort_enemies(t_vec *pos,
 	double		dist_new;
 
 	i = 0;
+	if (enemy_count == 0)
+		return ;
 	while (i < enemy_count - 1)
 	{
 		dist_old = get_dist_of_vecs(pos, &enemies[i].pos);
@@ -91,13 +93,15 @@ void	enemies_render(
 	int			i;
 
 	sort_enemies(&game->player.pos, objects, enemies, game->map.enemy_count);
+	if (game->map.enemy_count == 0)
+		return ;
 	i = -1;
 	while (i++ < game->map.enemy_count)
 	{
 		if (game->map.enemies[i].alive == false)
 			continue ;
 		sprite_init(&sprite, &enemies[i].pos,
-			game->map.textures[enemies[i].curr_frame], &game->player, game);
+			&game->map.textures[enemies[i].curr_frame], &game->player, game);
 		debug_print_sprite(&sprite);
 		draw_sprite(&sprite, game->img_world, wall_height);
 	}

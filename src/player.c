@@ -6,18 +6,21 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:50:14 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 16:16:08 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 20:41:06 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h" // t_player
 #include "raycast.h" // raycast_cast_ray
+#include <string.h> // NULL
 #include <math.h> // cos, sin
 
 void	player_shoot(t_player *player, t_enemy *enemies, t_game *game)
 {
 	t_rayhit	hit;
 
+	if (player->weapon == NULL)
+		return ;
 	if (is_next_frame(&player->weapon->last_frame_time) == true)
 	{
 		player->weapon->curr_frame++;

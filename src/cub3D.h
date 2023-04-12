@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 19:32:30 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 20:54:37 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,8 @@ typedef struct s_minimap
 	t_vec			pos;
 	double			width;
 	double			height;
-	int				visible;
+	bool			visible;
 	mlx_image_t		*minimap_walls;
-	mlx_image_t		*player;
 	mlx_image_t		*walls;
 	mlx_image_t		*view_dir;
 }	t_minimap;
@@ -92,7 +91,7 @@ typedef struct s_enemy	t_enemy;
 typedef struct s_map
 {
 	char		**arr;
-	t_tex		*textures[4]; // muss noch erhöht werden auf texturen von gegnern und türen
+	t_tex		textures[ZOMBIE_DEAD8 + 1];
 	t_door		*doors;
 	int			door_count;
 	t_object	*objects;
@@ -152,6 +151,7 @@ t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 
 // initialize
+void			initialize_player_data(t_player *player);
 int				initialize_mlx_data(t_game *game);
 
 // collision

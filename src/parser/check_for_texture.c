@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 18:24:09 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:39:51 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ static int	get_texture_file_path(t_map *map_data, char **line,
 		*error = 1;
 		return (error_message(8, map_data));
 	}
-	if (map_data->textures[i]->path != NULL)
+	if (map_data->textures[i].path != NULL)
 	{
 		ft_free_arr((void **)line);
 		*error = 1;
 		return (error_message(5, map_data));
 	}
-	cpy_line(&map_data->textures[i]->path,
+	cpy_line(&map_data->textures[i].path,
 		line[1], ft_strlen(line[1]));
 	ft_free_arr((void **)line);
 	return (0);

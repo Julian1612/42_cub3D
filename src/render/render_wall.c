@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:22:53 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:21:18 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 20:41:37 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	set_ray_dir(
 {
 	double	camera_x;
 
-	camera_x = 2 * (img_width - x - 1) / img_width - 1;
+	camera_x = 2 * x / img_width - 1;
 	ray_dir->x = player->dir.x + player->cplane.x * camera_x;
 	ray_dir->y = player->dir.y + player->cplane.y * camera_x;
 }
@@ -100,7 +100,7 @@ void	walls_render(t_game *game, int *wall_height)
 			img_x, game->map.ceiling_color);
 		fcknorm.x = img_x;
 		fcknorm.y = wall_height[img_x];
-		draw_wall(game->img_world, game->map.textures[ray_hit.tex_id]->tex,
+		draw_wall(game->img_world, game->map.textures[ray_hit.tex_id].tex,
 			ray_hit.x_offset, &fcknorm);
 		draw_floor(game->img_world, wall_height[img_x],
 			img_x, game->map.floor_color);

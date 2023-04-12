@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 18:31:34 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 21:14:15 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../raycast.h" // raycast funcs
 #include "../debug.h" // debug_print_player
 #include <math.h> // math funcs
+#include <string.h> // NULL
 
 #define MOV_SPEED 0.1
 #define ROT_SPEED 0.05
@@ -27,6 +28,8 @@ static void	handle_enemies(
 	int		i;
 	double	enemy_speed;
 
+	if (map->enemy_count == 0)
+		return ;
 	enemy_speed = ENEMY_SPEED * fps_mult;
 	i = -1;
 	while (i++ < map->enemy_count)
@@ -49,6 +52,15 @@ static void	handle_enemies(
 	}
 }
 
+static void	handle_minimap_keys(mlx_key_data_t keydata, void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	if (keydata.key == MLX_KEY_F && keydata.action == MLX_RELEASE)
+		switch_state_minimap(game, &game->player);
+}
+
 static void	handle_action_keys(
 	mlx_t *mlx, t_player *player, t_game *game)
 {
@@ -59,10 +71,10 @@ static void	handle_action_keys(
 	}
 	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
 		player_shoot(player, game->map.enemies, game);
-	else
+	else if (player->weapon != NULL)
 		player->weapon->curr_frame = GUN1;
 	if (mlx_is_key_down(mlx, MLX_KEY_E))
-		switch_door_state(game, player);
+		switch_state_door(game, player);
 }
 
 static void	handle_movement_keys(
@@ -102,6 +114,7 @@ void	loop_logic(t_game *game)
 	fps_mult = get_fps_mult(game->mlx->delta_time, FPS);
 	handle_action_keys(game->mlx, &game->player, game);
 	handle_movement_keys(game->mlx, &game->player, &game->map, fps_mult);
+	mlx_key_hook(game->mlx, &handle_minimap_keys, game);
 	handle_enemies(game->map.enemies, &game->map, &game->player, fps_mult);
 	debug_print_player(&game->player);
 	if (game->player.health <= 0)

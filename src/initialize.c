@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:24:00 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 20:53:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdlib.h> // NULL
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
-#include <stdio.h> // printf
 
 #define PLAYER_SIZE 2
 #define DIRECTION 2
@@ -27,7 +26,7 @@ static int	initialize_minimap(t_game *game)
 			MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);
 	if (game->minimap.minimap_walls == NULL)
 		return (ERROR);
-	if (mlx_image_to_window(game->mlx, game->minimap.minimap_walls, 0, 0) == -1)
+	if (mlx_image_to_window(game->mlx, game->minimap.minimap_walls, 0, 0) == ERROR)
 		return (ERROR);
 	game->minimap.visible = 0;
 	return (SUCCESS);
@@ -40,8 +39,8 @@ static int	initialize_textures(t_game *game)
 	i = 0;
 	while (i <= ZOMBIE_DEAD8)
 	{
-		game->map.textures[i]->tex = mlx_load_png(game->map.textures[i]->path);
-		if (game->map.textures[i]->tex == NULL)
+		game->map.textures[i].tex = mlx_load_png(game->map.textures[i].path);
+		if (game->map.textures[i].tex == NULL)
 			return (ERROR);
 		i++;
 	}
@@ -69,4 +68,12 @@ int	initialize_mlx_data(t_game *game)
 	if (initialize_minimap(game) == ERROR)
 		return (ERROR);
 	return (SUCCESS);
+}
+
+void	initialize_player_data(t_player *player)
+{
+	player->health = 100;
+	player->cplane.x = 0;
+	player->cplane.y = (double)WIDTH / HEIGHT / 2;
+	player->weapon = NULL;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 18:30:26 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 20:02:33 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,6 @@ static void	free_struct(t_map *map_data)
 
 	if (map_data == NULL)
 		return ;
-	i = 0;
-	// die 4 austauchen durch define
-	while (i < 4)
-	{
-		if (map_data->textures[i]->path != NULL)
-			free(map_data->textures[i]->path);
-		i++;
-	}
 	i = 0;
 	if (map_data->arr != NULL)
 	{

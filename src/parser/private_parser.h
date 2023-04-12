@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 19:35:32 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 20:20:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int				check_for_new_line(char **splitted_str, int *error);
 void			clear_buffer(char **line);
 
 /* parser_utils_1.c */
+void			remove_last_char(char *str);
 int				clear_mem(char **line);
 char			*ft_strjoin_free_s1(char const *s1, char const *s2);
 

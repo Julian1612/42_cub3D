@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:55:32 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 18:50:01 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:45:52 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,7 @@ enum e_tex_id
 	EAST,
 	SOUTH,
 	WEST,
-	KNIGHT,
-	LAMP,
-	TABLE,
 	DOOR_FRONT,
-	DOOR_SIDE,
 	GUN1,
 	GUN2,
 	GUN3,

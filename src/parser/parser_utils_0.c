@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 14:10:46 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:40:37 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	init_struct_null(t_map *map_data)
 	i = 0;
 	while (i < 4)
 	{
-		map_data->textures[i] = malloc(sizeof(t_tex));
-		map_data->textures[i]->path = NULL;
+		map_data->textures[i].path = NULL;
 		i++;
 	}
 	map_data->ceiling_color = -1;

@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/12 19:33:29 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/12 21:00:10 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,10 @@ SRC			=	check_for_map.c check_for_rgb.c check_for_texture.c check_map.c \
 				init_start_screen.c start_screen.c \
 				raycast.c raycast_ray.c raycast_rayhit.c \
 				render.c render_wall.c render_hud.c render_enemy.c \
-				render_enemy_sprite.c render_enemy_utils.c \
-				loop.c loop_logic.c loop_logic_door.c loop_graphic.c \
+				render_enemy_sprite.c render_enemy_utils.c render_minimap.c \
+				loop.c loop_logic.c loop_logic_switch_state.c loop_graphic.c \
 				collision.c debug.c initialize.c errexit.c math.c time.c \
-				minimap.c player.c enemy.c utils.c main.c
+				player.c enemy.c utils.c main.c
 
 INC			=	-I./src -I$(LIBMLX)/include/MLX42 -I$(LIBFT)/src/libft
 HEADERS		=	cub3D.h raycast.h render.h raycast/private_raycast.h \
