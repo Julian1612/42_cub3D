@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 21:14:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 21:19:49 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	free_data(t_map *map_data)
 // @todo add exit
 // @todo add game over and win screen
 // @todo delete unnecessary texture files
+// @todo rename Julian functinos
+// @todo refactor mandatory
 
 int	main(int argc, char **argv)
 {
@@ -75,9 +77,9 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	if (mlx_image_to_window(game.mlx, game.img_hud, 0, 0) == ERROR)
 		errexit_mlx_errno();
-	// if (initialize_start_screen(&game) == ERROR)
-	// 	errexit_mlx_errno();
-	// draw_background(&game.start_screen);
+	if (initialize_start_screen(&game) == ERROR)
+		errexit_mlx_errno();
+	draw_background(&game.start_screen);
 	initialize_player_data(&game.player);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
