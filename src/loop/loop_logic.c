@@ -6,10 +6,11 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 16:43:23 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 18:31:34 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "private_loop.h" // loop door funcs
 #include "../cub3D.h"
 #include "../raycast.h" // raycast funcs
 #include "../debug.h" // debug_print_player
@@ -17,14 +18,11 @@
 
 #define MOV_SPEED 0.1
 #define ROT_SPEED 0.05
-#define DOOR_COOLDOWN 0.2
-#define PLAYER_REACH 2.0
 #define ENEMY_SPEED 0.04
 
 static void	handle_enemies(
 	t_enemy *enemies, t_map *map, t_player *player, double fps_mult)
 {
-	t_vec	dir;
 	double	angle;
 	int		i;
 	double	enemy_speed;
@@ -40,43 +38,14 @@ static void	handle_enemies(
 			enemy_die(&enemies[i], map, i);
 			continue ;
 		}
-		angle = atan2(player->pos.y - enemies[i].pos.y, player->pos.x - enemies[i].pos.x);
-		dir.x = cos(angle);
-		dir.y = sin(angle);
-		if (fabs(enemies[i].pos.x - player->pos.x) < 0.5 && fabs(enemies[i].pos.y - player->pos.y) < 0.5)
+		angle = atan2(player->pos.y - enemies[i].pos.y,
+				player->pos.x - enemies[i].pos.x);
+		if (fabs(enemies[i].pos.x - player->pos.x) < 0.5
+			&& fabs(enemies[i].pos.y - player->pos.y) < 0.5)
 			enemy_attack(player, &enemies[i]);
 		else
-			enemy_move(&enemies[i], map, dir.x * enemy_speed, dir.y * enemy_speed, i);
-	}
-}
-
-static void	switch_door_state(t_game *game, t_player *player)
-{
-	t_rayhit	hit;
-	char		target;
-	int			i;
-
-	i = 0;
-	while (i < game->map.door_count)
-	{
-		if (mlx_get_time() - game->map.doors[i].last_action > DOOR_COOLDOWN)
-		{
-			if (game->map.doors[i].open == false)
-				target = DOOR_CLOSED;
-			else
-				target = DOOR_OPEN;
-			raycast_cast_ray(&hit, game, player->dir, target);
-			if (hit.hit == target && hit.dist <= PLAYER_REACH && hit.dist > 0.5)
-			{
-				if (game->map.doors[i].open == false)
-					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_OPEN;
-				else
-					game->map.arr[game->map.doors[i].y][game->map.doors[i].x] = DOOR_CLOSED;
-				game->map.doors[i].open = switch_bool(game->map.doors[i].open);
-			}
-			game->map.doors[i].last_action = mlx_get_time();
-		}
-		i++;
+			enemy_move(&enemies[i], map, cos(angle)
+				* enemy_speed, sin(angle) * enemy_speed, i);
 	}
 }
 

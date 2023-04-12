@@ -6,12 +6,13 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 15:47:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 18:11:24 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
 #include "enemy.h" // t_enemy
+#include "loop.h" // loop
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
 #include <stdlib.h> // malloc
 #include <stdio.h> // @note remove, printf
@@ -170,7 +171,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (initialize_mlx_data(&game) == ERROR)
 		errexit_mlx_errno();
-	if (mlx_loop_hook(game.mlx, &hook, &game) == false)
+	if (mlx_loop_hook(game.mlx, &loop, &game) == false)
 		errexit_mlx_errno();
 	if (mlx_image_to_window(game.mlx, game.img_world, 0, 0) == ERROR)
 		errexit_mlx_errno();

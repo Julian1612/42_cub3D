@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 16:04:35 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 18:30:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,10 @@ int				coor_to_pixel(int width, int x, int y);
 double			rotate_x(double x, double y, double angle);
 double			rotate_y(double x, double y, double angle);
 int				ft_abs(int n);
-bool			switch_bool(bool b);
 double			get_dist_of_vecs(t_vec *a, t_vec *b);
 
 // initialize
 int				initialize_mlx_data(t_game *game);
-
-// hook
-void			hook(void *param);
 
 // collision
 bool			collision_is_true(double x, double y, t_map *map, int enemy_num);

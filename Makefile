@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/12 16:38:31 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/12 18:30:36 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
 SRC			=	raycast.c raycast_ray.c raycast_rayhit.c \
 				render.c render_wall.c render_hud.c render_enemy.c \
 				render_enemy_sprite.c render_enemy_utils.c \
-				loop.c loop_logic.c loop_graphic.c \
+				loop.c loop_logic.c loop_logic_door.c loop_graphic.c \
 				collision.c debug.c initialize.c \
-				errexit.c hook.c utils.c time.c enemy.c player.c main.c
+				errexit.c utils.c time.c enemy.c player.c main.c
 
 INC			=	-I./src -I$(LIBMLX)/include/MLX42 -I$(LIBFT)/src/libft
 HEADERS		=	cub3D.h raycast.h render.h raycast/private_raycast.h \

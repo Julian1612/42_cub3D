@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:39:03 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 16:40:19 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 18:30:12 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,19 @@
 /* INCLUDES																	  */
 /* ************************************************************************** */
 
-# include "../cub3d.h" // t_game
+# include "../cub3D.h" // t_game
 
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
-// loop
+// loop_logic
 void	loop_logic(t_game *game);
+
+// loop_graphic
 void	loop_graphic(t_game *game);
+
+// loop_door
+void	switch_door_state(t_game *game, t_player *player);
 
 #endif

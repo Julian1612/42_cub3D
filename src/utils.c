@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 15:18:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 18:27:20 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,6 @@ int	ft_abs(int n)
 	if (n < 0)
 		return (-n);
 	return (n);
-}
-
-bool	switch_bool(bool b)
-{
-	if (b == true)
-		return (false);
-	return (true);
 }
 
 double get_dist_of_vecs(t_vec *a, t_vec *b)
