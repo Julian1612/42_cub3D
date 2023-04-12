@@ -6,10 +6,11 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 01:27:11 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:46:10 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "enemy.h" // t_enemy
 #include "cub3D.h" // t_game
 #include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
 #include <stdio.h> // @note remove

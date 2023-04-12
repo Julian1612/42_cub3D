@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 15:19:48 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:45:03 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,19 +131,6 @@ typedef struct s_weapon
 	enum e_tex_id	curr_frame;
 }	t_weapon;
 
-// @note enemies are always oriented towards the player
-// @todo speed is not used
-typedef struct s_enemy
-{
-	bool			alive;
-	t_vec			pos;
-	char			health;
-	double			speed;
-	char			damage;
-	double			last_frame_time;
-	enum e_tex_id	curr_frame;
-}	t_enemy;
-
 typedef struct s_minimap
 {
 	t_vec			pos;
@@ -153,6 +140,8 @@ typedef struct s_minimap
 	mlx_image_t		*walls;
 	mlx_image_t		*view_dir;
 }	t_minimap;
+
+typedef struct s_enemy t_enemy;
 
 typedef struct s_map
 {
@@ -221,8 +210,5 @@ int				collision_is_enemy(double x, double y, t_map *map, int enemy_num);
 double			get_fps_mult(double delta_time, int fps);
 bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);
-
-// enemy
-void			enemies(t_enemy *enemies, t_map *map, t_player *player, double fps_mult);
 
 #endif

@@ -6,11 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:38:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 15:26:59 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:45:38 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_render.h" // render funcs
+#include "../enemy.h" // t_enemy
 #include "../debug.h" // debug funcs
 #include "libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
 

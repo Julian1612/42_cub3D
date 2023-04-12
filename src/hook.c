@@ -6,11 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/12 15:29:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 15:46:38 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game
+#include "enemy.h" // enemy funcs
 #include "render.h" // render_all
 #include "raycast.h" // t_rayhit
 #include "debug.h" // debug_print_player
@@ -23,6 +24,35 @@
 #define ROT_SPEED 0.05
 #define DOOR_COOLDOWN 0.2
 #define PLAYER_REACH 2.0
+#define ENEMY_SPEED 0.04
+
+static void	enemies(t_enemy *enemies, t_map *map, t_player *player, double fps_mult)
+{
+	t_vec	dir;
+	double	angle;
+	int		i;
+	double	enemy_speed;
+
+	enemy_speed = ENEMY_SPEED * fps_mult;
+	i = -1;
+	while (i++ < map->enemy_count)
+	{
+		if (enemies[i].alive == false)
+			continue ;
+		if (enemies[i].health <= 0)
+		{
+			enemy_die(&enemies[i], map, i);
+			continue ;
+		}
+		angle = atan2(player->pos.y - enemies[i].pos.y, player->pos.x - enemies[i].pos.x);
+		dir.x = cos(angle);
+		dir.y = sin(angle);
+		if (fabs(enemies[i].pos.x - player->pos.x) < 0.5 && fabs(enemies[i].pos.y - player->pos.y) < 0.5)
+			enemy_attack(player, &enemies[i]);
+		else
+			enemy_move(&enemies[i], map, dir.x * enemy_speed, dir.y * enemy_speed, i);
+	}
+}
 
 static void	switch_door_state(t_game *game, t_player *player)
 {
