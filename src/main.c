@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 19:03:34 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:10:13 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,21 +147,15 @@ int	test_parse(t_game *game)
 }
 
 // @todo resizing segfault when shooting because of weapon texture
-// @todo refactor hook functions for more readability (logic loop and render loop?)
-// @todo go through code and refactor function parameters
 // @todo fix the mlx compiling shit
-// @todo split up into sensible modules (render module etc.)
-// @todo rename object to sprite and sprite struct to sprite_helper or something?
-// @todo make struct out of frame variables
 // @todo scale gun textures to 64x64
 // @todo compile with wall werror wextra
-// @todo remove cooldown function
 // @todo make re not working correctly
-// @todo add cooldown for enemy
-// @todo add coins
 // @todo add health bar
 // @todo add sounds
 // @todo make weapon pickupable
+// @todo add exit
+// @todo add game over and win screen
 
 int	main(int argc, char **argv)
 {
