@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 01:22:48 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:18:26 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,18 @@ static int	search_for_player(t_game *game, int i,
 		if (line[j] == 'N' || line[j] == 'S'
 			|| line[j] == 'E' || line[j] == 'W')
 		{
-			if ((j == 0 || j == line_len - 1)
-				|| (j < line_len && game->map.arr[i][j + 1] == ' ')
-				|| (j > 0 && game->map.arr[i][j - 1] == ' ')
-				|| (i > 0 && i < game->map.height - 1
-					&& (game->map.arr[i + 1][j] == ' '
-					|| game->map.arr[i - 1][j] == ' ')))
+			if (j > 0 && game->map.arr[i][j - 1] == ' ')
+				return (error_get_map(8, &game->map));
+			else if (game->map.arr[i][j + 1] == '\0'
+				|| game->map.arr[i][j + 1] == ' ')
+				return (error_get_map(8, &game->map));
+			else if (((int) ft_strlen(game->map.arr[i + 1]) >= j
+					&& game->map.arr[i + 1][j] == ' ')
+				|| ((int) ft_strlen(game->map.arr[i - 1]) >= j
+					&& game->map.arr[i - 1][j] == ' '))
+				return (error_get_map(8, &game->map));
+			else if ((int) ft_strlen(game->map.arr[i + 1]) <= j
+				|| (int) ft_strlen(game->map.arr[i - 1]) <= j)
 				return (error_get_map(8, &game->map));
 			game->player.pos.x = j + 0.5;
 			game->player.pos.y = i + 0.5;

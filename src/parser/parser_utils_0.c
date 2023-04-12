@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 14:37:50 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:10:46 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	init_struct_null(t_map *map_data)
 	map_data->arr = NULL;
 	map_data->enemies = NULL;
 	map_data->doors = NULL;
+	map_data->door_count = 0;
+	map_data->enemy_count = 0;
 }
 
 int	is_all_digit(char **str)

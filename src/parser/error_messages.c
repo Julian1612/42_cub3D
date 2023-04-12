@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 02:17:54 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:30:26 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,46 +101,21 @@ int	error_get_map(int error_code, t_map *map_data)
 		printf("Error!\nInvalid new line\n");
 	else if (error_code == 8)
 		printf("Error!\nPlayer is out of bounds\n");
-	else if (error_code == 9)
-		printf("Error!\nFoe is out of bounds\n");
-	else if (error_code == 10)
-		printf("Error!\nDoor is out of bounds\n");
 	printf("========================================\n");
 	free_struct(map_data);
 	return (1);
 }
 
-
 void	free_doors(t_map *map_data)
 {
-	int	i;
-
-	i = 0;
-	if (map_data->doors != NULL)
-	{
-		while (i < map_data->door_count)
-		{
-			free(&map_data->doors[i]);
-			i++;
-		}
+	if (map_data->door_count > 0 && map_data->doors != NULL)
 		free(map_data->doors);
-	}
 }
 
 void	free_enemies(t_map *map_data)
 {
-	int	i;
-
-	i = 0;
-	if (map_data->enemies != NULL)
-	{
-		while (i < map_data->enemy_count)
-		{
-			free(&map_data->enemies[i]);
-			i++;
-		}
+	if (map_data->enemy_count > 0 && map_data->enemies != NULL)
 		free(map_data->enemies);
-	}
 }
 
 static void	free_struct(t_map *map_data)
@@ -170,4 +145,3 @@ static void	free_struct(t_map *map_data)
 	free_doors(map_data);
 	free_enemies(map_data);
 }
-

@@ -6,12 +6,12 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 01:28:06 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:35:32 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // typedefs
-#include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+// #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
 #include <math.h> // sin, cos
 
 t_hexcolor	convert_to_hexcode(

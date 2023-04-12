@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:12:10 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 01:58:38 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 16:10:48 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,34 @@ static int	get_sprites_count(t_map *map_data)
 	return (0);
 }
 
-int	check_door_position(t_map *map, int i, int j, int line_len)
+int	check_for_sprites(t_game *game, char *line, int i, int j)
 {
-	if ((j == 0 || j == line_len - 1)
-		|| (j < line_len && map->arr[i][j + 1] == ' ')
-		|| (j > 0 && map->arr[i][j - 1] == ' '))
-		return (error_get_map(10, map));
+	int			line_len;
+	static int	count_enemies = 0;
+	static int	count_doors = 0;
+
+	line_len = ft_strlen(line);
+	if ((line[j] == 'F' && count_enemies < game->map.enemy_count)
+		|| (line[j] == 'D' && count_doors < game->map.door_count))
+	{
+		if (j > 0 && game->map.arr[i][j - 1] == ' ')
+			return (error_get_map(1, &game->map));
+		else if (game->map.arr[i][j + 1] == '\0'
+			|| game->map.arr[i][j + 1] == ' ')
+			return (error_get_map(1, &game->map));
+		else if (((int) ft_strlen(game->map.arr[i + 1]) >= j
+				&& game->map.arr[i + 1][j] == ' ')
+			|| ((int) ft_strlen(game->map.arr[i - 1]) >= j
+				&& game->map.arr[i - 1][j] == ' '))
+			return (error_get_map(1, &game->map));
+		else if ((int) ft_strlen(game->map.arr[i + 1]) <= j
+			|| (int) ft_strlen(game->map.arr[i - 1]) <= j)
+			return (error_get_map(1, &game->map));
+		if (line[j] == 'F')
+			init_enemy(&game->map, i, j, count_enemies++);
+		else if (line [j] == 'D')
+			init_door(&game->map, i, j, count_doors++);
+	}
 	return (0);
 }
 
@@ -90,36 +112,12 @@ static int	search_for_sprites(t_game *game, int i,
 			char *line)
 {
 	int			j;
-	int			line_len;
-	static int	count_enemies = 0;
-	static int	count_doors = 0;
 
 	j = 0;
 	while (line[j] != '\0')
 	{
-		line_len = ft_strlen(line);
-		if (line[j] == 'F' && count_enemies < game->map.enemy_count)
-		{
-			if ((j == 0 || j == line_len - 1)
-				|| (j < line_len && line[j + 1] == ' ')
-				|| (j > 0 && line[j - 1] == ' ')
-				|| (i > 0 && i < game->map.height - 1
-					&& (game->map.arr[i + 1][j] == ' '
-					|| game->map.arr[i - 1][j] == ' ')))
-				return (error_get_map(9, &game->map));
-			init_enemy(&game->map, i, j, count_enemies++);
-		}
-		if (line[j] == 'D' && count_doors < game->map.door_count)
-		{
-			if ((j == 0 || j == line_len - 1)
-				|| (j < line_len && game->map.arr[i][j + 1] == ' ')
-				|| (j > 0 && game->map.arr[i][j - 1] == ' ')
-				|| (i > 0 && i < game->map.height - 1
-					&& (game->map.arr[i + 1][j] == ' '
-					|| game->map.arr[i - 1][j] == ' ')))
-				return (error_get_map(10, &game->map));
-			init_door(&game->map, i, j, count_doors++);
-		}
+		if (check_for_sprites(game, line, i, j))
+			return (1);
 		j++;
 	}
 	return (0);

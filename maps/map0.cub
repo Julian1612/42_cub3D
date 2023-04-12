@@ -1,16 +1,14 @@
 
+
 F 255,255,255
-C 255,255,255
 
 WE ./textures/east.png
 EA ./textures/east.png
 NO textures/north.png
 SO  textures/north.png
+C 255,255,1
 
-     1111111111111
-111111111000000001
-10001D101000000001
-10001DN1111111111
-111111111
-111111111
-111111 11
+11
+1N1
+1F1
+11

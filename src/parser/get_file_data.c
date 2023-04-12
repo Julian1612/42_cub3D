@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 14:37:38 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:13:59 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,7 @@ int	check_for_invalid_definition(t_map *map_data, char *line, int *error)
 	i = 0;
 	while (line[i] != '\0' && line[i] != ' ')
 	{
-		if (line[i] != 'S' && line[i] != 'W'
-			&& line[i] != 'E' && line[i] != 'N'
-			&& line[i] != 'F' && line[i] != 'C'
+		if (line[i] != 'F' && line[i] != 'C'
 			&& line[i] != ' ' && line[i] != '\n')
 		{
 			*error = 1;
@@ -109,9 +107,11 @@ int	check_for_invalid_definition(t_map *map_data, char *line, int *error)
 
 static int	check_line(t_map *map_data, char *line, int fd, int *error)
 {
-	if (check_for_texture(map_data, line, error))
+	if(line > 0 && line[0] == '\n')
 		return (0);
 	else if (check_for_rgb(map_data, line, error))
+		return (0);
+	else if (check_for_texture(map_data, line, error))
 		return (0);
 	else if (check_for_map(map_data, line, fd, error))
 		return (1);
