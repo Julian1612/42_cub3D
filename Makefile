@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/12 15:29:03 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/12 16:15:28 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC			=	raycast.c raycast_ray.c raycast_rayhit.c \
 				render.c render_wall.c render_hud.c render_enemy.c \
 				render_enemy_sprite.c render_enemy_utils.c \
 				collision.c debug.c initialize.c \
-				errexit.c hook.c utils.c time.c enemy.c main.c
+				errexit.c hook.c utils.c time.c enemy.c player.c main.c
 
 INC			=	-I./src -I$(LIBMLX)/include/MLX42 -I$(LIBFT)/src/libft
 HEADERS		=	cub3D.h raycast.h render.h raycast/private_raycast.h \

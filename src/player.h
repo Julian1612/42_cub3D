@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemy.h                                            :+:      :+:    :+:   */
+/*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 15:31:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 16:14:42 by lorbke           ###   ########.fr       */
+/*   Created: 2023/04/12 15:49:01 by lorbke            #+#    #+#             */
+/*   Updated: 2023/04/12 16:15:45 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENEMY_H
-# define ENEMY_H
+#ifndef PLAYER_H
+# define PLAYER_H
 
 /* ************************************************************************** */
 /* INCLUDES																	  */
 /* ************************************************************************** */
 
+# include "enemy.h" // t_enemy
 # include "types.h" // t_vec
 # include <stdbool.h> // bool
 
@@ -24,28 +25,24 @@
 /* TYPEDEFS																	  */
 /* ************************************************************************** */
 
-typedef struct s_map	t_map;
-typedef struct s_player	t_player;
+typedef struct s_game	t_game;
 
-typedef struct s_enemy
+typedef struct s_player
 {
-	bool			alive;
 	t_vec			pos;
-	char			health;
-	double			speed;
-	char			damage;
-	double			last_frame_time;
-	enum e_tex_id	curr_frame;
-}	t_enemy;
+	t_vec			cplane;
+	t_vec			dir;
+	int				health;
+	t_weapon		*weapon;
+}	t_player;
 
 /* ************************************************************************** */
 /* FUNCTIONS																  */
 /* ************************************************************************** */
 
-// enemy
-void	enemy_move(t_enemy *enemy, t_map *map, double x_offset,
-			double y_offset, int enemy_index);
-void	enemy_attack(t_player *player, t_enemy *enemy);
-void	enemy_die(t_enemy *enemy, t_map *map, int enemy_index);
+// player
+void	player_shoot(t_player *player, t_enemy *enemies, t_game *game);
+void	player_move(t_vec *pos, t_map *map, double x_offset, double y_offset);
+void	player_rotate(t_player *player, double rot_speed, bool left);
 
 #endif

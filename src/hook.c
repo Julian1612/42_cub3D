@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/12 15:46:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 16:15:07 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,46 +84,6 @@ static void	switch_door_state(t_game *game, t_player *player)
 	}
 }
 
-static void	shoot(t_player *player, t_map *map, t_game *game)
-{
-	t_rayhit	hit;
-
-	if (is_next_frame(&player->weapon->last_frame_time) == true)
-	{
-		player->weapon->curr_frame++;
-		if (player->weapon->curr_frame > GUN6)
-			player->weapon->curr_frame = GUN3;
-	}
-	raycast_cast_ray(&hit, game, player->dir, ENEMY);
-	if (hit.enemy_index != -1)
-	{
-		if (map->enemies[hit.enemy_index].health > 0)
-			map->enemies[hit.enemy_index].health -= player->weapon->damage;
-	}
-}
-
-static void	move_player(t_vec *pos, t_map *map, double x_offset, double y_offset)
-{
-	if (!collision_is_true(pos->x + x_offset, pos->y, map, -1))
-		pos->x += x_offset;
-	if (!collision_is_true(pos->x, pos->y + y_offset, map, -1))
-		pos->y += y_offset;
-}
-
-static void	rotate_player(t_player *player, double rot_speed, bool left)
-{
-	double	temp;
-
-	if (left)
-		rot_speed = -rot_speed;
-	temp = player->dir.x;
-	player->dir.x = temp * cos(rot_speed) - player->dir.y * sin(rot_speed);
-	player->dir.y = temp * sin(rot_speed) + player->dir.y * cos(rot_speed);
-	temp = player->cplane.x;
-	player->cplane.x = temp * cos(rot_speed) - player->cplane.y * sin(rot_speed);
-	player->cplane.y = temp * sin(rot_speed) + player->cplane.y * cos(rot_speed);
-}
-
 static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t_game *game, double fps_mult)
 {
 	double	mov_speed;
@@ -139,19 +99,19 @@ static void	keys(mlx_t *mlx, t_minimap *minimap, t_player *player, t_map *map, t
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		move_player(&player->pos, map, player->dir.x * mov_speed, player->dir.y * mov_speed);
+		player_move(&player->pos, map, player->dir.x * mov_speed, player->dir.y * mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		move_player(&player->pos, map, -player->dir.x * mov_speed, -player->dir.y * mov_speed);
+		player_move(&player->pos, map, -player->dir.x * mov_speed, -player->dir.y * mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move_player(&player->pos, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * mov_speed, rotate_y(player->dir.x, player->dir.y, M_PI_2) * mov_speed);
+		player_move(&player->pos, map, rotate_x(player->dir.x, player->dir.y, M_PI_2) * mov_speed, rotate_y(player->dir.x, player->dir.y, M_PI_2) * mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move_player(&player->pos, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * mov_speed, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * mov_speed);
+		player_move(&player->pos, map, -rotate_x(player->dir.x, player->dir.y, M_PI_2) * mov_speed, -rotate_y(player->dir.x, player->dir.y, M_PI_2) * mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		rotate_player(player, rot_speed, true);
+		player_rotate(player, rot_speed, true);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		rotate_player(player, rot_speed, false);
+		player_rotate(player, rot_speed, false);
 	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
-		shoot(player, map, game);
+		player_shoot(player, map->enemies, game);
 	else
 		player->weapon->curr_frame = GUN1;
 	if (mlx_is_key_down(mlx, MLX_KEY_E))
