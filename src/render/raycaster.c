@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 01:40:50 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 02:16:03 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,24 @@ static void	init_ray(t_ray *ray, t_vec *pos, t_vec *ray_dir)
 	ray->origin = *pos;
 	ray->map_x = (int)ray->origin.x;
 	ray->map_y = (int)ray->origin.y;
-	// @note potential division by zero
 	ray->hypotenuse.x = fabs(UNIT / ray->dir.x);
 	ray->hypotenuse.y = fabs(UNIT / ray->dir.y);
+	ray->step.x = UNIT;
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -UNIT;
 		ray->length.x = (ray->origin.x - ray->map_x) * ray->hypotenuse.x;
 	}
 	else
-	{
-		ray->step.x = UNIT;
 		ray->length.x = (ray->map_x + UNIT - ray->origin.x) * ray->hypotenuse.x;
-	}
+	ray->step.y = UNIT;
 	if (ray->dir.y < 0)
 	{
 		ray->step.y = -UNIT;
 		ray->length.y = (ray->origin.y - ray->map_y) * ray->hypotenuse.y;
 	}
 	else
-	{
-		ray->step.y = UNIT;
 		ray->length.y = (ray->map_y + UNIT - ray->origin.y) * ray->hypotenuse.y;
-	}
 }
 
 static void	set_hit_type(t_rayhit *hit, t_ray *ray, t_map *map, char target)
