@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/12 19:15:33 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/12 19:33:29 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,20 @@ CFLAGS		=	-g
 LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 CC			=	cc
-VPATH		=	src: src/parser: src/parser/get_map: src/parser/get_textures: \
+VPATH		=	src: src/parser: src/start_screen: \
 				src/player_position: src/render src/raycast src/render src/loop
 
-SRC			=	raycast.c raycast_ray.c raycast_rayhit.c \
+SRC			=	check_for_map.c check_for_rgb.c check_for_texture.c check_map.c \
+				check_textures.c error_messages.c get_file_data.c \
+				init_player_position.c init_sprite_position.c parser.c \
+				parser_utils_0.c parser_utils_1.c \
+				init_start_screen.c start_screen.c \
+				raycast.c raycast_ray.c raycast_rayhit.c \
 				render.c render_wall.c render_hud.c render_enemy.c \
 				render_enemy_sprite.c render_enemy_utils.c \
 				loop.c loop_logic.c loop_logic_door.c loop_graphic.c \
-				collision.c debug.c initialize.c \
-				errexit.c math.c time.c enemy.c player.c main.c
+				collision.c debug.c initialize.c errexit.c math.c time.c \
+				minimap.c player.c enemy.c utils.c main.c
 
 INC			=	-I./src -I$(LIBMLX)/include/MLX42 -I$(LIBFT)/src/libft
 HEADERS		=	cub3D.h raycast.h render.h raycast/private_raycast.h \

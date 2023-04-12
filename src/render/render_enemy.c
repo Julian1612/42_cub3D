@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:38:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 15:45:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:24:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	enemies_render(
 		if (game->map.enemies[i].alive == false)
 			continue ;
 		sprite_init(&sprite, &enemies[i].pos,
-			&game->map.textures[enemies[i].curr_frame], &game->player, game);
+			game->map.textures[enemies[i].curr_frame], &game->player, game);
 		debug_print_sprite(&sprite);
 		draw_sprite(&sprite, game->img_world, wall_height);
 	}

@@ -6,25 +6,13 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:19:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:34:44 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // typedefs
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
 #include <math.h> // sin, cos
-
-t_hexcolor	convert_to_hexcode(
-	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
-{
-	unsigned int	rgba;
-
-	rgba = r;
-	rgba = (rgba << 8) + g;
-	rgba = (rgba << 8) + b;
-	rgba = (rgba << 8) + a;
-	return (rgba);
-}
 
 int	coor_to_pixel(int width, int x, int y)
 {
@@ -60,9 +48,7 @@ int	ft_abs(int n)
 	return (n);
 }
 
-bool	switch_bool(bool b)
+double	get_dist_of_vecs(t_vec *a, t_vec *b)
 {
-	if (b == true)
-		return (false);
-	return (true);
+	return ((a->x - b->x) * (a->x - b->x) + (a->y - b->y) * (a->y - b->y));
 }

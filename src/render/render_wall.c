@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:22:53 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 15:22:19 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:21:18 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	walls_render(t_game *game, int *wall_height)
 			img_x, game->map.ceiling_color);
 		fcknorm.x = img_x;
 		fcknorm.y = wall_height[img_x];
-		draw_wall(game->img_world, game->map.textures[ray_hit.tex_id].tex,
+		draw_wall(game->img_world, game->map.textures[ray_hit.tex_id]->tex,
 			ray_hit.x_offset, &fcknorm);
 		draw_floor(game->img_world, wall_height[img_x],
 			img_x, game->map.floor_color);

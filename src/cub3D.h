@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 19:17:49 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:32:30 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,19 +105,6 @@ typedef struct s_map
 	int			height;
 }	t_map;
 
-// @note weapon is pointer because the player can change weapons
-// @note weapon is pointer because the player can change weapons
-// @todo change x and y to coor
-typedef struct s_player
-{
-	t_vec			pos;
-	t_vec			cplane;
-	t_vec			dir;
-	int				health;
-	bool			turn_to_the_curser;
-	t_weapon		*weapon;
-}	t_player;
-
 typedef struct s_start_screen
 {
 	bool			active;
@@ -160,6 +147,10 @@ double			rotate_y(double x, double y, double angle);
 int				ft_abs(int n);
 double			get_dist_of_vecs(t_vec *a, t_vec *b);
 
+// utils
+t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
+					unsigned char b, unsigned char a);
+
 // initialize
 int				initialize_mlx_data(t_game *game);
 
@@ -173,5 +164,9 @@ int				collision_is_enemy(double x, double y,
 double			get_fps_mult(double delta_time, int fps);
 bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);
+
+// start_screen
+int				initialize_start_screen(t_game *game);
+void			draw_background(t_start_screen *start_screen);
 
 #endif

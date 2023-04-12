@@ -6,25 +6,13 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:09:00 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:35:02 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h" // cub3D structs
 #include "private_render.h" // render funcs
 #include "../../libraries/libft/src/libft/libft.h" // ft_memcpy
-
-t_hexcolor	convert_to_hexcode(
-	unsigned char r, unsigned char g, unsigned char b, unsigned char a)
-{
-	unsigned int	rgba;
-
-	rgba = r;
-	rgba = (rgba << 8) + g;
-	rgba = (rgba << 8) + b;
-	rgba = (rgba << 8) + a;
-	return (rgba);
-}
 
 void	tex_pixel_to_img(
 	mlx_image_t *img, mlx_texture_t *tex, t_coor *tex_coor, t_coor *img_coor)

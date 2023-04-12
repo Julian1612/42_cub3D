@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:26:54 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 15:24:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:21:39 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ void	hud_render(t_game *game)
 {
 	if (game->player.weapon != NULL)
 		draw_weapon(game->img_hud,
-			&game->map.textures[game->player.weapon->curr_frame]);
+			game->map.textures[game->player.weapon->curr_frame]);
 }

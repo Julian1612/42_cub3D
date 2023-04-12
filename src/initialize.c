@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:18:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/12 19:24:00 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@
 #define PLAYER_SIZE 2
 #define DIRECTION 2
 
-int	initialize_minimap(t_game *game)
+static int	initialize_minimap(t_game *game)
 {
-	get_map_measures(game); // kann weg oder ?
 	game->minimap.minimap_walls = mlx_new_image(game->mlx,
 			MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);
 	if (game->minimap.minimap_walls == NULL)
@@ -67,6 +66,7 @@ int	initialize_mlx_data(t_game *game)
 		return (ERROR);
 	if (initialize_textures(game) == ERROR)
 		return (ERROR);
-	game->player.turn_to_the_curser = false; /// wo anders initzialisieren
+	if (initialize_minimap(game) == ERROR)
+		return (ERROR);
 	return (SUCCESS);
 }
