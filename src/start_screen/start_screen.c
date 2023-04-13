@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 18:48:12 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 13:51:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:17:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	startscreen_wait_for_click(mlx_t *mlx, t_start_screen *start_screen)
 	mlx_get_mouse_pos(mlx, &x, &y);
 	if (x > mlx->width / 2 - button_width / 2
 		&& x < mlx->width / 2 + button_width / 2
-		&& y < 512 && y > 420
+		&& y < mlx->height / 2 + button_height / 2
+		&& y > mlx->height / 2 - button_height / 2
 		&& mlx_is_mouse_down(mlx, MLX_MOUSE_BUTTON_LEFT))
 	{
 		mlx_delete_image(mlx, start_screen->background);

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 14:40:40 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:24:19 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <stdio.h> // printf
 
 #define ENEMY_SPEED 0.04
+#define MOV_SPEED 0.05
+#define ROT_SPEED 0.05 
 
 static void	handle_enemies(
 	t_enemy *enemies, t_map *map, t_player *player, double fps_mult)
@@ -71,9 +73,10 @@ static void	handle_action_keys(
 		switch_state_door(game, player);
 }
 
-static void	handle_movement_keys(
-	mlx_t *mlx, t_player *player, t_map *map, double fps_mult)
+static void	handle_movement_keys(mlx_t *mlx, t_player *player, t_map *map)
 {
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT_SHIFT))
+		player->mov_speed *= 3;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		player_move(&player->pos, map, player->dir.x
 			* player->mov_speed, player->dir.y * player->mov_speed);
@@ -96,7 +99,7 @@ static void	handle_movement_keys(
 		player_rotate(player, player->rot_speed);
 }
 
-static void	handle_mouse_movement(mlx_t *mlx, t_player *player, double fps_mult)
+static void	handle_mouse_movement(mlx_t *mlx, t_player *player)
 {
 	double			rot_speed;
 	int32_t			new_x;
@@ -107,8 +110,7 @@ static void	handle_mouse_movement(mlx_t *mlx, t_player *player, double fps_mult)
 	if (last_x == 0 && last_y == 0)
 		mlx_get_mouse_pos(mlx, &last_x, &last_y);
 	mlx_get_mouse_pos(mlx, &new_x, &new_y);
-	rot_speed = (double)(new_x - last_x)
-		* player->rot_speed * fps_mult * 0.015;
+	rot_speed = (double)(new_x - last_x) *player->rot_speed * 0.015;
 	player_rotate(player, rot_speed);
 	last_x = new_x;
 }
@@ -118,9 +120,11 @@ void	loop_logic(t_game *game)
 	double	fps_mult;
 
 	fps_mult = get_fps_mult(game->mlx->delta_time, FPS);
+	game->player.mov_speed = MOV_SPEED * fps_mult;
+	game->player.rot_speed = ROT_SPEED * fps_mult;
 	handle_action_keys(game->mlx, &game->player, game);
-	handle_movement_keys(game->mlx, &game->player, &game->map, fps_mult);
-	handle_mouse_movement(game->mlx, &game->player, fps_mult);
+	handle_movement_keys(game->mlx, &game->player, &game->map);
+	handle_mouse_movement(game->mlx, &game->player);
 	mlx_key_hook(game->mlx, &handle_minimap_keys, game);
 	handle_enemies(game->map.enemies, &game->map, &game->player, fps_mult);
 	debug_print_player(&game->player);
