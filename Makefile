@@ -6,12 +6,12 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/13 20:53:59 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/13 21:00:23 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=	-g -Wall -Wextra -Werror
+CFLAGS		=	-g -Wall -Wextra -Werror -fsanitize=address
 LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 CC			=	cc
@@ -58,7 +58,7 @@ libft:
 	@$(MAKE) -C $(LIBFT)
 
 $(NAME): obj $(OBJS)
-	@$(CC) $(INC) $(LIBS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(INC) $(LIBS) $(OBJS) -o $(NAME)
 
 obj/%.o: %.c $(HEADERS)
 	@$(CC) $(CFLAGS) -o $@ -c $< 

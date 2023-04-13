@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 18:15:29 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:24:25 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	tex_pixel_to_img(
 	uint8_t	*src;
 	uint8_t	*dst;
 
-	src = &tex->pixels[coor_to_pixel(tex->width, tex_coor->x, tex_coor->y)];
-	dst = &img->pixels[coor_to_pixel(img->width, img_coor->x, img_coor->y)];
+	src = &tex->pixels[coor_to_pixel(tex->width, tex_coor->x,
+			tex_coor->y, tex->height)];
+	dst = &img->pixels[coor_to_pixel(img->width, img_coor->x,
+			img_coor->y, img->height)];
 	ft_memcpy(dst, src, tex->bytes_per_pixel);
 }
 

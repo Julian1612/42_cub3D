@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:38:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 20:56:54 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:21:41 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	draw_column(t_sprite *sprite,
 	{
 		hlpr->tex_coor.y = hlpr->temp * hlpr->ratio;
 		hlpr->color = sprite->tex->tex->pixels[coor_to_pixel(
-				sprite->tex->tex->width, hlpr->tex_coor.x, hlpr->tex_coor.y)];
+				sprite->tex->tex->width, hlpr->tex_coor.x,
+				hlpr->tex_coor.y, sprite->tex->tex->height)];
 		if (is_transparent(hlpr->color) == false)
 			tex_pixel_to_img(img, sprite->tex->tex,
 				&hlpr->tex_coor, &hlpr->img_coor);

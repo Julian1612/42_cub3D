@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprite_position.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:12:10 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 16:10:48 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:06:29 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	init_sprite_position(t_game *game)
 		return (0);
 	if (game->map.enemy_count > 0)
 	{
-		game->map.enemies = malloc(sizeof(t_enemy) * game->map.enemy_count);
+		game->map.enemies = malloc(sizeof(t_enemy) * (game->map.enemy_count + 1));
 		if (game->map.enemies == NULL)
 			return (error_message(4, &game->map));
 	}

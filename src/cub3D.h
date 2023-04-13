@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 18:54:26 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:22:33 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ typedef struct s_map
 	t_tex		textures[LAST];
 	t_door		*doors;
 	int			door_count;
-	t_object	*objects;
-	int			obj_count;
 	t_enemy		*enemies;
 	int			enemy_count;
 	t_hexcolor	ceiling_color;
@@ -140,7 +138,7 @@ void			errexit_msg(char *msg);
 void			errexit_mlx_errno(void);
 
 // math
-int				coor_to_pixel(int width, int x, int y);
+uint32_t		coor_to_pixel(uint32_t width, int x, int y, uint32_t height);
 double			rotate_x(double x, double y, double angle);
 double			rotate_y(double x, double y, double angle);
 int				ft_abs(int n);

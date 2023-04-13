@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 20:53:56 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:05:27 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@ int	free_data(t_map *map_data)
 	int	i;
 
 	i = 0;
-	while (i < map_data->obj_count)
-	{
-		free(map_data->objects[i].tex->path);
-		i++;
-	}
-	i = 0;
 	while (map_data->arr[i] != NULL)
 	{
 		free(map_data->arr[i]);
@@ -48,7 +42,6 @@ int	free_data(t_map *map_data)
 }
 
 // @todo fix the mlx compiling shit
-// @todo compile with wall werror wextra
 // @todo make re not working correctly
 // @todo check leaks (especially texture leaks)
 // @todo add sounds

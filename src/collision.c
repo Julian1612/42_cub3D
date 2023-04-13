@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 20:55:54 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:04:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,6 @@ static bool	is_wall(double x, double y, char **map)
 	return (false);
 }
 
-// @todo (problem: Permutability?) change to regular 
-// block collision (use map identifiers) after merge
-static bool	is_sprite(double x, double y, t_object *objects, int obj_count)
-{
-	int		i;
-	double	dist_x;
-	double	dist_y;
-
-	if (obj_count == 0)
-		return (false);
-	i = -1;
-	while (i++ < obj_count)
-	{
-		if (objects[i].type != DECOR_NON_PERM)
-			continue ;
-		dist_x = x - objects[i].pos.x;
-		dist_y = y - objects[i].pos.y;
-		if (dist_x * dist_x + dist_y * dist_y < SPRITE_SIZE_SQ)
-			return (true);
-	}
-	return (false);
-}
-
 // returns the index of the enemy that is in the way, NOT_SET if none
 int	collision_is_enemy(double x, double y, t_map *map, int enemy_num)
 {
@@ -100,8 +77,6 @@ int	collision_is_enemy(double x, double y, t_map *map, int enemy_num)
 bool	collision_is_true(double x, double y, t_map *map, int enemy_num)
 {
 	if (is_wall(x, y, map->arr))
-		return (true);
-	if (is_sprite(x, y, map->objects, map->obj_count))
 		return (true);
 	if (collision_is_enemy(x, y, map, enemy_num) != NOT_SET)
 		return (true);

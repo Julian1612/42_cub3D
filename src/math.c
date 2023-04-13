@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 18:03:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:27:59 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
 #include <math.h> // sin, cos
 
-int	coor_to_pixel(int width, int x, int y)
+uint32_t	coor_to_pixel(uint32_t width, int x, int y, uint32_t height)
 {
-	int	pixel;
+	uint32_t	pixel;
 
 	pixel = y * width + x;
+	if (pixel > (width - 1) * (height - 1))
+		return (0);
 	pixel *= 4;
 	return (pixel);
 }
