@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:55:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 17:52:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 19:52:41 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,12 @@ void	enemy_attack(t_player *player, t_enemy *enemy)
 	if (cooldown == 0)
 	{
 		cooldown = mlx_get_time();
-		player->health -= enemy->damage;
-		printf("player health: %d\n", player->health);
+		player_take_damage(player, enemy->damage);
 	}
 	else if (mlx_get_time() - cooldown > 1)
 	{
 		cooldown = mlx_get_time();
-		player->health -= enemy->damage;
-		printf("player health: %d\n", player->health);
+		player_take_damage(player, enemy->damage);
 	}
 }
 

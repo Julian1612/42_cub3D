@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 19:25:49 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 20:06:42 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,16 @@ int	initialize_mlx_data(t_game *game)
 
 void	initialize_player_data(t_player *player)
 {
+	static t_weapon	gun = {
+		.damage = 10,
+		.range = 10,
+		.reload_time = 1,
+		.last_frame_time = 0,
+		.curr_frame = GUN1,
+	};
+
 	player->health = 100;
 	player->mov_speed = 0.1;
 	player->rot_speed = 0.05;
-	player->weapon = NULL;
+	player->weapon = &gun;
 }

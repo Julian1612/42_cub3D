@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 16:27:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 20:06:10 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,21 @@ int	free_data(t_map *map_data)
 }
 
 // @todo fix the mlx compiling shit
-// @todo scale gun textures to 64x64
 // @todo compile with wall werror wextra
 // @todo make re not working correctly
 // @todo check leaks (especially texture leaks)
-// @todo add health bar
 // @todo add sounds
 // @todo make weapon pickupable
 // @todo add exit
 // @todo add game over and win screen
 // @todo rename Julian functinos
 // @todo refactor mandatory
+// @todo enemy cooldown
 // @todo create tex_ids for startscreen textures and animate startscreen
 
 int	main(int argc, char **argv)
 {
 	t_game		game;
-	static t_weapon	gun =
-	{
-		.damage = 10,
-		.range = 10,
-		.reload_time = 1,
-		.last_frame_time = 0,
-		.curr_frame = GUN1,
-	};
 
 	if (parser(&argc, argv, &game))
 		return (EXIT_FAILURE);
@@ -87,7 +78,6 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	draw_background(&game.start_screen);
 	initialize_player_data(&game.player);
-	game.player.weapon = &gun;
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	// free_data(&game.map);

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:50:14 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 14:30:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 19:53:29 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,9 @@ void	player_rotate(t_player *player, double rot_speed)
 		- player->cplane.y * sin(rot_speed);
 	player->cplane.y = temp * sin(rot_speed)
 		+ player->cplane.y * cos(rot_speed);
+}
+
+void	player_take_damage(t_player *player, int damage)
+{
+	player->health -= damage;
 }
