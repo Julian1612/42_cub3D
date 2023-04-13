@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:26:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 20:58:08 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:31:05 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void		column_set_start_end(t_start_end *stripe, int sprite_width,
 // render_enemy_sprite
 t_hexcolor	convert_to_hexcode(unsigned char r, unsigned char g,
 				unsigned char b, unsigned char a);
-void		sprite_init(t_sprite *sprite, t_vec *pos, t_tex *tex,
-				t_player *player, t_game *game);
+void		sprite_init(t_sprite *sprite, t_vec *pos, t_tex *tex, t_game *game);
 
 #endif

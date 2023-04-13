@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 16:04:34 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:31:18 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ void	tex_pixel_to_img(
 	ft_memcpy(dst, src, 4);
 }
 
-void	sprite_init(
-	t_sprite *sprite, t_vec *pos, t_tex *tex, t_player *player, t_game *game)
+void	sprite_init(t_sprite *sprite, t_vec *pos, t_tex *tex, t_game *game)
 {
-	double	cam_matrix_inv;
+	double		cam_matrix_inv;
+	t_player	*player;
 
+	player = &game->player;
 	sprite->tex = tex;
 	sprite->dir.x = player->dir.x;
 	sprite->dir.y = player->dir.y;
