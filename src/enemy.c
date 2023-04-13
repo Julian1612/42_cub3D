@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:55:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:07:34 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:52:54 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,31 @@
 #include <stdbool.h> // bool
 #include <stdio.h> // @note remove
 
-void	enemy_move(t_enemy *enemy, t_map *map, double x_offset, double y_offset, int enemy_index)
+void	enemy_move(t_enemy *enemy, t_map *map, t_vec offset, int enemy_index)
 {
 	bool	coll_x;
 	bool	coll_y;
 	int		state;
 
-	coll_x = collision_is_true(enemy->pos.x + x_offset,
+	coll_x = collision_is_true(enemy->pos.x + offset.x,
 			enemy->pos.y, map, enemy_index);
 	coll_y = collision_is_true(enemy->pos.x,
-			enemy->pos.y + y_offset, map, enemy_index);
+			enemy->pos.y + offset.y, map, enemy_index);
 	state = ZOMBIE_RUN1;
 	if (coll_x == false && coll_y == false)
 	{
-		enemy->pos.x += x_offset;
-		enemy->pos.y += y_offset;
+		enemy->pos.x += offset.x;
+		enemy->pos.y += offset.y;
 	}
 	else if (coll_x == false)
 	{
 		state = ZOMBIE_LEFT1;
-		enemy->pos.x += x_offset * 2;
+		enemy->pos.x += offset.x * 2;
 	}
 	else if (coll_y == false)
 	{
 		state = ZOMBIE_RIGHT1;
-		enemy->pos.y += y_offset * 2;
+		enemy->pos.y += offset.y * 2;
 	}
 	if (is_next_frame(&enemy->last_frame_time) == true)
 	{
@@ -71,6 +71,8 @@ void	enemy_attack(t_player *player, t_enemy *enemy)
 
 void	enemy_die(t_enemy *enemy, t_map *map, int enemy_index)
 {
+	if (enemy->alive == false)
+		return ;
 	if (enemy->curr_frame < ZOMBIE_DEAD1)
 		enemy->curr_frame = ZOMBIE_DEAD1;
 	if (is_next_frame(&enemy->last_frame_time) == true)

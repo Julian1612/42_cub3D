@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 15:45:56 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:55:25 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	handle_enemies(
 	double	angle;
 	int		i;
 	double	enemy_speed;
+	t_vec	offset;
 
 	if (map->enemy_count == 0)
 		return ;
@@ -30,9 +31,7 @@ static void	handle_enemies(
 	i = -1;
 	while (i++ < map->enemy_count)
 	{
-		if (enemies[i].alive == false)
-			continue ;
-		if (enemies[i].health <= 0)
+		if (enemies[i].alive == false || enemies[i].health <= 0)
 		{
 			enemy_die(&enemies[i], map, i);
 			continue ;
@@ -43,8 +42,11 @@ static void	handle_enemies(
 			&& fabs(enemies[i].pos.y - player->pos.y) < 0.5)
 			enemy_attack(player, &enemies[i]);
 		else
-			enemy_move(&enemies[i], map, cos(angle)
-				* enemy_speed, sin(angle) * enemy_speed, i);
+		{
+			offset.x = cos(angle) * enemy_speed;
+			offset.y = sin(angle) * enemy_speed;
+			enemy_move(&enemies[i], map, offset, i);
+		}
 	}
 }
 

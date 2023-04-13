@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:35:02 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:04:34 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	sprite_init(
 	sprite->dist.y = pos->y - player->pos.y;
 	cam_matrix_inv = 1.0
 		/ (player->cplane.x * sprite->dir.y - sprite->dir.x * player->cplane.y);
-	sprite->cam_pos.x = -cam_matrix_inv
+	sprite->cam_pos.x = cam_matrix_inv
 		* (sprite->dir.y * sprite->dist.x - sprite->dir.x * sprite->dist.y);
 	sprite->cam_pos.y = cam_matrix_inv
 		* (-player->cplane.y * sprite->dist.x
