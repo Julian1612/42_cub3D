@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 14:29:11 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:35:37 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ static void	handle_minimap_keys(mlx_key_data_t keydata, void *param)
 static void	handle_action_keys(
 	mlx_t *mlx, t_player *player, t_game *game)
 {
-	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
+	if (mlx_is_mouse_down(mlx, MLX_MOUSE_BUTTON_LEFT))
 		player_shoot(player, game->map.enemies, game);
 	else if (player->weapon != NULL)
 		player->weapon->curr_frame = GUN1;
-	if (mlx_is_key_down(mlx, MLX_KEY_E))
+	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
 		switch_state_door(game, player);
 }
 

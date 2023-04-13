@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:50:14 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 14:29:58 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:30:22 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	player_shoot(t_player *player, t_enemy *enemies, t_game *game)
 			player->weapon->curr_frame = GUN3;
 	}
 	raycast_cast_ray(&hit, game, player->dir, ENEMY);
-	if (hit.enemy_index != -1)
+	if (hit.enemy_index != NOT_SET)
 	{
 		if (enemies[hit.enemy_index].health > 0)
 			enemies[hit.enemy_index].health -= player->weapon->damage;
