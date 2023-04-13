@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 13:39:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:25:38 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,9 @@ static void	handle_mouse_movement(mlx_t *mlx, t_player *player, double fps_mult)
 	if (last_x == 0 && last_y == 0)
 		mlx_get_mouse_pos(mlx, &last_x, &last_y);
 	mlx_get_mouse_pos(mlx, &new_x, &new_y);
-	rot_speed = ROT_SPEED * -ft_abs((new_x - last_x)) * 0.013 * fps_mult;
-	if (new_x < 400 && new_x > 2)
-		player_rotate(player, rot_speed, false);
-	else if (new_x > 400 && new_x < 800)
-		player_rotate(player, rot_speed, true);
-	mlx_set_mouse_pos(mlx, 400, 400);
+	rot_speed = (double)(last_x - new_x) * ROT_SPEED * fps_mult * 0.015;
+	player_rotate(player, rot_speed, true);
+	last_x = new_x;
 }
 
 void	loop_logic(t_game *game)

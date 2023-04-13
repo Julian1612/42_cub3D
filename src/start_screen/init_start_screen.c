@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:18:35 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/10 18:45:08 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 13:49:04 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ static int	textures_to_images(t_game *game);
 
 int	initialize_start_screen(t_game *game)
 {
+	int	tex_width;
+
 	if (init_background(game) == ERROR)
 		exit (EXIT_FAILURE);
 	if (init_png_textures(&game->start_screen) == ERROR)
 		exit (EXIT_FAILURE);
 	if (init_images(game) == ERROR)
 		exit (EXIT_FAILURE);
+	tex_width = game->start_screen.img_start_button->width;
 	if (textures_to_images(game) == ERROR)
 		exit (EXIT_FAILURE);
 	if (mlx_image_to_window(game->mlx, game->start_screen.img_soldier_down,
@@ -35,7 +38,7 @@ int	initialize_start_screen(t_game *game)
 			(WIDTH / 2) - 140, 70) < 0)
 		exit(EXIT_FAILURE);
 	if (mlx_image_to_window(game->mlx, game->start_screen.img_start_button,
-			(WIDTH / 2) - 140, HEIGHT / 2) < 0)
+			(WIDTH / 2) - tex_width / 2, HEIGHT / 2) < 0)
 		exit(EXIT_FAILURE);
 	return (SUCCESS);
 }
