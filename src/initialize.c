@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 00:13:47 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:29:32 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	initialize_textures(t_game *game)
 
 static int	initialize_environ(t_game *game)
 {
-	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
+	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3=====D", false);
 	game->img_world = mlx_new_image(game->mlx,
 			game->mlx->width, game->mlx->height + 2);
 	game->img_hud = mlx_new_image(game->mlx,

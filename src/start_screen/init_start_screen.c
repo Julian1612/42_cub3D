@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 11:18:35 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 13:49:04 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:32:03 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ static int	init_background(t_game *game)
 static int	init_png_textures(t_start_screen *start_screen)
 {
 	start_screen->start_button = mlx_load_png
-		("./textures/start_button.png");
+		("./textures/screens/start_button.png");
 	start_screen->soldier_down = mlx_load_png
-		("./textures/soldier_down.png");
+		("./textures/screens/soldier_down.png");
 	start_screen->soldier_up = mlx_load_png
-		("./textures/soldier_up.png");
+		("./textures/screens/soldier_up.png");
 	if (start_screen->start_button == NULL
 		|| start_screen->soldier_down == NULL
 		|| start_screen->soldier_up == NULL)

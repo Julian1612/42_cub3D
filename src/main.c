@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 00:14:07 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:17:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	free_data(t_map *map_data)
 // @todo refactor mandatory
 // @todo enemy cooldown
 // @todo create tex_ids for startscreen textures and animate startscreen
+// @todo show enemies on minimap
 
 int	main(int argc, char **argv)
 {
@@ -75,6 +76,5 @@ int	main(int argc, char **argv)
 	initialize_player_data(&game.player);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
-	// free_data(&game.map);
 	return (EXIT_SUCCESS);
 }

@@ -1,10 +1,10 @@
 C 36,42,107
 F 33,35,38
 
-NO ./textures/north.png
-EA ./textures/east.png
-SO ./textures/south.png
-WE ./textures/west.png
+NO ./textures/test.png
+EA ./textures/test.png
+SO ./textures/test.png
+WE ./textures/test.png
 
         11111111111111111111111
         11000000000010011100001                              1111111111111111
