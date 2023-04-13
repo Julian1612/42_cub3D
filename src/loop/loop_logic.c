@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 15:55:25 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:23:50 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,42 @@
 #include <math.h> // math funcs
 #include <string.h> // NULL
 
+static void	handle_enemies_take_action(int i, t_map *map,
+	t_player *player, double enemy_speed)
+{
+	double	angle;
+	t_vec	offset;
+
+	if (map->enemies[i].alive == false || map->enemies[i].health <= 0)
+	{
+		enemy_die(&map->enemies[i], map, i);
+		return ;
+	}
+	angle = atan2(player->pos.y - map->enemies[i].pos.y,
+			player->pos.x - map->enemies[i].pos.x);
+	if (fabs(map->enemies[i].pos.x - player->pos.x) < 0.5
+		&& fabs(map->enemies[i].pos.y - player->pos.y) < 0.5)
+		enemy_attack(player, &map->enemies[i]);
+	else
+	{
+		offset.x = cos(angle) * enemy_speed;
+		offset.y = sin(angle) * enemy_speed;
+		enemy_move(&map->enemies[i], map, offset, i);
+	}
+}
+
 static void	handle_enemies(
 	t_enemy *enemies, t_map *map, t_player *player, double fps_mult)
 {
-	double	angle;
 	int		i;
 	double	enemy_speed;
-	t_vec	offset;
 
 	if (map->enemy_count == 0)
 		return ;
 	enemy_speed = ENEMY_SPEED * fps_mult;
 	i = -1;
 	while (i++ < map->enemy_count)
-	{
-		if (enemies[i].alive == false || enemies[i].health <= 0)
-		{
-			enemy_die(&enemies[i], map, i);
-			continue ;
-		}
-		angle = atan2(player->pos.y - enemies[i].pos.y,
-				player->pos.x - enemies[i].pos.x);
-		if (fabs(enemies[i].pos.x - player->pos.x) < 0.5
-			&& fabs(enemies[i].pos.y - player->pos.y) < 0.5)
-			enemy_attack(player, &enemies[i]);
-		else
-		{
-			offset.x = cos(angle) * enemy_speed;
-			offset.y = sin(angle) * enemy_speed;
-			enemy_move(&enemies[i], map, offset, i);
-		}
-	}
+		handle_enemies_take_action(i, map, player, enemy_speed);
 }
 
 static void	handle_mouse_movement(mlx_t *mlx, t_player *player)

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:34:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:11:36 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@ int	coor_to_pixel(int width, int x, int y)
 	int	pixel;
 
 	pixel = y * width + x;
-	// @note multiply to get from int32 to int8
 	pixel *= 4;
 	return (pixel);
 }
 
-// @todo move this to separate math file with other math related functions?
 double	rotate_x(double x, double y, double angle)
 {
 	double	rotated_x;

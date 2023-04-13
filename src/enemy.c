@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:55:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 15:52:54 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:23:27 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
 #include <stdio.h> // @note remove
+
+static void	enemy_move_set_next_frame(t_enemy *enemy, int state)
+{
+	if (is_next_frame(&enemy->last_frame_time) == true)
+	{
+		enemy->curr_frame++;
+		if (enemy->curr_frame > state + 2)
+			enemy->curr_frame = state;
+	}
+}
 
 void	enemy_move(t_enemy *enemy, t_map *map, t_vec offset, int enemy_index)
 {
@@ -43,12 +53,7 @@ void	enemy_move(t_enemy *enemy, t_map *map, t_vec offset, int enemy_index)
 		state = ZOMBIE_RIGHT1;
 		enemy->pos.y += offset.y * 2;
 	}
-	if (is_next_frame(&enemy->last_frame_time) == true)
-	{
-		enemy->curr_frame++;
-		if (enemy->curr_frame > state + 2)
-			enemy->curr_frame = state;
-	}
+	enemy_move_set_next_frame(enemy, state);
 }
 
 void	enemy_attack(t_player *player, t_enemy *enemy)
