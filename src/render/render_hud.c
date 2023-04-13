@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:26:54 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 19:47:45 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 20:50:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,38 @@ static void	draw_texture(mlx_image_t *img, t_tex *weapon_tex,
 	}
 }
 
-void	hud_render(t_game *game)
+static void	draw_damage(mlx_image_t *img, int player_health)
+{
+	int				i;
+	int				j;
+	unsigned int	alpha;
+	static int		health = 0;
+
+	if (health == 0)
+		health = player_health;
+	i = 0;
+	while (i < img->width)
+	{
+		j = 0;
+		while (j < img->height / 2)
+		{
+			alpha = 255 - j;
+			if (alpha > 255 || health == player_health)
+				alpha = 0;
+			mlx_put_pixel(img, i, j, convert_to_hexcode(255, 0, 0, alpha));
+			j++;
+		}
+		i++;
+	}
+	if (health != player_health)
+		health = player_health;
+}
+
+static t_coor	handle_textures(t_game *game)
 {
 	t_coor				pos;
 	t_tex				*weapon_tex;
 	double				ratio;
-	static mlx_image_t	*health = NULL;
 
 	weapon_tex = &game->map.textures[game->player.weapon->curr_frame];
 	if (game->player.weapon != NULL)
@@ -62,9 +88,19 @@ void	hud_render(t_game *game)
 	pos.y = game->img_hud->height
 		- game->map.textures[HEART].tex->height / ratio - 10;
 	draw_texture(game->img_hud, &game->map.textures[HEART], pos, ratio);
+	return (pos);
+}
+
+void	hud_render(t_game *game)
+{
+	t_coor				pos;
+	static mlx_image_t	*health = NULL;
+
+	pos = handle_textures(game);
 	if (health != NULL)
 		mlx_delete_image(game->mlx, health);
 	health = mlx_put_string(game->mlx, ft_itoa(game->player.health),
 			pos.x + game->map.textures[HEART].tex->width, pos.y + 10);
 	mlx_resize_image(health, 100, 70);
+	draw_damage(game->img_hud, game->player.health);
 }
