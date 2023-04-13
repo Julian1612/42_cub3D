@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:50:14 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 20:41:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:29:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,17 @@ void	player_shoot(t_player *player, t_enemy *enemies, t_game *game)
 
 void	player_move(t_vec *pos, t_map *map, double x_offset, double y_offset)
 {
-	if (!collision_is_true(pos->x + x_offset, pos->y, map, -1))
+	if (!collision_is_true(pos->x + x_offset, pos->y, map, NOT_SET))
 		pos->x += x_offset;
-	if (!collision_is_true(pos->x, pos->y + y_offset, map, -1))
+	if (!collision_is_true(pos->x, pos->y + y_offset, map, NOT_SET))
 		pos->y += y_offset;
 }
 
-void	player_rotate(t_player *player, double rot_speed, bool left)
+// negative rot_speed for left rotation
+void	player_rotate(t_player *player, double rot_speed)
 {
 	double	temp;
 
-	if (left)
-		rot_speed = -rot_speed;
 	temp = player->dir.x;
 	player->dir.x = temp * cos(rot_speed) - player->dir.y * sin(rot_speed);
 	player->dir.y = temp * sin(rot_speed) + player->dir.y * cos(rot_speed);

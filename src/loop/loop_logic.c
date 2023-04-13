@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 14:25:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:29:11 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ static void	handle_movement_keys(
 			* mov_speed, -rotate_y(player->dir.x, player->dir.y, M_PI_2)
 			* mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		player_rotate(player, rot_speed, true);
+		player_rotate(player, -rot_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		player_rotate(player, rot_speed, false);
+		player_rotate(player, rot_speed);
 }
 
 static void	handle_mouse_movement(mlx_t *mlx, t_player *player, double fps_mult)
@@ -114,8 +114,8 @@ static void	handle_mouse_movement(mlx_t *mlx, t_player *player, double fps_mult)
 	if (last_x == 0 && last_y == 0)
 		mlx_get_mouse_pos(mlx, &last_x, &last_y);
 	mlx_get_mouse_pos(mlx, &new_x, &new_y);
-	rot_speed = (double)(last_x - new_x) * ROT_SPEED * fps_mult * 0.015;
-	player_rotate(player, rot_speed, true);
+	rot_speed = (double)(new_x - last_x) * ROT_SPEED * fps_mult * 0.015;
+	player_rotate(player, rot_speed);
 	last_x = new_x;
 }
 
