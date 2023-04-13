@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/12 21:00:10 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/13 15:46:40 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC			=	check_for_map.c check_for_rgb.c check_for_texture.c check_map.c \
 				raycast.c raycast_ray.c raycast_rayhit.c \
 				render.c render_wall.c render_hud.c render_enemy.c \
 				render_enemy_sprite.c render_enemy_utils.c render_minimap.c \
-				loop.c loop_logic.c loop_logic_switch_state.c loop_graphic.c \
+				loop.c loop_logic.c loop_logic_keys.c loop_logic_switch_state.c \
+				loop_graphic.c \
 				collision.c debug.c initialize.c errexit.c math.c time.c \
 				player.c enemy.c utils.c main.c
 
