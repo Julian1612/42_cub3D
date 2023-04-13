@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 21:38:42 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 13:29:37 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 #  define DEBUG 0
 # endif
 
-# define WIDTH 800
+# define WIDTH 1200
 # define HEIGHT 800
 # define NOT_SET -1
 # define ERROR -1

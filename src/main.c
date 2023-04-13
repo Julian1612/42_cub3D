@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 21:43:08 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 13:27:24 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	free_data(t_map *map_data)
 	return (EXIT_SUCCESS);
 }
 
-// @todo resizing segfault when shooting because of weapon texture
 // @todo fix the mlx compiling shit
 // @todo scale gun textures to 64x64
 // @todo compile with wall werror wextra
@@ -62,16 +61,15 @@ int	free_data(t_map *map_data)
 // @todo refactor mandatory
 // @todo sprinting button
 // @todo create tex_ids for startscreen textures and animate startscreen
-// @todo camera plane initialized wrongly if initial direction of player is south
+// @todo camera plane initialized wrongly if initial
+// direction of player is south
 
 int	main(int argc, char **argv)
 {
 	t_game		game;
 
 	if (parser(&argc, argv, &game))
-	{
 		return (EXIT_FAILURE);
-	}
 	if (initialize_mlx_data(&game) == ERROR)
 		errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &loop, &game) == false)

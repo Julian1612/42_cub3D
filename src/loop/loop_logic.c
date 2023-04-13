@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 21:27:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 13:39:38 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../debug.h" // debug_print_player
 #include <math.h> // math funcs
 #include <string.h> // NULL
+#include <stdio.h> // printf
 
 #define MOV_SPEED 0.1
 #define ROT_SPEED 0.05
@@ -64,11 +65,6 @@ static void	handle_minimap_keys(mlx_key_data_t keydata, void *param)
 static void	handle_action_keys(
 	mlx_t *mlx, t_player *player, t_game *game)
 {
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-	{
-		mlx_close_window(mlx);
-		errexit_msg("Escape pressed. Exiting program.");
-	}
 	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
 		player_shoot(player, game->map.enemies, game);
 	else if (player->weapon != NULL)
@@ -118,7 +114,7 @@ static void	handle_mouse_movement(mlx_t *mlx, t_player *player, double fps_mult)
 	if (last_x == 0 && last_y == 0)
 		mlx_get_mouse_pos(mlx, &last_x, &last_y);
 	mlx_get_mouse_pos(mlx, &new_x, &new_y);
-	rot_speed = ROT_SPEED * fps_mult * -ft_abs((new_x - last_x) / 50);
+	rot_speed = ROT_SPEED * -ft_abs((new_x - last_x)) * 0.013 * fps_mult;
 	if (new_x < 400 && new_x > 2)
 		player_rotate(player, rot_speed, false);
 	else if (new_x > 400 && new_x < 800)
