@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 20:29:33 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:39:03 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,33 @@ static t_vec	get_view_direction(char direction)
 	return (dir);
 }
 
+static t_vec	get_camera_direction(char direction)
+{
+	t_vec	cplane;
+
+	if (direction == 'N')
+	{
+		cplane.x = (double)WIDTH / HEIGHT / 2;
+		cplane.y = 0;
+	}
+	else if (direction == 'S')
+	{
+		cplane.x = -(double)WIDTH / HEIGHT / 2;
+		cplane.y = 0;
+	}
+	else if (direction == 'E')
+	{
+		cplane.x = 0;
+		cplane.y = (double)WIDTH / HEIGHT / 2;
+	}
+	else if (direction == 'W')
+	{
+		cplane.x = 0;
+		cplane.y = -(double)WIDTH / HEIGHT / 2;
+	}
+	return (cplane);
+}
+
 static int	search_for_player(t_game *game, int i,
 			char *line, int *def_count)
 {
@@ -98,6 +125,7 @@ static int	search_for_player(t_game *game, int i,
 			game->player.pos.x = j + 0.5;
 			game->player.pos.y = i + 0.5;
 			game->player.dir = get_view_direction(line[j]);
+			game->player.cplane = get_camera_direction(line[j]);
 			(*def_count)++;
 		}
 		j++;
