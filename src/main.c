@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 15:41:21 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:42:51 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	free_data(t_map *map_data)
 // @todo scale gun textures to 64x64
 // @todo compile with wall werror wextra
 // @todo make re not working correctly
+// @todo check leaks (especially texture leaks)
 // @todo add health bar
 // @todo add sounds
 // @todo make weapon pickupable
