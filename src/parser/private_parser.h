@@ -6,17 +6,13 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 20:20:48 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 18:56:08 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRIVATE_PARSER_H
 # define PRIVATE_PARSER_H
 # include "../cub3D.h"
-# define NBR_B_TEXTURES 3
-# define CHAR_DOOR 'D'
-# define CHAR_BARREL 'B'
-# define CHAR_ENEMY 'E'
 
 /* check_for_bonus_textures.c */
 int				check_for_bonus_texture(t_map *map_data, char *line,

@@ -22,3 +22,4 @@
 ./textures/zombie/zombie_dead6.png
 ./textures/zombie/zombie_dead7.png
 ./textures/zombie/zombie_dead8.png
+./textures/hud/heart.png

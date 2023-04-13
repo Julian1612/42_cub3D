@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 15:42:35 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 19:25:49 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	initialize_textures(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i <= ZOMBIE_DEAD8)
+	while (i < LAST)
 	{
 		game->map.textures[i].tex = mlx_load_png(game->map.textures[i].path);
 		if (game->map.textures[i].tex == NULL)

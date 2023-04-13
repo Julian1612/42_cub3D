@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 18:01:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 18:54:26 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_enemy	t_enemy;
 typedef struct s_map
 {
 	char		**arr;
-	t_tex		textures[ZOMBIE_DEAD8 + 1];
+	t_tex		textures[LAST];
 	t_door		*doors;
 	int			door_count;
 	t_object	*objects;

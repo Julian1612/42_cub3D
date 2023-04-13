@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 16:35:38 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 18:56:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_bonus_textures(t_map *map_data)
 	if (fd_path < 0)
 		return (error_textures(7, map_data));
 	i = WEST + 1;
-	while (i <= ZOMBIE_DEAD8)
+	while (i < LAST)
 	{
 		path = get_next_line(fd_path);
 		if (path == NULL)
