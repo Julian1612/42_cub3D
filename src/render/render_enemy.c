@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   render_enemy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:38:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 21:56:08 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 23:40:43 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_render.h" // render funcs
 #include "../enemy.h" // t_enemy
 #include "../debug.h" // debug funcs
-#include "libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include "../../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
 #include <stdio.h> // printf
 
 static void	spritehelper_init(t_spritehelper *hlpr,

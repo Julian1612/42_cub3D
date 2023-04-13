@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 20:02:33 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:31:57 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,18 +106,6 @@ int	error_get_map(int error_code, t_map *map_data)
 	return (1);
 }
 
-void	free_doors(t_map *map_data)
-{
-	if (map_data->door_count > 0 && map_data->doors != NULL)
-		free(map_data->doors);
-}
-
-void	free_enemies(t_map *map_data)
-{
-	if (map_data->enemy_count > 0 && map_data->enemies != NULL)
-		free(map_data->enemies);
-}
-
 static void	free_struct(t_map *map_data)
 {
 	int	i;
@@ -134,6 +122,8 @@ static void	free_struct(t_map *map_data)
 		}
 		free(map_data->arr);
 	}
-	free_doors(map_data);
-	free_enemies(map_data);
+	if (map_data->door_count > 0 && map_data->doors != NULL)
+		free(map_data->doors);
+	if (map_data->enemy_count > 0 && map_data->enemies != NULL)
+		free(map_data->enemies);
 }

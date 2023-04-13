@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 13:46:22 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 18:13:59 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 00:03:10 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	check_for_invalid_definition(t_map *map_data, char *line, int *error)
 
 static int	check_line(t_map *map_data, char *line, int fd, int *error)
 {
-	if(line > 0 && line[0] == '\n')
+	if (line > 0 && line[0] == '\n')
 		return (0);
 	else if (check_for_rgb(map_data, line, error))
 		return (0);

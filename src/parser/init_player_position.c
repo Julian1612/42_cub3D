@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player_position.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 16:36:00 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:17:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,28 +100,15 @@ static int	search_for_player(t_game *game, int i,
 			char *line, int *def_count)
 {
 	int	j;
-	int	line_len;
 
 	j = 0;
 	while (line[j])
 	{
-		line_len = ft_strlen(line);
 		if (line[j] == 'N' || line[j] == 'S'
 			|| line[j] == 'E' || line[j] == 'W')
 		{
-			if (j > 0 && game->map.arr[i][j - 1] == ' ')
-				return (error_get_map(8, &game->map));
-			else if (game->map.arr[i][j + 1] == '\0'
-				|| game->map.arr[i][j + 1] == ' ')
-				return (error_get_map(8, &game->map));
-			else if (((int) ft_strlen(game->map.arr[i + 1]) >= j
-					&& game->map.arr[i + 1][j] == ' ')
-				|| ((int) ft_strlen(game->map.arr[i - 1]) >= j
-					&& game->map.arr[i - 1][j] == ' '))
-				return (error_get_map(8, &game->map));
-			else if ((int) ft_strlen(game->map.arr[i + 1]) <= j
-				|| (int) ft_strlen(game->map.arr[i - 1]) <= j)
-				return (error_get_map(8, &game->map));
+			if (check_pos_in_map(&game->map, i, j))
+				return (1);
 			game->player.pos.x = j + 0.5;
 			game->player.pos.y = i + 0.5;
 			game->player.dir = get_view_direction(line[j]);

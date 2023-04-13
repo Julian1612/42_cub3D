@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 18:56:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:00:08 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../../libraries/libft/src/get_next_line/get_next_line.h" // gnl
 #include <fcntl.h> // open
 #include <unistd.h> // close
+#include <stdio.h> // printf
 
 int	check_textures_file(t_map *map_data, char *cub_file_path, char *data_type)
 {
@@ -57,7 +58,7 @@ int	check_bonus_textures(t_map *map_data)
 	char	*path;
 	int		i;
 
-	fd_path = open("./textures/paths.txt", O_RDONLY);
+	fd_path = open("../textures/paths.txt", O_RDONLY);
 	if (fd_path < 0)
 		return (error_textures(7, map_data));
 	i = WEST + 1;
@@ -73,13 +74,3 @@ int	check_bonus_textures(t_map *map_data)
 	get_next_line(-1);
 	return (0);
 }
-
-// // add the check for the other bonus textures
-// // else if (character == CHAR_ENEMY && map_data->enemy.path == NULL)
-// // 	return (error_textures(7, map_data));
-// static int	check_char(t_map *map_data, char character)
-// {
-// 	// if (character == CHAR_DOOR && map_data->objects[DOOR_].path == NULL)
-// 	// 	return (error_textures(7, map_data));
-// 	return (0);
-// }
