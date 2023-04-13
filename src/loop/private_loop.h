@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:39:03 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 15:45:40 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:12:15 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ void	loop_logic(t_game *game);
 // loop_graphic
 void	loop_graphic(t_game *game);
 
-// loop_logic_switch_state
-void	switch_state_door(t_game *game, t_player *player);
-void	switch_state_minimap(t_game *game, t_player *player);
+// loop_logic_door
+void	handle_door(t_game *game, t_player *player);
 
 // loop_logic_keys
-void	handle_minimap_keys(mlx_key_data_t keydata, void *param);
 void	handle_action_keys(mlx_t *mlx, t_player *player, t_game *game);
 void	handle_movement_keys(mlx_t *mlx, t_player *player, t_map *map);
 

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:26:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 18:17:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:08:16 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		enemies_render(t_game *game, t_enemy *enemies,
 				int *wall_height);
 
 // render_minimap
-int			minimap_render(t_game *game);
+void		minimap_render(t_game *game);
 
 // render_enemy_utils
 void		tex_pixel_to_img(mlx_image_t *img, mlx_texture_t *tex,

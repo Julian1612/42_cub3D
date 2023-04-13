@@ -6,12 +6,12 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/13 21:58:01 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/14 00:11:56 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=	-g -Wall -Wextra -Werror #-fsanitize=address,undefined
+CFLAGS		=	-g -Wall -Wextra -Werror #-fsanitize=address,undefinded
 LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 CC			=	cc
@@ -26,7 +26,7 @@ SRC			=	check_for_map.c check_for_rgb.c check_for_texture.c check_map.c \
 				raycast.c raycast_ray.c raycast_rayhit.c \
 				render.c render_wall.c render_hud.c render_enemy.c \
 				render_enemy_sprite.c render_enemy_utils.c render_minimap.c \
-				loop.c loop_logic.c loop_logic_keys.c loop_logic_switch_state.c \
+				loop.c loop_logic.c loop_logic_keys.c loop_logic_door.c \
 				loop_graphic.c \
 				collision.c debug.c initialize.c errexit.c math.c time.c \
 				player.c enemy.c utils.c main.c
