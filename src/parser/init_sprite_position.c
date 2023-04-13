@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:12:10 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 21:06:29 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:57:13 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	init_sprite_position(t_game *game)
 		return (0);
 	if (game->map.enemy_count > 0)
 	{
-		game->map.enemies = malloc(sizeof(t_enemy) * (game->map.enemy_count + 1));
+		game->map.enemies = malloc(sizeof(t_enemy) * game->map.enemy_count);
 		if (game->map.enemies == NULL)
 			return (error_message(4, &game->map));
 	}

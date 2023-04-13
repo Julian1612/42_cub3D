@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 17:53:21 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:56:54 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../debug.h" // debug_print_player
 #include <math.h> // math funcs
 #include <string.h> // NULL
+#include <stdbool.h> // bool
 
 static void	handle_enemies_take_action(int i, t_map *map,
 	t_player *player, double enemy_speed)
@@ -50,7 +51,7 @@ static void	handle_enemies(t_map *map, t_player *player, double fps_mult)
 		return ;
 	enemy_speed = ENEMY_SPEED * fps_mult;
 	i = -1;
-	while (i++ < map->enemy_count)
+	while (i++ < map->enemy_count - 1)
 		handle_enemies_take_action(i, map, player, enemy_speed);
 }
 

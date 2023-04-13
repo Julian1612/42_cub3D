@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:38:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 21:21:41 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:56:08 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../enemy.h" // t_enemy
 #include "../debug.h" // debug funcs
 #include "libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include <stdio.h> // printf
 
 static void	spritehelper_init(t_spritehelper *hlpr,
 	t_sprite *sprite, mlx_image_t *img)
@@ -97,7 +98,7 @@ void	enemies_render(
 	if (game->map.enemy_count == 0)
 		return ;
 	i = -1;
-	while (i++ < game->map.enemy_count)
+	while (i++ < game->map.enemy_count - 1)
 	{
 		if (game->map.enemies[i].alive == false)
 			continue ;

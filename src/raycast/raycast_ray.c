@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 13:01:58 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 16:29:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:32:12 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ double	ray_get_x_offset(t_ray *ray)
 
 void	ray_init(t_ray *ray, t_vec *pos, t_vec *ray_dir)
 {
+	ray->y_side = false;
 	ray->dir = *ray_dir;
 	ray->angle = atan2(ray_dir->x, ray_dir->y);
 	ray->origin = *pos;

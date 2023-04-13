@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 21:04:58 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:57:25 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	collision_is_enemy(double x, double y, t_map *map, int enemy_num)
 	if (map->enemy_count == 0)
 		return (NOT_SET);
 	i = NOT_SET;
-	while (i++ < map->enemy_count)
+	while (i++ < map->enemy_count - 1)
 	{
 		if (i == enemy_num || map->enemies[i].health <= 0)
 			continue ;
