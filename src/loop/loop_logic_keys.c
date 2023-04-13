@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:44:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 15:46:07 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:12:06 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 #include <math.h> // math funcs
 #include <string.h> // NULL
 
-void	handle_minimap_keys(mlx_key_data_t keydata, void *param)
-{
-	t_game	*game;
-
-	game = (t_game *)param;
-	if (keydata.key == MLX_KEY_F && keydata.action == MLX_RELEASE)
-		switch_state_minimap(game, &game->player);
-}
-
 void	handle_action_keys(
 	mlx_t *mlx, t_player *player, t_game *game)
 {
@@ -34,7 +25,7 @@ void	handle_action_keys(
 	else if (player->weapon != NULL)
 		player->weapon->curr_frame = GUN1;
 	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
-		switch_state_door(game, player);
+		handle_door(game, player);
 }
 
 void	handle_movement_keys(mlx_t *mlx, t_player *player, t_map *map)

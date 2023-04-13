@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 20:06:42 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:13:47 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ static int	initialize_minimap(t_game *game)
 	game->minimap.minimap_walls = mlx_new_image(game->mlx,
 			MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);
 	if (game->minimap.minimap_walls == NULL)
-		return (ERROR);
-	if (mlx_image_to_window(game->mlx, game->minimap.minimap_walls, 0, 0)
-		== ERROR)
 		return (ERROR);
 	game->minimap.visible = 0;
 	return (SUCCESS);
@@ -52,9 +49,9 @@ static int	initialize_environ(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	game->img_world = mlx_new_image(game->mlx,
-			game->mlx->width, game->mlx->height);
+			game->mlx->width, game->mlx->height + 2);
 	game->img_hud = mlx_new_image(game->mlx,
-			game->mlx->width, game->mlx->height);
+			game->mlx->width, game->mlx->height + 2);
 	if (game->mlx == NULL || game->img_world == NULL || game->img_hud == NULL)
 		return (ERROR);
 	return (SUCCESS);

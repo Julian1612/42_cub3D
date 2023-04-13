@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 21:22:33 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:10:11 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@
 # define NOT_SET -1
 # define ERROR -1
 # define SUCCESS 0
-# define MINIMAP_WALL_SIZE 30
 # define FLOOR '0'
 # define WALL '1'
 # define FPS 60
-# define OBJ_COUNT 4
+# define MINIMAP_WALL_SIZE 30
 # define DOOR_CLOSED 'D'
 # define DOOR_OPEN 'd'
 # define ENEMY 'E'

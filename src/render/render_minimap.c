@@ -6,30 +6,19 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 21:05:33 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:10:31 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h" // t_game
 #include <string.h> // NULL
-#include <math.h>
 
 static void	draw_square(t_minimap *minimap, int i, int j, char symbol);
 static void	draw_minimap(t_game *game);
 
-int	minimap_render(t_game *game)
+void	minimap_render(t_game *game)
 {
-	if (game->minimap.visible == false)
-		return (0);
-	mlx_delete_image(game->mlx, game->minimap.minimap_walls);
-	game->minimap.minimap_walls = mlx_new_image(game->mlx,
-			MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);
-	if (game->minimap.minimap_walls == NULL)
-		mlx_close_window(game->mlx);
 	draw_minimap(game);
-	if (mlx_image_to_window(game->mlx, game->minimap.minimap_walls, 0, 0) == -1)
-		mlx_close_window(game->mlx);
-	return (0);
 }
 
 static void	draw_minimap(t_game *game)
@@ -65,7 +54,7 @@ static void	draw_square(t_minimap *minimap, int i, int j, char symbol)
 {
 	int			k;
 	int			l;
-	uint32_t	color;
+	t_hexcolor	color;
 
 	if (symbol == ' ')
 		return ;
@@ -85,48 +74,5 @@ static void	draw_square(t_minimap *minimap, int i, int j, char symbol)
 			l++;
 		}
 		k++;
-	}
-}
-
-void	get_map_measures(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (game->map.arr[i] != NULL)
-	{
-		j = 0;
-		while (game->map.arr[i][j] != '\0')
-		{
-			if (j > game->map.width)
-				game->map.width = j;
-			j++;
-		}
-		i++;
-	}
-	game->map.width++;
-	game->map.height = i;
-	game->minimap.width = game->map.width;
-	game->minimap.height = game->map.height;
-}
-
-// lmm aus dem struct entfernen
-void	change_maps(mlx_key_data_t keydata, void *param)
-{
-	t_minimap	*minimap;
-
-	minimap = (t_minimap *)param;
-	if (keydata.key == MLX_KEY_F && keydata.action == 0
-		&& minimap->visible == 1)
-	{
-		minimap->minimap_walls->instances[0].enabled = false;
-		minimap->visible = 0;
-	}
-	else if (keydata.key == MLX_KEY_F && keydata.action == 0
-		&& minimap->visible == 0)
-	{
-		minimap->minimap_walls->instances[0].enabled = true;
-		minimap->visible = 1;
 	}
 }
