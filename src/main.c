@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 14:54:52 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:41:21 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,9 @@ int	free_data(t_map *map_data)
 // @todo make weapon pickupable
 // @todo add exit
 // @todo add game over and win screen
-// @todo delete unnecessary texture files
 // @todo rename Julian functinos
 // @todo refactor mandatory
-// @todo sprinting button
 // @todo create tex_ids for startscreen textures and animate startscreen
-// @todo camera plane initialized wrongly if initial
-// direction of player is south
 
 int	main(int argc, char **argv)
 {
