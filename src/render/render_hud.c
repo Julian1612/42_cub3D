@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:26:54 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 20:50:48 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 20:56:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	draw_texture(mlx_image_t *img, t_tex *weapon_tex,
 
 	img_coor.x = pos.x;
 	tex_coor.x = 0;
-	while (tex_coor.x < weapon_tex->tex->width)
+	while ((uint32_t)tex_coor.x < weapon_tex->tex->width)
 	{
 		img_coor.y = pos.y;
 		temp = 0;
@@ -42,8 +42,8 @@ static void	draw_texture(mlx_image_t *img, t_tex *weapon_tex,
 
 static void	draw_damage(mlx_image_t *img, int player_health)
 {
-	int				i;
-	int				j;
+	uint32_t		i;
+	uint32_t		j;
 	unsigned int	alpha;
 	static int		health = 0;
 

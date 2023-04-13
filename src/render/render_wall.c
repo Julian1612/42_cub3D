@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:22:53 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 18:16:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 20:55:55 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	draw_wall(mlx_image_t *img,
 	}
 	ratio = (double)tex->height / fcknorm->y;
 	img_y_wall_end = img->height / 2 + fcknorm->y / 2;
-	while (img_coor.y < img->height && img_coor.y < img_y_wall_end)
+	while ((uint32_t)img_coor.y < img->height && img_coor.y < img_y_wall_end)
 	{
 		tex_coor.y = temp * ratio;
 		tex_pixel_to_img(img, tex, &tex_coor, &img_coor);
@@ -53,7 +53,7 @@ static void	draw_ceiling(
 	if (ceil_height < 0)
 		ceil_height = 0;
 	img_y = 0;
-	while (img_y < img->height && img_y < ceil_height)
+	while (img_y < img->height && img_y < (uint32_t)ceil_height)
 	{
 		mlx_put_pixel(img, img_x, img_y, color);
 		img_y++;
@@ -63,8 +63,8 @@ static void	draw_ceiling(
 static void	draw_floor(
 	mlx_image_t *img, int wall_height, int img_x, t_hexcolor color)
 {
-	int	floor_start;
-	int	img_y;
+	int			floor_start;
+	uint32_t	img_y;
 
 	floor_start = img->height / 2 + wall_height / 2;
 	img_y = floor_start;

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:56:45 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 18:16:13 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 20:57:12 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	is_visible(t_sprite *sprite, t_spritehelper *hlpr,
 	mlx_image_t *img, int *wall_height)
 {
 	if (sprite->cam_pos.y < 0 || hlpr->img_coor.x < 0
-		|| hlpr->img_coor.x >= img->width
+		|| (uint32_t)hlpr->img_coor.x >= img->width
 		|| wall_height[hlpr->img_coor.x] > sprite->height)
 		return (false);
 	return (true);

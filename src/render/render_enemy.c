@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:38:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 18:16:57 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 20:56:54 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	draw_sprite(t_sprite *sprite,
 		hlpr.tex_coor.x = (hlpr.img_coor.x - (-sprite->width / 2
 					+ sprite->img_x)) * sprite->tex->tex->width / sprite->width;
 		hlpr.temp = 0;
-		if (sprite->height > img->height)
+		if ((uint32_t)sprite->height > img->height)
 			hlpr.temp = (sprite->height - img->height) / 2;
 		draw_column(sprite, &hlpr, img);
 	}

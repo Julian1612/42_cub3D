@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 20:10:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 20:53:56 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	free_data(t_map *map_data)
 // @todo make re not working correctly
 // @todo check leaks (especially texture leaks)
 // @todo add sounds
-// @todo make weapon pickupable
 // @todo add exit
 // @todo add game over and win screen
 // @todo rename Julian functinos
