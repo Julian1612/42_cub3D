@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 13:26:13 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:39:11 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void	initialize_player_data(t_player *player)
 	player->health = 100;
 	player->cplane.x = 0;
 	player->cplane.y = (double)WIDTH / HEIGHT / 2;
+	player->mov_speed = 0.1;
+	player->rot_speed = 0.05;
 	player->weapon = NULL;
 }

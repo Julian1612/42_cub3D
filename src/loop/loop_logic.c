@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 14:35:37 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:40:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 #include <string.h> // NULL
 #include <stdio.h> // printf
 
-#define MOV_SPEED 0.1
-#define ROT_SPEED 0.05
 #define ENEMY_SPEED 0.04
 
 static void	handle_enemies(
@@ -76,31 +74,26 @@ static void	handle_action_keys(
 static void	handle_movement_keys(
 	mlx_t *mlx, t_player *player, t_map *map, double fps_mult)
 {
-	double	mov_speed;
-	double	rot_speed;
-
-	mov_speed = MOV_SPEED * fps_mult;
-	rot_speed = ROT_SPEED * fps_mult;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		player_move(&player->pos, map, player->dir.x
-			* mov_speed, player->dir.y * mov_speed);
+			* player->mov_speed, player->dir.y * player->mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
 		player_move(&player->pos, map, -player->dir.x
-			* mov_speed, -player->dir.y * mov_speed);
+			* player->mov_speed, -player->dir.y * player->mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		player_move(&player->pos, map,
 			rotate_x(player->dir.x, player->dir.y, M_PI_2)
-			* mov_speed, rotate_y(player->dir.x, player->dir.y, M_PI_2)
-			* mov_speed);
+			* player->mov_speed, rotate_y(player->dir.x, player->dir.y, M_PI_2)
+			* player->mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
 		player_move(&player->pos, map,
 			-rotate_x(player->dir.x, player->dir.y, M_PI_2)
-			* mov_speed, -rotate_y(player->dir.x, player->dir.y, M_PI_2)
-			* mov_speed);
+			* player->mov_speed, -rotate_y(player->dir.x, player->dir.y, M_PI_2)
+			* player->mov_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		player_rotate(player, -rot_speed);
+		player_rotate(player, -player->rot_speed);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		player_rotate(player, rot_speed);
+		player_rotate(player, player->rot_speed);
 }
 
 static void	handle_mouse_movement(mlx_t *mlx, t_player *player, double fps_mult)
@@ -114,7 +107,8 @@ static void	handle_mouse_movement(mlx_t *mlx, t_player *player, double fps_mult)
 	if (last_x == 0 && last_y == 0)
 		mlx_get_mouse_pos(mlx, &last_x, &last_y);
 	mlx_get_mouse_pos(mlx, &new_x, &new_y);
-	rot_speed = (double)(new_x - last_x) * ROT_SPEED * fps_mult * 0.015;
+	rot_speed = (double)(new_x - last_x)
+		* player->rot_speed * fps_mult * 0.015;
 	player_rotate(player, rot_speed);
 	last_x = new_x;
 }

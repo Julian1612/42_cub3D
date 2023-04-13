@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:49:01 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 14:28:11 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 14:39:22 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_player
 	t_vec			cplane;
 	t_vec			dir;
 	int				health;
+	double			mov_speed;
+	double			rot_speed;
 	t_weapon		*weapon;
 }	t_player;
 
