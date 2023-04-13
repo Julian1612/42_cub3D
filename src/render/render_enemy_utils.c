@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:56:45 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:04:35 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 18:16:13 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ bool	is_transparent(t_hexcolor color)
 	return (false);
 }
 
-bool	is_visible(
-	t_sprite *sprite, t_spritehelper *hlpr, mlx_image_t *img, int *wall_height)
+bool	is_visible(t_sprite *sprite, t_spritehelper *hlpr,
+	mlx_image_t *img, int *wall_height)
 {
 	if (sprite->cam_pos.y < 0 || hlpr->img_coor.x < 0
 		|| hlpr->img_coor.x >= img->width
@@ -31,8 +31,7 @@ bool	is_visible(
 	return (true);
 }
 
-void	row_set_start_end(t_start_end *row, int sprite_height,
-	int img_height, int offset)
+void	row_set_start_end(t_start_end *row, int sprite_height, int img_height)
 {
 	row->start = -sprite_height / 2 + img_height / 2;
 	if (row->start < 0)

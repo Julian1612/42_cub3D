@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:06:33 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 16:31:18 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 18:15:29 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	tex_pixel_to_img(
 
 	src = &tex->pixels[coor_to_pixel(tex->width, tex_coor->x, tex_coor->y)];
 	dst = &img->pixels[coor_to_pixel(img->width, img_coor->x, img_coor->y)];
-	ft_memcpy(dst, src, 4);
+	ft_memcpy(dst, src, tex->bytes_per_pixel);
 }
 
 void	sprite_init(t_sprite *sprite, t_vec *pos, t_tex *tex, t_game *game)

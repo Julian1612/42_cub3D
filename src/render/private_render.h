@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:26:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 16:31:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 18:17:28 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 typedef struct s_coor
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 }	t_coor;
 
 typedef struct s_start_end
@@ -69,8 +69,8 @@ void		hud_render(t_game *game);
 void		walls_render(t_game *game, int *wall_height);
 
 // render_enemy
-void		enemies_render(t_game *game, t_object *objects,
-				t_enemy *enemies, int *wall_height);
+void		enemies_render(t_game *game, t_enemy *enemies,
+				int *wall_height);
 
 // render_minimap
 int			minimap_render(t_game *game);
@@ -84,7 +84,7 @@ void		draw_column(t_sprite *sprite,
 bool		is_visible(t_sprite *sprite, t_spritehelper *hlpr,
 				mlx_image_t *img, int *wall_height);
 void		row_set_start_end(t_start_end *row, int sprite_height,
-				int img_height, int offset);
+				int img_height);
 void		column_set_start_end(t_start_end *stripe, int sprite_width,
 				int img_width, int img_x);
 

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 15:39:03 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:36:00 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static t_vec	get_view_direction(char direction)
 		dir.x = 1;
 		dir.y = 0;
 	}
-	else if (direction == 'W')
+	else
 	{
 		dir.x = -1;
 		dir.y = 0;
@@ -88,7 +88,7 @@ static t_vec	get_camera_direction(char direction)
 		cplane.x = 0;
 		cplane.y = (double)WIDTH / HEIGHT / 2;
 	}
-	else if (direction == 'W')
+	else
 	{
 		cplane.x = 0;
 		cplane.y = -(double)WIDTH / HEIGHT / 2;

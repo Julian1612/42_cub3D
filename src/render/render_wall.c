@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:22:53 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 20:41:37 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 18:16:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 static void	draw_wall(mlx_image_t *img,
 	mlx_texture_t *tex, double tex_offset, t_coor *fcknorm)
 {
-	t_coor	tex_coor;
-	int		temp;
-	t_coor	img_coor;
-	double	ratio;
-	int		img_y_wall_end;
+	t_coor		tex_coor;
+	int			temp;
+	t_coor		img_coor;
+	double		ratio;
+	int			img_y_wall_end;
 
 	tex_coor.x = tex->width * tex_offset;
 	temp = 0;
@@ -46,10 +46,12 @@ static void	draw_wall(mlx_image_t *img,
 static void	draw_ceiling(
 	mlx_image_t *img, int wall_height, int img_x, t_hexcolor color)
 {
-	int	ceil_height;
-	int	img_y;
+	int			ceil_height;
+	uint32_t	img_y;
 
 	ceil_height = img->height / 2 - wall_height / 2;
+	if (ceil_height < 0)
+		ceil_height = 0;
 	img_y = 0;
 	while (img_y < img->height && img_y < ceil_height)
 	{
@@ -88,7 +90,7 @@ void	walls_render(t_game *game, int *wall_height)
 	t_rayhit	ray_hit;
 	t_vec		ray_dir;
 	t_coor		fcknorm;
-	int			img_x;
+	uint32_t	img_x;
 
 	img_x = 0;
 	while (img_x < game->img_world->width)

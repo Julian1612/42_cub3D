@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 20:20:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:35:38 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include "../../libraries/libft/src/get_next_line/get_next_line.h" // gnl
 #include <fcntl.h> // open
 #include <unistd.h> // close
-
-static int	check_char(t_map *map_data, char character);
 
 int	check_textures_file(t_map *map_data, char *cub_file_path, char *data_type)
 {
@@ -46,9 +44,9 @@ int	check_mandatory_textures(t_map *map_data)
 			return (1);
 		i++;
 	}
-	if (map_data->floor_color == -1)
+	if ((int)map_data->floor_color == -1)
 		return (error_textures(WEST + 1, map_data));
-	else if (map_data->ceiling_color == -1)
+	else if ((int)map_data->ceiling_color == -1)
 		return (error_textures(4, map_data));
 	return (0);
 }

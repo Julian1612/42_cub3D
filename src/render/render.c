@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 20:59:44 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 18:16:22 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	render_all(t_game *game)
 	wall_height = malloc(sizeof(int) * game->img_world->width);
 	minimap_render(game);
 	walls_render(game, wall_height);
-	enemies_render(game, game->map.objects, game->map.enemies, wall_height);
+	enemies_render(game, game->map.enemies, wall_height);
 	hud_render(game);
 	free(wall_height);
 }

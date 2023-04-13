@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 19:39:51 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:35:16 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include <stdio.h>
 
 static int	get_texture_file_path(t_map *map_data, char **line,
-				int i, int *error);
-static int	get_bonus_texture_file_path(t_map *map_data, char *line,
 				int i, int *error);
 
 int	ft_strcmp(const char *s1, const char *s2)

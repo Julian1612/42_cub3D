@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:38:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 16:31:29 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 18:16:57 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 static void	spritehelper_init(t_spritehelper *hlpr,
 	t_sprite *sprite, mlx_image_t *img)
 {
-	row_set_start_end(&hlpr->row, sprite->height, img->height, 0);
+	row_set_start_end(&hlpr->row, sprite->height, img->height);
 	column_set_start_end(&hlpr->column, sprite->width,
 		img->width, sprite->img_x);
 	hlpr->ratio = (double)sprite->tex->tex->height / sprite->height;
@@ -40,7 +40,8 @@ void	draw_column(t_sprite *sprite,
 	}
 }
 
-static void	draw_sprite(t_sprite *sprite, mlx_image_t *img, int *wall_height)
+static void	draw_sprite(t_sprite *sprite,
+	mlx_image_t *img, int *wall_height)
 {
 	t_spritehelper	hlpr;
 
@@ -59,8 +60,7 @@ static void	draw_sprite(t_sprite *sprite, mlx_image_t *img, int *wall_height)
 	}
 }
 
-static void	sort_enemies(t_vec *pos,
-	t_object *objects, t_enemy *enemies, int enemy_count)
+static void	sort_enemies(t_vec *pos, t_enemy *enemies, int enemy_count)
 {
 	t_enemy		temp;
 	int			i;
@@ -87,12 +87,12 @@ static void	sort_enemies(t_vec *pos,
 }
 
 void	enemies_render(
-	t_game *game, t_object *objects, t_enemy *enemies, int *wall_height)
+	t_game *game, t_enemy *enemies, int *wall_height)
 {
 	t_sprite	sprite;
 	int			i;
 
-	sort_enemies(&game->player.pos, objects, enemies, game->map.enemy_count);
+	sort_enemies(&game->player.pos, enemies, game->map.enemy_count);
 	if (game->map.enemy_count == 0)
 		return ;
 	i = -1;

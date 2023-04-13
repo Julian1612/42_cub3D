@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 16:23:50 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 17:53:21 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	handle_enemies_take_action(int i, t_map *map,
 
 	if (map->enemies[i].alive == false || map->enemies[i].health <= 0)
 	{
-		enemy_die(&map->enemies[i], map, i);
+		enemy_die(&map->enemies[i]);
 		return ;
 	}
 	angle = atan2(player->pos.y - map->enemies[i].pos.y,
@@ -41,8 +41,7 @@ static void	handle_enemies_take_action(int i, t_map *map,
 	}
 }
 
-static void	handle_enemies(
-	t_enemy *enemies, t_map *map, t_player *player, double fps_mult)
+static void	handle_enemies(t_map *map, t_player *player, double fps_mult)
 {
 	int		i;
 	double	enemy_speed;
@@ -82,7 +81,7 @@ void	loop_logic(t_game *game)
 	handle_movement_keys(game->mlx, &game->player, &game->map);
 	handle_mouse_movement(game->mlx, &game->player);
 	mlx_key_hook(game->mlx, &handle_minimap_keys, game);
-	handle_enemies(game->map.enemies, &game->map, &game->player, fps_mult);
+	handle_enemies(&game->map, &game->player, fps_mult);
 	debug_print_player(&game->player);
 	if (game->player.health <= 0)
 		errexit_msg("You died. Exiting program.");

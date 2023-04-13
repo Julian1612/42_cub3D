@@ -6,18 +6,19 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:55:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 16:23:27 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 17:52:38 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game
+#include "types.h" // e_tex_id
 #include "enemy.h" // t_enemy
 #include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
 #include <stdio.h> // @note remove
 
-static void	enemy_move_set_next_frame(t_enemy *enemy, int state)
+static void	enemy_move_set_next_frame(t_enemy *enemy, enum e_tex_id state)
 {
 	if (is_next_frame(&enemy->last_frame_time) == true)
 	{
@@ -74,7 +75,7 @@ void	enemy_attack(t_player *player, t_enemy *enemy)
 	}
 }
 
-void	enemy_die(t_enemy *enemy, t_map *map, int enemy_index)
+void	enemy_die(t_enemy *enemy)
 {
 	if (enemy->alive == false)
 		return ;

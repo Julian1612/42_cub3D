@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:27:04 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 21:02:28 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 16:45:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	switch_state_door(t_game *game, t_player *player)
 	}
 }
 
-void	switch_state_minimap(t_game *game, t_player *player)
+void	switch_state_minimap(t_game *game)
 {
 	game->minimap.minimap_walls->instances[0].enabled
 		= switch_bool(game->minimap.minimap_walls->instances[0].enabled);

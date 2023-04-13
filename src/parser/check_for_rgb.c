@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_rgb.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:38 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/11 14:37:14 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:34:42 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	init_struct(t_map *map_data, char **splitted_str,
 {
 	if (boundary == 1)
 	{
-		if (map_data->ceiling_color != -1)
+		if ((int)map_data->ceiling_color != -1)
 		{
 			error_message(6, map_data);
 			*error = 1;
@@ -97,7 +97,7 @@ static void	init_struct(t_map *map_data, char **splitted_str,
 	}
 	else if (boundary == 2)
 	{
-		if (map_data->floor_color != -1)
+		if ((int)map_data->floor_color != -1)
 		{
 			error_message(6, map_data);
 			*error = 1;

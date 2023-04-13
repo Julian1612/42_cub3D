@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:31:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 15:51:03 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 17:52:36 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ typedef struct s_enemy
 // enemy
 void	enemy_move(t_enemy *enemy, t_map *map, t_vec offset, int enemy_index);
 void	enemy_attack(t_player *player, t_enemy *enemy);
-void	enemy_die(t_enemy *enemy, t_map *map, int enemy_index);
+void	enemy_die(t_enemy *enemy);
 
 #endif
