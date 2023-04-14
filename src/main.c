@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 19:49:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 20:31:32 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,9 @@ static int	put_images_to_window(t_game *game)
 	return (SUCCESS);
 }
 
-// @todo fix the mlx compiling shit
-// @todo make re not working correctly
 // @todo check leaks (especially texture leaks)
-// @todo add sounds
 // @todo refactor mandatory
 // @todo enemy cooldown
-// @todo weird game over screen texture bug
-// @todo use %s strings for sounds?
 
 int	main(int argc, char **argv)
 {
