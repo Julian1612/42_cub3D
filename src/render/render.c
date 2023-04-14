@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 01:29:27 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 22:59:26 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ void	render_game(t_game *game)
 	int	*wall_height;
 
 	wall_height = malloc(sizeof(int) * game->img_world->width);
-	minimap_render(game);
 	walls_render(game, wall_height);
-	enemies_render(game, game->map.enemies, wall_height);
-	hud_render(game);
 	free(wall_height);
+}
+
+bool	is_transparent(t_hexcolor color)
+{
+	if (color == 0x00000000)
+		return (true);
+	return (false);
 }

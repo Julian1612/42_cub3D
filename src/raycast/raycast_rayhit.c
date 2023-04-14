@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_rayhit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 13:09:28 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 05:45:20 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:15:43 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,10 @@
 #include "private_raycast.h" // t_ray
 #include "../cub3D.h" // cub3D structs and defines
 
-void	rayhit_set_type(t_rayhit *hit, t_ray *ray, t_map *map, char target)
+void	rayhit_set_type(t_rayhit *hit, t_ray *ray, t_map *map)
 {
-	int	enemy_index;
-
 	if (map->arr[ray->map_y][ray->map_x] == WALL)
 		hit->hit = WALL;
-	if (map->arr[ray->map_y][ray->map_x] == EXIT)
-		hit->hit = EXIT;
-	else if (map->arr[ray->map_y][ray->map_x] == DOOR_CLOSED)
-		hit->hit = DOOR_CLOSED;
-	else if (target == DOOR_OPEN && map->arr[ray->map_y][ray->map_x]
-		== DOOR_OPEN)
-		hit->hit = DOOR_OPEN;
-	else if (target == ENEMY)
-	{
-		enemy_index = collision_is_enemy(ray->map_x + 0.5,
-				ray->map_y + 0.5, map, NOT_SET);
-		if (enemy_index != NOT_SET)
-		{
-			hit->hit = ENEMY;
-			hit->enemy_index = enemy_index;
-		}
-	}
 }
 
 void	rayhit_set_tex_id(t_rayhit *hit, bool y_side, t_vec *step)
@@ -58,10 +39,6 @@ void	rayhit_set_tex_id(t_rayhit *hit, bool y_side, t_vec *step)
 				hit->tex_id = WALL_EAST;
 		}
 	}
-	else if (hit->hit == EXIT)
-		hit->tex_id = WALL_EXIT;
-	else if (hit->hit == DOOR_CLOSED)
-		hit->tex_id = DOOR_FRONT;
 }
 
 void	rayhit_set_offset(t_rayhit *hit, bool y_side, t_ray *ray)

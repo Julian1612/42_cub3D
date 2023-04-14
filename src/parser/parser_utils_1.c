@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 11:28:41 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 01:52:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:14:50 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,4 @@ int	check_pos_in_map(t_map *map, int i, int j)
 		|| (int) ft_strlen(map->arr[i - 1]) <= j)
 		return (error_get_map(8, map));
 	return (0);
-}
-
-void	init_door(t_map *map_data, int i, int j, int count_doors)
-{
-	map_data->doors[count_doors].x = j + 0.5;
-	map_data->doors[count_doors].y = i + 0.5;
-	map_data->doors[count_doors].open = false;
-	map_data->doors[count_doors].last_action = 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_logic_keys.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:44:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 03:18:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:01:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,8 @@
 #include <math.h> // math funcs
 #include <string.h> // NULL
 
-void	handle_action_keys(
-	mlx_t *mlx, t_player *player, t_game *game)
-{
-	if (mlx_is_mouse_down(mlx, MLX_MOUSE_BUTTON_LEFT))
-		player_shoot(player, game->map.enemies, game);
-	else if (player->weapon != NULL)
-		player->weapon->frame.curr = HUD_GUN1;
-	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
-		handle_door(game, player);
-}
-
 void	handle_movement_keys(mlx_t *mlx, t_player *player, t_map *map)
 {
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT_SHIFT))
-		player->mov_speed *= 3;
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		player_move(&player->pos, map, player->dir.x
 			* player->mov_speed, player->dir.y * player->mov_speed);

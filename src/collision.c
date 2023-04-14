@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 21:11:41 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:18:45 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "enemy.h" // t_enemy
 #include "cub3D.h" // t_game
 #include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
 #include <stdio.h> // @note remove
@@ -22,7 +21,7 @@
 
 static bool	is_non_permeable(char c)
 {
-	if (c == WALL || c == DOOR_CLOSED)
+	if (c == WALL)
 		return (true);
 	return (false);
 }
@@ -56,33 +55,9 @@ static bool	is_wall(double x, double y, char **map)
 	return (false);
 }
 
-// returns the index of the enemy that is in the way, NOT_SET if none
-int	collision_is_enemy(double x, double y, t_map *map, int enemy_num)
-{
-	int		i;
-	double	dist_x;
-	double	dist_y;
-
-	if (map->enemy_count == 0)
-		return (NOT_SET);
-	i = NOT_SET;
-	while (i++ < map->enemy_count - 1)
-	{
-		if (i == enemy_num || map->enemies[i].health <= 0)
-			continue ;
-		dist_x = x - map->enemies[i].pos.x;
-		dist_y = y - map->enemies[i].pos.y;
-		if (dist_x * dist_x + dist_y * dist_y < SPRITE_SIZE_SQ)
-			return (i);
-	}
-	return (NOT_SET);
-}
-
-bool	collision_is_true(double x, double y, t_map *map, int enemy_num)
+bool	collision_is_true(double x, double y, t_map *map)
 {
 	if (is_wall(x, y, map->arr))
-		return (true);
-	if (collision_is_enemy(x, y, map, enemy_num) != NOT_SET)
 		return (true);
 	return (false);
 }

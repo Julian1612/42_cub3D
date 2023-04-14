@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_0.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 09:59:24 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 19:40:37 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:14:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ void	init_struct_null(t_map *map_data)
 	map_data->ceiling_color = -1;
 	map_data->floor_color = -1;
 	map_data->arr = NULL;
-	map_data->enemies = NULL;
-	map_data->doors = NULL;
-	map_data->door_count = 0;
-	map_data->enemy_count = 0;
 }
 
 int	is_all_digit(char **str)

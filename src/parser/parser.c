@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 05:28:07 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:12:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,11 @@ int	parser(int *argc, char **argv, t_game *game)
 		return (1);
 	if (check_mandatory_textures(&game->map))
 		return (1);
-	if (check_bonus_textures(&game->map))
-		return (1);
 	if (check_map(&game->map))
 		return (1);
 	if (check_for_invalid_definitions(&game->map))
 		return (1);
 	if (init_player_position(game))
-		return (1);
-	if (init_sprite_position(game))
 		return (1);
 	return (0);
 }
@@ -95,8 +91,7 @@ static int	check_for_invalid_definitions(t_map *map_data)
 			if (map_data->arr[i][j] != '0' && map_data->arr[i][j] != '1'
 				&& map_data->arr[i][j] != 'N' && map_data->arr[i][j] != 'S'
 				&& map_data->arr[i][j] != 'W' && map_data->arr[i][j] != 'E'
-				&& map_data->arr[i][j] != 'D' && map_data->arr[i][j] != 'F'
-				&& map_data->arr[i][j] != 'X' && map_data->arr[i][j] != ' ')
+				&& map_data->arr[i][j] != ' ')
 				return (error_get_map(5, map_data));
 			j++;
 		}

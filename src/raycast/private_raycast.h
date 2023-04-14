@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   private_raycast.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 13:14:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 14:03:47 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 22:50:38 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_ray
 /* ************************************************************************** */
 
 // rayhit
-void	rayhit_set_type(t_rayhit *hit, t_ray *ray, t_map *map, char target);
+void	rayhit_set_type(t_rayhit *hit, t_ray *ray, t_map *map);
 void	rayhit_set_tex_id(t_rayhit *hit, bool y_side, t_vec *step);
 void	rayhit_set_offset(t_rayhit *hit, bool y_side, t_ray *ray);
 void	rayhit_init(t_rayhit *hit);

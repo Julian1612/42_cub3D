@@ -6,12 +6,13 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:22:27 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 11:17:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:10:38 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_render.h" // render funcs
 #include "../../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include "../../libraries/libft/src/libft/libft.h" // ft_memcpy
 #include <stdio.h>
 
 void	render_texture(mlx_image_t *img, t_tex *tex,
@@ -39,49 +40,15 @@ void	render_texture(mlx_image_t *img, t_tex *tex,
 	}
 }
 
-void	render_texture_transparent(mlx_image_t *img, t_tex *tex,
-	t_coor pos, double ratio)
+void	tex_pixel_to_img(
+	mlx_image_t *img, mlx_texture_t *tex, t_coor *tex_coor, t_coor *img_coor)
 {
-	t_coor		img_coor;
-	t_coor		tex_coor;
-	int			temp;
-	t_hexcolor	color;
+	uint8_t	*src;
+	uint8_t	*dst;
 
-	img_coor.x = pos.x;
-	tex_coor.x = 0;
-	while ((uint32_t)tex_coor.x < tex->tex->width)
-	{
-		img_coor.y = pos.y;
-		temp = 0;
-		while (temp < tex->tex->height / ratio)
-		{
-			tex_coor.y = temp * ratio;
-			color = tex->tex->pixels[coor_to_pixel(tex->tex->width,
-					tex_coor.x, tex_coor.y, tex->tex->height)];
-			if (is_transparent(color) == false)
-				tex_pixel_to_img(img, tex->tex, &tex_coor, &img_coor);
-			img_coor.y++;
-			temp++;
-		}
-		img_coor.x++;
-		tex_coor.x++;
-	}
-}
-
-void	render_color_image(mlx_image_t *img, t_hexcolor color)
-{
-	uint32_t	x;
-	uint32_t	y;
-
-	x = 0;
-	while (x < img->width)
-	{
-		y = 0;
-		while (y < img->height)
-		{
-			mlx_put_pixel(img, x, y, color);
-			y++;
-		}
-		x++;
-	}
+	src = &tex->pixels[coor_to_pixel(tex->width, tex_coor->x,
+			tex_coor->y, tex->height)];
+	dst = &img->pixels[coor_to_pixel(img->width, img_coor->x,
+			img_coor->y, img->height)];
+	ft_memcpy(dst, src, tex->bytes_per_pixel);
 }

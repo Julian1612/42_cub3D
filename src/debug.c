@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 15:11:10 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:18:12 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:04:57 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,4 @@ void	debug_print_ray(t_ray *ray, t_rayhit *hit)
 	printf("hit offset:   %f\n", hit->x_offset);
 	printf("hit dist:   %f\n", hit->dist);
 	printf("hit texture:   %d\n", hit->tex_id);
-}
-
-void	debug_print_sprite(t_sprite *sprite)
-{
-	if (DEBUG == 0)
-		return ;
-	printf(BLUE"============ SPRITE ============\n"RESET);
-	debug_print_vec(&sprite->dir, "sprite direction vector from player:\n");
-	debug_print_vec(&sprite->dist, "sprite distance from player:\n");
-	debug_print_vec(&sprite->cam_pos, "sprite position on camera plane:\n");
-	printf("sprite x position on the screen: %f\n", sprite->img_x);
-	printf("sprite.height: %d\n", sprite->height);
-	printf("sprite.width: %d\n", sprite->width);
 }

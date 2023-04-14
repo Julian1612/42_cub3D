@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 22:01:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 00:20:50 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 22:48:12 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ static void	extend_ray(t_ray *ray)
 }
 
 void	raycast_cast_ray(
-	t_rayhit *hit, t_game *game, t_vec ray_dir, char target)
+	t_rayhit *hit, t_game *game, t_vec ray_dir)
 {
 	t_ray	ray;
 
 	ray_init(&ray, &game->player.pos, &ray_dir);
 	rayhit_init(hit);
-	rayhit_set_type(hit, &ray, &game->map, target);
+	rayhit_set_type(hit, &ray, &game->map);
 	while (hit->hit == NOT_SET)
 	{
 		extend_ray(&ray);
-		rayhit_set_type(hit, &ray, &game->map, target);
+		rayhit_set_type(hit, &ray, &game->map);
 	}
 	ray_set_distance(hit, &ray, ray.y_side);
 	rayhit_set_tex_id(hit, ray.y_side, &ray.step);

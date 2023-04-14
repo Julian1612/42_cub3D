@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 13:14:27 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 14:26:19 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 22:50:18 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ typedef struct s_rayhit
 
 // raycast
 void	raycast_cast_ray(
-			t_rayhit *hit, t_game *game, t_vec ray_dir, char target);
+			t_rayhit *hit, t_game *game, t_vec ray_dir);
 
 #endif

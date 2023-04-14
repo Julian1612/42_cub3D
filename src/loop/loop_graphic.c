@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_graphic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:21:07 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:43:37 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:16:59 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	resize(t_game *game)
 	last_width = game->mlx->width;
 	last_height = game->mlx->height;
 	mlx_resize_image(game->img_world, game->mlx->width, game->mlx->height);
-	mlx_resize_image(game->hud.img, game->mlx->width, game->mlx->height);
 	resize_camera(&game->player, game->mlx->width, game->mlx->height);
 }
 

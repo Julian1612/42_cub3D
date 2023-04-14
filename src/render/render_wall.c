@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:22:53 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 00:38:37 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 22:51:42 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	walls_render(t_game *game, int *wall_height)
 	while (img_x < game->img_world->width)
 	{
 		set_ray_dir(&ray_dir, img_x, game->img_world->width, &game->player);
-		raycast_cast_ray(&ray_hit, game, ray_dir, WALL);
+		raycast_cast_ray(&ray_hit, game, ray_dir);
 		wall_height[img_x] = game->img_world->height / ray_hit.dist;
 		draw_ceiling(game->img_world, wall_height[img_x],
 			img_x, game->map.ceiling_color);

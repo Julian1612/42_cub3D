@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 18:55:53 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:11:09 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,4 @@ void	free_parser_data(t_map *map_data)
 		}
 		free(map_data->arr);
 	}
-	if (map_data->door_count > 0 && map_data->doors != NULL)
-		free(map_data->doors);
-	if (map_data->enemy_count > 0 && map_data->enemies != NULL)
-		free(map_data->enemies);
 }
