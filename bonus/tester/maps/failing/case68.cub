@@ -1,0 +1,19 @@
+NO textures/north.png
+EA ./textures/east.png
+SO ./textures/south.png
+WE ./textures/west.png
+
+F 220,100,0
+C 100,130,35
+
+D ./textures/door.png
+L ./textures/super_mario.png
+A ./textures/super_mario.png
+P ./textures/super_mario.png
+
+11
+11
+11
+
+
+

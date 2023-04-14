@@ -1,7 +1,0 @@
-WE ./textures/west.png
-EA ./textures/east.png
-SO                   ./textures/south.png
-NO ./textures/north.png
-
-F  240,        240,      240
-C     50        ,50      ,50
