@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 23:28:05 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:02:11 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	free_textures(t_tex *textures)
 static void	initialize_player_data(t_player *player)
 {
 	static t_weapon	gun = {
-		.damage = 7,
+		.damage = 10,
 		.frame.time_of_last = 0,
 		.frame.curr = HUD_GUN1,
 	};

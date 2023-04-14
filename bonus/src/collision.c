@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 23:49:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:14:04 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
 
-#define PLAYER_SIZE 0.2
-#define SPRITE_SIZE_SQ 0.5
+#define ENTITY_SIZE 0.2
+#define ENTITY_SIZE_SQ 0.25
 
 static bool	is_non_permeable(char c)
 {
@@ -32,25 +32,25 @@ static bool	is_wall(double x, double y, char **map)
 {
 	if (ft_strlen(map[(int)(y)]) <= x)
 		return (true);
-	if (is_non_permeable(map[(int)(y + PLAYER_SIZE)][(int)(x)]) == true)
+	if (is_non_permeable(map[(int)(y + ENTITY_SIZE)][(int)(x)]) == true)
 		return (true);
-	if (is_non_permeable(map[(int)(y - PLAYER_SIZE)][(int)(x)]) == true)
+	if (is_non_permeable(map[(int)(y - ENTITY_SIZE)][(int)(x)]) == true)
 		return (true);
-	if (is_non_permeable(map[(int)(y)][(int)(x + PLAYER_SIZE)]) == true)
+	if (is_non_permeable(map[(int)(y)][(int)(x + ENTITY_SIZE)]) == true)
 		return (true);
-	if (is_non_permeable(map[(int)(y)][(int)(x - PLAYER_SIZE)]) == true)
+	if (is_non_permeable(map[(int)(y)][(int)(x - ENTITY_SIZE)]) == true)
 		return (true);
-	if (is_non_permeable(map[(int)(y + PLAYER_SIZE)]
-		[(int)(x + PLAYER_SIZE)]) == true)
+	if (is_non_permeable(map[(int)(y + ENTITY_SIZE)]
+		[(int)(x + ENTITY_SIZE)]) == true)
 		return (true);
-	if (is_non_permeable(map[(int)(y - PLAYER_SIZE)]
-		[(int)(x - PLAYER_SIZE)]) == true)
+	if (is_non_permeable(map[(int)(y - ENTITY_SIZE)]
+		[(int)(x - ENTITY_SIZE)]) == true)
 		return (true);
-	if (is_non_permeable(map[(int)(y - PLAYER_SIZE)]
-		[(int)(x + PLAYER_SIZE)]) == true)
+	if (is_non_permeable(map[(int)(y - ENTITY_SIZE)]
+		[(int)(x + ENTITY_SIZE)]) == true)
 		return (true);
-	if (is_non_permeable(map[(int)(y + PLAYER_SIZE)]
-		[(int)(x - PLAYER_SIZE)]) == true)
+	if (is_non_permeable(map[(int)(y + ENTITY_SIZE)]
+		[(int)(x - ENTITY_SIZE)]) == true)
 		return (true);
 	return (false);
 }
@@ -71,7 +71,7 @@ int	collision_is_enemy(double x, double y, t_map *map, int enemy_num)
 			continue ;
 		dist_x = x - map->enemies[i].pos.x;
 		dist_y = y - map->enemies[i].pos.y;
-		if (dist_x * dist_x + dist_y * dist_y < SPRITE_SIZE_SQ)
+		if (dist_x * dist_x + dist_y * dist_y < ENTITY_SIZE_SQ)
 			return (i);
 	}
 	return (NOT_SET);
