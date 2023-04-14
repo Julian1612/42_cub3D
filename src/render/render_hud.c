@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   render_hud.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:26:54 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:57:11 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 11:17:27 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../render.h" // render funcs
-#include "libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include "../../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
 #include "../../libraries/libft/src/libft/libft.h" // ft_itoa
 #include <string.h> // NULL
 
