@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 13:09:28 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 05:20:50 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 05:37:30 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	rayhit_set_type(t_rayhit *hit, t_ray *ray, t_map *map, char target)
 
 	if (map->arr[ray->map_y][ray->map_x] == WALL)
 		hit->hit = WALL;
+	if (map->arr[ray->map_y][ray->map_x] == EXIT)
+		hit->hit = EXIT;
 	else if (map->arr[ray->map_y][ray->map_x] == DOOR_CLOSED)
 		hit->hit = DOOR_CLOSED;
 	else if (target == DOOR_OPEN && map->arr[ray->map_y][ray->map_x]
@@ -56,6 +58,8 @@ void	rayhit_set_tex_id(t_rayhit *hit, bool y_side, t_vec *step)
 				hit->tex_id = EAST;
 		}
 	}
+	else if (hit->hit == EXIT)
+		hit->tex_id = EXIT;
 	else if (hit->hit == DOOR_CLOSED)
 		hit->tex_id = DOOR_FRONT;
 }
