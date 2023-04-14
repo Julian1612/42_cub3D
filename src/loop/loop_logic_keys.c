@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:44:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 00:12:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:51:23 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_action_keys(
 	if (mlx_is_mouse_down(mlx, MLX_MOUSE_BUTTON_LEFT))
 		player_shoot(player, game->map.enemies, game);
 	else if (player->weapon != NULL)
-		player->weapon->curr_frame = GUN1;
+		player->weapon->curr_frame = HUD_GUN1;
 	if (mlx_is_key_down(mlx, MLX_KEY_SPACE))
 		handle_door(game, player);
 }

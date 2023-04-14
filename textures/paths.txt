@@ -1,10 +1,4 @@
 ./textures/door/door_front.png
-./textures/gun/gun1.png
-./textures/gun/gun2.png
-./textures/gun/gun3.png
-./textures/gun/gun4.png
-./textures/gun/gun5.png
-./textures/gun/gun6.png
 ./textures/zombie/zombie_run1.png
 ./textures/zombie/zombie_run2.png
 ./textures/zombie/zombie_run3.png
@@ -22,4 +16,13 @@
 ./textures/zombie/zombie_dead6.png
 ./textures/zombie/zombie_dead7.png
 ./textures/zombie/zombie_dead8.png
+./textures/hud/gun1.png
+./textures/hud/gun2.png
+./textures/hud/gun3.png
+./textures/hud/gun4.png
+./textures/hud/gun5.png
+./textures/hud/gun6.png
 ./textures/hud/heart.png
+./textures/screens/soldier_down.png
+./textures/screens/soldier_up.png
+./textures/screens/start_button.png

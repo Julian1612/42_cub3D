@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:46:52 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 18:16:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 01:29:27 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../cub3D.h" // cub3D structs
 #include <stdlib.h> // malloc, free
 
-void	render_all(t_game *game)
+void	render_game(t_game *game)
 {
 	int	*wall_height;
 

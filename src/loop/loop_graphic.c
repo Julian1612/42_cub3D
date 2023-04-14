@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:21:07 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 13:05:02 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 01:29:27 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ static void	resize(t_game *game)
 
 void	loop_graphic(t_game *game)
 {
-	render_all(game);
+	render_game(game);
 	resize(game);
 }

@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/14 00:11:56 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/14 02:06:19 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,19 +15,18 @@ CFLAGS		=	-g -Wall -Wextra -Werror #-fsanitize=address,undefinded
 LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 CC			=	cc
-VPATH		=	src: src/parser: src/start_screen: \
+VPATH		=	src: src/parser: \
 				src/player_position: src/render src/raycast src/render src/loop
 
 SRC			=	check_for_map.c check_for_rgb.c check_for_texture.c check_map.c \
 				check_textures.c error_messages.c get_file_data.c \
 				init_player_position.c init_sprite_position.c parser.c \
 				parser_utils_0.c parser_utils_1.c \
-				init_start_screen.c start_screen.c \
 				raycast.c raycast_ray.c raycast_rayhit.c \
-				render.c render_wall.c render_hud.c render_enemy.c \
+				render.c render_wall.c render_hud.c render_enemy.c render_utils.c \
 				render_enemy_sprite.c render_enemy_utils.c render_minimap.c \
-				loop.c loop_logic.c loop_logic_keys.c loop_logic_door.c \
-				loop_graphic.c \
+				loop.c loop_screen.c loop_logic.c loop_logic_keys.c \
+				loop_logic_door.c loop_graphic.c \
 				collision.c debug.c initialize.c errexit.c math.c time.c \
 				player.c enemy.c utils.c main.c
 

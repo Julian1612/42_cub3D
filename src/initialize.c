@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 00:29:32 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 01:10:35 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,23 @@ static int	initialize_textures(t_game *game)
 	return (SUCCESS);
 }
 
+static int	initialize_screens(t_game *game)
+{
+	game->start.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->game_over.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->win.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (game->start.img == NULL || game->game_over.img == NULL
+		|| game->win.img == NULL)
+		return (ERROR);
+	game->start.tex = &game->map.textures[SCREEN_START];
+	game->game_over.tex = &game->map.textures[SCREEN_SOLDIER1];
+	game->win.tex = &game->map.textures[SCREEN_SOLDIER2];
+	game->start.active = true;
+	game->game_over.active = false;
+	game->win.active = false;
+	return (SUCCESS);
+}
+
 static int	initialize_environ(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3=====D", false);
@@ -63,23 +80,9 @@ int	initialize_mlx_data(t_game *game)
 		return (ERROR);
 	if (initialize_textures(game) == ERROR)
 		return (ERROR);
+	if (initialize_screens(game) == ERROR)
+		return (ERROR);
 	if (initialize_minimap(game) == ERROR)
 		return (ERROR);
 	return (SUCCESS);
-}
-
-void	initialize_player_data(t_player *player)
-{
-	static t_weapon	gun = {
-		.damage = 10,
-		.range = 10,
-		.reload_time = 1,
-		.last_frame_time = 0,
-		.curr_frame = GUN1,
-	};
-
-	player->health = 100;
-	player->mov_speed = 0.1;
-	player->rot_speed = 0.05;
-	player->weapon = &gun;
 }

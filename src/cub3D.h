@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 00:10:11 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 02:04:06 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,9 @@ typedef struct s_door
 	int				y;
 }	t_door;
 
-typedef struct s_object
-{
-	t_vec			pos;
-	t_tex			*tex;
-	enum e_obj_type	type;
-}	t_object;
-
+// @todo width height needed?
+// @todo view dir needed?
+// @todo whole struct necessary?
 typedef struct s_minimap
 {
 	t_vec			pos;
@@ -101,19 +97,12 @@ typedef struct s_map
 	int			height;
 }	t_map;
 
-typedef struct s_start_screen
+typedef struct s_screen
 {
 	bool			active;
-	mlx_image_t		*background;
-	mlx_image_t		*img_start_button;
-	mlx_image_t		*img_exit_button;
-	mlx_image_t		*img_soldier_up;
-	mlx_image_t		*img_soldier_down;
-	mlx_texture_t	*start_button;
-	mlx_texture_t	*exit_button;
-	mlx_texture_t	*soldier_down;
-	mlx_texture_t	*soldier_up;
-}	t_start_screen;
+	mlx_image_t		*img;
+	t_tex			*tex;
+}	t_screen;
 
 // @note items might be added here
 typedef struct s_game
@@ -121,11 +110,13 @@ typedef struct s_game
 	mlx_t			*mlx;
 	mlx_image_t		*img_world;
 	mlx_image_t		*img_hud;
+	t_screen		start;
+	t_screen		game_over;
+	t_screen		win;
 	t_map			map;
 	t_minimap		minimap;
 	t_player		player;
 	t_enemy			*enemies;
-	t_start_screen	start_screen;
 }	t_game;
 
 /* ************************************************************************** */
@@ -148,7 +139,6 @@ t_hexcolor		convert_to_hexcode(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 
 // initialize
-void			initialize_player_data(t_player *player);
 int				initialize_mlx_data(t_game *game);
 
 // collision
@@ -163,9 +153,7 @@ bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);
 
 // start_screen
-int				initialize_start_screen(t_game *game);
-void			draw_background(t_start_screen *start_screen);
 void			startscreen_wait_for_click(mlx_t *mlx,
-					t_start_screen *start_screen);
+					t_screen *start_screen);
 
 #endif

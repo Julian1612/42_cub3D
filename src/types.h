@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:55:32 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 18:53:58 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:52:50 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@ enum e_tex_id
 	SOUTH,
 	WEST,
 	DOOR_FRONT,
-	GUN1,
-	GUN2,
-	GUN3,
-	GUN4,
-	GUN5,
-	GUN6,
 	ZOMBIE_RUN1,
 	ZOMBIE_RUN2,
 	ZOMBIE_RUN3,
@@ -54,7 +48,16 @@ enum e_tex_id
 	ZOMBIE_DEAD6,
 	ZOMBIE_DEAD7,
 	ZOMBIE_DEAD8,
-	HEART,
+	HUD_GUN1,
+	HUD_GUN2,
+	HUD_GUN3,
+	HUD_GUN4,
+	HUD_GUN5,
+	HUD_GUN6,
+	HUD_HEART,
+	SCREEN_SOLDIER1,
+	SCREEN_SOLDIER2,
+	SCREEN_START,
 	LAST,
 };
 

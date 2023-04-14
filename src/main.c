@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 00:17:31 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 01:04:57 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,60 @@
 #include "parser.h" // parser
 #include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
 #include <stdlib.h> // malloc
-#include <stdio.h> // @note remove, printf
-#include <unistd.h> // @note remove, sleep
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
-#include <string.h> // @note remove, memcpy
 
 void	play_music(void)
 {
 	system("afplay ./sound_track/preussengloria.mp3 &");
 }
 
-int	free_data(t_map *map_data)
-{
-	int	i;
+// static int	free_data(t_map *map_data)
+// {
+// 	int	i;
 
-	i = 0;
-	while (map_data->arr[i] != NULL)
-	{
-		free(map_data->arr[i]);
-		i++;
-	}
-	free(map_data->arr);
-	return (EXIT_SUCCESS);
+// 	i = 0;
+// 	while (map_data->arr[i] != NULL)
+// 	{
+// 		free(map_data->arr[i]);
+// 		i++;
+// 	}
+// 	free(map_data->arr);
+// 	return (EXIT_SUCCESS);
+// }
+
+static void	initialize_player_data(t_player *player)
+{
+	static t_weapon	gun = {
+		.damage = 10,
+		.range = 10,
+		.reload_time = 1,
+		.last_frame_time = 0,
+		.curr_frame = HUD_GUN1,
+	};
+
+	player->health = 100;
+	player->mov_speed = 0.1;
+	player->rot_speed = 0.05;
+	player->weapon = &gun;
+}
+
+static int	put_images_to_window(t_game *game)
+{
+	if (mlx_image_to_window(game->mlx, game->img_world, 0, 0) == ERROR)
+		return (ERROR);
+	if (mlx_image_to_window(game->mlx, game->img_hud, 0, 0) == ERROR)
+		return (ERROR);
+	if (mlx_image_to_window(game->mlx, game->start.img, 0, 0) == ERROR)
+		return (ERROR);
+	if (mlx_image_to_window(game->mlx, game->game_over.img, 0, 0) == ERROR)
+		return (ERROR);
+	if (mlx_image_to_window(game->mlx, game->win.img, 0, 0) == ERROR)
+		return (ERROR);
+	if (mlx_image_to_window(game->mlx, game->minimap.minimap_walls, 0, 0)
+		== ERROR)
+		return (ERROR);
+	return (SUCCESS);
 }
 
 // @todo fix the mlx compiling shit
@@ -63,16 +94,8 @@ int	main(int argc, char **argv)
 		errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &loop, &game) == false)
 		errexit_mlx_errno();
-	if (mlx_image_to_window(game.mlx, game.img_world, 0, 0) == ERROR)
+	if (put_images_to_window(&game) == ERROR)
 		errexit_mlx_errno();
-	if (mlx_image_to_window(game.mlx, game.img_hud, 0, 0) == ERROR)
-		errexit_mlx_errno();
-	if (mlx_image_to_window(game.mlx, game.minimap.minimap_walls, 0, 0)
-		== ERROR)
-		return (ERROR);
-	if (initialize_start_screen(&game) == ERROR)
-		errexit_mlx_errno();
-	draw_background(&game.start_screen);
 	initialize_player_data(&game.player);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
