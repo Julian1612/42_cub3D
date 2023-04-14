@@ -6,11 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:04:23 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:04:25 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:23:00 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
+#include "types.h" // t_frame
 #include <stdbool.h> // bool
 
 bool	is_cooldown(void)
@@ -27,14 +28,24 @@ bool	is_cooldown(void)
 	return (true);
 }
 
-bool	is_next_frame(double *last_frame_time)
+bool	is_next_frame(double *time_of_last)
 {
-	if (mlx_get_time() - *last_frame_time > 0.125)
+	if (mlx_get_time() - *time_of_last > 0.125)
 	{
-		*last_frame_time = mlx_get_time();
+		*time_of_last = mlx_get_time();
 		return (true);
 	}
 	return (false);
+}
+
+void	set_next_frame(t_frame *frame, enum e_tex_id start, int frame_count)
+{
+	if (is_next_frame(&frame->time_of_last) == true)
+	{
+		frame->curr++;
+		if (frame->curr > start + frame_count - 1)
+			frame->curr = start;
+	}
 }
 
 double	get_fps_mult(double delta_time, int fps)

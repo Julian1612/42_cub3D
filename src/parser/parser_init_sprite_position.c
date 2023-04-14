@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_sprite_position.c                             :+:      :+:    :+:   */
+/*   parser_init_sprite_position.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:12:10 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 01:52:01 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 03:18:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ static void	init_enemy(t_map *map_data, int i, int j, int count_enemies)
 	map_data->enemies[count_enemies].pos.x = j + 0.5;
 	map_data->enemies[count_enemies].pos.y = i + 0.5;
 	map_data->enemies[count_enemies].health = 100;
-	map_data->enemies[count_enemies].last_frame_time = 0;
-	map_data->enemies[count_enemies].curr_frame = ZOMBIE_RUN1;
+	map_data->enemies[count_enemies].frame.time_of_last = 0;
+	map_data->enemies[count_enemies].frame.curr = ZOMBIE_RUN1;
 	map_data->enemies[count_enemies].speed = 0.1;
 	map_data->enemies[count_enemies].damage = 10;
 }

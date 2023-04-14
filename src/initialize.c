@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 01:10:35 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:18:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ static int	initialize_screens(t_game *game)
 	if (game->start.img == NULL || game->game_over.img == NULL
 		|| game->win.img == NULL)
 		return (ERROR);
-	game->start.tex = &game->map.textures[SCREEN_START];
-	game->game_over.tex = &game->map.textures[SCREEN_SOLDIER1];
-	game->win.tex = &game->map.textures[SCREEN_SOLDIER2];
+	game->start.frame.curr = START_BG1;
+	game->game_over.frame.curr = START_BG1;
+	game->win.frame.curr = START_BG1;
 	game->start.active = true;
 	game->game_over.active = false;
 	game->win.active = false;
+	game->start.frame.time_of_last = 0;
+	game->game_over.frame.time_of_last = 0;
+	game->win.frame.time_of_last = 0;
 	return (SUCCESS);
 }
 

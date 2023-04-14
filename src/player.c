@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:50:14 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 00:52:37 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:18:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	player_shoot(t_player *player, t_enemy *enemies, t_game *game)
 
 	if (player->weapon == NULL)
 		return ;
-	if (is_next_frame(&player->weapon->last_frame_time) == true)
+	if (is_next_frame(&player->weapon->frame.time_of_last) == true)
 	{
-		player->weapon->curr_frame++;
-		if (player->weapon->curr_frame > HUD_GUN6)
-			player->weapon->curr_frame = HUD_GUN3;
+		player->weapon->frame.curr++;
+		if (player->weapon->frame.curr > HUD_GUN6)
+			player->weapon->frame.curr = HUD_GUN3;
 	}
 	raycast_cast_ray(&hit, game, player->dir, ENEMY);
 	if (hit.enemy_index != NOT_SET)

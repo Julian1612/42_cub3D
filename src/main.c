@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 01:04:57 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:18:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static void	initialize_player_data(t_player *player)
 		.damage = 10,
 		.range = 10,
 		.reload_time = 1,
-		.last_frame_time = 0,
-		.curr_frame = HUD_GUN1,
+		.frame.time_of_last = 0,
+		.frame.curr = HUD_GUN1,
 	};
 
 	player->health = 100;

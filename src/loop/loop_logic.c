@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 00:12:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 02:49:13 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,8 @@ static void	handle_mouse_movement(mlx_t *mlx, t_player *player)
 	last_x = new_x;
 }
 
-void	loop_logic(t_game *game)
+void	loop_logic(t_game *game, double fps_mult)
 {
-	double	fps_mult;
-
-	fps_mult = get_fps_mult(game->mlx->delta_time, FPS);
 	game->player.mov_speed = MOV_SPEED * fps_mult;
 	game->player.rot_speed = ROT_SPEED * fps_mult;
 	handle_action_keys(game->mlx, &game->player, game);

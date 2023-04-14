@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:26:54 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 02:07:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:18:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_coor	handle_textures(t_game *game)
 	t_tex				*weapon_tex;
 	double				ratio;
 
-	weapon_tex = &game->map.textures[game->player.weapon->curr_frame];
+	weapon_tex = &game->map.textures[game->player.weapon->frame.curr];
 	if (game->player.weapon != NULL)
 	{
 		ratio = (double)weapon_tex->tex->height

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:39:03 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 02:04:36 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 02:50:01 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 /* ************************************************************************** */
 
 // loop_logic
-void	loop_logic(t_game *game);
+void	loop_logic(t_game *game, double fps_mult);
 
 // loop_graphic
 void	loop_graphic(t_game *game);
@@ -45,6 +45,6 @@ void	handle_action_keys(mlx_t *mlx, t_player *player, t_game *game);
 void	handle_movement_keys(mlx_t *mlx, t_player *player, t_map *map);
 
 // loop_screen
-void	start_loop(t_screen *start, mlx_t *mlx);
+void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures);
 
 #endif

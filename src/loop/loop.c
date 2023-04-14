@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:06:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 02:02:56 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 02:50:16 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,22 @@ static void	handle_esc(mlx_t *mlx)
 	}
 }
 
-void	game_loop(t_game *game)
+void	game_loop(t_game *game, double fps_mult)
 {
-	loop_logic(game);
+	loop_logic(game, fps_mult);
 	loop_graphic(game);
 }
 
 void	loop(void *param)
 {
 	t_game	*game;
+	double	fps_mult;
 
 	game = (t_game *)param;
+	fps_mult = get_fps_mult(game->mlx->delta_time, FPS);
 	handle_esc(game->mlx);
 	if (game->start.active == true)
-		start_loop(&game->start, game->mlx);
+		start_loop(&game->start, game->mlx, game->map.textures);
 	else if (game->game_over.active == false && game->win.active == false)
-		game_loop(game);
+		game_loop(game, fps_mult);
 }

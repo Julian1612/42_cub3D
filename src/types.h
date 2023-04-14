@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:55:32 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 00:52:50 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:17:50 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,14 @@ enum e_tex_id
 	HUD_GUN5,
 	HUD_GUN6,
 	HUD_HEART,
-	SCREEN_SOLDIER1,
-	SCREEN_SOLDIER2,
-	SCREEN_START,
+	START_BG1,
+	START_BG2,
+	START_BG3,
+	START_BG4,
+	START_BG5,
+	START_BG6,
+	START_BG7,
+	START_BG8,
 	LAST,
 };
 
@@ -79,5 +84,11 @@ typedef struct s_vector
 	double	x;
 	double	y;
 }	t_vec;
+
+typedef struct s_frame
+{
+	double			time_of_last;
+	enum e_tex_id	curr;
+}	t_frame;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_enemy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:38:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 23:40:43 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 03:18:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	enemies_render(
 		if (game->map.enemies[i].alive == false)
 			continue ;
 		sprite_init(&sprite, &enemies[i].pos,
-			&game->map.textures[enemies[i].curr_frame], game);
+			&game->map.textures[enemies[i].frame.curr], game);
 		debug_print_sprite(&sprite);
 		draw_sprite(&sprite, game->img_world, wall_height);
 	}

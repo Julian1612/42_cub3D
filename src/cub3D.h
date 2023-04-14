@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 02:04:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:20:47 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_screen
 {
 	bool			active;
 	mlx_image_t		*img;
-	t_tex			*tex;
+	t_frame			frame;
 }	t_screen;
 
 // @note items might be added here
@@ -148,6 +148,7 @@ int				collision_is_enemy(double x, double y,
 					t_map *map, int enemy_num);
 
 // time
+void			set_next_frame(t_frame *frame, enum e_tex_id start, int frame_count);
 double			get_fps_mult(double delta_time, int fps);
 bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);

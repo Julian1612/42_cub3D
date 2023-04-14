@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:49:01 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 19:53:22 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:17:17 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ typedef struct s_weapon
 	char			damage;
 	char			range;
 	char			reload_time;
-	double			last_frame_time;
-	enum e_tex_id	curr_frame;
+	t_frame			frame;
 }	t_weapon;
 
 typedef struct s_player

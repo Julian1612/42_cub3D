@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:55:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 19:52:41 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:23:07 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,6 @@
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
 #include <stdio.h> // @note remove
-
-static void	enemy_move_set_next_frame(t_enemy *enemy, enum e_tex_id state)
-{
-	if (is_next_frame(&enemy->last_frame_time) == true)
-	{
-		enemy->curr_frame++;
-		if (enemy->curr_frame > state + 2)
-			enemy->curr_frame = state;
-	}
-}
 
 void	enemy_move(t_enemy *enemy, t_map *map, t_vec offset, int enemy_index)
 {
@@ -54,7 +44,7 @@ void	enemy_move(t_enemy *enemy, t_map *map, t_vec offset, int enemy_index)
 		state = ZOMBIE_RIGHT1;
 		enemy->pos.y += offset.y * 2;
 	}
-	enemy_move_set_next_frame(enemy, state);
+	set_next_frame(&enemy->frame, state, 3);
 }
 
 void	enemy_attack(t_player *player, t_enemy *enemy)
@@ -77,15 +67,15 @@ void	enemy_die(t_enemy *enemy)
 {
 	if (enemy->alive == false)
 		return ;
-	if (enemy->curr_frame < ZOMBIE_DEAD1)
-		enemy->curr_frame = ZOMBIE_DEAD1;
-	if (is_next_frame(&enemy->last_frame_time) == true)
+	if (enemy->frame.curr < ZOMBIE_DEAD1)
+		enemy->frame.curr = ZOMBIE_DEAD1;
+	if (is_next_frame(&enemy->frame.time_of_last) == true)
 	{
-		enemy->curr_frame++;
-		if (enemy->curr_frame > ZOMBIE_DEAD8)
+		enemy->frame.curr++;
+		if (enemy->frame.curr > ZOMBIE_DEAD8)
 		{
 			enemy->alive = false;
-			enemy->curr_frame = ZOMBIE_DEAD1;
+			enemy->frame.curr = ZOMBIE_DEAD1;
 		}
 	}
 }

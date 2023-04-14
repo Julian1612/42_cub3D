@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:31:24 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 17:52:36 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:16:29 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ typedef struct s_enemy
 	char			health;
 	double			speed;
 	char			damage;
-	double			last_frame_time;
-	enum e_tex_id	curr_frame;
+	t_frame			frame;
 }	t_enemy;
 
 /* ************************************************************************** */

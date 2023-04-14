@@ -23,6 +23,11 @@
 ./textures/hud/gun5.png
 ./textures/hud/gun6.png
 ./textures/hud/heart.png
-./textures/screens/soldier_down.png
-./textures/screens/soldier_up.png
-./textures/screens/start_button.png
+./textures/screens/start_bg1.png
+./textures/screens/start_bg2.png
+./textures/screens/start_bg3.png
+./textures/screens/start_bg4.png
+./textures/screens/start_bg5.png
+./textures/screens/start_bg6.png
+./textures/screens/start_bg7.png
+./textures/screens/start_bg8.png

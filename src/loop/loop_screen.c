@@ -6,15 +6,16 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 02:02:58 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 02:03:20 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:21:29 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_loop.h" // loop funcs
+#include "../types.h" // tex id
 #include "../render.h" // render funcs
 #include "../cub3D.h" // t_game
 
-void	start_loop(t_screen *start, mlx_t *mlx)
+void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures)
 {
 	int32_t	x;
 	int32_t	y;
@@ -24,7 +25,8 @@ void	start_loop(t_screen *start, mlx_t *mlx)
 
 	pos.x = mlx->width / 2 - start->img->width / 2;
 	pos.y = mlx->height / 2 - start->img->height / 2 + 50;
-	render_texture(start->img, start->tex, pos, 1);
+	set_next_frame(&start->frame, START_BG1, 7);
+	render_texture(start->img, &textures[start->frame.curr], pos, 1);
 	button_width = start->img->width;
 	button_height = start->img->height;
 	mlx_get_mouse_pos(mlx, &x, &y);
