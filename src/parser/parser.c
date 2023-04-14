@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:14:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 20:00:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 05:28:07 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static int	check_for_invalid_definitions(t_map *map_data)
 				&& map_data->arr[i][j] != 'N' && map_data->arr[i][j] != 'S'
 				&& map_data->arr[i][j] != 'W' && map_data->arr[i][j] != 'E'
 				&& map_data->arr[i][j] != 'D' && map_data->arr[i][j] != 'F'
-				&& map_data->arr[i][j] != ' ')
+				&& map_data->arr[i][j] != 'X' && map_data->arr[i][j] != ' ')
 				return (error_get_map(5, map_data));
 			j++;
 		}

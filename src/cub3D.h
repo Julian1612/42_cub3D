@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 03:20:47 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 05:18:23 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@
 # define MINIMAP_WALL_SIZE 30
 # define DOOR_CLOSED 'D'
 # define DOOR_OPEN 'd'
-# define ENEMY 'E'
+# define ENEMY 'F'
+# define EXIT 'X'
 # define FPS 60
 
 /* ************************************************************************** */
