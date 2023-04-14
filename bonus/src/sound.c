@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 07:08:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 20:16:56 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 22:54:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#define SOUND_FILE "ps"
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*substr;
-
-	if (s == NULL)
-		return (NULL);
-	if (start >= strlen((char *)s))
-		return (calloc(1, sizeof(char)));
-	if (len > strlen((char *)s))
-		len = strlen((char *)s);
-	substr = malloc(sizeof(char) * (len + 1));
-	if (!substr)
-		return (NULL);
-	strlcpy(substr, s + start, len + 1);
-	return (substr);
-}
+#define SOUND_FILE "sound_pid"
 
 int	sound_get_id(char *s)
 {
@@ -52,7 +35,7 @@ int	sound_get_id(char *s)
 	buff = NULL;
 	ps_fd = open(SOUND_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	dup2(ps_fd, STDOUT_FILENO);
-	system(SOUND_FILE);
+	system("ps");
 	dup2(tmp_fd, STDOUT_FILENO);
 	close(tmp_fd);
 	close(ps_fd);

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:49:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:27:39 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@
 
 static int	initialize_minimap(t_game *game)
 {
-	game->minimap.minimap_walls = mlx_new_image(game->mlx,
+	game->img_minimap = mlx_new_image(game->mlx,
 			MINIMAP_WALL_SIZE * 5, MINIMAP_WALL_SIZE * 5);
-	if (game->minimap.minimap_walls == NULL)
+	if (game->img_minimap == NULL)
 		return (ERROR);
-	game->minimap.visible = 0;
 	return (SUCCESS);
 }
 

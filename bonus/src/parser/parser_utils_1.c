@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 11:28:41 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 01:52:07 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:20:04 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int	check_pos_in_map(t_map *map, int i, int j)
 
 void	init_door(t_map *map_data, int i, int j, int count_doors)
 {
-	map_data->doors[count_doors].x = j + 0.5;
-	map_data->doors[count_doors].y = i + 0.5;
+	map_data->doors[count_doors].x = j;
+	map_data->doors[count_doors].y = i;
 	map_data->doors[count_doors].open = false;
 	map_data->doors[count_doors].last_action = 0;
 }

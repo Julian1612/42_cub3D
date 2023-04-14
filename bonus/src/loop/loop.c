@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:06:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 20:32:40 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:27:22 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	loop_2(t_game *game, double fps_mult)
 {
 	if (game->player.health <= 0)
 	{
-		game->minimap.minimap_walls->enabled = false;
+		game->img_minimap->enabled = false;
 		game->hud.img->enabled = false;
 		game->hud.img_str->enabled = false;
 		sound_stop(game->sound_id[SOUND_GAME]);
@@ -75,7 +75,7 @@ void	loop(void *param)
 	}
 	else if (has_won(&game->map, &game->player) == true)
 	{
-		game->minimap.minimap_walls->enabled = false;
+		game->img_minimap->enabled = false;
 		game->hud.img->enabled = false;
 		game->hud.img_str->enabled = false;
 		sound_stop(game->sound_id[SOUND_GAME]);

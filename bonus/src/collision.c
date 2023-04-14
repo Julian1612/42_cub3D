@@ -6,13 +6,14 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 21:11:41 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 22:53:06 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "enemy.h" // t_enemy
 #include "cub3D.h" // t_game
 #include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
+#include "../libraries/libft/src/libft/libft.h" // ft_strlen
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
@@ -29,10 +30,8 @@ static bool	is_non_permeable(char c)
 
 static bool	is_wall(double x, double y, char **map)
 {
-	if (x - PLAYER_SIZE < 0)
-		x = PLAYER_SIZE;
-	if (y - PLAYER_SIZE < 0)
-		y = PLAYER_SIZE;
+	if (ft_strlen(map[(int)(y)]) <= x)
+		return (true);
 	if (is_non_permeable(map[(int)(y + PLAYER_SIZE)][(int)(x)]) == true)
 		return (true);
 	if (is_non_permeable(map[(int)(y - PLAYER_SIZE)][(int)(x)]) == true)

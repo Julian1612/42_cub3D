@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:15:43 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 21:20:50 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:26:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../libraries/libft/src/libft/libft.h" // ft_strlen
 #include <string.h> // NULL
 
-static void	draw_square(t_minimap *minimap, int i, int j, char symbol);
+static void	draw_square(mlx_image_t *img, int i, int j, char symbol);
 
 static void	minimap_render_helper(t_game *game, int i, int j, int k)
 {
@@ -26,9 +26,9 @@ static void	minimap_render_helper(t_game *game, int i, int j, int k)
 		&& game->map.arr[i][j] != '\0')
 	{
 		if (i == (int) game->player.pos.y && j == (int) game->player.pos.x)
-			draw_square(&game->minimap, k, l, 'P');
+			draw_square(game->img_minimap, k, l, 'P');
 		else
-			draw_square(&game->minimap, k, l, game->map.arr[i][j]);
+			draw_square(game->img_minimap, k, l, game->map.arr[i][j]);
 		j++;
 		l++;
 	}
@@ -55,7 +55,7 @@ void	minimap_render(t_game *game)
 	}
 }
 
-static void	draw_square(t_minimap *minimap, int i, int j, char symbol)
+static void	draw_square(mlx_image_t *img, int i, int j, char symbol)
 {
 	int			k;
 	int			l;
@@ -75,7 +75,7 @@ static void	draw_square(t_minimap *minimap, int i, int j, char symbol)
 		l = j * MINIMAP_WALL_SIZE;
 		while (l < (j * MINIMAP_WALL_SIZE) + MINIMAP_WALL_SIZE)
 		{
-			mlx_put_pixel(minimap->minimap_walls, l, k, color);
+			mlx_put_pixel(img, l, k, color);
 			l++;
 		}
 		k++;

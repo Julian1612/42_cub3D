@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 21:36:48 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:25:26 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,11 @@
 # define DOOR_OPEN 'd'
 # define ENEMY 'F'
 # define EXIT 'X'
-# define FPS 60
 # define SOUND_MAX 10
 
 /* ************************************************************************** */
 /* ENUMS																	  */
 /* ************************************************************************** */
-
-enum	e_obj_type
-{
-	DECOR_NON_PERM,
-	DECOR_PERM,
-	WEAPON,
-	COIN,
-};
 
 enum	e_sound_id
 {
@@ -81,20 +72,6 @@ typedef struct s_door
 	int				x;
 	int				y;
 }	t_door;
-
-// @todo width height needed?
-// @todo view dir needed?
-// @todo whole struct necessary?
-typedef struct s_minimap
-{
-	t_vec			pos;
-	double			width;
-	double			height;
-	bool			visible;
-	mlx_image_t		*minimap_walls;
-	mlx_image_t		*walls;
-	mlx_image_t		*view_dir;
-}	t_minimap;
 
 typedef struct s_enemy	t_enemy;
 
@@ -130,12 +107,12 @@ typedef struct s_game
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img_world;
+	mlx_image_t		*img_minimap;
 	t_hud			hud;
 	t_screen		start;
 	t_screen		lose;
 	t_screen		win;
 	t_map			map;
-	t_minimap		minimap;
 	t_player		player;
 	t_enemy			*enemies;
 	int				sound_id[SOUND_MAX];
