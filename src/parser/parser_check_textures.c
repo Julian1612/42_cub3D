@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 00:00:08 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 01:51:00 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_bonus_textures(t_map *map_data)
 	char	*path;
 	int		i;
 
-	fd_path = open("../textures/paths.txt", O_RDONLY);
+	fd_path = open("./textures/paths.txt", O_RDONLY);
 	if (fd_path < 0)
 		return (error_textures(7, map_data));
 	i = WEST + 1;

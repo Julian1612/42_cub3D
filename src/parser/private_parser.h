@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:13:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 00:18:14 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 01:52:16 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void			remove_last_char(char *str);
 int				clear_mem(char **line);
 char			*ft_strjoin_free_s1(char const *s1, char const *s2);
 int				check_pos_in_map(t_map *map, int i, int j);
+void			init_door(t_map *map_data, int i, int j, int count_doors);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:12:10 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 00:20:24 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 01:52:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int		search_for_sprites(t_game *game, int i,
 					char *line);
 static int		get_sprites_count(t_map *map_data);
 static void		init_enemy(t_map *map_data, int i, int j, int count_enemies);
-static void		init_door(t_map *map_data, int i, int j, int count_doors);
 
 int	init_sprite_position(t_game *game)
 {
@@ -118,12 +117,4 @@ static void	init_enemy(t_map *map_data, int i, int j, int count_enemies)
 	map_data->enemies[count_enemies].curr_frame = ZOMBIE_RUN1;
 	map_data->enemies[count_enemies].speed = 0.1;
 	map_data->enemies[count_enemies].damage = 10;
-}
-
-static void	init_door(t_map *map_data, int i, int j, int count_doors)
-{
-	map_data->doors[count_doors].x = j + 0.5;
-	map_data->doors[count_doors].y = i + 0.5;
-	map_data->doors[count_doors].open = false;
-	map_data->doors[count_doors].last_action = 0;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_for_texture.c                                :+:      :+:    :+:   */
+/*   parser_check_for_texture.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 14:47:45 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/13 16:35:16 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 02:00:37 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,48 +104,3 @@ char	*cpy_line(char **des, char *src, int len)
 	(*des)[i] = '\0';
 	return (*des);
 }
-
-// int	check_for_bonus_texture(t_map *map_data, char *line, int *error)
-// {
-// 	static char	definitions[NBR_B_TEXTURES]
-// 		= {CHAR_DOOR, CHAR_BARREL, CHAR_ENEMY};
-// 	int			i;
-
-// 	i = 0;
-// 	while (i < NBR_B_TEXTURES)
-// 	{
-// 		if (ft_strchr(line, definitions[i]) != NULL)
-// 		{
-// 			get_bonus_texture_file_path(map_data, line, i, error);
-// 			return (1);
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-// static int	get_bonus_texture_file_path(t_map *map_data, char *line,
-// 			int i, int *error)
-// {
-// 	char	**splitted_str;
-// 	int		splitted_str_len;
-
-// 	splitted_str = ft_split(line, ' ');
-// 	if (splitted_str == NULL || ft_arrlen((void **)splitted_str) != 2)
-// 	{
-// 		*error = 1;
-// 		return (error_message(8, map_data));
-// 	}
-// 	splitted_str_len = ft_strlen(splitted_str[1]);
-// 	if (splitted_str == NULL)
-// 		return (error_message(4, map_data));
-// 	if (map_data->objects[i].tex->path != NULL)
-// 	{
-// 		*error = 1;
-// 		return (error_message(5, map_data));
-// 	}
-// 	cpy_line(&map_data->objects[i].tex->path,
-// 		splitted_str[1], splitted_str_len);
-// 	ft_free_arr((void **)splitted_str);
-// 	return (0);
-// }

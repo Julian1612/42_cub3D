@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_player_position.c                             :+:      :+:    :+:   */
+/*   parser_init_player_position.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:36:05 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 00:17:50 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 02:01:01 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	init_player_position(t_game *game)
 	return (error_get_map(4, &game->map));
 }
 
-// @todo check if correct
 static t_vec	get_view_direction(char direction)
 {
 	t_vec	dir;
