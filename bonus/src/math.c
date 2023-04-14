@@ -6,12 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 16:19:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 21:27:59 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:40:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // typedefs
-#include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include "../libraries/mlx42/include/MLX42/MLX42.h" // mlx typedefs
 #include <math.h> // sin, cos
 
 uint32_t	coor_to_pixel(uint32_t width, int x, int y, uint32_t height)

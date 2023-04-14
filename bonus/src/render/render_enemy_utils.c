@@ -6,12 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:56:45 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 03:57:59 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:40:24 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_render.h" // render funcs
-#include "../../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include "../../libraries/mlx42/include/MLX42/MLX42.h" // mlx typedefs
 #include "../../libraries/libft/src/libft/libft.h" // ft_memcpy
 
 bool	is_transparent(t_hexcolor color)

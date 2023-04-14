@@ -6,11 +6,11 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:04:23 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 03:23:00 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:40:53 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
+#include "../libraries/mlx42/include/MLX42/MLX42.h" // MLX_functions
 #include "types.h" // t_frame
 #include <stdbool.h> // bool
 

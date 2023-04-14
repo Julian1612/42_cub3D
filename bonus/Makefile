@@ -6,13 +6,13 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/15 00:11:11 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/15 00:39:26 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
 CFLAGS		=	-g -Wall -Wextra -Werror #-fsanitize=address,undefined
-LIBMLX		=	./libraries/mlx
+LIBMLX		=	./libraries/mlx42
 LIBFT		=	./libraries/libft
 CC			=	cc
 VPATH		=	src: src/parser: src/render src/raycast src/render src/loop
@@ -57,7 +57,6 @@ obj:
 libft:
 	@if [ ! -f $(LIBFT)/libft.a ]; then \
 		printf "$(GREEN)Building libft: $(RESET)"; \
-		mkdir -p $(LIBFT)/build; \
 		$(MAKE) -C $(LIBFT) >/dev/null; \
 		printf "$(GREEN)✅$(RESET)\n"; \
 	fi

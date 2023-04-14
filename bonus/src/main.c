@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/15 00:02:11 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:41:07 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "enemy.h" // t_enemy
 #include "loop.h" // loop
 #include "parser.h" // parser
-#include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
+#include "../libraries/mlx42/include/MLX42/MLX42.h" // mlx functions
 #include <stdlib.h> // malloc
 #include <stdbool.h> // bool
 #include <math.h> // M_PI

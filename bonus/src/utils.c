@@ -6,12 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:31:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/12 19:32:10 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:41:02 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // typedefs
-#include "../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include "../libraries/mlx42/include/MLX42/MLX42.h" // mlx typedefs
 
 t_hexcolor	convert_to_hexcode(
 	unsigned char r, unsigned char g, unsigned char b, unsigned char a)

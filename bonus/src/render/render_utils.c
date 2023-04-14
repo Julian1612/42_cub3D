@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:22:27 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 11:17:47 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:40:16 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_render.h" // render funcs
-#include "../../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include "../../libraries/mlx42/include/MLX42/MLX42.h" // mlx typedefs
 #include <stdio.h>
 
 void	render_texture(mlx_image_t *img, t_tex *tex,

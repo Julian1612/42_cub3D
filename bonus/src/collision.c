@@ -6,13 +6,13 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/15 00:14:04 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:40:29 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "enemy.h" // t_enemy
 #include "cub3D.h" // t_game
-#include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
+#include "../libraries/mlx42/include/MLX42/MLX42.h" // MLX_functions
 #include "../libraries/libft/src/libft/libft.h" // ft_strlen
 #include <stdio.h> // @note remove
 #include <math.h> // cos, sin

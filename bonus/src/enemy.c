@@ -6,14 +6,14 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:55:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/15 00:09:36 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:40:57 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game
 #include "types.h" // e_tex_id
 #include "enemy.h" // t_enemy
-#include "../libraries/mlx/include/MLX42/MLX42.h" // MLX_functions
+#include "../libraries/mlx42/include/MLX42/MLX42.h" // MLX_functions
 #include <math.h> // cos, sin
 #include <stdbool.h> // bool
 #include <stdio.h> // @note remove

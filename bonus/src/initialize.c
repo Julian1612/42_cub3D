@@ -6,12 +6,12 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 23:27:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/15 00:40:35 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h" // t_game, t_map, t_player, t_texture, t_weapon
-#include "../libraries/mlx/include/MLX42/MLX42.h" // mlx functions
+#include "../libraries/mlx42/include/MLX42/MLX42.h" // mlx functions
 #include "../libraries/libft/src/libft/libft.h" // ft_strlen, ft_memset
 #include <stdlib.h> // NULL
 #include <stdbool.h> // bool
