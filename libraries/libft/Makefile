@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
+#    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 10:08:16 by jschneid          #+#    #+#              #
-#    Updated: 2023/03/08 16:54:29 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/14 15:07:09 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,10 +81,10 @@ $(OBJ_PATH)/%.o: %.c
 	$(CC) $(CFLAGS) $(ADD_FLAGS) -I. -c $< -o $@
 
 clean:
-	$(RM) -r $(OBJ_PATH)
+	@$(RM) -r $(OBJ_PATH)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 	@echo -e "$(RED)make: libft cleaned!$(RESET)"
 
 re: fclean all

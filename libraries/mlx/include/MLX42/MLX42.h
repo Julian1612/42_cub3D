@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   MLX42.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 00:33:01 by W2Wizard          #+#    #+#             */
-/*   Updated: 2023/04/10 18:12:28 by lorbke           ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   MLX42_Keys.h                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/12/28 02:29:06 by W2Wizard      #+#    #+#                 */
+/*   Updated: 2023/03/30 16:23:19 by ntamayo-      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,9 +203,9 @@ typedef void (*mlx_mousefunc)(mouse_key_t button, action_t action, modifier_key_
 
 /**
  * Callback function used to handle raw mouse movement.
- *
- * @param[in] xdelta The mouse x position.
- * @param[in] ydelta The mouse y position.
+ * 
+ * @param[in] xpos The mouse x position.
+ * @param[in] ypos The mouse y position.
  * @param[in] param Additional parameter to pass on to the function.
  */
 typedef void (*mlx_cursorfunc)(double xpos, double ypos, void* param);
@@ -239,6 +239,13 @@ typedef void (*mlx_resizefunc)(int32_t width, int32_t height, void* param);
  */
 typedef void (*mlx_closefunc)(void* param);
 
+/** 
+ * Typedef for a window cursor object, these eventually expand to
+ * the native cursor object, but are hidden from the user.
+ * 
+ * Under GLFW they are named GLFWcursor and have a wrapper for each implementation.
+ * You can find the ACTUAL cursor in the following files at GLFW named under *_platform.h
+ */
 typedef void mlx_win_cursor_t;
 
 //= Error Functions =//
@@ -254,8 +261,8 @@ const char* mlx_strerror(mlx_errno_t val);
 //= Generic Functions =//
 
 /**
- * Initilizes a new MLX42 Instance.
- *
+ * Initializes a new MLX42 Instance.
+ * 
  * @param[in] width The width of the window.
  * @param[in] height The height of the window.
  * @param[in] title The title of the window.
@@ -460,7 +467,14 @@ mlx_win_cursor_t* mlx_create_std_cursor(cursor_t type);
  * @param[in] texture The texture to use as cursor.
  * @returns The cursor object or null on failure.
  */
-void* mlx_create_cursor(mlx_texture_t* texture);
+mlx_win_cursor_t* mlx_create_cursor(mlx_texture_t* texture);
+
+/**
+ * Destroys the given cursor object.
+ * 
+ * @param[in] cursor The cursor object to destroy.
+ */
+void mlx_destroy_cursor(mlx_win_cursor_t* cursor);
 
 /**
  * Sets the current cursor to the given custom cursor. 
@@ -539,7 +553,7 @@ void mlx_resize_hook(mlx_t* mlx, mlx_resizefunc func, void* param);
  * @param[in] mlx The MLX instance handle.
  * @param[in] f The function.
  * @param[in] param The parameter to pass on to the function.
- * @returns Whether or not the hook was added successfuly.
+ * @returns Whether or not the hook was added successfully. 
  */
 bool mlx_loop_hook(mlx_t* mlx, void (*f)(void*), void* param);
 
@@ -645,9 +659,9 @@ int32_t mlx_image_to_window(mlx_t* mlx, mlx_image_t* img, int32_t x, int32_t y);
 void mlx_delete_image(mlx_t* mlx, mlx_image_t* image);
 
 /**
- * Allows you to resize an image, the pixel buffer is re-allocated
- * to fit & the previous data is copied over. New pixels are zeroed.
- *
+ * Allows you to resize an image, a new pixel buffer is allocated
+ * to fit & the previous data is scaled to fit the new size.
+ * 
  * @param[in] img The image to resize.
  * @param[in] nwidth The new width.
  * @param[in] nheight The new height.
