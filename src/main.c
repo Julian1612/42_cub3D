@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 20:31:32 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 21:07:35 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,24 @@
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
 
-// static int	free_data(t_map *map_data)
-// {
-// 	int	i;
+static int	free_textures(t_tex *textures)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (map_data->arr[i] != NULL)
-// 	{
-// 		free(map_data->arr[i]);
-// 		i++;
-// 	}
-// 	free(map_data->arr);
-// 	return (EXIT_SUCCESS);
-// }
+	i = 0;
+	while (i < LAST)
+	{
+		mlx_delete_texture(textures[i].tex);
+		free(textures[i].path);
+		i++;
+	}
+	return (ERROR);
+}
 
 static void	initialize_player_data(t_player *player)
 {
 	static t_weapon	gun = {
-		.damage = 10,
-		.range = 10,
-		.reload_time = 1,
+		.damage = 7,
 		.frame.time_of_last = 0,
 		.frame.curr = HUD_GUN1,
 	};
@@ -79,7 +77,6 @@ static int	put_images_to_window(t_game *game)
 	return (SUCCESS);
 }
 
-// @todo check leaks (especially texture leaks)
 // @todo refactor mandatory
 // @todo enemy cooldown
 
@@ -99,5 +96,6 @@ int	main(int argc, char **argv)
 	initialize_sound_ids(game.sound_id);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
+	free_textures(game.map.textures);
 	return (EXIT_SUCCESS);
 }

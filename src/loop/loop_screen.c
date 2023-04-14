@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 02:02:58 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 08:47:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 20:33:13 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures, int *sound_id)
 	{
 		start->img->enabled = false;
 		start->active = false;
+		mlx_delete_image(mlx, start->img);
 		sound_play(&sound_id[SOUND_WIN],
 			"./sounds/start_click.mp3", "afplay ./sounds/start_click.mp3 &");
 		mlx_set_cursor_mode(mlx, MLX_MOUSE_DISABLED);

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 21:57:25 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 21:11:41 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ static bool	is_non_permeable(char c)
 
 static bool	is_wall(double x, double y, char **map)
 {
+	if (x - PLAYER_SIZE < 0)
+		x = PLAYER_SIZE;
+	if (y - PLAYER_SIZE < 0)
+		y = PLAYER_SIZE;
 	if (is_non_permeable(map[(int)(y + PLAYER_SIZE)][(int)(x)]) == true)
 		return (true);
 	if (is_non_permeable(map[(int)(y - PLAYER_SIZE)][(int)(x)]) == true)

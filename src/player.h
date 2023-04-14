@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:49:01 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 09:06:58 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 20:38:00 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ typedef struct s_game	t_game;
 typedef struct s_weapon
 {
 	char			damage;
-	char			range;
-	char			reload_time;
 	t_frame			frame;
 }	t_weapon;
 
