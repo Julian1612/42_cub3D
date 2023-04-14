@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 02:02:58 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 04:33:25 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 04:47:06 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 #include "../types.h" // tex id
 #include "../render.h" // render funcs
 #include "../cub3D.h" // t_game
+
+static bool	is_button_clicked(mlx_t *mlx, int width, int height, t_coor *pos)
+{
+	int	x;
+	int	y;
+
+	mlx_get_mouse_pos(mlx, &x, &y);
+	if (x > pos->x
+		&& x < pos->x + width
+		&& y < pos->y + height
+		&& y > pos->y - height
+		&& mlx_is_mouse_down(mlx, MLX_MOUSE_BUTTON_LEFT))
+		return (true);
+	return (false);
+}
 
 static void	start_render_textures(t_screen *start, mlx_t *mlx, t_tex *textures)
 {
@@ -32,24 +47,14 @@ static void	start_render_textures(t_screen *start, mlx_t *mlx, t_tex *textures)
 
 void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures)
 {
-	int32_t	x;
-	int32_t	y;
-	int		button_width;
-	int		button_height;
-	t_coor	pos;
+	t_coor	button_pos;
 
-	pos.x = mlx->width / 2 - start->img->width / 2;
-	pos.y = 0;
 	set_next_frame(&start->frame, START_BG1, 8);
 	start_render_textures(start, mlx, textures);
-	button_width = (int)&textures[START_BUTTON].tex->width;
-	button_height = (int)&textures[START_BUTTON].tex->height;
-	mlx_get_mouse_pos(mlx, &x, &y);
-	if (x > mlx->width / 2 - button_width / 2
-		&& x < mlx->width / 2 + button_width / 2
-		&& y < mlx->height / 2 + button_height / 2 + 50
-		&& y > mlx->height / 2 - button_height / 2 + 50
-		&& mlx_is_mouse_down(mlx, MLX_MOUSE_BUTTON_LEFT))
+	button_pos.x = mlx->width / 2 - textures[START_BUTTON].tex->width / 2 + 20;
+	button_pos.y = mlx->height - 350;
+	if (is_button_clicked(mlx, textures[START_BUTTON].tex->width,
+			textures[START_BUTTON].tex->height, &button_pos))
 	{
 		start->img->enabled = false;
 		start->active = false;
