@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 07:08:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 22:54:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:45:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,47 @@
 
 #define SOUND_FILE "sound_pid"
 
-int	sound_get_id(char *s)
+static int	find_sound_id(char *s, FILE *file_stream)
 {
-	FILE	*fn;
-	int		sound_id;
-	size_t	n;
-	int		ps_fd;
 	char	*buff;
-	int		tmp_fd;
+	char	*sub_str;
+	int		sound_id;
+	size_t	buff_size;
 
-	tmp_fd = dup(STDOUT_FILENO);
-	sound_id = 0;
 	buff = NULL;
-	ps_fd = open(SOUND_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	dup2(ps_fd, STDOUT_FILENO);
-	system("ps");
-	dup2(tmp_fd, STDOUT_FILENO);
-	close(tmp_fd);
-	close(ps_fd);
-	n = 0;
-	fn = fopen(SOUND_FILE, "r");
-	while (getline(&buff, &n, fn) >= 0)
+	sound_id = 0;
+	buff_size = 0;
+	while (getline(&buff, &buff_size, file_stream) >= 0)
 	{
 		if (buff && ft_strnstr(buff, s, ft_strlen(buff)) != NULL)
 		{
-			char *sub_str = ft_substr(buff, 0, 10);
+			sub_str = ft_substr(buff, 0, 10);
 			sound_id = ft_atoi(sub_str);
 			free(sub_str);
 			free(buff);
 			break ;
 		}
 	}
-	if (sound_id == 0)
-		free(buff);
-	fclose(fn);
+	return (sound_id);
+}
+
+int	sound_get_id(char *s)
+{
+	FILE	*file_stream;
+	int		sound_id;
+	int		sound_file_fd;
+	int		temp_fd;
+
+	temp_fd = dup(STDOUT_FILENO);
+	sound_file_fd = open(SOUND_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	dup2(sound_file_fd, STDOUT_FILENO);
+	system("ps");
+	dup2(temp_fd, STDOUT_FILENO);
+	close(temp_fd);
+	close(sound_file_fd);
+	file_stream = fopen(SOUND_FILE, "r");
+	sound_id = find_sound_id(s, file_stream);
+	fclose(file_stream);
 	return (sound_id);
 }
 
