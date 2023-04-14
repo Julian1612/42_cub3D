@@ -1,4 +1,5 @@
 .vscode
+.DS_Store
 bonus/obj
 bonus/libraries/libft/obj
 bonus/cub3D
