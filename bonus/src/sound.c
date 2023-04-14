@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 07:08:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 23:54:09 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:55:03 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	find_sound_id(char *s, FILE *file_stream)
 	return (sound_id);
 }
 
-int	sound_get_id(char *s)
+static int	sound_get_id(char *s)
 {
 	FILE	*file_stream;
 	int		sound_id;

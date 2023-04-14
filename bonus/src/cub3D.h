@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 23:25:26 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:55:10 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);
 
 // sound
-int				sound_get_id(char *s);
 void			sound_play(int *sound_id, char *path, char *cmd);
 void			sound_stop(int sound_id);
 void			sound_stop_all(int *sound_id);
