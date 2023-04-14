@@ -1,9 +1,0 @@
-.vscode
-obj
-libraries/libft/obj
-cub3D
-libraries/libft/libft.a
-textures/west2.png
-textures/east2.png
-textures/south2.png
-textures/north2.png

@@ -1,0 +1,9 @@
+.vscode
+bonus/obj
+bonus/libraries/libft/obj
+bonus/cub3D
+bonus/libraries/libft/libft.a
+bonus/textures/west2.png
+bonus/textures/east2.png
+bonus/textures/south2.png
+bonus/textures/north2.png
