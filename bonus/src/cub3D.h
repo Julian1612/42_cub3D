@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 10:04:51 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 21:36:48 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,10 +175,6 @@ void			set_next_frame(t_frame *frame, enum e_tex_id start,
 double			get_fps_mult(double delta_time, int fps);
 bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);
-
-// start_screen
-void			startscreen_wait_for_click(mlx_t *mlx,
-					t_screen *start_screen);
 
 // sound
 int				sound_get_id(char *s);
