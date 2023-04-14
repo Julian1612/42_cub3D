@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   render_enemy_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:56:45 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 20:57:12 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/13 23:40:56 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_render.h" // render funcs
-#include "libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
-#include "libraries/libft/src/libft/libft.h" // ft_memcpy
+#include "../../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include "../../libraries/libft/src/libft/libft.h" // ft_memcpy
 
 bool	is_transparent(t_hexcolor color)
 {

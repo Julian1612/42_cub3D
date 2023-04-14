@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/14 02:06:19 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/14 02:06:55 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,7 @@ CC			=	cc
 VPATH		=	src: src/parser: \
 				src/player_position: src/render src/raycast src/render src/loop
 
-SRC			=	check_for_map.c check_for_rgb.c check_for_texture.c check_map.c \
-				check_textures.c error_messages.c get_file_data.c \
-				init_player_position.c init_sprite_position.c parser.c \
+SRC			=	parser.c parser_check_for_map.c parser_check_for_rgb.c parser_check_for_texture.c parser_check_map.c parser_check_textures.c parser_error_messages.c parser_get_file_data.c parser_init_player_position.c parser_init_sprite_position.c \
 				parser_utils_0.c parser_utils_1.c \
 				raycast.c raycast_ray.c raycast_rayhit.c \
 				render.c render_wall.c render_hud.c render_enemy.c render_utils.c \
@@ -60,7 +58,7 @@ $(NAME): obj $(OBJS)
 	@$(CC) $(CFLAGS) $(INC) $(LIBS) $(OBJS) -o $(NAME)
 
 obj/%.o: %.c $(HEADERS)
-	@$(CC) $(CFLAGS) -o $@ -c $< 
+	@$(CC) $(CFLAGS) -o $@ -c $<
 	@printf "$(GREEN)$(BOLD)\rCompiling: $(notdir $<)\r\e[35C[OK]\n$(RESET)"
 
 clean:

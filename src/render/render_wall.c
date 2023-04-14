@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:22:53 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/13 23:31:15 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 00:38:37 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_render.h" // render funcs
 #include "../raycast.h" // t_rayhit
-#include "libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
+#include "../../libraries/mlx/include/MLX42/MLX42.h" // mlx typedefs
 
 static void	draw_wall(mlx_image_t *img,
 	mlx_texture_t *tex, double tex_offset, t_coor *fcknorm)

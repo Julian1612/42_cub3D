@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 11:28:41 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/12 20:20:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 01:52:07 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,30 @@ char	*ft_strjoin_free_s1(char const *s1, char const *s2)
 	str[j + i] = '\0';
 	free((char *)s1);
 	return (str);
+}
+
+int	check_pos_in_map(t_map *map, int i, int j)
+{
+	if (j > 0 && map->arr[i][j - 1] == ' ')
+		return (error_get_map(8, map));
+	else if (map->arr[i][j + 1] == '\0'
+		|| map->arr[i][j + 1] == ' ')
+		return (error_get_map(8, map));
+	else if (((int) ft_strlen(map->arr[i + 1]) >= j
+			&& map->arr[i + 1][j] == ' ')
+		|| ((int) ft_strlen(map->arr[i - 1]) >= j
+			&& map->arr[i - 1][j] == ' '))
+		return (error_get_map(8, map));
+	else if ((int) ft_strlen(map->arr[i + 1]) <= j
+		|| (int) ft_strlen(map->arr[i - 1]) <= j)
+		return (error_get_map(8, map));
+	return (0);
+}
+
+void	init_door(t_map *map_data, int i, int j, int count_doors)
+{
+	map_data->doors[count_doors].x = j + 0.5;
+	map_data->doors[count_doors].y = i + 0.5;
+	map_data->doors[count_doors].open = false;
+	map_data->doors[count_doors].last_action = 0;
 }
