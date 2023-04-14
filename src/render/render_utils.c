@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 01:22:27 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:24:17 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:58:53 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	render_texture_transparent(mlx_image_t *img, t_tex *tex,
 
 void	render_color_image(mlx_image_t *img, t_hexcolor color)
 {
-	int	x;
-	int	y;
+	uint32_t	x;
+	uint32_t	y;
 
 	x = 0;
 	while (x < img->width)

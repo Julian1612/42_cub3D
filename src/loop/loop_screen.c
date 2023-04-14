@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 02:02:58 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:24:39 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:53:40 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,22 @@ void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures)
 	}
 }
 
-#include <stdio.h>
+void	lose_loop(t_screen *lose, mlx_t *mlx, t_tex *textures)
+{
+	t_coor	pos;
+
+	pos.x = mlx->width / 2 - textures[LOSE].tex->width / 2;
+	pos.y = mlx->height / 2 - textures[LOSE].tex->height / 2;
+	render_color_image(lose->img, 0x000000FF);
+	render_texture_transparent(lose->img, &textures[LOSE], pos, 1);
+}
+
 void	win_loop(t_screen *win, mlx_t *mlx, t_tex *textures)
 {
 	t_coor	pos;
 
 	pos.x = mlx->width / 2 - textures[WIN].tex->width / 2;
 	pos.y = mlx->height / 2 - textures[WIN].tex->height / 2;
-	render_color_image(win->img, 0x0000FF);
+	render_color_image(win->img, 0x000000FF);
 	render_texture_transparent(win->img, &textures[WIN], pos, 1);
 }

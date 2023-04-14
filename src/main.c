@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 06:43:51 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 07:03:24 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	put_images_to_window(t_game *game)
 		return (ERROR);
 	if (mlx_image_to_window(game->mlx, game->start.img, 0, 0) == ERROR)
 		return (ERROR);
-	if (mlx_image_to_window(game->mlx, game->game_over.img, 0, 0) == ERROR)
+	if (mlx_image_to_window(game->mlx, game->lose.img, 0, 0) == ERROR)
 		return (ERROR);
 	if (mlx_image_to_window(game->mlx, game->win.img, 0, 0) == ERROR)
 		return (ERROR);
@@ -76,13 +76,9 @@ static int	put_images_to_window(t_game *game)
 // @todo make re not working correctly
 // @todo check leaks (especially texture leaks)
 // @todo add sounds
-// @todo add exit
-// @todo add game over and win screen
-// @todo rename Julian functinos
 // @todo refactor mandatory
 // @todo enemy cooldown
-// @todo create tex_ids for startscreen textures and animate startscreen
-// @todo show enemies on minimap
+// @todo weird game over screen texture bug
 
 int	main(int argc, char **argv)
 {

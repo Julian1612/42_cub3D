@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:55:32 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:19:57 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:49:13 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ enum e_tex_id
 	START_CUB,
 	START_BUTTON,
 	WIN,
+	LOSE,
 	LAST,
 };
 

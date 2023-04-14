@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 14:26:54 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:43:00 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:57:11 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void	hud_render(t_game *game)
 	game->hud.img_str = mlx_put_string(game->mlx, ft_itoa(game->player.health),
 			pos.x + game->map.textures[HUD_HEART].tex->width, pos.y + 10);
 	mlx_resize_image(game->hud.img_str, 100, 70);
-	draw_damage(game->hud.img_str, game->player.health);
+	draw_damage(game->hud.img, game->player.health);
 }

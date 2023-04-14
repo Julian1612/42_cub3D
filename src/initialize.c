@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:40:53 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:49:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ static int	initialize_textures(t_game *game)
 static int	initialize_screens(t_game *game)
 {
 	game->start.img = mlx_new_image(game->mlx, WIDTH, HEIGHT + 2);
-	game->game_over.img = mlx_new_image(game->mlx, WIDTH, HEIGHT + 2);
+	game->lose.img = mlx_new_image(game->mlx, WIDTH, HEIGHT + 2);
 	game->win.img = mlx_new_image(game->mlx, WIDTH, HEIGHT + 2);
-	if (game->start.img == NULL || game->game_over.img == NULL
+	if (game->start.img == NULL || game->lose.img == NULL
 		|| game->win.img == NULL)
 		return (ERROR);
 	game->start.frame.curr = START_BG1;
-	game->game_over.frame.curr = START_BG1;
+	game->lose.frame.curr = START_BG1;
 	game->win.frame.curr = START_BG1;
 	game->start.active = true;
-	game->game_over.active = false;
+	game->lose.active = false;
 	game->win.active = false;
 	game->start.frame.time_of_last = 0;
-	game->game_over.frame.time_of_last = 0;
+	game->lose.frame.time_of_last = 0;
 	game->win.frame.time_of_last = 0;
 	return (SUCCESS);
 }

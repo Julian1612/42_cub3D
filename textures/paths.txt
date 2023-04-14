@@ -35,3 +35,4 @@
 ./textures/screens/start_cub3d.png
 ./textures/screens/start_button.png
 ./textures/screens/win.png
+./textures/screens/lose.png

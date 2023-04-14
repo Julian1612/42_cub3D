@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:39:03 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:08:52 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:53:15 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	handle_movement_keys(mlx_t *mlx, t_player *player, t_map *map);
 // loop_screen
 void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures);
 void	win_loop(t_screen *win, mlx_t *mlx, t_tex *textures);
+void	lose_loop(t_screen *lose, mlx_t *mlx, t_tex *textures);
 
 #endif

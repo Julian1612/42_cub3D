@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 02:49:13 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:54:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,4 @@ void	loop_logic(t_game *game, double fps_mult)
 	handle_mouse_movement(game->mlx, &game->player);
 	handle_enemies(&game->map, &game->player, fps_mult);
 	debug_print_player(&game->player);
-	if (game->player.health <= 0)
-		errexit_msg("You died. Exiting program.");
 }

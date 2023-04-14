@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 06:31:58 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:49:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct s_game
 	mlx_image_t		*img_world;
 	t_hud			hud;
 	t_screen		start;
-	t_screen		game_over;
+	t_screen		lose;
 	t_screen		win;
 	t_map			map;
 	t_minimap		minimap;

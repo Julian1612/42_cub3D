@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:06:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:43:27 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:54:05 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ void	loop(void *param)
 		game->hud.img->enabled = false;
 		game->hud.img_str->enabled = false;
 		win_loop(&game->win, game->mlx, game->map.textures);
+	}
+	else if (game->player.health <= 0)
+	{
+		game->minimap.minimap_walls->enabled = false;
+		game->hud.img->enabled = false;
+		game->hud.img_str->enabled = false;
+		lose_loop(&game->lose, game->mlx, game->map.textures);
 	}
 	else
 		game_loop(game, fps_mult);
