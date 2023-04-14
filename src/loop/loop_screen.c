@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 02:02:58 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:19:30 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:24:39 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void	win_loop(t_screen *win, mlx_t *mlx, t_tex *textures)
 
 	pos.x = mlx->width / 2 - textures[WIN].tex->width / 2;
 	pos.y = mlx->height / 2 - textures[WIN].tex->height / 2;
+	render_color_image(win->img, 0x0000FF);
 	render_texture_transparent(win->img, &textures[WIN], pos, 1);
 }

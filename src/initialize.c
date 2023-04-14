@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 03:31:15 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:40:53 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ static int	initialize_environ(t_game *game)
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3=====D", false);
 	game->img_world = mlx_new_image(game->mlx,
 			game->mlx->width, game->mlx->height + 2);
-	game->img_hud = mlx_new_image(game->mlx,
+	game->hud.img = mlx_new_image(game->mlx,
 			game->mlx->width, game->mlx->height + 2);
-	if (game->mlx == NULL || game->img_world == NULL || game->img_hud == NULL)
+	if (game->mlx == NULL || game->img_world == NULL || game->hud.img == NULL)
 		return (ERROR);
 	return (SUCCESS);
 }
@@ -83,9 +83,9 @@ int	initialize_mlx_data(t_game *game)
 		return (ERROR);
 	if (initialize_textures(game) == ERROR)
 		return (ERROR);
-	if (initialize_screens(game) == ERROR)
-		return (ERROR);
 	if (initialize_minimap(game) == ERROR)
+		return (ERROR);
+	if (initialize_screens(game) == ERROR)
 		return (ERROR);
 	return (SUCCESS);
 }

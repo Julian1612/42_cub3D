@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:06:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:15:53 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:43:27 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	game_loop(t_game *game, double fps_mult)
 
 bool	has_won(t_map *map, t_player *player)
 {
-	if (map->arr[(int)player->pos.y][(int)player->pos.x] == 'X')
+	if (map->arr[(int)player->pos.y][(int)player->pos.x] == EXIT)
 		return (true);
 	return (false);
 }
@@ -48,7 +48,12 @@ void	loop(void *param)
 	if (game->start.active == true)
 		start_loop(&game->start, game->mlx, game->map.textures);
 	else if (has_won(&game->map, &game->player) == true)
+	{
+		game->minimap.minimap_walls->enabled = false;
+		game->hud.img->enabled = false;
+		game->hud.img_str->enabled = false;
 		win_loop(&game->win, game->mlx, game->map.textures);
+	}
 	else
 		game_loop(game, fps_mult);
 }

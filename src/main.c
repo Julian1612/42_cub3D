@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 06:17:08 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:43:51 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	put_images_to_window(t_game *game)
 {
 	if (mlx_image_to_window(game->mlx, game->img_world, 0, 0) == ERROR)
 		return (ERROR);
-	if (mlx_image_to_window(game->mlx, game->img_hud, 0, 0) == ERROR)
+	if (mlx_image_to_window(game->mlx, game->hud.img, 0, 0) == ERROR)
 		return (ERROR);
 	if (mlx_image_to_window(game->mlx, game->start.img, 0, 0) == ERROR)
 		return (ERROR);

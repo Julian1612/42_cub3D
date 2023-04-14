@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 05:18:23 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:31:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,12 @@ typedef struct s_map
 	int			height;
 }	t_map;
 
+typedef struct s_hud
+{
+	mlx_image_t		*img;
+	mlx_image_t		*img_str;
+}	t_hud;
+
 typedef struct s_screen
 {
 	bool			active;
@@ -110,7 +116,7 @@ typedef struct s_game
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img_world;
-	mlx_image_t		*img_hud;
+	t_hud			hud;
 	t_screen		start;
 	t_screen		game_over;
 	t_screen		win;
