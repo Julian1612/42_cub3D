@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/14 19:43:35 by jschneid         ###   ########.fr        #
+#    Updated: 2023/04/14 19:46:35 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@ CFLAGS		=	-g -O3 -Wall -Wextra -Werror
 LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 CC			=	cc
-VPATH		=	src: src/parser: \
-				src/player_position: src/render src/raycast src/render src/loop
+VPATH		=	src: src/parser: src/render src/raycast src/render src/loop
 
 SRC			=	parser.c parser_check_for_map.c parser_check_for_rgb.c \
 				parser_check_for_texture.c parser_check_map.c \

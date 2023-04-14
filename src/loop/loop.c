@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:06:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 10:10:19 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 19:51:52 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,38 @@ static void	handle_esc(mlx_t *mlx, int *sound_id)
 	}
 }
 
-void	game_loop(t_game *game, double fps_mult)
+static void	game_loop(t_game *game, double fps_mult)
 {
 	loop_logic(game, fps_mult);
 	loop_graphic(game);
 }
 
-bool	has_won(t_map *map, t_player *player)
+static bool	has_won(t_map *map, t_player *player)
 {
 	if (map->arr[(int)player->pos.y][(int)player->pos.x] == EXIT)
 		return (true);
 	return (false);
+}
+
+static void	loop_2(t_game *game, double fps_mult)
+{
+	if (game->player.health <= 0)
+	{
+		game->minimap.minimap_walls->enabled = false;
+		game->hud.img->enabled = false;
+		game->hud.img_str->enabled = false;
+		sound_stop(game->sound_id[SOUND_GAME]);
+		sound_play(&game->sound_id[SOUND_LOSE],
+			"./sounds/lose.mp3", "afplay ./sounds/lose.mp3 &");
+		lose_loop(&game->lose, game->mlx, game->map.textures);
+	}
+	else
+	{
+		sound_stop(game->sound_id[SOUND_START]);
+		sound_play(&game->sound_id[SOUND_GAME],
+			"./sounds/game.mp3", "afplay ./sounds/game.mp3 &");
+		game_loop(game, fps_mult);
+	}
 }
 
 void	loop(void *param)
@@ -62,21 +83,6 @@ void	loop(void *param)
 			"./sounds/win.mp3", "afplay ./sounds/win.mp3 &");
 		win_loop(&game->win, game->mlx, game->map.textures);
 	}
-	else if (game->player.health <= 0)
-	{
-		game->minimap.minimap_walls->enabled = false;
-		game->hud.img->enabled = false;
-		game->hud.img_str->enabled = false;
-		sound_stop(game->sound_id[SOUND_GAME]);
-		sound_play(&game->sound_id[SOUND_LOSE],
-			"./sounds/lose.mp3", "afplay ./sounds/lose.mp3 &");
-		lose_loop(&game->lose, game->mlx, game->map.textures);
-	}
 	else
-	{
-		sound_stop(game->sound_id[SOUND_START]);
-		sound_play(&game->sound_id[SOUND_GAME],
-			"./sounds/game.mp3", "afplay ./sounds/game.mp3 &");
-		game_loop(game, fps_mult);
-	}
+		loop_2(game, fps_mult);
 }

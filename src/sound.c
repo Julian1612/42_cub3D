@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 07:08:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 08:33:57 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 20:16:56 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
+#define SOUND_FILE "ps"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -48,20 +50,20 @@ int	sound_get_id(char *s)
 	tmp_fd = dup(STDOUT_FILENO);
 	sound_id = 0;
 	buff = NULL;
-	ps_fd = open("ps", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	ps_fd = open(SOUND_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	dup2(ps_fd, STDOUT_FILENO);
-	system("ps");
+	system(SOUND_FILE);
 	dup2(tmp_fd, STDOUT_FILENO);
 	close(tmp_fd);
 	close(ps_fd);
 	n = 0;
-	fn = fopen("ps", "r");
+	fn = fopen(SOUND_FILE, "r");
 	while (getline(&buff, &n, fn) >= 0)
 	{
-		if (buff && strnstr(buff, s, strlen(buff)) != NULL)
+		if (buff && ft_strnstr(buff, s, ft_strlen(buff)) != NULL)
 		{
 			char *sub_str = ft_substr(buff, 0, 10);
-			sound_id = atoi(sub_str);
+			sound_id = ft_atoi(sub_str);
 			free(sub_str);
 			free(buff);
 			break ;
@@ -73,12 +75,6 @@ int	sound_get_id(char *s)
 	return (sound_id);
 }
 
-static void	sound_start(int sound_id, char *cmd)
-{
-	if (sound_id == 0)
-		system(cmd);
-}
-
 void	sound_stop(int sound_id)
 {
 	if (sound_id)
@@ -87,7 +83,8 @@ void	sound_stop(int sound_id)
 
 void	sound_play(int *sound_id, char *path, char *cmd)
 {
-	sound_start(*sound_id, cmd);
+	if (*sound_id == 0)
+		system(cmd);
 	*sound_id = sound_get_id(path);
 }
 
@@ -101,18 +98,5 @@ void	sound_stop_all(int *sound_id)
 		sound_stop(sound_id[i]);
 		i++;
 	}
+	unlink(SOUND_FILE);
 }
-
-// int	main(void)
-// {
-// 	int	pid[3];
-
-// 	// sleep(5);
-// 	// sound_stop(pid[0]);
-// 	printf("pid = %d\n", pid[0]);
-// 	sound_start(pid[0], "afplay ./sounds/erika.mp3 &");
-// 	pid[0] = mlx_get_pid("./sounds/erika.mp3");
-// 	printf("pid = %d\n", pid[0]);
-// 	sleep(5);
-// 	sound_stop(pid[0]);
-// }
