@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:06:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 08:42:02 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 10:10:19 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	loop(void *param)
 		game->minimap.minimap_walls->enabled = false;
 		game->hud.img->enabled = false;
 		game->hud.img_str->enabled = false;
+		sound_stop(game->sound_id[SOUND_GAME]);
 		sound_play(&game->sound_id[SOUND_WIN],
 			"./sounds/win.mp3", "afplay ./sounds/win.mp3 &");
 		win_loop(&game->win, game->mlx, game->map.textures);
@@ -66,6 +67,7 @@ void	loop(void *param)
 		game->minimap.minimap_walls->enabled = false;
 		game->hud.img->enabled = false;
 		game->hud.img_str->enabled = false;
+		sound_stop(game->sound_id[SOUND_GAME]);
 		sound_play(&game->sound_id[SOUND_LOSE],
 			"./sounds/lose.mp3", "afplay ./sounds/lose.mp3 &");
 		lose_loop(&game->lose, game->mlx, game->map.textures);
@@ -73,6 +75,8 @@ void	loop(void *param)
 	else
 	{
 		sound_stop(game->sound_id[SOUND_START]);
+		sound_play(&game->sound_id[SOUND_GAME],
+			"./sounds/game.mp3", "afplay ./sounds/game.mp3 &");
 		game_loop(game, fps_mult);
 	}
 }

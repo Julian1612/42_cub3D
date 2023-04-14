@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 09:10:15 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 10:04:51 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ enum	e_sound_id
 {
 	SOUND_START,
 	SOUND_START_CLICK,
+	SOUND_GAME,
 	SOUND_WIN,
 	SOUND_LOSE,
 	SOUND_GUN,
