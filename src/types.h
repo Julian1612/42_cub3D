@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:55:32 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 04:07:24 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:19:57 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 
 enum e_tex_id
 {
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST,
+	WALL_NORTH,
+	WALL_EAST,
+	WALL_SOUTH,
+	WALL_WEST,
+	WALL_EXIT,
 	DOOR_FRONT,
 	ZOMBIE_RUN1,
 	ZOMBIE_RUN2,
@@ -65,6 +66,7 @@ enum e_tex_id
 	START_BG8,
 	START_CUB,
 	START_BUTTON,
+	WIN,
 	LAST,
 };
 

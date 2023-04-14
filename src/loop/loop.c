@@ -6,13 +6,14 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 19:06:51 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 02:50:16 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:15:53 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_loop.h" // loop funcs
 #include "../render.h" // render funcs
 #include "../cub3D.h" // t_game
+#include <stdbool.h> // bool
 
 static void	handle_esc(mlx_t *mlx)
 {
@@ -29,6 +30,13 @@ void	game_loop(t_game *game, double fps_mult)
 	loop_graphic(game);
 }
 
+bool	has_won(t_map *map, t_player *player)
+{
+	if (map->arr[(int)player->pos.y][(int)player->pos.x] == 'X')
+		return (true);
+	return (false);
+}
+
 void	loop(void *param)
 {
 	t_game	*game;
@@ -39,6 +47,8 @@ void	loop(void *param)
 	handle_esc(game->mlx);
 	if (game->start.active == true)
 		start_loop(&game->start, game->mlx, game->map.textures);
-	else if (game->game_over.active == false && game->win.active == false)
+	else if (has_won(&game->map, &game->player) == true)
+		win_loop(&game->win, game->mlx, game->map.textures);
+	else
 		game_loop(game, fps_mult);
 }

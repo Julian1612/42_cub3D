@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_textures.c                                   :+:      :+:    :+:   */
+/*   parser_check_textures.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 09:49:00 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 01:51:00 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 05:45:04 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_mandatory_textures(t_map *map_data)
 	int	i;
 
 	i = 0;
-	while (i <= WEST)
+	while (i <= WALL_WEST)
 	{
 		if (map_data->textures[i].path == NULL)
 			return (error_textures(6, map_data));
@@ -46,7 +46,7 @@ int	check_mandatory_textures(t_map *map_data)
 		i++;
 	}
 	if ((int)map_data->floor_color == -1)
-		return (error_textures(WEST + 1, map_data));
+		return (error_textures(WALL_WEST + 1, map_data));
 	else if ((int)map_data->ceiling_color == -1)
 		return (error_textures(4, map_data));
 	return (0);
@@ -61,7 +61,7 @@ int	check_bonus_textures(t_map *map_data)
 	fd_path = open("./textures/paths.txt", O_RDONLY);
 	if (fd_path < 0)
 		return (error_textures(7, map_data));
-	i = WEST + 1;
+	i = WALL_WEST + 1;
 	while (i < LAST)
 	{
 		path = get_next_line(fd_path);

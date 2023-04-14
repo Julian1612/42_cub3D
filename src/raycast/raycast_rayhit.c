@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 13:09:28 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 05:37:30 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 05:45:20 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,20 @@ void	rayhit_set_tex_id(t_rayhit *hit, bool y_side, t_vec *step)
 		if (y_side)
 		{
 			if (step->y < 0)
-				hit->tex_id = SOUTH;
+				hit->tex_id = WALL_SOUTH;
 			else
-				hit->tex_id = NORTH;
+				hit->tex_id = WALL_NORTH;
 		}
 		else
 		{
 			if (step->x < 0)
-				hit->tex_id = WEST;
+				hit->tex_id = WALL_WEST;
 			else
-				hit->tex_id = EAST;
+				hit->tex_id = WALL_EAST;
 		}
 	}
 	else if (hit->hit == EXIT)
-		hit->tex_id = EXIT;
+		hit->tex_id = WALL_EXIT;
 	else if (hit->hit == DOOR_CLOSED)
 		hit->tex_id = DOOR_FRONT;
 }

@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 02:02:58 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 04:47:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 06:19:30 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,14 @@ void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures)
 		start->active = false;
 		mlx_set_cursor_mode(mlx, MLX_MOUSE_DISABLED);
 	}
+}
+
+#include <stdio.h>
+void	win_loop(t_screen *win, mlx_t *mlx, t_tex *textures)
+{
+	t_coor	pos;
+
+	pos.x = mlx->width / 2 - textures[WIN].tex->width / 2;
+	pos.y = mlx->height / 2 - textures[WIN].tex->height / 2;
+	render_texture_transparent(win->img, &textures[WIN], pos, 1);
 }
