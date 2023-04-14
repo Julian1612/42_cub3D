@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 19:36:26 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 19:40:03 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,36 @@ static void	handle_enemies_take_action(int i, t_game *game,
 	double	angle;
 	t_vec	offset;
 
-	if (game->map.enemies[i].alive == false || map->enemies[i].health <= 0)
+	if (game->map.enemies[i].alive == false || game->map.enemies[i].health <= 0)
 	{
-		enemy_die(&map->enemies[i], sound_id);
+		enemy_die(&game->map.enemies[i], sound_id);
 		return ;
 	}
-	angle = atan2(player->pos.y - map->enemies[i].pos.y,
-			player->pos.x - map->enemies[i].pos.x);
-	if (fabs(map->enemies[i].pos.x - player->pos.x) < 0.5
-		&& fabs(map->enemies[i].pos.y - player->pos.y) < 0.5)
-		enemy_attack(player, &map->enemies[i], sound_id);
+	angle = atan2(game->player.pos.y - game->map.enemies[i].pos.y,
+			game->player.pos.x - game->map.enemies[i].pos.x);
+	if (fabs(game->map.enemies[i].pos.x - game->player.pos.x) < 0.5
+		&& fabs(game->map.enemies[i].pos.y - game->player.pos.y) < 0.5)
+		enemy_attack(&game->player, &game->map.enemies[i], sound_id);
 	else
 	{
 		offset.x = cos(angle) * enemy_speed;
 		offset.y = sin(angle) * enemy_speed;
-		enemy_move(&map->enemies[i], map, offset, i);
+		enemy_move(&game->map.enemies[i], &game->map, offset, i);
 	}
 }
 
-static void	handle_enemies(t_map *map, t_player *player,
+static void	handle_enemies(t_game *game,
 	double fps_mult, int *sound_id)
 {
 	int		i;
 	double	enemy_speed;
 
-	if (map->enemy_count == 0)
+	if (game->map.enemy_count == 0)
 		return ;
 	enemy_speed = ENEMY_SPEED * fps_mult;
 	i = -1;
-	while (i++ < map->enemy_count - 1)
-		handle_enemies_take_action(i, map, player, enemy_speed, sound_id);
+	while (i++ < game->map.enemy_count - 1)
+		handle_enemies_take_action(i, game, enemy_speed, sound_id);
 }
 
 static void	handle_mouse_movement(mlx_t *mlx, t_player *player)
@@ -79,6 +79,6 @@ void	loop_logic(t_game *game, double fps_mult)
 	handle_action_keys(game->mlx, &game->player, game);
 	handle_movement_keys(game->mlx, &game->player, &game->map);
 	handle_mouse_movement(game->mlx, &game->player);
-	handle_enemies(&game->map, &game->player, fps_mult, game->sound_id);
+	handle_enemies(game, fps_mult, game->sound_id);
 	debug_print_player(&game->player);
 }
