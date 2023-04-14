@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 07:08:22 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 23:45:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:54:09 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,16 @@ int	sound_get_id(char *s)
 
 	temp_fd = dup(STDOUT_FILENO);
 	sound_file_fd = open(SOUND_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (temp_fd == -1 || sound_file_fd == -1)
+		return (0);
 	dup2(sound_file_fd, STDOUT_FILENO);
 	system("ps");
 	dup2(temp_fd, STDOUT_FILENO);
 	close(temp_fd);
 	close(sound_file_fd);
 	file_stream = fopen(SOUND_FILE, "r");
+	if (file_stream == NULL)
+		return (0);
 	sound_id = find_sound_id(s, file_stream);
 	fclose(file_stream);
 	return (sound_id);

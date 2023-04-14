@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 01:18:00 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 22:53:06 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 23:49:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdbool.h> // bool
 
 #define PLAYER_SIZE 0.2
-#define SPRITE_SIZE_SQ 0.25
+#define SPRITE_SIZE_SQ 0.5
 
 static bool	is_non_permeable(char c)
 {
