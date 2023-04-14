@@ -6,12 +6,12 @@
 #    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/14 15:26:17 by jschneid         ###   ########.fr        #
+#    Updated: 2023/04/14 19:43:35 by jschneid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-CFLAGS		=	-g -O3 -Wall -Wextra -Werror #-fsanitize=address,undefined
+CFLAGS		=	-g -O3 -Wall -Wextra -Werror
 LIBMLX		=	./libraries/mlx
 LIBFT		=	./libraries/libft
 CC			=	cc
@@ -72,7 +72,7 @@ libmlx:
 	fi
 
 $(NAME): obj $(OBJS)
-	@echo "$(GREEN)cub3D Compiled ✅$(RESET)";
+	@echo "$(GREEN)cub3D Compiled: ✅$(RESET)";
 	@$(CC) $(CFLAGS) $(INC) $(LIBS) $(OBJS) -o $(NAME)
 
 obj/%.o: %.c $(HEADERS)
