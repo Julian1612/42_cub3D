@@ -1,20 +1,17 @@
+EA ./textures/east.png
 
+C 25,255,123
+
+WE ./textures/west.png
+
+NO textures/south.png
+SO  textures/north.png
+
+
+asdfasfd
 
 F 255,255,255
+11111
+1S11
+11 11
 
-WE ./textures/east.png
-EA ./textures/east.png
-NO textures/north.png
-SO  textures/north.png
-C 255,255,1
-
-
-
-
-
-
-
-11
-1N1
-101
-11

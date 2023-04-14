@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 08:50:18 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 18:54:20 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 #include <stdlib.h> // malloc
 #include <stdbool.h> // bool
 #include <math.h> // M_PI
-
-void	play_music(void)
-{
-	system("afplay ./sound_track/preussengloria.mp3 &");
-}
 
 // static int	free_data(t_map *map_data)
 // {
@@ -98,7 +93,10 @@ int	main(int argc, char **argv)
 	t_game		game;
 
 	if (parser(&argc, argv, &game))
+	{
+		system("leaks cub3D");
 		return (EXIT_FAILURE);
+	}
 	if (initialize_mlx_data(&game) == ERROR)
 		errexit_mlx_errno();
 	if (mlx_loop_hook(game.mlx, &loop, &game) == false)
@@ -108,6 +106,8 @@ int	main(int argc, char **argv)
 	initialize_player_data(&game.player);
 	initialize_sound_ids(game.sound_id);
 	mlx_loop(game.mlx);
+	system("leaks cub3D");
+	// free_parser_data(&game.map);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }

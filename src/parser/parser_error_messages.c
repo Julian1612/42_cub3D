@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_messages.c                                   :+:      :+:    :+:   */
+/*   parser_error_messages.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:03:15 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 00:31:57 by jschneid         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:55:53 by jschneid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "private_parser.h"
 #include <stdlib.h> // free
 #include <stdio.h> // printf
-
-static void	free_struct(t_map *map_data);
 
 int	error_message(int error_code, t_map *map_data)
 {
@@ -40,7 +38,7 @@ int	error_message(int error_code, t_map *map_data)
 	else if (error_code == 10)
 		printf("Error!\nCould't find file for wall texture\n");
 	printf("========================================\n");
-	free_struct(map_data);
+	free_parser_data(map_data);
 	return (1);
 }
 
@@ -68,7 +66,7 @@ int	error_textures(int error_code, t_map *map_data)
 	else if (error_code == 7)
 		printf("Error!\nFile path for bonus texture is missing\n");
 	printf("========================================\n");
-	free_struct(map_data);
+	free_parser_data(map_data);
 	return (1);
 }
 
@@ -78,7 +76,7 @@ int	error_textures_2(int error_code, t_map *map_data)
 	if (error_code == 1)
 		printf("Error!\nInvalid Definition in .cub file\n");
 	printf("========================================\n");
-	free_struct(map_data);
+	free_parser_data(map_data);
 	return (1);
 }
 
@@ -102,11 +100,11 @@ int	error_get_map(int error_code, t_map *map_data)
 	else if (error_code == 8)
 		printf("Error!\nPlayer is out of bounds\n");
 	printf("========================================\n");
-	free_struct(map_data);
+	free_parser_data(map_data);
 	return (1);
 }
 
-static void	free_struct(t_map *map_data)
+void	free_parser_data(t_map *map_data)
 {
 	int	i;
 
