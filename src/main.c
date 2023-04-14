@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:28:59 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 07:03:24 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 08:50:18 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,18 @@ static void	initialize_player_data(t_player *player)
 	player->weapon = &gun;
 }
 
+static void	initialize_sound_ids(int *sound_id)
+{
+	int	i;
+
+	i = 0;
+	while (i < SOUND_MAX)
+	{
+		sound_id[i] = 0;
+		i++;
+	}
+}
+
 static int	put_images_to_window(t_game *game)
 {
 	if (mlx_image_to_window(game->mlx, game->img_world, 0, 0) == ERROR)
@@ -79,6 +91,7 @@ static int	put_images_to_window(t_game *game)
 // @todo refactor mandatory
 // @todo enemy cooldown
 // @todo weird game over screen texture bug
+// @todo use %s strings for sounds?
 
 int	main(int argc, char **argv)
 {
@@ -93,6 +106,7 @@ int	main(int argc, char **argv)
 	if (put_images_to_window(&game) == ERROR)
 		errexit_mlx_errno();
 	initialize_player_data(&game.player);
+	initialize_sound_ids(game.sound_id);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);

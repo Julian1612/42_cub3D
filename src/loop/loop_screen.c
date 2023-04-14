@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 02:02:58 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 06:53:40 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 08:47:46 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ static void	start_render_textures(t_screen *start, mlx_t *mlx, t_tex *textures)
 	render_texture_transparent(start->img, &textures[START_BUTTON], pos, 1);
 }
 
-void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures)
+void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures, int *sound_id)
 {
 	t_coor	button_pos;
 
+	mlx_set_cursor_mode(mlx, MLX_MOUSE_NORMAL);
 	set_next_frame(&start->frame, START_BG1, 8);
 	start_render_textures(start, mlx, textures);
 	button_pos.x = mlx->width / 2 - textures[START_BUTTON].tex->width / 2 + 20;
@@ -58,6 +59,8 @@ void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures)
 	{
 		start->img->enabled = false;
 		start->active = false;
+		sound_play(&sound_id[SOUND_WIN],
+			"./sounds/start_click.mp3", "afplay ./sounds/start_click.mp3 &");
 		mlx_set_cursor_mode(mlx, MLX_MOUSE_DISABLED);
 	}
 }
@@ -66,6 +69,7 @@ void	lose_loop(t_screen *lose, mlx_t *mlx, t_tex *textures)
 {
 	t_coor	pos;
 
+	mlx_set_cursor_mode(mlx, MLX_MOUSE_NORMAL);
 	pos.x = mlx->width / 2 - textures[LOSE].tex->width / 2;
 	pos.y = mlx->height / 2 - textures[LOSE].tex->height / 2;
 	render_color_image(lose->img, 0x000000FF);
@@ -76,6 +80,7 @@ void	win_loop(t_screen *win, mlx_t *mlx, t_tex *textures)
 {
 	t_coor	pos;
 
+	mlx_set_cursor_mode(mlx, MLX_MOUSE_NORMAL);
 	pos.x = mlx->width / 2 - textures[WIN].tex->width / 2;
 	pos.y = mlx->height / 2 - textures[WIN].tex->height / 2;
 	render_color_image(win->img, 0x000000FF);

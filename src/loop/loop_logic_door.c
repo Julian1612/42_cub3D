@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:27:04 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 00:11:23 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 09:22:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ static bool	switch_bool(bool b)
 	return (true);
 }
 
-static enum e_tex_id	switch_state(enum e_tex_id state)
+static enum e_tex_id	switch_state(enum e_tex_id state, int *sound_id)
 {
+	sound_play(&sound_id[SOUND_DOOR], "./sounds/door.mp3",
+		"afplay ./sounds/door.mp3 &");
 	if (state == DOOR_CLOSED)
 		return (DOOR_OPEN);
 	else
@@ -53,7 +55,7 @@ void	handle_door(t_game *game, t_player *player)
 			{
 				game->map.arr[game->map.doors[i].y][game->map.doors[i].x]
 					= switch_state(game->map.arr[game->map.doors[i].y]
-					[game->map.doors[i].x]);
+					[game->map.doors[i].x], game->sound_id);
 				game->map.doors[i].open = switch_bool(game->map.doors[i].open);
 			}
 			game->map.doors[i].last_action = mlx_get_time();

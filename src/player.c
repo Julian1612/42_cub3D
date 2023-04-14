@@ -6,23 +6,27 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:50:14 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 03:18:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 09:09:43 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h" // t_player
 #include "raycast.h" // raycast_cast_ray
+#include "cub3D.h" // sound
 #include <string.h> // NULL
 #include <math.h> // cos, sin
 
 void	player_shoot(t_player *player, t_enemy *enemies, t_game *game)
 {
-	t_rayhit	hit;
+	t_rayhit		hit;
 
 	if (player->weapon == NULL)
 		return ;
+	sound_play(&game->sound_id[SOUND_GUN], "./sounds/gun.mp3",
+		"afplay ./sounds/gun.mp3 &");
 	if (is_next_frame(&player->weapon->frame.time_of_last) == true)
 	{
+		game->sound_id[SOUND_GUN] = 0;
 		player->weapon->frame.curr++;
 		if (player->weapon->frame.curr > HUD_GUN6)
 			player->weapon->frame.curr = HUD_GUN3;
@@ -58,7 +62,9 @@ void	player_rotate(t_player *player, double rot_speed)
 		+ player->cplane.y * cos(rot_speed);
 }
 
-void	player_take_damage(t_player *player, int damage)
+void	player_take_damage(t_player *player, int damage, int *sound_id)
 {
+	sound_play(&sound_id[SOUND_PLAYER_DAMAGE], "./sounds/player_damage.mp3",
+		"afplay ./sounds/player_damage.mp3 &");
 	player->health -= damage;
 }

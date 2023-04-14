@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:49:01 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 03:17:17 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 09:06:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ typedef struct s_player
 void	player_shoot(t_player *player, t_enemy *enemies, t_game *game);
 void	player_move(t_vec *pos, t_map *map, double x_offset, double y_offset);
 void	player_rotate(t_player *player, double rot_speed);
-void	player_take_damage(t_player *player, int damage);
+void	player_take_damage(t_player *player, int damage, int *sound_id);
 
 #endif

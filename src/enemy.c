@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 18:55:13 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 03:23:07 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 09:09:33 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,30 @@ void	enemy_move(t_enemy *enemy, t_map *map, t_vec offset, int enemy_index)
 	set_next_frame(&enemy->frame, state, 3);
 }
 
-void	enemy_attack(t_player *player, t_enemy *enemy)
+void	enemy_attack(t_player *player, t_enemy *enemy, int *sound_id)
 {
 	static int	cooldown = 0;
 
 	if (cooldown == 0)
 	{
 		cooldown = mlx_get_time();
-		player_take_damage(player, enemy->damage);
+		player_take_damage(player, enemy->damage, sound_id);
 	}
 	else if (mlx_get_time() - cooldown > 1)
 	{
 		cooldown = mlx_get_time();
-		player_take_damage(player, enemy->damage);
+		player_take_damage(player, enemy->damage, sound_id);
 	}
 }
 
-void	enemy_die(t_enemy *enemy)
+void	enemy_die(t_enemy *enemy, int *sound_id)
 {
 	if (enemy->alive == false)
 		return ;
 	if (enemy->frame.curr < ZOMBIE_DEAD1)
 		enemy->frame.curr = ZOMBIE_DEAD1;
+	sound_play(&sound_id[SOUND_ENEMY_DIE], "./sounds/enemy_die.mp3",
+		"afplay ./sounds/enemy_die.mp3 &");
 	if (is_next_frame(&enemy->frame.time_of_last) == true)
 	{
 		enemy->frame.curr++;

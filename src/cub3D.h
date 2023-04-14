@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jschneid          #+#    #+#             */
-/*   Updated: 2023/04/14 06:49:43 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 09:10:15 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define ENEMY 'F'
 # define EXIT 'X'
 # define FPS 60
+# define SOUND_MAX 10
 
 /* ************************************************************************** */
 /* ENUMS																	  */
@@ -54,6 +55,18 @@ enum	e_obj_type
 	DECOR_PERM,
 	WEAPON,
 	COIN,
+};
+
+enum	e_sound_id
+{
+	SOUND_START,
+	SOUND_START_CLICK,
+	SOUND_WIN,
+	SOUND_LOSE,
+	SOUND_GUN,
+	SOUND_DOOR,
+	SOUND_ENEMY_DIE,
+	SOUND_PLAYER_DAMAGE,
 };
 
 /* ************************************************************************** */
@@ -124,6 +137,7 @@ typedef struct s_game
 	t_minimap		minimap;
 	t_player		player;
 	t_enemy			*enemies;
+	int				sound_id[SOUND_MAX];
 }	t_game;
 
 /* ************************************************************************** */
@@ -155,7 +169,8 @@ int				collision_is_enemy(double x, double y,
 					t_map *map, int enemy_num);
 
 // time
-void			set_next_frame(t_frame *frame, enum e_tex_id start, int frame_count);
+void			set_next_frame(t_frame *frame, enum e_tex_id start,
+					int frame_count);
 double			get_fps_mult(double delta_time, int fps);
 bool			is_next_frame(double *delta_time);
 bool			is_cooldown(void);
@@ -163,5 +178,11 @@ bool			is_cooldown(void);
 // start_screen
 void			startscreen_wait_for_click(mlx_t *mlx,
 					t_screen *start_screen);
+
+// sound
+int				sound_get_id(char *s);
+void			sound_play(int *sound_id, char *path, char *cmd);
+void			sound_stop(int sound_id);
+void			sound_stop_all(int *sound_id);
 
 #endif

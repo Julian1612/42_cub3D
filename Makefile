@@ -6,7 +6,7 @@
 #    By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 15:19:48 by jschneid          #+#    #+#              #
-#    Updated: 2023/04/14 06:59:21 by lorbke           ###   ########.fr        #
+#    Updated: 2023/04/14 08:23:35 by lorbke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC			=	parser.c parser_check_for_map.c parser_check_for_rgb.c parser_check_for_
 				loop.c loop_screen.c loop_logic.c loop_logic_keys.c \
 				loop_logic_door.c loop_graphic.c \
 				collision.c debug.c initialize.c errexit.c math.c time.c \
-				player.c enemy.c utils.c main.c
+				player.c enemy.c utils.c sound.c main.c
 
 INC			=	-I./src -I$(LIBMLX)/include/MLX42 -I$(LIBFT)/src/libft
 HEADERS		=	cub3D.h raycast.h render.h raycast/private_raycast.h \
