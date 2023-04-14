@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 16:20:05 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 09:08:03 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 19:36:26 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 #include <string.h> // NULL
 #include <stdbool.h> // bool
 
-static void	handle_enemies_take_action(int i, t_map *map,
-	t_player *player, double enemy_speed, int *sound_id)
+static void	handle_enemies_take_action(int i, t_game *game,
+	double enemy_speed, int *sound_id)
 {
 	double	angle;
 	t_vec	offset;
 
-	if (map->enemies[i].alive == false || map->enemies[i].health <= 0)
+	if (game->map.enemies[i].alive == false || map->enemies[i].health <= 0)
 	{
 		enemy_die(&map->enemies[i], sound_id);
 		return ;
