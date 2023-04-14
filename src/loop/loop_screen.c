@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 02:02:58 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 03:21:29 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 04:33:25 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 #include "../types.h" // tex id
 #include "../render.h" // render funcs
 #include "../cub3D.h" // t_game
+
+static void	start_render_textures(t_screen *start, mlx_t *mlx, t_tex *textures)
+{
+	t_coor	pos;
+
+	pos.x = mlx->width / 2 - textures[START_BG1].tex->width / 2;
+	pos.y = 0;
+	render_texture(start->img, &textures[start->frame.curr], pos, 1);
+	pos.x = mlx->width / 2 - textures[START_CUB].tex->width / 2 + 20;
+	pos.y = 50;
+	render_texture_transparent(start->img, &textures[START_CUB], pos, 1);
+	pos.x = mlx->width / 2 - textures[START_BUTTON].tex->width / 2 + 20;
+	pos.y = mlx->height - 350;
+	render_texture_transparent(start->img, &textures[START_BUTTON], pos, 1);
+}
 
 void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures)
 {
@@ -24,11 +39,11 @@ void	start_loop(t_screen *start, mlx_t *mlx, t_tex *textures)
 	t_coor	pos;
 
 	pos.x = mlx->width / 2 - start->img->width / 2;
-	pos.y = mlx->height / 2 - start->img->height / 2 + 50;
-	set_next_frame(&start->frame, START_BG1, 7);
-	render_texture(start->img, &textures[start->frame.curr], pos, 1);
-	button_width = start->img->width;
-	button_height = start->img->height;
+	pos.y = 0;
+	set_next_frame(&start->frame, START_BG1, 8);
+	start_render_textures(start, mlx, textures);
+	button_width = (int)&textures[START_BUTTON].tex->width;
+	button_height = (int)&textures[START_BUTTON].tex->height;
 	mlx_get_mouse_pos(mlx, &x, &y);
 	if (x > mlx->width / 2 - button_width / 2
 		&& x < mlx->width / 2 + button_width / 2

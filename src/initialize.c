@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:24:25 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 03:18:46 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 03:31:15 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static int	initialize_textures(t_game *game)
 
 static int	initialize_screens(t_game *game)
 {
-	game->start.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->game_over.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->win.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->start.img = mlx_new_image(game->mlx, WIDTH, HEIGHT + 2);
+	game->game_over.img = mlx_new_image(game->mlx, WIDTH, HEIGHT + 2);
+	game->win.img = mlx_new_image(game->mlx, WIDTH, HEIGHT + 2);
 	if (game->start.img == NULL || game->game_over.img == NULL
 		|| game->win.img == NULL)
 		return (ERROR);

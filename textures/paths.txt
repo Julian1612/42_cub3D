@@ -31,3 +31,5 @@
 ./textures/screens/start_bg6.png
 ./textures/screens/start_bg7.png
 ./textures/screens/start_bg8.png
+./textures/screens/start_cub3d.png
+./textures/screens/start_button.png

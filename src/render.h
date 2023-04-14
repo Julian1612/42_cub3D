@@ -6,7 +6,7 @@
 /*   By: lorbke <lorbke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 15:09:20 by lorbke            #+#    #+#             */
-/*   Updated: 2023/04/14 01:31:36 by lorbke           ###   ########.fr       */
+/*   Updated: 2023/04/14 04:32:58 by lorbke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ void	render_game(t_game *game);
 // render_utils
 void	render_texture(mlx_image_t *img, t_tex *tex,
 			t_coor pos, double ratio);
+void	render_texture_transparent(mlx_image_t *img, t_tex *tex,
+	t_coor pos, double ratio);
 
 #endif
