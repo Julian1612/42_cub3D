@@ -7,17 +7,16 @@ For more information about the project, you can refer to the subject.
 ## Installation
 Before running the program, make sure you have the required dependencies installed. Ensure that the miniLibX package is available on your system.
 
-1. Clone the repository to your machine:
-
+1. Clone the repository to your machine
 ```bash
 git clone https://github.com/Julian1612/42_cub3D.git
 ```
-2. Open the terminal and navigate to the cloned directory:
+2. Open the terminal and navigate to the cloned directory
 ```bash
 cd 42_cub3D
 ```
-3. Build the program by running the 'make' command. The Makefile compiles the program and generates the executable 'cub3D':
-4. After successful compilation, you can execute the program:
+3. Build the program by running the 'make' command. The Makefile compiles the program and generates the executable 'cub3D'
+4. After successful compilation, you can execute the program
 ```bash
 ./cub3D path_to_map.cub
 ```
