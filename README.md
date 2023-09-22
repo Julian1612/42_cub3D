@@ -27,7 +27,7 @@ After successful compilation, you can execute the program:
 bash
 Copy code
 ./cub3D path_to_map.cub
-##Basic Usage
+## Basic Usage
 cub3D provides a unique gaming experience within a maze using ray-casting principles. It offers a variety of controls and features inspired by Wolfenstein 3D. Here are some basic usage examples to get you started:
 
 Move forward: W key
