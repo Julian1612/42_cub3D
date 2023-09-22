@@ -23,11 +23,12 @@ cd 42_cub3D
 ## Basic Usage
 cub3D provides a unique gaming experience within a maze using ray-casting principles. It offers a variety of controls and features inspired by Wolfenstein 3D. Here are some basic usage examples to get you started:
 
-Move forward: W key
-Move backward: S key
-Strafe left: A key
-Strafe right: D key
-Look left: Left arrow key
-Look right: Right arrow key
-Exit the game: ESC key or clicking the red cross on the window frame
+#### Move forward: W key
+#### Move backward: S key
+#### Strafe left: A key
+#### Strafe right: D key
+#### Look left: Left arrow key
+#### Look right: Right arrow key
+#### Exit the game: ESC key or clicking the red cross on the window frame
+
 Explore the world of ray-casting and immersive gaming with cub3D.
