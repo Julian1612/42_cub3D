@@ -1,6 +1,6 @@
 # cub3D
 Overview
-cub3D is a team project created as part of the 42 Heilbronn core curriculum, inspired by the iconic Wolfenstein 3D game. This project is a tribute to the first-person shooter genre and offers a deep dive into ray-casting, allowing users to explore a dynamic view inside a maze. It is a collaborative effort with [DGross](https://github.com/lorbke).
+cub3D is a team project created as part of the 42 Heilbronn core curriculum, inspired by the iconic Wolfenstein 3D game. This project is a tribute to the first-person shooter genre and offers a deep dive into ray-casting, allowing users to explore a dynamic view inside a maze. It is a collaborative effort with [lorbke](https://github.com/lorbke).
 For more information about the project, you can refer to the [subject](https://cdn.intra.42.fr/pdf/pdf/101913/en.subject.pdf).
 
 
