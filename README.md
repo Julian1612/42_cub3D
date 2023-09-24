@@ -11,11 +11,7 @@ Before running the program, make sure you have the required dependencies install
 ```bash
 git clone https://github.com/Julian1612/42_cub3D.git
 ```
-2. Open the terminal and navigate to the cloned directory
-```bash
-cd 42_cub3D
-```
-3. Build the program by running the 'make' command. The Makefile compiles the program and generates the executable 'cub3D'
+2. Build the program by running the 'make' command. The Makefile compiles the program and generates the executable 'cub3D'
 4. After successful compilation, you can execute the program
 ```bash
 ./cub3D path_to_map.cub
